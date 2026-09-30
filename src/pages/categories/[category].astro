@@ -1,0 +1,607 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import FilterSidebar from '../../components/FilterSidebar.astro';
+
+export function getStaticPaths() {
+  return [
+    { params: { category: 'cement' } },
+    { params: { category: 'cement-concrete' } },
+    { params: { category: 'steel-metal' } },
+    { params: { category: 'steel-&-metal' } },
+    { params: { category: 'lumber-wood' } },
+    { params: { category: 'lumber-&-wood' } },
+    { params: { category: 'tools-equipment' } },
+    { params: { category: 'tools-&-equipment' } },
+    { params: { category: 'electrical' } },
+    { params: { category: 'plumbing' } },
+    { params: { category: 'paint' } },
+    { params: { category: 'roofing' } }
+  ];
+}
+
+const { category } = Astro.params;
+
+// Category data
+const categoryData: Record<string, any> = {
+  'cement': {
+    name: 'Cement & Concrete',
+    icon: '🏗️',
+    description: 'Premium cement and concrete products for all your construction needs',
+    banner: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&h=400&fit=crop',
+    totalProducts: 2450
+  },
+  'cement-concrete': {
+    name: 'Cement & Concrete',
+    icon: '🏗️',
+    description: 'Premium cement and concrete products for all your construction needs',
+    banner: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&h=400&fit=crop',
+    totalProducts: 2450
+  },
+  'steel-metal': {
+    name: 'Steel & Metal',
+    icon: '⚙️',
+    description: 'High-quality steel and metal materials for structural projects',
+    banner: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=1200&h=400&fit=crop',
+    totalProducts: 1890
+  },
+  'steel-&-metal': {
+    name: 'Steel & Metal',
+    icon: '⚙️',
+    description: 'High-quality steel and metal materials for structural projects',
+    banner: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=1200&h=400&fit=crop',
+    totalProducts: 1890
+  },
+  'lumber-wood': {
+    name: 'Lumber & Wood',
+    icon: '🪵',
+    description: 'Premium lumber and wood products for construction and finishing',
+    banner: 'https://images.unsplash.com/photo-1563453392212-326f5e854473?w=1200&h=400&fit=crop',
+    totalProducts: 3200
+  },
+  'lumber-&-wood': {
+    name: 'Lumber & Wood',
+    icon: '🪵',
+    description: 'Premium lumber and wood products for construction and finishing',
+    banner: 'https://images.unsplash.com/photo-1563453392212-326f5e854473?w=1200&h=400&fit=crop',
+    totalProducts: 3200
+  },
+  'tools-equipment': {
+    name: 'Tools & Equipment',
+    icon: '🔨',
+    description: 'Professional tools and equipment for every construction task',
+    banner: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=1200&h=400&fit=crop',
+    totalProducts: 5600
+  },
+  'tools-&-equipment': {
+    name: 'Tools & Equipment',
+    icon: '🔨',
+    description: 'Professional tools and equipment for every construction task',
+    banner: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=1200&h=400&fit=crop',
+    totalProducts: 5600
+  }
+};
+
+const currentCategory = categoryData[category || 'cement'] || categoryData['cement'];
+
+// Mock products by category
+const productsByCategory: Record<string, any[]> = {
+  'cement': [
+  {
+    id: '1',
+    name: 'Premium Portland Cement - 50kg Bag',
+    price: 12.99,
+    originalPrice: 15.99,
+    image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=500&h=500&fit=crop',
+    rating: 4.8,
+    reviews: 234,
+    badge: 'Best Seller',
+    inStock: true
+  },
+  {
+    id: '2',
+    name: 'Quick-Set Concrete Mix - 40kg',
+    price: 18.50,
+    image: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=500&h=500&fit=crop',
+    rating: 4.7,
+    reviews: 189,
+    inStock: true
+  },
+  {
+    id: '3',
+    name: 'High-Strength Mortar Mix - 25kg',
+    price: 14.99,
+    originalPrice: 17.99,
+    image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=500&h=500&fit=crop',
+    rating: 4.9,
+    reviews: 456,
+    badge: 'Sale',
+    inStock: true
+  },
+  {
+    id: '4',
+    name: 'White Portland Cement - 50kg',
+    price: 22.99,
+    image: 'https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=500&h=500&fit=crop',
+    rating: 4.6,
+    reviews: 123,
+    inStock: true
+  },
+  {
+    id: '5',
+    name: 'Rapid Hardening Cement - 50kg',
+    price: 19.99,
+    originalPrice: 24.99,
+    image: 'https://images.unsplash.com/photo-1632778149955-e80f8ceca2e8?w=500&h=500&fit=crop',
+    rating: 4.8,
+    reviews: 345,
+    badge: 'Hot Deal',
+    inStock: true
+  },
+  {
+    id: '6',
+    name: 'Masonry Cement - 40kg Bag',
+    price: 16.50,
+    image: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=500&h=500&fit=crop',
+    rating: 4.5,
+    reviews: 234,
+    inStock: true
+  },
+  {
+    id: '7',
+    name: 'Concrete Repair Mix - 20kg',
+    price: 24.99,
+    image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=500&h=500&fit=crop',
+    rating: 4.7,
+    reviews: 167,
+    inStock: false
+  },
+  {
+    id: '8',
+    name: 'Self-Leveling Concrete - 25kg',
+    price: 29.99,
+    originalPrice: 34.99,
+    image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=500&h=500&fit=crop',
+    rating: 4.9,
+    reviews: 289,
+    badge: 'New',
+    inStock: true
+  },
+  {
+    id: '9',
+    name: 'Fiber-Reinforced Concrete Mix - 30kg',
+    price: 32.99,
+    image: 'https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=500&h=500&fit=crop',
+    rating: 4.8,
+    reviews: 198,
+    inStock: true
+  },
+  {
+    id: '10',
+    name: 'Waterproof Cement - 50kg',
+    price: 26.99,
+    image: 'https://images.unsplash.com/photo-1632778149955-e80f8ceca2e8?w=500&h=500&fit=crop',
+    rating: 4.7,
+    reviews: 276,
+    inStock: true
+  },
+  {
+    id: '11',
+    name: 'Colored Concrete Mix - Gray - 25kg',
+    price: 21.99,
+    image: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=500&h=500&fit=crop',
+    rating: 4.6,
+    reviews: 145,
+    inStock: true
+  },
+  {
+    id: '12',
+    name: 'Lightweight Concrete Mix - 20kg',
+    price: 27.99,
+    originalPrice: 31.99,
+    image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=500&h=500&fit=crop',
+    rating: 4.5,
+    reviews: 112,
+    badge: 'Sale',
+    inStock: true
+  }
+  ],
+  'steel-metal': [
+    {
+      id: 'sm1',
+      name: 'Steel Reinforcement Bars (Rebar) - Grade 60',
+      price: 45.50,
+      image: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=500&h=500&fit=crop',
+      rating: 4.9,
+      reviews: 189,
+      badge: 'Best Seller',
+      inStock: true
+    },
+    {
+      id: 'sm2',
+      name: 'Galvanized Steel Sheet - 4x8ft',
+      price: 89.99,
+      originalPrice: 109.99,
+      image: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=500&h=500&fit=crop',
+      rating: 4.8,
+      reviews: 234,
+      badge: 'Sale',
+      inStock: true
+    },
+    {
+      id: 'sm3',
+      name: 'Stainless Steel Angle Bar - 2x2 inch',
+      price: 32.99,
+      image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=500&h=500&fit=crop',
+      rating: 4.7,
+      reviews: 156,
+      inStock: true
+    },
+    {
+      id: 'sm4',
+      name: 'Carbon Steel Pipe - 2 inch x 20ft',
+      price: 67.50,
+      image: 'https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=500&h=500&fit=crop',
+      rating: 4.6,
+      reviews: 198,
+      inStock: true
+    },
+    {
+      id: 'sm5',
+      name: 'Steel I-Beam - 6 inch x 12ft',
+      price: 156.99,
+      originalPrice: 189.99,
+      image: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=500&h=500&fit=crop',
+      rating: 4.9,
+      reviews: 145,
+      badge: 'Hot Deal',
+      inStock: true
+    },
+    {
+      id: 'sm6',
+      name: 'Aluminum Sheet - 4x8ft',
+      price: 124.99,
+      image: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=500&h=500&fit=crop',
+      rating: 4.7,
+      reviews: 167,
+      inStock: true
+    },
+    {
+      id: 'sm7',
+      name: 'Steel Wire Mesh - 4x8ft Roll',
+      price: 42.99,
+      image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=500&h=500&fit=crop',
+      rating: 4.5,
+      reviews: 123,
+      inStock: false
+    },
+    {
+      id: 'sm8',
+      name: 'Copper Pipe - 1/2 inch x 10ft',
+      price: 28.50,
+      image: 'https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=500&h=500&fit=crop',
+      rating: 4.8,
+      reviews: 289,
+      inStock: true
+    },
+    {
+      id: 'sm9',
+      name: 'Steel Channel - 3 inch x 10ft',
+      price: 54.99,
+      originalPrice: 64.99,
+      image: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=500&h=500&fit=crop',
+      rating: 4.6,
+      reviews: 134,
+      badge: 'Sale',
+      inStock: true
+    },
+    {
+      id: 'sm10',
+      name: 'Brass Rod - 1 inch x 6ft',
+      price: 38.99,
+      image: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=500&h=500&fit=crop',
+      rating: 4.7,
+      reviews: 178,
+      inStock: true
+    },
+    {
+      id: 'sm11',
+      name: 'Steel Flat Bar - 2x1/4 inch x 8ft',
+      price: 24.99,
+      image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=500&h=500&fit=crop',
+      rating: 4.5,
+      reviews: 145,
+      inStock: true
+    },
+    {
+      id: 'sm12',
+      name: 'Galvanized Steel Tube - 2 inch x 10ft',
+      price: 48.99,
+      image: 'https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=500&h=500&fit=crop',
+      rating: 4.8,
+      reviews: 201,
+      badge: 'New',
+      inStock: true
+    }
+  ],
+  'steel-&-metal': [
+    {
+      id: 'sm1',
+      name: 'Steel Reinforcement Bars (Rebar) - Grade 60',
+      price: 45.50,
+      image: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=500&h=500&fit=crop',
+      rating: 4.9,
+      reviews: 189,
+      badge: 'Best Seller',
+      inStock: true
+    },
+    {
+      id: 'sm2',
+      name: 'Galvanized Steel Sheet - 4x8ft',
+      price: 89.99,
+      originalPrice: 109.99,
+      image: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=500&h=500&fit=crop',
+      rating: 4.8,
+      reviews: 234,
+      badge: 'Sale',
+      inStock: true
+    },
+    {
+      id: 'sm3',
+      name: 'Stainless Steel Angle Bar - 2x2 inch',
+      price: 32.99,
+      image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=500&h=500&fit=crop',
+      rating: 4.7,
+      reviews: 156,
+      inStock: true
+    },
+    {
+      id: 'sm4',
+      name: 'Carbon Steel Pipe - 2 inch x 20ft',
+      price: 67.50,
+      image: 'https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=500&h=500&fit=crop',
+      rating: 4.6,
+      reviews: 198,
+      inStock: true
+    },
+    {
+      id: 'sm5',
+      name: 'Steel I-Beam - 6 inch x 12ft',
+      price: 156.99,
+      originalPrice: 189.99,
+      image: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=500&h=500&fit=crop',
+      rating: 4.9,
+      reviews: 145,
+      badge: 'Hot Deal',
+      inStock: true
+    },
+    {
+      id: 'sm6',
+      name: 'Aluminum Sheet - 4x8ft',
+      price: 124.99,
+      image: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=500&h=500&fit=crop',
+      rating: 4.7,
+      reviews: 167,
+      inStock: true
+    },
+    {
+      id: 'sm7',
+      name: 'Steel Wire Mesh - 4x8ft Roll',
+      price: 42.99,
+      image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=500&h=500&fit=crop',
+      rating: 4.5,
+      reviews: 123,
+      inStock: false
+    },
+    {
+      id: 'sm8',
+      name: 'Copper Pipe - 1/2 inch x 10ft',
+      price: 28.50,
+      image: 'https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=500&h=500&fit=crop',
+      rating: 4.8,
+      reviews: 289,
+      inStock: true
+    },
+    {
+      id: 'sm9',
+      name: 'Steel Channel - 3 inch x 10ft',
+      price: 54.99,
+      originalPrice: 64.99,
+      image: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=500&h=500&fit=crop',
+      rating: 4.6,
+      reviews: 134,
+      badge: 'Sale',
+      inStock: true
+    },
+    {
+      id: 'sm10',
+      name: 'Brass Rod - 1 inch x 6ft',
+      price: 38.99,
+      image: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=500&h=500&fit=crop',
+      rating: 4.7,
+      reviews: 178,
+      inStock: true
+    },
+    {
+      id: 'sm11',
+      name: 'Steel Flat Bar - 2x1/4 inch x 8ft',
+      price: 24.99,
+      image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=500&h=500&fit=crop',
+      rating: 4.5,
+      reviews: 145,
+      inStock: true
+    },
+    {
+      id: 'sm12',
+      name: 'Galvanized Steel Tube - 2 inch x 10ft',
+      price: 48.99,
+      image: 'https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=500&h=500&fit=crop',
+      rating: 4.8,
+      reviews: 201,
+      badge: 'New',
+      inStock: true
+    }
+  ]
+};
+
+const products = productsByCategory[category || 'cement'] || productsByCategory['cement'];
+---
+
+<BaseLayout title={`${currentCategory.name} - ASIN STILL`} description={currentCategory.description}>
+  <!-- Category Banner -->
+  <section class="relative bg-gradient-to-br from-dark-950 via-primary-950 to-dark-950 text-white overflow-hidden">
+    <!-- Background Image with Overlay -->
+    <div class="absolute inset-0">
+      <img src={currentCategory.banner} alt={currentCategory.name} class="w-full h-full object-cover opacity-20" />
+      <div class="absolute inset-0 bg-gradient-to-r from-dark-950/90 via-dark-950/70 to-dark-950/90"></div>
+    </div>
+
+    <!-- Animated Pattern -->
+    <div class="absolute inset-0 opacity-[0.03]">
+      <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="category-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+            <path d="M 100 0 L 0 0 0 100" fill="none" stroke="white" stroke-width="0.5"/>
+            <circle cx="0" cy="0" r="2" fill="white"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#category-pattern)"/>
+      </svg>
+    </div>
+
+    <div class="container mx-auto px-4 py-16 md:py-20 relative z-10">
+      <!-- Breadcrumb -->
+      <nav class="flex items-center gap-2 text-sm mb-6 animate-fade-in">
+        <a href="/" class="text-primary-300 hover:text-white transition-colors duration-300">Home</a>
+        <svg class="w-4 h-4 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+        <a href="/categories" class="text-primary-300 hover:text-white transition-colors duration-300">Categories</a>
+        <svg class="w-4 h-4 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+        <span class="text-white font-medium">{currentCategory.name}</span>
+      </nav>
+
+      <!-- Category Header -->
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-4 mb-4" style="animation: fadeInUp 0.6s ease-in-out 0.1s both;">
+          <span class="text-6xl">{currentCategory.icon}</span>
+          <div>
+            <h1 class="text-4xl md:text-5xl font-black mb-2">{currentCategory.name}</h1>
+            <p class="text-primary-200 text-lg">{currentCategory.totalProducts}+ Products Available</p>
+          </div>
+        </div>
+        <p class="text-xl text-white/80 leading-relaxed" style="animation: fadeInUp 0.6s ease-in-out 0.2s both;">
+          {currentCategory.description}
+        </p>
+      </div>
+    </div>
+
+    <!-- Wave Divider -->
+    <div class="absolute bottom-0 left-0 right-0">
+      <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full">
+        <path d="M0 80L60 70C120 60 240 40 360 35C480 30 600 40 720 45C840 50 960 50 1080 45C1200 40 1320 30 1380 25L1440 20V80H1380C1320 80 1200 80 1080 80C960 80 840 80 720 80C600 80 480 80 360 80C240 80 120 80 60 80H0Z" class="fill-white dark:fill-dark-950"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="container mx-auto px-4 py-12">
+    <div class="flex flex-col lg:flex-row gap-8">
+      <!-- Sidebar Filters -->
+      <aside class="lg:w-64 flex-shrink-0">
+        <FilterSidebar />
+      </aside>
+
+      <!-- Products Grid -->
+      <div class="flex-1">
+        <!-- Toolbar -->
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 pb-6 border-b border-gray-200 dark:border-dark-800">
+          <div>
+            <p class="text-gray-600 dark:text-gray-400">
+              Showing <span class="font-semibold text-gray-900 dark:text-white">{products.length}</span> of 
+              <span class="font-semibold text-gray-900 dark:text-white">{currentCategory.totalProducts}</span> products
+            </p>
+          </div>
+
+          <!-- Sort Dropdown -->
+          <div class="flex items-center gap-4">
+            <label for="sort" class="text-sm font-medium text-gray-700 dark:text-gray-300">Sort by:</label>
+            <select id="sort" class="px-4 py-2 rounded-xl border-2 border-gray-200 dark:border-dark-700 bg-white dark:bg-dark-800 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-all duration-300">
+              <option>Best Selling</option>
+              <option>Price: Low to High</option>
+              <option>Price: High to Low</option>
+              <option>Newest</option>
+              <option>Rating</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          {products.map((product, i) => (
+            <div style={`animation: fadeInUp 0.6s ease-in-out ${i * 0.05}s both;`}>
+              <ProductCard {...product} />
+            </div>
+          ))}
+        </div>
+
+        <!-- Pagination -->
+        <div class="flex justify-center items-center gap-2">
+          <button class="px-4 py-2 rounded-xl border-2 border-gray-200 dark:border-dark-700 hover:border-primary-500 dark:hover:border-primary-500 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          
+          {[1, 2, 3, 4, 5].map(page => (
+            <button class={`px-4 py-2 rounded-xl border-2 transition-all duration-300 ${page === 1 ? 'bg-primary-600 text-white border-primary-600' : 'border-gray-200 dark:border-dark-700 hover:border-primary-500 dark:hover:border-primary-500'}`}>
+              {page}
+            </button>
+          ))}
+          
+          <button class="px-4 py-2 rounded-xl border-2 border-gray-200 dark:border-dark-700 hover:border-primary-500 dark:hover:border-primary-500 transition-all duration-300">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Category Info Section -->
+  <section class="bg-gray-50 dark:bg-dark-900 py-16">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">About {currentCategory.name}</h2>
+        <div class="prose prose-lg dark:prose-invert max-w-none">
+          <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
+            Our {currentCategory.name.toLowerCase()} collection features premium quality products from trusted manufacturers. 
+            Whether you're working on a residential project or a large commercial construction, we have the right materials for your needs.
+          </p>
+          <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+            All products are tested for quality and durability, ensuring they meet industry standards. 
+            We offer competitive pricing, fast delivery, and expert support to help you choose the right products for your project.
+          </p>
+        </div>
+
+        <!-- Features -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+          {[
+            { icon: '✓', title: 'Quality Assured', desc: 'All products tested and certified' },
+            { icon: '🚚', title: 'Fast Delivery', desc: 'Same-day shipping available' },
+            { icon: '💬', title: 'Expert Support', desc: '24/7 technical assistance' }
+          ].map(feature => (
+            <div class="bg-white dark:bg-dark-800 rounded-2xl p-6 border border-gray-200 dark:border-dark-700 hover:border-primary-500 dark:hover:border-primary-500 transition-all duration-500 hover:shadow-xl hover:-translate-y-1">
+              <div class="text-4xl mb-3">{feature.icon}</div>
+              <h3 class="font-bold text-lg mb-2">{feature.title}</h3>
+              <p class="text-gray-600 dark:text-gray-400 text-sm">{feature.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

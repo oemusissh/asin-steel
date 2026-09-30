@@ -1,0 +1,91 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProductCard from '../components/ProductCard.astro';
+import FilterSidebar from '../components/FilterSidebar.astro';
+
+const products = Array.from({ length: 12 }, (_, i) => ({
+  id: `prod-${i + 1}`,
+  name: `Building Material Product ${i + 1}`,
+  price: Math.floor(Math.random() * 200) + 10,
+  originalPrice: i % 3 === 0 ? Math.floor(Math.random() * 250) + 50 : undefined,
+  image: `https://images.unsplash.com/photo-${1500000000000 + i * 10000000}?w=500&h=500&fit=crop`,
+  rating: 4 + Math.random(),
+  reviews: Math.floor(Math.random() * 500) + 50,
+  badge: i % 4 === 0 ? 'Best Seller' : i % 5 === 0 ? 'New' : undefined,
+  inStock: i % 7 !== 0
+}));
+---
+
+<BaseLayout title="Products - ASIN STILL">
+  <div class="container mx-auto px-4 py-8">
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-sm mb-8 animate-fade-in">
+      <a href="/" class="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400">Home</a>
+      <span class="text-gray-400">/</span>
+      <span class="text-gray-900 dark:text-white font-semibold">Products</span>
+    </nav>
+
+    <div class="flex flex-col lg:flex-row gap-8">
+      <!-- Filters -->
+      <FilterSidebar />
+
+      <!-- Products Grid -->
+      <div class="flex-1">
+        <!-- Toolbar - Mobile Optimized -->
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4 mb-6 animate-slide-down">
+          <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400">
+            Showing <span class="font-semibold text-gray-900 dark:text-white">1-12</span> of <span class="font-semibold text-gray-900 dark:text-white">248</span> products
+          </p>
+          
+          <div class="flex items-center gap-2 sm:gap-4 w-full sm:w-auto">
+            <!-- View Toggle - Hidden on Mobile -->
+            <div class="hidden sm:flex items-center gap-2 bg-white dark:bg-dark-800 rounded-lg p-1 border border-gray-200 dark:border-dark-700">
+              <button class="p-2 rounded bg-primary-600 text-white" aria-label="Grid view">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                </svg>
+              </button>
+              <button class="p-2 rounded hover:bg-gray-100 dark:hover:bg-dark-700" aria-label="List view">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
+                </svg>
+              </button>
+            </div>
+
+            <!-- Sort - Mobile Optimized -->
+            <select class="flex-1 sm:flex-none px-3 sm:px-4 py-2 sm:py-2.5 text-sm bg-white dark:bg-dark-800 border border-gray-200 dark:border-dark-700 rounded-lg focus:outline-none focus:border-primary-500 cursor-pointer">
+              <option>Sort by: Featured</option>
+              <option>Price: Low to High</option>
+              <option>Price: High to Low</option>
+              <option>Newest</option>
+              <option>Best Rating</option>
+              <option>Most Popular</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Products - Mobile Optimized Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
+          {products.map(product => (
+            <ProductCard {...product} />
+          ))}
+        </div>
+
+        <!-- Pagination - Mobile Optimized -->
+        <div class="flex flex-wrap justify-center items-center gap-2 animate-fade-in">
+          <button class="px-3 sm:px-4 py-2 text-sm rounded-lg border border-gray-200 dark:border-dark-700 hover:bg-gray-100 dark:hover:bg-dark-800 transition-colors disabled:opacity-50 active:scale-95" disabled>
+            Previous
+          </button>
+          {[1, 2, 3, 4, 5].map(page => (
+            <button class={`px-3 sm:px-4 py-2 text-sm rounded-lg border transition-colors active:scale-95 ${page === 1 ? 'bg-primary-600 text-white border-primary-600' : 'border-gray-200 dark:border-dark-700 hover:bg-gray-100 dark:hover:bg-dark-800'}`}>
+              {page}
+            </button>
+          ))}
+          <button class="px-3 sm:px-4 py-2 text-sm rounded-lg border border-gray-200 dark:border-dark-700 hover:bg-gray-100 dark:hover:bg-dark-800 transition-colors active:scale-95">
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

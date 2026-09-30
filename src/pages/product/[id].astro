@@ -1,0 +1,387 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProductCard from '../../components/ProductCard.astro';
+
+export function getStaticPaths() {
+  return [
+    { params: { id: '1' } },
+    { params: { id: '2' } },
+    { params: { id: '3' } },
+    { params: { id: '4' } },
+    { params: { id: '5' } },
+  ];
+}
+
+// Mock product data
+const product = {
+  id: '1',
+  name: 'Premium Portland Cement - 50kg Bag',
+  price: 12.99,
+  originalPrice: 15.99,
+  images: [
+    'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=800&fit=crop',
+    'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=800&h=800&fit=crop',
+    'https://images.unsplash.com/photo-1563453392212-326f5e854473?w=800&h=800&fit=crop',
+  ],
+  rating: 4.8,
+  reviews: 234,
+  inStock: true,
+  sku: 'CEM-PORT-50',
+  category: 'Cement & Concrete',
+  brand: 'BuildPro',
+  description: 'High-quality Portland cement perfect for all construction projects. Provides excellent strength and durability for foundations, walls, and structural applications.',
+  features: [
+    'Premium grade Portland cement',
+    'High compressive strength',
+    'Consistent quality and performance',
+    'Suitable for all weather conditions',
+    'Meets ASTM C150 standards',
+    'Fast setting time'
+  ],
+  specifications: {
+    'Weight': '50 kg (110 lbs)',
+    'Type': 'Portland Cement Type I',
+    'Compressive Strength': '4000+ PSI',
+    'Setting Time': '45-60 minutes',
+    'Color': 'Gray',
+    'Storage': 'Keep dry and covered'
+  }
+};
+
+const relatedProducts = [
+  {
+    id: '2',
+    name: 'Steel Reinforcement Bars',
+    price: 45.50,
+    image: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=500&h=500&fit=crop',
+    rating: 4.9,
+    reviews: 189,
+    inStock: true
+  },
+  {
+    id: '3',
+    name: 'Premium Pine Lumber',
+    price: 8.99,
+    image: 'https://images.unsplash.com/photo-1563453392212-326f5e854473?w=500&h=500&fit=crop',
+    rating: 4.7,
+    reviews: 456,
+    inStock: true
+  },
+  {
+    id: '4',
+    name: 'Professional Power Drill',
+    price: 129.99,
+    image: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=500&h=500&fit=crop',
+    rating: 4.9,
+    reviews: 678,
+    inStock: true
+  },
+  {
+    id: '5',
+    name: 'Copper Electrical Wire',
+    price: 89.99,
+    image: 'https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=500&h=500&fit=crop',
+    rating: 4.6,
+    reviews: 123,
+    inStock: true
+  }
+];
+---
+
+<BaseLayout title={`${product.name} - ASIN STILL`}>
+  <div class="container mx-auto px-4 py-8">
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-sm mb-8 animate-fade-in">
+      <a href="/" class="text-gray-600 dark:text-gray-400 hover:text-primary-600">Home</a>
+      <span class="text-gray-400">/</span>
+      <a href="/products" class="text-gray-600 dark:text-gray-400 hover:text-primary-600">Products</a>
+      <span class="text-gray-400">/</span>
+      <a href={`/categories/${product.category.toLowerCase()}`} class="text-gray-600 dark:text-gray-400 hover:text-primary-600">{product.category}</a>
+      <span class="text-gray-400">/</span>
+      <span class="text-gray-900 dark:text-white font-semibold">{product.name}</span>
+    </nav>
+
+    <!-- Product Details -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+      <!-- Images -->
+      <div class="space-y-4 animate-slide-up">
+        <div class="relative aspect-square rounded-2xl overflow-hidden bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-700">
+          <img id="main-image" src={product.images[0]} alt={product.name} class="w-full h-full object-cover" />
+        </div>
+        <div class="grid grid-cols-4 gap-4">
+          {product.images.map((img, i) => (
+            <button
+              data-image={img}
+              class={`aspect-square rounded-lg overflow-hidden border-2 ${i === 0 ? 'border-primary-600' : 'border-gray-200 dark:border-dark-700'} hover:border-primary-600 transition-colors`}
+            >
+              <img src={img} alt={`${product.name} ${i + 1}`} class="w-full h-full object-cover" />
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <!-- Info -->
+      <div class="animate-slide-up" style="animation-delay: 0.1s;">
+        <div class="mb-4">
+          <span class="inline-block px-3 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 rounded-full text-sm font-semibold">
+            {product.category}
+          </span>
+        </div>
+
+        <h1 class="text-4xl font-bold mb-4">{product.name}</h1>
+
+        <!-- Rating -->
+        <div class="flex items-center gap-4 mb-6">
+          <div class="flex items-center gap-1">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <svg
+                class={`w-5 h-5 ${i < Math.floor(product.rating) ? 'text-yellow-400' : 'text-gray-300 dark:text-dark-600'}`}
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+            ))}
+          </div>
+          <span class="text-gray-600 dark:text-gray-400">{product.rating} ({product.reviews} reviews)</span>
+        </div>
+
+        <!-- Price -->
+        <div class="flex items-center gap-4 mb-6">
+          <span class="text-4xl font-bold text-primary-600 dark:text-primary-400">${product.price.toFixed(2)}</span>
+          {product.originalPrice && (
+            <>
+              <span class="text-2xl text-gray-500 dark:text-gray-400 line-through">${product.originalPrice.toFixed(2)}</span>
+              <span class="px-3 py-1 bg-red-600 text-white rounded-full text-sm font-bold">
+                Save {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}%
+              </span>
+            </>
+          )}
+        </div>
+
+        <!-- Stock Status -->
+        <div class="mb-6">
+          {product.inStock ? (
+            <span class="text-green-600 dark:text-green-400 flex items-center gap-2 text-lg font-semibold">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              In Stock - Ready to Ship
+            </span>
+          ) : (
+            <span class="text-red-600 dark:text-red-400 text-lg font-semibold">Out of Stock</span>
+          )}
+        </div>
+
+        <!-- Description -->
+        <p class="text-gray-600 dark:text-gray-400 mb-6 text-lg">{product.description}</p>
+
+        <!-- Quantity & Actions -->
+        <div class="flex flex-wrap gap-4 mb-8">
+          <div class="flex items-center gap-2 bg-gray-100 dark:bg-dark-800 rounded-xl p-2">
+            <button id="decrease-qty" class="px-4 py-2 hover:bg-gray-200 dark:hover:bg-dark-700 rounded-lg transition-colors">-</button>
+            <span id="quantity" class="px-6 font-bold text-lg">1</span>
+            <button id="increase-qty" class="px-4 py-2 hover:bg-gray-200 dark:hover:bg-dark-700 rounded-lg transition-colors">+</button>
+          </div>
+          <button
+            id="add-to-cart-btn"
+            class="flex-1 py-4 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-bold transition-all duration-300 hover:shadow-lg transform hover:scale-105"
+          >
+            Add to Cart
+          </button>
+          <button
+            id="wishlist-btn"
+            class="p-4 border-2 border-gray-200 dark:border-dark-700 hover:border-primary-600 dark:hover:border-primary-600 rounded-xl transition-all duration-300"
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Product Info -->
+        <div class="space-y-4 border-t border-gray-200 dark:border-dark-700 pt-6">
+          <div class="flex items-center gap-3">
+            <span class="text-gray-600 dark:text-gray-400">SKU:</span>
+            <span class="font-semibold">{product.sku}</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-gray-600 dark:text-gray-400">Brand:</span>
+            <span class="font-semibold">{product.brand}</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-gray-600 dark:text-gray-400">Category:</span>
+            <a href={`/categories/${product.category.toLowerCase()}`} class="font-semibold text-primary-600 dark:text-primary-400 hover:underline">{product.category}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="mb-16 animate-on-scroll">
+      <div class="border-b border-gray-200 dark:border-dark-700 mb-6">
+        <div class="flex gap-8">
+          <button class="tab-btn active pb-4 border-b-2 border-primary-600 font-semibold" data-tab="description">Description</button>
+          <button class="tab-btn pb-4 border-b-2 border-transparent hover:border-gray-300 dark:hover:border-dark-600 font-semibold transition-colors" data-tab="specifications">Specifications</button>
+          <button class="tab-btn pb-4 border-b-2 border-transparent hover:border-gray-300 dark:hover:border-dark-600 font-semibold transition-colors" data-tab="reviews">Reviews ({product.reviews})</button>
+        </div>
+      </div>
+
+      <div id="description" class="tab-content">
+        <div class="bg-white dark:bg-dark-800 rounded-2xl p-8 border border-gray-200 dark:border-dark-700">
+          <h3 class="text-2xl font-bold mb-4">Product Features</h3>
+          <ul class="space-y-3">
+            {product.features.map(feature => (
+              <li class="flex items-start gap-3">
+                <svg class="w-6 h-6 text-primary-600 dark:text-primary-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                <span class="text-gray-600 dark:text-gray-400">{feature}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <div id="specifications" class="tab-content hidden">
+        <div class="bg-white dark:bg-dark-800 rounded-2xl p-8 border border-gray-200 dark:border-dark-700">
+          <h3 class="text-2xl font-bold mb-6">Technical Specifications</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {Object.entries(product.specifications).map(([key, value]) => (
+              <div class="flex justify-between p-4 bg-gray-50 dark:bg-dark-900 rounded-lg">
+                <span class="font-semibold">{key}:</span>
+                <span class="text-gray-600 dark:text-gray-400">{value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div id="reviews" class="tab-content hidden">
+        <div class="bg-white dark:bg-dark-800 rounded-2xl p-8 border border-gray-200 dark:border-dark-700">
+          <h3 class="text-2xl font-bold mb-6">Customer Reviews</h3>
+          <div class="space-y-6">
+            {[1, 2, 3].map(i => (
+              <div class="border-b border-gray-200 dark:border-dark-700 pb-6 last:border-0">
+                <div class="flex items-center gap-4 mb-3">
+                  <div class="flex items-center gap-1">
+                    {Array.from({ length: 5 }).map(() => (
+                      <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                    ))}
+                  </div>
+                  <span class="font-semibold">John Doe</span>
+                  <span class="text-sm text-gray-500">2 weeks ago</span>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">Excellent quality cement. Used it for my foundation and it set perfectly. Highly recommend!</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Related Products -->
+    <section class="animate-on-scroll">
+      <h2 class="text-3xl font-bold mb-8">Related Products</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {relatedProducts.map(p => (
+          <ProductCard {...p} />
+        ))}
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<script define:vars={{ product }}>
+  // Image gallery
+  document.querySelectorAll('[data-image]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const img = (e.currentTarget as HTMLElement).dataset.image!;
+      document.getElementById('main-image')!.setAttribute('src', img);
+      
+      document.querySelectorAll('[data-image]').forEach(b => b.classList.remove('border-primary-600'));
+      (e.currentTarget as HTMLElement).classList.add('border-primary-600');
+    });
+  });
+
+  // Quantity
+  let quantity = 1;
+  document.getElementById('increase-qty')?.addEventListener('click', () => {
+    quantity++;
+    document.getElementById('quantity')!.textContent = quantity.toString();
+  });
+  document.getElementById('decrease-qty')?.addEventListener('click', () => {
+    if (quantity > 1) {
+      quantity--;
+      document.getElementById('quantity')!.textContent = quantity.toString();
+    }
+  });
+
+  // Add to cart
+  document.getElementById('add-to-cart-btn')?.addEventListener('click', () => {
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const existingItem = cart.find((item: any) => item.id === product.id);
+
+    if (existingItem) {
+      existingItem.quantity += quantity;
+    } else {
+      cart.push({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.images[0],
+        quantity: quantity
+      });
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    
+    const count = cart.reduce((sum: number, item: any) => sum + item.quantity, 0);
+    document.querySelectorAll('[data-cart-count]').forEach(el => {
+      el.textContent = count.toString();
+    });
+
+    const btn = document.getElementById('add-to-cart-btn')!;
+    btn.textContent = 'Added to Cart!';
+    setTimeout(() => {
+      btn.textContent = 'Add to Cart';
+    }, 2000);
+  });
+
+  // Wishlist
+  document.getElementById('wishlist-btn')?.addEventListener('click', () => {
+    const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+    const index = wishlist.indexOf(product.id);
+    
+    if (index > -1) {
+      wishlist.splice(index, 1);
+    } else {
+      wishlist.push(product.id);
+    }
+    
+    localStorage.setItem('wishlist', JSON.stringify(wishlist));
+    
+    document.querySelectorAll('[data-wishlist-count]').forEach(el => {
+      el.textContent = wishlist.length.toString();
+    });
+  });
+
+  // Tabs
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const tab = (e.currentTarget as HTMLElement).dataset.tab!;
+      
+      document.querySelectorAll('.tab-btn').forEach(b => {
+        b.classList.remove('active', 'border-primary-600');
+        b.classList.add('border-transparent');
+      });
+      (e.currentTarget as HTMLElement).classList.add('active', 'border-primary-600');
+      (e.currentTarget as HTMLElement).classList.remove('border-transparent');
+      
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+      document.getElementById(tab)!.classList.remove('hidden');
+    });
+  });
+</script>

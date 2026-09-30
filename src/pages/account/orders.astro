@@ -1,0 +1,297 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// Mock user data
+const user = {
+  name: 'John Doe',
+  email: 'john.doe@example.com',
+  memberSince: 'January 2024'
+};
+
+// Mock orders data
+const orders = [
+  {
+    id: 'BM-12345',
+    date: 'February 8, 2026',
+    status: 'Delivered',
+    statusColor: 'green',
+    total: 870.87,
+    items: 3,
+    trackingNumber: 'TRK-987654321',
+    products: [
+      { name: 'Premium Oak Hardwood Flooring', quantity: 2, price: 299.99, image: 'https://images.unsplash.com/photo-1615971677499-5467cbab01c0?w=100&h=100&fit=crop' },
+      { name: 'Professional Tool Set', quantity: 1, price: 149.99, image: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=100&h=100&fit=crop' }
+    ]
+  },
+  {
+    id: 'BM-12344',
+    date: 'February 3, 2026',
+    status: 'In Transit',
+    statusColor: 'blue',
+    total: 1245.50,
+    items: 5,
+    trackingNumber: 'TRK-987654320',
+    products: [
+      { name: 'Portland Cement 50kg', quantity: 10, price: 12.99, image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=100&h=100&fit=crop' },
+      { name: 'Steel Rebar Grade 60', quantity: 20, price: 45.50, image: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=100&h=100&fit=crop' }
+    ]
+  },
+  {
+    id: 'BM-12343',
+    date: 'January 28, 2026',
+    status: 'Processing',
+    statusColor: 'yellow',
+    total: 567.30,
+    items: 2,
+    trackingNumber: null,
+    products: [
+      { name: 'Interior Paint Premium White', quantity: 5, price: 45.99, image: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=100&h=100&fit=crop' },
+      { name: 'Paint Roller Set Professional', quantity: 2, price: 24.99, image: 'https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=100&h=100&fit=crop' }
+    ]
+  },
+  {
+    id: 'BM-12342',
+    date: 'January 20, 2026',
+    status: 'Cancelled',
+    statusColor: 'red',
+    total: 345.00,
+    items: 1,
+    trackingNumber: null,
+    products: [
+      { name: 'Electric Drill Professional', quantity: 1, price: 345.00, image: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=100&h=100&fit=crop' }
+    ]
+  },
+  {
+    id: 'BM-12341',
+    date: 'January 15, 2026',
+    status: 'Delivered',
+    statusColor: 'green',
+    total: 2150.75,
+    items: 8,
+    trackingNumber: 'TRK-987654319',
+    products: [
+      { name: 'Ceramic Floor Tiles 60x60cm', quantity: 50, price: 15.99, image: 'https://images.unsplash.com/photo-1615971677499-5467cbab01c0?w=100&h=100&fit=crop' },
+      { name: 'Tile Adhesive Premium', quantity: 10, price: 25.50, image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=100&h=100&fit=crop' }
+    ]
+  }
+];
+---
+
+<BaseLayout title="My Orders - ASIN STILL">
+  <!-- Header -->
+  <section class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 dark:from-dark-900 dark:via-dark-800 dark:to-dark-900 text-white py-8">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <h1 class="text-2xl sm:text-3xl font-bold mb-2">My Orders</h1>
+          <p class="text-gray-300 dark:text-gray-400">Track and manage your orders</p>
+        </div>
+        <a href="/account" class="hidden sm:flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg border border-white/20 transition-all text-sm font-medium">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Back to Account
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filters & Stats -->
+  <section class="bg-white dark:bg-dark-900 border-b border-gray-200 dark:border-dark-800 py-4">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <!-- Stats -->
+        <div class="flex items-center gap-6">
+          <div>
+            <p class="text-sm text-gray-500 dark:text-gray-400">Total Orders</p>
+            <p class="text-xl font-bold text-gray-900 dark:text-white">{orders.length}</p>
+          </div>
+          <div class="h-10 w-px bg-gray-200 dark:bg-dark-700"></div>
+          <div>
+            <p class="text-sm text-gray-500 dark:text-gray-400">Total Spent</p>
+            <p class="text-xl font-bold text-gray-900 dark:text-white">${orders.reduce((sum, order) => sum + order.total, 0).toLocaleString()}</p>
+          </div>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-2 sm:pb-0">
+          <button class="filter-btn active px-4 py-2 bg-primary-600 text-white rounded-lg text-sm font-semibold whitespace-nowrap" data-status="all">
+            All Orders
+          </button>
+          <button class="filter-btn px-4 py-2 bg-gray-100 dark:bg-dark-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-semibold hover:bg-gray-200 dark:hover:bg-dark-700 transition-colors whitespace-nowrap" data-status="delivered">
+            Delivered
+          </button>
+          <button class="filter-btn px-4 py-2 bg-gray-100 dark:bg-dark-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-semibold hover:bg-gray-200 dark:hover:bg-dark-700 transition-colors whitespace-nowrap" data-status="in-transit">
+            In Transit
+          </button>
+          <button class="filter-btn px-4 py-2 bg-gray-100 dark:bg-dark-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-semibold hover:bg-gray-200 dark:hover:bg-dark-700 transition-colors whitespace-nowrap" data-status="processing">
+            Processing
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Orders List -->
+  <section class="py-8 bg-gray-50 dark:bg-dark-800">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto space-y-4">
+        {orders.map((order) => (
+          <div class="order-card bg-white dark:bg-dark-900 rounded-xl shadow-sm border border-gray-200 dark:border-dark-700 overflow-hidden hover:shadow-md transition-shadow" data-status={order.status.toLowerCase().replace(' ', '-')}>
+            <!-- Order Header -->
+            <div class="p-4 sm:p-6 border-b border-gray-200 dark:border-dark-700">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div class="flex-1">
+                  <div class="flex items-center gap-3 mb-2">
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-white">Order {order.id}</h3>
+                    <span class={`px-3 py-1 bg-${order.statusColor}-100 dark:bg-${order.statusColor}-900/30 text-${order.statusColor}-700 dark:text-${order.statusColor}-400 rounded-full text-xs font-semibold`}>
+                      {order.status}
+                    </span>
+                  </div>
+                  <div class="flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
+                    <span class="flex items-center gap-1">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                      {order.date}
+                    </span>
+                    <span class="flex items-center gap-1">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                      </svg>
+                      {order.items} items
+                    </span>
+                    {order.trackingNumber && (
+                      <span class="flex items-center gap-1">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                        </svg>
+                        {order.trackingNumber}
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="text-right">
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Total</p>
+                    <p class="text-xl font-bold text-gray-900 dark:text-white">${order.total.toFixed(2)}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Order Items -->
+            <div class="p-4 sm:p-6">
+              <div class="space-y-3">
+                {order.products.map((product) => (
+                  <div class="flex items-center gap-4">
+                    <img src={product.image} alt={product.name} class="w-16 h-16 rounded-lg object-cover flex-shrink-0" />
+                    <div class="flex-1 min-w-0">
+                      <h4 class="font-semibold text-gray-900 dark:text-white truncate">{product.name}</h4>
+                      <p class="text-sm text-gray-600 dark:text-gray-400">Qty: {product.quantity}</p>
+                    </div>
+                    <div class="text-right">
+                      <p class="font-semibold text-gray-900 dark:text-white">${product.price.toFixed(2)}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <!-- Order Actions -->
+            <div class="p-4 sm:p-6 bg-gray-50 dark:bg-dark-800 border-t border-gray-200 dark:border-dark-700">
+              <div class="flex flex-wrap gap-3">
+                {order.trackingNumber && (
+                  <a href={`/track-order?order=${order.id}`} class="flex-1 sm:flex-none px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-semibold transition-colors text-center text-sm flex items-center justify-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                    </svg>
+                    Track Order
+                  </a>
+                )}
+                <button class="flex-1 sm:flex-none px-4 py-2 bg-white dark:bg-dark-900 border border-gray-300 dark:border-dark-700 text-gray-700 dark:text-gray-300 rounded-lg font-semibold hover:bg-gray-50 dark:hover:bg-dark-800 transition-colors text-sm flex items-center justify-center gap-2">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
+                  View Details
+                </button>
+                {order.status === 'Delivered' && (
+                  <button class="flex-1 sm:flex-none px-4 py-2 bg-white dark:bg-dark-900 border border-gray-300 dark:border-dark-700 text-gray-700 dark:text-gray-300 rounded-lg font-semibold hover:bg-gray-50 dark:hover:bg-dark-800 transition-colors text-sm flex items-center justify-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" />
+                    </svg>
+                    Return
+                  </button>
+                )}
+                <button class="flex-1 sm:flex-none px-4 py-2 bg-white dark:bg-dark-900 border border-gray-300 dark:border-dark-700 text-gray-700 dark:text-gray-300 rounded-lg font-semibold hover:bg-gray-50 dark:hover:bg-dark-800 transition-colors text-sm flex items-center justify-center gap-2">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                  </svg>
+                  Invoice
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Empty State (Hidden by default) -->
+      <div id="empty-state" class="hidden max-w-md mx-auto text-center py-12">
+        <div class="w-24 h-24 bg-gray-100 dark:bg-dark-800 rounded-full flex items-center justify-center mx-auto mb-6">
+          <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">No orders found</h3>
+        <p class="text-gray-600 dark:text-gray-400 mb-6">Try adjusting your filters or start shopping!</p>
+        <a href="/products" class="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-semibold transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+          </svg>
+          Start Shopping
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Filter functionality
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const orderCards = document.querySelectorAll('.order-card');
+    const emptyState = document.getElementById('empty-state');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const status = btn.dataset.status;
+        
+        // Update active button
+        filterBtns.forEach(b => {
+          b.classList.remove('active', 'bg-primary-600', 'text-white');
+          b.classList.add('bg-gray-100', 'dark:bg-dark-800', 'text-gray-700', 'dark:text-gray-300');
+        });
+        btn.classList.add('active', 'bg-primary-600', 'text-white');
+        btn.classList.remove('bg-gray-100', 'dark:bg-dark-800', 'text-gray-700', 'dark:text-gray-300');
+        
+        // Filter orders
+        let visibleCount = 0;
+        orderCards.forEach(card => {
+          const cardStatus = card.dataset.status;
+          if (status === 'all' || cardStatus === status) {
+            card.style.display = 'block';
+            visibleCount++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+        
+        // Show/hide empty state
+        if (visibleCount === 0) {
+          emptyState.classList.remove('hidden');
+        } else {
+          emptyState.classList.add('hidden');
+        }
+      });
+    });
+  </script>
+</BaseLayout>

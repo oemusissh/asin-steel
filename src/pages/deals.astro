@@ -1,0 +1,405 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProductCard from '../components/ProductCard.astro';
+
+// Hot deals products
+const hotDeals = [
+  {
+    id: 'd1',
+    name: 'Premium Portland Cement - 50kg Bag',
+    price: 12.99,
+    originalPrice: 15.99,
+    image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=500&h=500&fit=crop',
+    rating: 4.8,
+    reviews: 234,
+    badge: 'Best Seller',
+    inStock: true
+  },
+  {
+    id: 'd2',
+    name: 'Professional Power Drill Set',
+    price: 129.99,
+    originalPrice: 179.99,
+    image: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=500&h=500&fit=crop',
+    rating: 4.9,
+    reviews: 678,
+    badge: 'Hot Deal',
+    inStock: true
+  },
+  {
+    id: 'd3',
+    name: 'Premium Pine Lumber 2x4x8',
+    price: 8.99,
+    originalPrice: 11.99,
+    image: 'https://images.unsplash.com/photo-1563453392212-326f5e854473?w=500&h=500&fit=crop',
+    rating: 4.7,
+    reviews: 456,
+    badge: 'Sale',
+    inStock: true
+  },
+  {
+    id: 'd4',
+    name: 'Exterior Paint - Premium Weather Shield',
+    price: 54.99,
+    originalPrice: 69.99,
+    image: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=500&h=500&fit=crop',
+    rating: 4.8,
+    reviews: 345,
+    badge: 'Sale',
+    inStock: true
+  },
+  {
+    id: 'd5',
+    name: 'Galvanized Steel Sheet - 4x8ft',
+    price: 89.99,
+    originalPrice: 109.99,
+    image: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=500&h=500&fit=crop',
+    rating: 4.8,
+    reviews: 234,
+    badge: 'Sale',
+    inStock: true
+  },
+  {
+    id: 'd6',
+    name: 'Steel I-Beam - 6 inch x 12ft',
+    price: 156.99,
+    originalPrice: 189.99,
+    image: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=500&h=500&fit=crop',
+    rating: 4.9,
+    reviews: 145,
+    badge: 'Hot Deal',
+    inStock: true
+  },
+  {
+    id: 'd7',
+    name: 'High-Strength Mortar Mix - 25kg',
+    price: 14.99,
+    originalPrice: 17.99,
+    image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=500&h=500&fit=crop',
+    rating: 4.9,
+    reviews: 456,
+    badge: 'Sale',
+    inStock: true
+  },
+  {
+    id: 'd8',
+    name: 'Rapid Hardening Cement - 50kg',
+    price: 19.99,
+    originalPrice: 24.99,
+    image: 'https://images.unsplash.com/photo-1632778149955-e80f8ceca2e8?w=500&h=500&fit=crop',
+    rating: 4.8,
+    reviews: 345,
+    badge: 'Hot Deal',
+    inStock: true
+  },
+  {
+    id: 'd9',
+    name: 'Self-Leveling Concrete - 25kg',
+    price: 29.99,
+    originalPrice: 34.99,
+    image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=500&h=500&fit=crop',
+    rating: 4.9,
+    reviews: 289,
+    badge: 'New',
+    inStock: true
+  },
+  {
+    id: 'd10',
+    name: 'Steel Channel - 3 inch x 10ft',
+    price: 54.99,
+    originalPrice: 64.99,
+    image: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=500&h=500&fit=crop',
+    rating: 4.6,
+    reviews: 134,
+    badge: 'Sale',
+    inStock: true
+  },
+  {
+    id: 'd11',
+    name: 'Lightweight Concrete Mix - 20kg',
+    price: 27.99,
+    originalPrice: 31.99,
+    image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=500&h=500&fit=crop',
+    rating: 4.5,
+    reviews: 112,
+    badge: 'Sale',
+    inStock: true
+  },
+  {
+    id: 'd12',
+    name: 'Professional Circular Saw',
+    price: 89.99,
+    originalPrice: 119.99,
+    image: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=500&h=500&fit=crop',
+    rating: 4.8,
+    reviews: 423,
+    badge: 'Hot Deal',
+    inStock: true
+  }
+];
+---
+
+<BaseLayout title="Hot Deals & Special Offers - ASIN STILL" description="Exclusive deals and discounts on premium building materials">
+  <!-- Hero Banner - Clean Professional Premium -->
+  <section class="relative bg-gradient-to-br from-red-700 via-red-900 to-dark-950 dark:from-red-900 dark:via-dark-950 dark:to-black text-white overflow-hidden">
+    <!-- Subtle Film Grain for Depth (No Repeating Pattern) -->
+    <div class="absolute inset-0 opacity-[0.015] mix-blend-overlay">
+      <svg class="w-full h-full">
+        <filter id="deals-grain">
+          <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/>
+        </filter>
+        <rect width="100%" height="100%" filter="url(#deals-grain)"/>
+      </svg>
+    </div>
+
+    <!-- Radial Glow Behind Headline (Very Subtle) -->
+    <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-gradient-radial from-yellow-400/8 via-red-500/5 to-transparent rounded-full blur-[120px]"></div>
+
+    <!-- Dark Gradient Overlay for Contrast -->
+    <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40"></div>
+
+    <div class="container mx-auto px-4 py-16 md:py-20 relative z-10">
+      <!-- Breadcrumb -->
+      <nav class="flex items-center gap-2 text-sm mb-6 animate-fade-in">
+        <a href="/" class="text-red-200 hover:text-white transition-colors duration-300">Home</a>
+        <svg class="w-4 h-4 text-red-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+        <span class="text-white font-medium">Hot Deals</span>
+      </nav>
+
+      <div class="max-w-4xl">
+        <!-- Header with Strong Hierarchy -->
+        <div class="flex items-start gap-6 mb-6" style="animation: fadeInUp 0.6s ease-in-out 0.1s both;">
+          <div class="relative flex-shrink-0">
+            <span class="text-7xl">🔥</span>
+            <span class="absolute -top-2 -right-2 flex h-6 w-6">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-6 w-6 bg-yellow-500"></span>
+            </span>
+          </div>
+          <div>
+            <div class="inline-flex items-center gap-2 bg-yellow-500/20 backdrop-blur-sm px-4 py-2 rounded-full border border-yellow-400/30 mb-4">
+              <span class="relative flex h-3 w-3">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-3 w-3 bg-yellow-500"></span>
+              </span>
+              <span class="text-sm font-bold text-yellow-200">Limited Time Offers</span>
+            </div>
+            
+            <!-- Dominant Headline -->
+            <h1 class="text-5xl md:text-7xl font-black mb-4 leading-[1.1] tracking-tight">
+              Hot Deals & Special Offers
+            </h1>
+            
+            <!-- Concise Urgent Subheadline -->
+            <p class="text-xl md:text-2xl text-red-100 font-semibold mb-2">
+              Save up to 40% on Premium Materials
+            </p>
+            <p class="text-lg text-red-200/80">
+              Limited stock • Exclusive prices • Ends soon
+            </p>
+          </div>
+        </div>
+
+        <!-- Enhanced Countdown Timer with Smooth Animation -->
+        <div class="flex gap-3 mb-8" style="animation: fadeInUp 0.6s ease-in-out 0.3s both;">
+          {['Days', 'Hours', 'Minutes', 'Seconds'].map((label, i) => (
+            <div class="flex-1 max-w-[100px]">
+              <div class="relative bg-white/10 backdrop-blur-xl rounded-2xl p-4 border border-white/20 hover:border-yellow-400/40 transition-all duration-500 group">
+                <!-- Subtle Pulse Glow -->
+                <div class="absolute inset-0 bg-yellow-400/0 group-hover:bg-yellow-400/5 rounded-2xl transition-all duration-500"></div>
+                <div class="absolute -inset-1 bg-yellow-400/0 group-hover:bg-yellow-400/10 rounded-2xl blur-lg transition-all duration-500 -z-10"></div>
+                
+                <span class="text-4xl font-black block text-center countdown-digit" id={`deals-${label.toLowerCase()}`}>
+                  {['05', '12', '34', '56'][i]}
+                </span>
+                <span class="text-xs text-red-200 font-semibold block text-center mt-1 uppercase tracking-wider">{label}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Wave Divider -->
+    <div class="absolute bottom-0 left-0 right-0">
+      <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full">
+        <path d="M0 80L60 70C120 60 240 40 360 35C480 30 600 40 720 45C840 50 960 50 1080 45C1200 40 1320 30 1380 25L1440 20V80H1380C1320 80 1200 80 1080 80C960 80 840 80 720 80C600 80 480 80 360 80C240 80 120 80 60 80H0Z" class="fill-white dark:fill-dark-950"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Deal Type Selector - Navigation State -->
+  <section class="container mx-auto px-4 py-12">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+      {[
+        { name: 'Biggest Discount', icon: '💰', color: 'from-primary-600 to-primary-700', active: true },
+        { name: 'Flash Sale', icon: '⚡', color: 'from-primary-600 to-primary-700', active: false },
+        { name: 'Clearance', icon: '🏷️', color: 'from-primary-600 to-primary-700', active: false },
+        { name: 'Bundle Deals', icon: '📦', color: 'from-primary-600 to-primary-700', active: false }
+      ].map((cat, i) => (
+        <button class={`group relative overflow-hidden rounded-2xl p-6 text-white bg-gradient-to-br ${cat.color} transition-all duration-500 ease-in-out hover:shadow-[0_0_30px_rgba(251,146,60,0.4)] hover:scale-[1.03] cursor-pointer ${cat.active ? 'ring-2 ring-primary-400 shadow-[0_0_30px_rgba(251,146,60,0.3)]' : 'opacity-60 hover:opacity-100'}`} style={`animation: fadeInUp 0.6s ease-in-out ${i * 0.1}s both;`}>
+          <!-- Active Glow -->
+          {cat.active && (
+            <div class="absolute -inset-1 bg-primary-500/20 rounded-2xl blur-xl -z-10 animate-pulse-slow"></div>
+          )}
+          
+          <div class="relative z-10">
+            <div class="text-4xl mb-2 transform group-hover:scale-110 transition-transform duration-500 ease-in-out">{cat.icon}</div>
+            <h3 class="font-bold text-base leading-tight">{cat.name}</h3>
+          </div>
+          
+          <!-- Subtle Pattern -->
+          <div class="absolute -bottom-4 -right-4 text-7xl opacity-5 group-hover:opacity-10 transition-opacity duration-500">{cat.icon}</div>
+        </button>
+      ))}
+    </div>
+
+    <!-- Products Grid with Enhanced Hover -->
+    <div class="mb-8">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+        <div>
+          <h2 class="text-3xl font-bold mb-1">Today's Best Deals</h2>
+          <p class="text-gray-600 dark:text-gray-400">Showing {hotDeals.length} exclusive offers</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
+          </svg>
+          <label for="deals-sort" class="text-sm font-medium text-gray-700 dark:text-gray-300">Sort by:</label>
+          <select id="deals-sort" class="px-4 py-2 rounded-xl border-2 border-gray-200 dark:border-dark-700 bg-white dark:bg-dark-800 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-all duration-500 hover:border-gray-300 dark:hover:border-dark-600 cursor-pointer">
+            <option>Biggest Discount</option>
+            <option>Price: Low to High</option>
+            <option>Price: High to Low</option>
+            <option>Best Selling</option>
+            <option>Ending Soon</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 deals-grid">
+        {hotDeals.map((product, i) => (
+          <div class="deal-card" style={`animation: fadeInUp 0.6s ease-in-out ${i * 0.05}s both;`}>
+            <ProductCard {...product} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Shop Deals Section - Enhanced Spacing -->
+  <section class="bg-gradient-to-b from-gray-50 to-white dark:from-dark-900 dark:to-dark-950 py-16">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center mb-12">
+        <h2 class="text-3xl font-bold mb-4">Why Shop Our Deals?</h2>
+        <p class="text-gray-600 dark:text-gray-400 text-lg">
+          Premium quality at exceptional prices - trusted by thousands of contractors
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-5xl mx-auto">
+        {[
+          {
+            icon: `<svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`,
+            title: 'Genuine Savings',
+            desc: 'Real discounts on authentic products, not inflated prices'
+          },
+          {
+            icon: `<svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>`,
+            title: 'Quality Guaranteed',
+            desc: 'Same premium quality, just better prices'
+          },
+          {
+            icon: `<svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`,
+            title: 'Limited Time',
+            desc: 'Exclusive deals that won\'t last long'
+          }
+        ].map((feature, i) => (
+          <div class="group bg-white dark:bg-dark-800 rounded-3xl p-8 text-center border border-gray-200 dark:border-dark-700 hover:border-primary-500 dark:hover:border-primary-500 transition-all duration-500 ease-in-out hover:shadow-2xl hover:-translate-y-1.5" style={`animation: fadeInUp 0.6s ease-in-out ${i * 0.1}s both;`}>
+            <!-- Animated Icon -->
+            <div class="inline-flex items-center justify-center w-20 h-20 mb-5 rounded-2xl bg-gradient-to-br from-primary-600 to-primary-700 text-white transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 ease-in-out shadow-lg group-hover:shadow-2xl animate-float-slow">
+              <div class="transform group-hover:scale-110 transition-transform duration-500 ease-in-out" set:html={feature.icon} />
+            </div>
+            
+            <h3 class="font-bold text-xl mb-3 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-300">{feature.title}</h3>
+            <p class="text-gray-600 dark:text-gray-400 leading-relaxed">{feature.desc}</p>
+            
+            <!-- Glow Effect -->
+            <div class="absolute -inset-1 bg-gradient-to-r from-primary-600 to-primary-700 rounded-3xl blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 ease-in-out -z-10"></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Smooth Countdown Digit Animation */
+  .countdown-digit {
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* Deal Card Enhanced Hover */
+  .deal-card {
+    transition: all 0.5s ease-in-out;
+  }
+  
+  /* Smooth Grid Transition on Sort */
+  .deals-grid {
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  .deals-grid.sorting {
+    opacity: 0.5;
+  }
+</style>
+
+<script>
+  // Enhanced Countdown Timer with Smooth Animation
+  function updateDealsCountdown() {
+    const endDate = new Date();
+    endDate.setDate(endDate.getDate() + 5);
+    endDate.setHours(23, 59, 59);
+
+    const now = new Date().getTime();
+    const distance = endDate.getTime() - now;
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    const updateDigit = (id: string, value: number) => {
+      const el = document.getElementById(id);
+      if (el && el.textContent !== String(value).padStart(2, '0')) {
+        el.style.transform = 'scale(1.1)';
+        setTimeout(() => {
+          el.textContent = String(value).padStart(2, '0');
+          el.style.transform = 'scale(1)';
+        }, 150);
+      }
+    };
+
+    updateDigit('deals-days', days);
+    updateDigit('deals-hours', hours);
+    updateDigit('deals-minutes', minutes);
+    updateDigit('deals-seconds', seconds);
+  }
+
+  updateDealsCountdown();
+  setInterval(updateDealsCountdown, 1000);
+
+  // Smooth Sort Animation
+  const sortSelect = document.getElementById('deals-sort');
+  const dealsGrid = document.querySelector('.deals-grid');
+  
+  sortSelect?.addEventListener('change', () => {
+    dealsGrid?.classList.add('sorting');
+    setTimeout(() => {
+      dealsGrid?.classList.remove('sorting');
+      // Smooth scroll to top of grid
+      dealsGrid?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 300);
+  });
+</script>

@@ -1,0 +1,385 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Help Center - ASIN STILL">
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-orange-50 to-orange-100 dark:from-gray-800 dark:to-gray-900 py-16">
+    <div class="container mx-auto px-4">
+      <div class="max-w-3xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+          👋 How Can We Help You?
+        </h1>
+        <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">
+          Search our knowledge base or browse categories below
+        </p>
+        
+        <!-- Search Bar -->
+        <div class="relative">
+          <input
+            type="text"
+            id="help-search"
+            placeholder="Search for help articles, guides, or FAQs..."
+            class="w-full px-6 py-4 pr-12 rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:border-orange-500 dark:focus:border-orange-500 focus:outline-none text-lg"
+          />
+          <svg class="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </div>
+        
+        <!-- Search Results -->
+        <div id="search-results" class="hidden mt-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 text-left max-h-96 overflow-y-auto">
+          <div id="results-content"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular Topics -->
+  <section class="py-16 bg-white dark:bg-gray-900">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
+        📚 Popular Help Topics
+      </h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto" id="help-categories">
+        <!-- Getting Started -->
+        <div class="help-category bg-gray-50 dark:bg-gray-800 rounded-xl p-6 hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent hover:border-orange-500" data-category="getting-started">
+          <div class="text-4xl mb-4">🚀</div>
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Getting Started</h3>
+          <p class="text-gray-600 dark:text-gray-400 mb-4">Learn the basics of ordering and using ASIN STILL</p>
+          <div class="space-y-2">
+            <a href="#" class="help-link block text-orange-600 dark:text-orange-400 hover:underline" data-article="how-to-order">How to place an order</a>
+            <a href="#" class="help-link block text-orange-600 dark:text-orange-400 hover:underline" data-article="create-account">Creating an account</a>
+            <a href="#" class="help-link block text-orange-600 dark:text-orange-400 hover:underline" data-article="payment-methods">Payment methods</a>
+            <a href="#" class="help-link block text-orange-600 dark:text-orange-400 hover:underline" data-article="first-purchase">Making your first purchase</a>
+          </div>
+        </div>
+
+        <!-- Orders & Tracking -->
+        <div class="help-category bg-gray-50 dark:bg-gray-800 rounded-xl p-6 hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent hover:border-orange-500" data-category="orders">
+          <div class="text-4xl mb-4">📦</div>
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Orders & Tracking</h3>
+          <p class="text-gray-600 dark:text-gray-400 mb-4">Track and manage your orders</p>
+          <div class="space-y-2">
+            <a href="/track-order" class="help-link block text-orange-600 dark:text-orange-400 hover:underline">Track my order</a>
+            <a href="#" class="help-link block text-orange-600 dark:text-orange-400 hover:underline" data-article="modify-order">Modify or cancel order</a>
+            <a href="#" class="help-link block text-orange-600 dark:text-orange-400 hover:underline" data-article="order-status">Understanding order status</a>
+            <a href="/account/orders" class="help-link block text-orange-600 dark:text-orange-400 hover:underline">View order history</a>
+          </div>
+        </div>
+
+        <!-- Shipping & Delivery -->
+        <div class="help-category bg-gray-50 dark:bg-gray-800 rounded-xl p-6 hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent hover:border-orange-500" data-category="shipping">
+          <div class="text-4xl mb-4">🚚</div>
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Shipping & Delivery</h3>
+          <p class="text-gray-600 dark:text-gray-400 mb-4">Everything about shipping and delivery</p>
+          <div class="space-y-2">
+            <a href="/shipping-info" class="help-link block text-orange-600 dark:text-orange-400 hover:underline">Shipping options & rates</a>
+            <a href="#" class="help-link block text-orange-600 dark:text-orange-400 hover:underline" data-article="delivery-time">Delivery timeframes</a>
+            <a href="#" class="help-link block text-orange-600 dark:text-orange-400 hover:underline" data-article="shipping-zones">Shipping zones</a>
+            <a href="#" class="help-link block text-orange-600 dark:text-orange-400 hover:underline" data-article="freight-delivery">Freight delivery info</a>
+          </div>
+        </div>
+
+        <!-- Returns & Refunds -->
+        <div class="help-category bg-gray-50 dark:bg-gray-800 rounded-xl p-6 hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent hover:border-orange-500" data-category="returns">
+          <div class="text-4xl mb-4">↩️</div>
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Returns & Refunds</h3>
+          <p class="text-gray-600 dark:text-gray-400 mb-4">Return policy and refund process</p>
+          <div class="space-y-2">
+            <a href="/returns" class="help-link block text-orange-600 dark:text-orange-400 hover:underline">Return policy</a>
+            <a href="#" class="help-link block text-orange-600 dark:text-orange-400 hover:underline" data-article="start-return">How to start a return</a>
+            <a href="#" class="help-link block text-orange-600 dark:text-orange-400 hover:underline" data-article="refund-process">Refund processing time</a>
+            <a href="#" class="help-link block text-orange-600 dark:text-orange-400 hover:underline" data-article="exchange-items">Exchange items</a>
+          </div>
+        </div>
+
+        <!-- Account & Security -->
+        <div class="help-category bg-gray-50 dark:bg-gray-800 rounded-xl p-6 hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent hover:border-orange-500" data-category="account">
+          <div class="text-4xl mb-4">🔐</div>
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Account & Security</h3>
+          <p class="text-gray-600 dark:text-gray-400 mb-4">Manage your account settings</p>
+          <div class="space-y-2">
+            <a href="#" class="help-link block text-orange-600 dark:text-orange-400 hover:underline" data-article="reset-password">Reset password</a>
+            <a href="#" class="help-link block text-orange-600 dark:text-orange-400 hover:underline" data-article="update-profile">Update profile info</a>
+            <a href="/account/addresses" class="help-link block text-orange-600 dark:text-orange-400 hover:underline">Manage addresses</a>
+            <a href="#" class="help-link block text-orange-600 dark:text-orange-400 hover:underline" data-article="account-security">Account security tips</a>
+          </div>
+        </div>
+
+        <!-- Products & Pricing -->
+        <div class="help-category bg-gray-50 dark:bg-gray-800 rounded-xl p-6 hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent hover:border-orange-500" data-category="products">
+          <div class="text-4xl mb-4">🏗️</div>
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Products & Pricing</h3>
+          <p class="text-gray-600 dark:text-gray-400 mb-4">Product information and pricing</p>
+          <div class="space-y-2">
+            <a href="#" class="help-link block text-orange-600 dark:text-orange-400 hover:underline" data-article="product-specs">Product specifications</a>
+            <a href="#" class="help-link block text-orange-600 dark:text-orange-400 hover:underline" data-article="bulk-pricing">Bulk order pricing</a>
+            <a href="#" class="help-link block text-orange-600 dark:text-orange-400 hover:underline" data-article="price-match">Price match guarantee</a>
+            <a href="#" class="help-link block text-orange-600 dark:text-orange-400 hover:underline" data-article="product-availability">Product availability</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Links -->
+  <section class="py-16 bg-gray-50 dark:bg-gray-800">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
+        ⚡ Quick Links
+      </h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+        <a href="/faq" class="bg-white dark:bg-gray-900 rounded-xl p-6 text-center hover:shadow-lg transition-shadow border-2 border-transparent hover:border-orange-500">
+          <div class="text-4xl mb-3">❓</div>
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">FAQ</h3>
+          <p class="text-gray-600 dark:text-gray-400 text-sm">Frequently asked questions</p>
+        </a>
+
+        <a href="/support" class="bg-white dark:bg-gray-900 rounded-xl p-6 text-center hover:shadow-lg transition-shadow border-2 border-transparent hover:border-orange-500">
+          <div class="text-4xl mb-3">💬</div>
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Contact Support</h3>
+          <p class="text-gray-600 dark:text-gray-400 text-sm">Get help from our team</p>
+        </a>
+
+        <a href="/track-order" class="bg-white dark:bg-gray-900 rounded-xl p-6 text-center hover:shadow-lg transition-shadow border-2 border-transparent hover:border-orange-500">
+          <div class="text-4xl mb-3">📍</div>
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Track Order</h3>
+          <p class="text-gray-600 dark:text-gray-400 text-sm">Check your order status</p>
+        </a>
+
+        <a href="/returns" class="bg-white dark:bg-gray-900 rounded-xl p-6 text-center hover:shadow-lg transition-shadow border-2 border-transparent hover:border-orange-500">
+          <div class="text-4xl mb-3">🔄</div>
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Returns</h3>
+          <p class="text-gray-600 dark:text-gray-400 text-sm">Start a return or exchange</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Getting Started Guide -->
+  <section class="py-16 bg-white dark:bg-gray-900">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
+          🎯 Getting Started with ASIN STILL
+        </h2>
+        
+        <div class="space-y-6">
+          <!-- Step 1 -->
+          <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 border-l-4 border-orange-500">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold">1</div>
+              <div class="flex-1">
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Create Your Account</h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-3">Sign up for a free ASIN STILL account to access exclusive deals, track orders, and save your favorite products.</p>
+                <a href="/register" class="text-orange-600 dark:text-orange-400 hover:underline font-medium">Create Account →</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 border-l-4 border-orange-500">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold">2</div>
+              <div class="flex-1">
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Browse Products</h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-3">Explore our wide range of building materials, from cement and concrete to tools and hardware.</p>
+                <a href="/products" class="text-orange-600 dark:text-orange-400 hover:underline font-medium">Browse Products →</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 border-l-4 border-orange-500">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold">3</div>
+              <div class="flex-1">
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Add to Cart & Checkout</h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-3">Add items to your cart, review your order, and proceed to secure checkout with multiple payment options.</p>
+                <a href="/cart" class="text-orange-600 dark:text-orange-400 hover:underline font-medium">View Cart →</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 border-l-4 border-orange-500">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold">4</div>
+              <div class="flex-1">
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Track Your Order</h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-3">Monitor your order status in real-time from processing to delivery with our tracking system.</p>
+                <a href="/track-order" class="text-orange-600 dark:text-orange-400 hover:underline font-medium">Track Order →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Support CTA -->
+  <section class="py-16 bg-gradient-to-br from-orange-500 to-orange-600 text-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">
+          Still Need Help?
+        </h2>
+        <p class="text-xl text-orange-100 mb-8">
+          Our support team is here to assist you 24/7
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/support" class="bg-white text-orange-600 px-8 py-4 rounded-lg font-bold hover:bg-orange-50 transition-colors inline-flex items-center justify-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+            </svg>
+            Contact Support
+          </a>
+          <a href="/contact" class="bg-orange-700 text-white px-8 py-4 rounded-lg font-bold hover:bg-orange-800 transition-colors inline-flex items-center justify-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+            </svg>
+            Email Us
+          </a>
+        </div>
+        <div class="mt-8 pt-8 border-t border-orange-400">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+            <div>
+              <div class="text-3xl font-bold mb-1">24/7</div>
+              <div class="text-orange-100">Support Available</div>
+            </div>
+            <div>
+              <div class="text-3xl font-bold mb-1">&lt;2h</div>
+              <div class="text-orange-100">Average Response</div>
+            </div>
+            <div>
+              <div class="text-3xl font-bold mb-1">98%</div>
+              <div class="text-orange-100">Satisfaction Rate</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <script>
+    // Help articles database
+    const helpArticles = [
+      { id: 'how-to-order', title: 'How to place an order', category: 'getting-started', content: 'Learn how to browse products, add items to cart, and complete checkout.' },
+      { id: 'create-account', title: 'Creating an account', category: 'getting-started', content: 'Sign up for a ASIN STILL account to access exclusive features and track orders.' },
+      { id: 'payment-methods', title: 'Payment methods', category: 'getting-started', content: 'We accept credit cards, debit cards, PayPal, and bank transfers.' },
+      { id: 'first-purchase', title: 'Making your first purchase', category: 'getting-started', content: 'Step-by-step guide for new customers making their first order.' },
+      { id: 'modify-order', title: 'Modify or cancel order', category: 'orders', content: 'How to change or cancel your order before it ships.' },
+      { id: 'order-status', title: 'Understanding order status', category: 'orders', content: 'Learn what each order status means and what to expect.' },
+      { id: 'delivery-time', title: 'Delivery timeframes', category: 'shipping', content: 'Standard delivery takes 5-7 business days, express 2-3 days.' },
+      { id: 'shipping-zones', title: 'Shipping zones', category: 'shipping', content: 'We deliver to all major cities and regional areas across the country.' },
+      { id: 'freight-delivery', title: 'Freight delivery info', category: 'shipping', content: 'Large orders are delivered via freight with scheduled delivery.' },
+      { id: 'start-return', title: 'How to start a return', category: 'returns', content: 'Initiate a return within 30 days of delivery through your account.' },
+      { id: 'refund-process', title: 'Refund processing time', category: 'returns', content: 'Refunds are processed within 5-7 business days after we receive the return.' },
+      { id: 'exchange-items', title: 'Exchange items', category: 'returns', content: 'Exchange defective or wrong items for the correct product.' },
+      { id: 'reset-password', title: 'Reset password', category: 'account', content: 'Use the forgot password link on the login page to reset your password.' },
+      { id: 'update-profile', title: 'Update profile info', category: 'account', content: 'Edit your personal information in account settings.' },
+      { id: 'account-security', title: 'Account security tips', category: 'account', content: 'Keep your account secure with strong passwords and two-factor authentication.' },
+      { id: 'product-specs', title: 'Product specifications', category: 'products', content: 'Detailed specifications are available on each product page.' },
+      { id: 'bulk-pricing', title: 'Bulk order pricing', category: 'products', content: 'Contact us for special pricing on bulk orders over $10,000.' },
+      { id: 'price-match', title: 'Price match guarantee', category: 'products', content: 'We match competitor prices on identical products.' },
+      { id: 'product-availability', title: 'Product availability', category: 'products', content: 'Check real-time stock availability on product pages.' }
+    ];
+
+    // Search functionality
+    const searchInput = document.getElementById('help-search');
+    const searchResults = document.getElementById('search-results');
+    const resultsContent = document.getElementById('results-content');
+
+    searchInput?.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase().trim();
+      
+      if (query.length < 2) {
+        searchResults.classList.add('hidden');
+        return;
+      }
+
+      const matches = helpArticles.filter(article => 
+        article.title.toLowerCase().includes(query) || 
+        article.content.toLowerCase().includes(query) ||
+        article.category.toLowerCase().includes(query)
+      );
+
+      if (matches.length > 0) {
+        resultsContent.innerHTML = `
+          <h3 class="font-bold text-gray-900 dark:text-white mb-4">Found ${matches.length} result${matches.length > 1 ? 's' : ''}</h3>
+          <div class="space-y-3">
+            ${matches.map(article => `
+              <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors cursor-pointer" data-article="${article.id}">
+                <h4 class="font-bold text-gray-900 dark:text-white mb-1">${highlightText(article.title, query)}</h4>
+                <p class="text-sm text-gray-600 dark:text-gray-400">${highlightText(article.content, query)}</p>
+                <span class="text-xs text-orange-600 dark:text-orange-400 mt-2 inline-block">📁 ${article.category.replace('-', ' ')}</span>
+              </div>
+            `).join('')}
+          </div>
+        `;
+        searchResults.classList.remove('hidden');
+      } else {
+        resultsContent.innerHTML = `
+          <div class="text-center py-8">
+            <div class="text-4xl mb-3">🔍</div>
+            <p class="text-gray-600 dark:text-gray-400">No results found for "${query}"</p>
+            <p class="text-sm text-gray-500 dark:text-gray-500 mt-2">Try different keywords or browse categories below</p>
+          </div>
+        `;
+        searchResults.classList.remove('hidden');
+      }
+    });
+
+    // Highlight search terms
+    function highlightText(text, query) {
+      const regex = new RegExp(`(${query})`, 'gi');
+      return text.replace(regex, '<mark class="bg-yellow-200 dark:bg-yellow-600">$1</mark>');
+    }
+
+    // Close search results when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!searchInput?.contains(e.target) && !searchResults?.contains(e.target)) {
+        searchResults?.classList.add('hidden');
+      }
+    });
+
+    // Handle article clicks
+    document.addEventListener('click', (e) => {
+      const articleDiv = e.target.closest('[data-article]');
+      if (articleDiv) {
+        const articleId = articleDiv.dataset.article;
+        const article = helpArticles.find(a => a.id === articleId);
+        if (article) {
+          alert(`Article: ${article.title}\n\n${article.content}\n\nThis would open a detailed help article page.`);
+        }
+      }
+    });
+
+    // Handle help link clicks
+    document.querySelectorAll('.help-link[data-article]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const articleId = link.dataset.article;
+        const article = helpArticles.find(a => a.id === articleId);
+        if (article) {
+          alert(`Article: ${article.title}\n\n${article.content}\n\nThis would open a detailed help article page.`);
+        }
+      });
+    });
+
+    // Category hover effect
+    document.querySelectorAll('.help-category').forEach(category => {
+      category.addEventListener('click', (e) => {
+        if (!e.target.closest('.help-link')) {
+          const categoryName = category.dataset.category;
+          const categoryArticles = helpArticles.filter(a => a.category === categoryName);
+          console.log(`Category: ${categoryName}`, categoryArticles);
+        }
+      });
+    });
+  </script>
+</BaseLayout>

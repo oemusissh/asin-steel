@@ -1,0 +1,439 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Track Your Order - ASIN STILL">
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-primary-600 via-primary-500 to-orange-500 dark:from-primary-700 dark:via-primary-600 dark:to-orange-600 text-white py-16 sm:py-20 overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-10 left-10 w-72 h-72 bg-white rounded-full blur-3xl"></div>
+      <div class="absolute bottom-10 right-10 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+    </div>
+    
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="max-w-3xl mx-auto text-center">
+        <div class="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+          </svg>
+        </div>
+        <h1 class="text-4xl sm:text-5xl font-bold mb-4">Track Your Order</h1>
+        <p class="text-lg sm:text-xl text-white/90 leading-relaxed">
+          Enter your order number or tracking ID to see real-time delivery updates.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tracking Form -->
+  <section class="py-16 sm:py-20 bg-white dark:bg-dark-900">
+    <div class="container mx-auto px-4">
+      <div class="max-w-2xl mx-auto">
+        <div class="bg-gray-50 dark:bg-dark-800 rounded-xl p-8 shadow-lg">
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">Enter Tracking Information</h2>
+          
+          <form id="tracking-form" class="space-y-6">
+            <div>
+              <label for="order-number" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                Order Number or Tracking ID
+              </label>
+              <input 
+                type="text" 
+                id="order-number" 
+                required
+                placeholder="e.g., #BM-12345 or TRK-987654321"
+                class="w-full px-4 py-3 bg-white dark:bg-dark-900 border-2 border-gray-300 dark:border-dark-700 rounded-lg focus:outline-none focus:border-primary-500 text-gray-900 dark:text-white"
+              />
+            </div>
+
+            <div>
+              <label for="email" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                Email Address (Optional)
+              </label>
+              <input 
+                type="email" 
+                id="email"
+                placeholder="john@example.com"
+                class="w-full px-4 py-3 bg-white dark:bg-dark-900 border-2 border-gray-300 dark:border-dark-700 rounded-lg focus:outline-none focus:border-primary-500 text-gray-900 dark:text-white"
+              />
+              <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                We'll send tracking updates to this email
+              </p>
+            </div>
+
+            <button 
+              type="submit"
+              class="w-full px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-semibold transition-colors flex items-center justify-center gap-2"
+            >
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+              Track Order
+            </button>
+          </form>
+
+          <div class="mt-6 pt-6 border-t border-gray-200 dark:border-dark-700">
+            <p class="text-sm text-gray-600 dark:text-gray-400 text-center mb-3">
+              Don't have your order number?
+            </p>
+            <div class="flex flex-col sm:flex-row gap-3">
+              <a href="/account" class="flex-1 px-4 py-2 bg-gray-200 dark:bg-dark-700 text-gray-700 dark:text-gray-300 rounded-lg font-semibold hover:bg-gray-300 dark:hover:bg-dark-600 transition-colors text-center text-sm">
+                View My Orders
+              </a>
+              <a href="/support" class="flex-1 px-4 py-2 bg-gray-200 dark:bg-dark-700 text-gray-700 dark:text-gray-300 rounded-lg font-semibold hover:bg-gray-300 dark:hover:bg-dark-600 transition-colors text-center text-sm">
+                Contact Support
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tracking Results (Hidden by default) -->
+  <section id="tracking-results" class="hidden py-16 bg-gray-50 dark:bg-dark-800">
+    <div class="container mx-auto px-4">
+      <div class="max-w-5xl mx-auto">
+        
+        <!-- Order Summary Card -->
+        <div class="bg-white dark:bg-dark-900 rounded-xl p-6 sm:p-8 shadow-lg mb-8">
+          <div class="flex items-start justify-between mb-6">
+            <div>
+              <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Order #BM-12345</h2>
+              <p class="text-gray-600 dark:text-gray-400">Placed on February 8, 2026</p>
+            </div>
+            <span class="px-4 py-2 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-lg font-semibold text-sm">
+              In Transit
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            <div>
+              <p class="text-sm text-gray-500 dark:text-gray-400 mb-1">Tracking Number</p>
+              <p class="font-semibold text-gray-900 dark:text-white">TRK-987654321</p>
+            </div>
+            <div>
+              <p class="text-sm text-gray-500 dark:text-gray-400 mb-1">Estimated Delivery</p>
+              <p class="font-semibold text-gray-900 dark:text-white">February 13, 2026</p>
+            </div>
+            <div>
+              <p class="text-sm text-gray-500 dark:text-gray-400 mb-1">Shipping Method</p>
+              <p class="font-semibold text-gray-900 dark:text-white">Standard Shipping</p>
+            </div>
+          </div>
+
+          <div class="pt-6 border-t border-gray-200 dark:border-dark-700">
+            <h3 class="font-bold text-gray-900 dark:text-white mb-3">Shipping Address</h3>
+            <p class="text-gray-600 dark:text-gray-400">
+              John Doe<br>
+              123 Main Street, Apt 4B<br>
+              Los Angeles, CA 90001<br>
+              United States
+            </p>
+          </div>
+        </div>
+
+        <!-- Tracking Timeline -->
+        <div class="bg-white dark:bg-dark-900 rounded-xl p-6 sm:p-8 shadow-lg mb-8">
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6">Tracking Timeline</h3>
+          
+          <div class="relative">
+            <!-- Timeline Line -->
+            <div class="absolute left-6 top-0 bottom-0 w-0.5 bg-gray-200 dark:bg-dark-700"></div>
+            
+            <!-- Timeline Items -->
+            <div class="space-y-8">
+              <!-- Current Status -->
+              <div class="relative flex gap-6">
+                <div class="flex-shrink-0 w-12 h-12 bg-primary-600 rounded-full flex items-center justify-center z-10 ring-4 ring-primary-100 dark:ring-primary-900/30">
+                  <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <div class="flex-1 pt-2">
+                  <div class="flex items-start justify-between mb-1">
+                    <h4 class="font-bold text-gray-900 dark:text-white">Out for Delivery</h4>
+                    <span class="text-sm text-gray-500 dark:text-gray-400">Today, 8:30 AM</span>
+                  </div>
+                  <p class="text-gray-600 dark:text-gray-400 text-sm">
+                    Your package is on the delivery vehicle and will arrive today.
+                  </p>
+                  <p class="text-sm text-primary-600 dark:text-primary-400 font-semibold mt-2">
+                    📍 Los Angeles Distribution Center
+                  </p>
+                </div>
+              </div>
+
+              <!-- Previous Status -->
+              <div class="relative flex gap-6">
+                <div class="flex-shrink-0 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center z-10">
+                  <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <div class="flex-1 pt-2">
+                  <div class="flex items-start justify-between mb-1">
+                    <h4 class="font-semibold text-gray-900 dark:text-white">Arrived at Local Facility</h4>
+                    <span class="text-sm text-gray-500 dark:text-gray-400">Feb 11, 6:15 PM</span>
+                  </div>
+                  <p class="text-gray-600 dark:text-gray-400 text-sm">
+                    Package arrived at the local distribution center.
+                  </p>
+                </div>
+              </div>
+
+              <div class="relative flex gap-6">
+                <div class="flex-shrink-0 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center z-10">
+                  <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <div class="flex-1 pt-2">
+                  <div class="flex items-start justify-between mb-1">
+                    <h4 class="font-semibold text-gray-900 dark:text-white">In Transit</h4>
+                    <span class="text-sm text-gray-500 dark:text-gray-400">Feb 10, 2:30 PM</span>
+                  </div>
+                  <p class="text-gray-600 dark:text-gray-400 text-sm">
+                    Package is on its way to the destination.
+                  </p>
+                </div>
+              </div>
+
+              <div class="relative flex gap-6">
+                <div class="flex-shrink-0 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center z-10">
+                  <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <div class="flex-1 pt-2">
+                  <div class="flex items-start justify-between mb-1">
+                    <h4 class="font-semibold text-gray-900 dark:text-white">Shipped</h4>
+                    <span class="text-sm text-gray-500 dark:text-gray-400">Feb 9, 10:00 AM</span>
+                  </div>
+                  <p class="text-gray-600 dark:text-gray-400 text-sm">
+                    Package has been picked up by the carrier.
+                  </p>
+                </div>
+              </div>
+
+              <div class="relative flex gap-6">
+                <div class="flex-shrink-0 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center z-10">
+                  <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <div class="flex-1 pt-2">
+                  <div class="flex items-start justify-between mb-1">
+                    <h4 class="font-semibold text-gray-900 dark:text-white">Order Confirmed</h4>
+                    <span class="text-sm text-gray-500 dark:text-gray-400">Feb 8, 3:45 PM</span>
+                  </div>
+                  <p class="text-gray-600 dark:text-gray-400 text-sm">
+                    Your order has been confirmed and is being prepared.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Order Items -->
+        <div class="bg-white dark:bg-dark-900 rounded-xl p-6 sm:p-8 shadow-lg">
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6">Order Items</h3>
+          
+          <div class="space-y-4">
+            <div class="flex gap-4 pb-4 border-b border-gray-200 dark:border-dark-700">
+              <div class="w-20 h-20 bg-gray-100 dark:bg-dark-800 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                </svg>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-semibold text-gray-900 dark:text-white mb-1">Premium Oak Hardwood Flooring</h4>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">SKU: FLR-OAK-001</p>
+                <div class="flex items-center justify-between">
+                  <span class="text-sm text-gray-600 dark:text-gray-400">Qty: 2</span>
+                  <span class="font-semibold text-gray-900 dark:text-white">$299.99</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex gap-4 pb-4 border-b border-gray-200 dark:border-dark-700">
+              <div class="w-20 h-20 bg-gray-100 dark:bg-dark-800 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                </svg>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-semibold text-gray-900 dark:text-white mb-1">Professional Tool Set</h4>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">SKU: TLS-PRO-045</p>
+                <div class="flex items-center justify-between">
+                  <span class="text-sm text-gray-600 dark:text-gray-400">Qty: 1</span>
+                  <span class="font-semibold text-gray-900 dark:text-white">$149.99</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-6 border-t border-gray-200 dark:border-dark-700">
+            <div class="space-y-2">
+              <div class="flex justify-between text-gray-600 dark:text-gray-400">
+                <span>Subtotal</span>
+                <span>$749.97</span>
+              </div>
+              <div class="flex justify-between text-gray-600 dark:text-gray-400">
+                <span>Shipping</span>
+                <span>$49.00</span>
+              </div>
+              <div class="flex justify-between text-gray-600 dark:text-gray-400">
+                <span>Tax</span>
+                <span>$71.90</span>
+              </div>
+              <div class="flex justify-between text-lg font-bold text-gray-900 dark:text-white pt-2 border-t border-gray-200 dark:border-dark-700">
+                <span>Total</span>
+                <span>$870.87</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- Help Section -->
+  <section class="py-16 sm:py-20 bg-white dark:bg-dark-900">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">Need Help?</h2>
+          <p class="text-gray-600 dark:text-gray-400">
+            Common questions about order tracking
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-gray-50 dark:bg-dark-800 rounded-xl p-6">
+            <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-xl flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 class="font-bold text-gray-900 dark:text-white mb-2">Where's my tracking number?</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+              Your tracking number is sent via email once your order ships. Check your inbox and spam folder.
+            </p>
+            <a href="/support" class="text-sm text-primary-600 dark:text-primary-400 hover:underline font-semibold">
+              Contact Support →
+            </a>
+          </div>
+
+          <div class="bg-gray-50 dark:bg-dark-800 rounded-xl p-6">
+            <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 class="font-bold text-gray-900 dark:text-white mb-2">How long does shipping take?</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+              Standard shipping takes 5-7 business days. Express shipping takes 2-3 business days.
+            </p>
+            <a href="/shipping-info" class="text-sm text-primary-600 dark:text-primary-400 hover:underline font-semibold">
+              Shipping Info →
+            </a>
+          </div>
+
+          <div class="bg-gray-50 dark:bg-dark-800 rounded-xl p-6">
+            <div class="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 class="font-bold text-gray-900 dark:text-white mb-2">Can I change my delivery address?</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+              Contact us immediately if you need to change your address before the order ships.
+            </p>
+            <a href="/support" class="text-sm text-primary-600 dark:text-primary-400 hover:underline font-semibold">
+              Contact Support →
+            </a>
+          </div>
+
+          <div class="bg-gray-50 dark:bg-dark-800 rounded-xl p-6">
+            <div class="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-xl flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-orange-600 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+            </div>
+            <h3 class="font-bold text-gray-900 dark:text-white mb-2">What if my package is delayed?</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+              Delays can happen due to weather or carrier issues. We'll keep you updated via email.
+            </p>
+            <a href="/faq" class="text-sm text-primary-600 dark:text-primary-400 hover:underline font-semibold">
+              View FAQ →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 sm:py-20 bg-gradient-to-br from-primary-600 via-primary-500 to-orange-500 dark:from-primary-700 dark:via-primary-600 dark:to-orange-600 text-white relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+      <div class="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+    </div>
+    
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">Questions About Your Order?</h2>
+        <p class="text-lg text-white/90 mb-8">
+          Our customer support team is available 24/7 to help with any tracking or delivery questions.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/support" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-primary-600 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+            Contact Support
+          </a>
+          <a href="/account" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm text-white rounded-lg font-semibold hover:bg-white/20 transition-colors border-2 border-white/30">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+            View All Orders
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Tracking Form Handler
+    const trackingForm = document.getElementById('tracking-form');
+    const trackingResults = document.getElementById('tracking-results');
+
+    trackingForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const orderNumber = document.getElementById('order-number').value;
+      
+      if (orderNumber.trim()) {
+        // Simulate API call
+        setTimeout(() => {
+          // Show results section
+          trackingResults.classList.remove('hidden');
+          
+          // Scroll to results
+          trackingResults.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 500);
+      }
+    });
+
+    // Demo: Auto-fill for testing
+    const urlParams = new URLSearchParams(window.location.search);
+    const demoOrder = urlParams.get('demo');
+    if (demoOrder === 'true') {
+      document.getElementById('order-number').value = '#BM-12345';
+      trackingResults.classList.remove('hidden');
+    }
+  </script>
+</BaseLayout>

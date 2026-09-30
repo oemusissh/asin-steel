@@ -1,0 +1,581 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Shipping Information - ASIN STILL">
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-primary-600 via-primary-500 to-orange-500 dark:from-primary-700 dark:via-primary-600 dark:to-orange-600 text-white py-16 sm:py-20 overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-10 left-10 w-72 h-72 bg-white rounded-full blur-3xl"></div>
+      <div class="absolute bottom-10 right-10 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+    </div>
+    
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="max-w-3xl mx-auto text-center">
+        <div class="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+          </svg>
+        </div>
+        <h1 class="text-4xl sm:text-5xl font-bold mb-4">Shipping Information</h1>
+        <p class="text-lg sm:text-xl text-white/90 leading-relaxed">
+          Fast, reliable delivery of building materials to your doorstep or job site nationwide.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Overview -->
+  <section class="py-12 bg-white dark:bg-dark-900 border-b border-gray-200 dark:border-dark-800">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
+        <div class="text-center">
+          <div class="w-16 h-16 bg-gradient-to-br from-primary-100 to-primary-200 dark:from-primary-900/30 dark:to-primary-800/30 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-gray-900 dark:text-white mb-1">Same-Day Dispatch</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400">Orders before 2 PM</p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-16 h-16 bg-gradient-to-br from-green-100 to-green-200 dark:from-green-900/30 dark:to-green-800/30 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-gray-900 dark:text-white mb-1">Free Shipping</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400">Orders over $500</p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900/30 dark:to-blue-800/30 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-gray-900 dark:text-white mb-1">Real-Time Tracking</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400">Track every shipment</p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-16 h-16 bg-gradient-to-br from-orange-100 to-orange-200 dark:from-orange-900/30 dark:to-orange-800/30 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-orange-600 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-gray-900 dark:text-white mb-1">Nationwide Coverage</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400">All 50 states</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Shipping Options -->
+  <section class="py-16 sm:py-20 bg-gray-50 dark:bg-dark-800">
+    <div class="container mx-auto px-4">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">Shipping Options</h2>
+          <p class="text-gray-600 dark:text-gray-400">
+            Choose the delivery speed that works best for your project timeline
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Standard Shipping -->
+          <div class="bg-white dark:bg-dark-900 rounded-xl p-6 shadow-lg border-2 border-gray-200 dark:border-dark-700 hover:border-primary-500 dark:hover:border-primary-500 transition-all duration-300 hover:-translate-y-1">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white">Standard</h3>
+              <span class="px-3 py-1 bg-gray-100 dark:bg-dark-800 text-gray-700 dark:text-gray-300 rounded-full text-sm font-semibold">
+                5-7 Days
+              </span>
+            </div>
+            
+            <div class="mb-6">
+              <div class="text-3xl font-bold text-gray-900 dark:text-white mb-1">$49</div>
+              <p class="text-sm text-gray-600 dark:text-gray-400">Free over $500</p>
+            </div>
+            
+            <ul class="space-y-3 mb-6">
+              <li class="flex items-start gap-2">
+                <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-sm text-gray-700 dark:text-gray-300">Ground shipping</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-sm text-gray-700 dark:text-gray-300">Signature required</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-sm text-gray-700 dark:text-gray-300">Tracking included</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-sm text-gray-700 dark:text-gray-300">Insurance up to $1,000</span>
+              </li>
+            </ul>
+            
+            <p class="text-xs text-gray-500 dark:text-gray-400">
+              Best for: Regular orders, non-urgent deliveries
+            </p>
+          </div>
+
+          <!-- Express Shipping -->
+          <div class="bg-white dark:bg-dark-900 rounded-xl p-6 shadow-xl border-2 border-primary-500 relative hover:-translate-y-1 transition-all duration-300">
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+              <span class="px-4 py-1 bg-primary-600 text-white rounded-full text-xs font-bold">
+                POPULAR
+              </span>
+            </div>
+            
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white">Express</h3>
+              <span class="px-3 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-400 rounded-full text-sm font-semibold">
+                2-3 Days
+              </span>
+            </div>
+            
+            <div class="mb-6">
+              <div class="text-3xl font-bold text-gray-900 dark:text-white mb-1">$99</div>
+              <p class="text-sm text-gray-600 dark:text-gray-400">Flat rate</p>
+            </div>
+            
+            <ul class="space-y-3 mb-6">
+              <li class="flex items-start gap-2">
+                <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-sm text-gray-700 dark:text-gray-300">Priority shipping</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-sm text-gray-700 dark:text-gray-300">Signature required</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-sm text-gray-700 dark:text-gray-300">Real-time tracking</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-sm text-gray-700 dark:text-gray-300">Insurance up to $2,500</span>
+              </li>
+            </ul>
+            
+            <p class="text-xs text-gray-500 dark:text-gray-400">
+              Best for: Time-sensitive projects, urgent needs
+            </p>
+          </div>
+
+          <!-- Freight Shipping -->
+          <div class="bg-white dark:bg-dark-900 rounded-xl p-6 shadow-lg border-2 border-gray-200 dark:border-dark-700 hover:border-primary-500 dark:hover:border-primary-500 transition-all duration-300 hover:-translate-y-1">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white">Freight</h3>
+              <span class="px-3 py-1 bg-gray-100 dark:bg-dark-800 text-gray-700 dark:text-gray-300 rounded-full text-sm font-semibold">
+                3-5 Days
+              </span>
+            </div>
+            
+            <div class="mb-6">
+              <div class="text-3xl font-bold text-gray-900 dark:text-white mb-1">Custom</div>
+              <p class="text-sm text-gray-600 dark:text-gray-400">Based on weight</p>
+            </div>
+            
+            <ul class="space-y-3 mb-6">
+              <li class="flex items-start gap-2">
+                <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-sm text-gray-700 dark:text-gray-300">Pallet shipping</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-sm text-gray-700 dark:text-gray-300">Liftgate service available</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-sm text-gray-700 dark:text-gray-300">Inside delivery option</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-sm text-gray-700 dark:text-gray-300">Full insurance coverage</span>
+              </li>
+            </ul>
+            
+            <p class="text-xs text-gray-500 dark:text-gray-400">
+              Best for: Bulk orders, heavy materials, pallets
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Delivery Zones -->
+  <section class="py-16 sm:py-20 bg-white dark:bg-dark-900">
+    <div class="container mx-auto px-4">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">Delivery Coverage</h2>
+          <p class="text-gray-600 dark:text-gray-400">
+            We deliver to all 50 states with varying delivery times
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-xl p-6 border border-green-200 dark:border-green-800">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white">Zone 1</h3>
+            </div>
+            <p class="text-sm text-gray-700 dark:text-gray-300 mb-3">
+              CA, NV, AZ, OR, WA, ID, UT
+            </p>
+            <div class="flex items-center gap-2 text-sm">
+              <svg class="w-4 h-4 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span class="font-semibold text-gray-900 dark:text-white">2-3 business days</span>
+            </div>
+          </div>
+
+          <div class="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-xl p-6 border border-blue-200 dark:border-blue-800">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white">Zone 2</h3>
+            </div>
+            <p class="text-sm text-gray-700 dark:text-gray-300 mb-3">
+              TX, CO, NM, MT, WY, ND, SD, NE, KS, OK
+            </p>
+            <div class="flex items-center gap-2 text-sm">
+              <svg class="w-4 h-4 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span class="font-semibold text-gray-900 dark:text-white">3-5 business days</span>
+            </div>
+          </div>
+
+          <div class="bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20 rounded-xl p-6 border border-orange-200 dark:border-orange-800">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-12 h-12 bg-orange-500 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white">Zone 3</h3>
+            </div>
+            <p class="text-sm text-gray-700 dark:text-gray-300 mb-3">
+              All other states including AK, HI
+            </p>
+            <div class="flex items-center gap-2 text-sm">
+              <svg class="w-4 h-4 text-orange-600 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span class="font-semibold text-gray-900 dark:text-white">5-7 business days</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Shipping Restrictions -->
+  <section class="py-16 sm:py-20 bg-gray-50 dark:bg-dark-800">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">Shipping Restrictions</h2>
+          <p class="text-gray-600 dark:text-gray-400">
+            Important information about items we cannot ship
+          </p>
+        </div>
+
+        <div class="bg-white dark:bg-dark-900 rounded-xl p-8 shadow-lg">
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div class="flex-shrink-0">
+                <div class="w-10 h-10 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center">
+                  <svg class="w-5 h-5 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="font-bold text-gray-900 dark:text-white mb-2">Hazardous Materials</h3>
+                <p class="text-gray-600 dark:text-gray-400 text-sm">
+                  Certain chemicals, paints, and flammable materials require special handling. Contact us for hazmat shipping options.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0">
+                <div class="w-10 h-10 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg flex items-center justify-center">
+                  <svg class="w-5 h-5 text-yellow-600 dark:text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="font-bold text-gray-900 dark:text-white mb-2">Oversized Items</h3>
+                <p class="text-gray-600 dark:text-gray-400 text-sm">
+                  Items exceeding 150 lbs or 96" in any dimension require freight shipping. Additional fees may apply.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0">
+                <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
+                  <svg class="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="font-bold text-gray-900 dark:text-white mb-2">PO Box Addresses</h3>
+                <p class="text-gray-600 dark:text-gray-400 text-sm">
+                  Most building materials cannot be delivered to PO boxes. A physical street address is required.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Order Tracking -->
+  <section class="py-16 sm:py-20 bg-white dark:bg-dark-900">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">Track Your Order</h2>
+          <p class="text-gray-600 dark:text-gray-400">
+            Stay updated on your delivery every step of the way
+          </p>
+        </div>
+
+        <div class="bg-gradient-to-br from-primary-50 to-orange-50 dark:from-primary-900/20 dark:to-orange-900/20 rounded-xl p-8 border border-primary-200 dark:border-primary-800">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">How to Track</h3>
+              <ol class="space-y-3">
+                <li class="flex gap-3">
+                  <span class="flex-shrink-0 w-6 h-6 bg-primary-600 text-white rounded-full flex items-center justify-center text-sm font-bold">1</span>
+                  <span class="text-gray-700 dark:text-gray-300">Check your email for tracking number</span>
+                </li>
+                <li class="flex gap-3">
+                  <span class="flex-shrink-0 w-6 h-6 bg-primary-600 text-white rounded-full flex items-center justify-center text-sm font-bold">2</span>
+                  <span class="text-gray-700 dark:text-gray-300">Visit your account dashboard</span>
+                </li>
+                <li class="flex gap-3">
+                  <span class="flex-shrink-0 w-6 h-6 bg-primary-600 text-white rounded-full flex items-center justify-center text-sm font-bold">3</span>
+                  <span class="text-gray-700 dark:text-gray-300">Click on "Track Order"</span>
+                </li>
+                <li class="flex gap-3">
+                  <span class="flex-shrink-0 w-6 h-6 bg-primary-600 text-white rounded-full flex items-center justify-center text-sm font-bold">4</span>
+                  <span class="text-gray-700 dark:text-gray-300">View real-time updates</span>
+                </li>
+              </ol>
+            </div>
+
+            <div>
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Tracking Features</h3>
+              <ul class="space-y-3">
+                <li class="flex items-start gap-2">
+                  <svg class="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span class="text-gray-700 dark:text-gray-300">Real-time GPS tracking</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span class="text-gray-700 dark:text-gray-300">Email & SMS notifications</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span class="text-gray-700 dark:text-gray-300">Estimated delivery window</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span class="text-gray-700 dark:text-gray-300">Delivery photo confirmation</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="mt-8 pt-8 border-t border-primary-200 dark:border-primary-800">
+            <a href="/account" class="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-semibold transition-colors">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+              </svg>
+              Track My Orders
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- FAQ Section -->
+  <section class="py-16 sm:py-20 bg-gray-50 dark:bg-dark-800">
+    <div class="container mx-auto px-4">
+      <div class="max-w-3xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">Shipping FAQs</h2>
+          <p class="text-gray-600 dark:text-gray-400">
+            Common questions about our shipping process
+          </p>
+        </div>
+
+        <div class="space-y-4">
+          <div class="bg-white dark:bg-dark-900 rounded-xl overflow-hidden shadow-sm">
+            <button class="faq-trigger w-full px-6 py-5 text-left flex items-center justify-between hover:bg-gray-50 dark:hover:bg-dark-800 transition-colors">
+              <span class="font-semibold text-gray-900 dark:text-white">When will my order ship?</span>
+              <svg class="w-5 h-5 text-gray-500 transition-transform faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class="faq-content hidden px-6 pb-5">
+              <p class="text-gray-600 dark:text-gray-400">
+                Orders placed before 2 PM PST ship the same business day. Orders after 2 PM ship the next business day. You'll receive a tracking number via email once your order ships.
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-white dark:bg-dark-900 rounded-xl overflow-hidden shadow-sm">
+            <button class="faq-trigger w-full px-6 py-5 text-left flex items-center justify-between hover:bg-gray-50 dark:hover:bg-dark-800 transition-colors">
+              <span class="font-semibold text-gray-900 dark:text-white">Do you ship internationally?</span>
+              <svg class="w-5 h-5 text-gray-500 transition-transform faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class="faq-content hidden px-6 pb-5">
+              <p class="text-gray-600 dark:text-gray-400">
+                Currently, we only ship within the United States. International shipping may be available in the future. Contact us for special arrangements.
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-white dark:bg-dark-900 rounded-xl overflow-hidden shadow-sm">
+            <button class="faq-trigger w-full px-6 py-5 text-left flex items-center justify-between hover:bg-gray-50 dark:hover:bg-dark-800 transition-colors">
+              <span class="font-semibold text-gray-900 dark:text-white">Can I change my shipping address?</span>
+              <svg class="w-5 h-5 text-gray-500 transition-transform faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class="faq-content hidden px-6 pb-5">
+              <p class="text-gray-600 dark:text-gray-400">
+                You can change your shipping address before the order ships. Contact our support team immediately at support@kantongaplikasi.com or WhatsApp +62 813-9244-2358.
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-white dark:bg-dark-900 rounded-xl overflow-hidden shadow-sm">
+            <button class="faq-trigger w-full px-6 py-5 text-left flex items-center justify-between hover:bg-gray-50 dark:hover:bg-dark-800 transition-colors">
+              <span class="font-semibold text-gray-900 dark:text-white">What if my package is damaged?</span>
+              <svg class="w-5 h-5 text-gray-500 transition-transform faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class="faq-content hidden px-6 pb-5">
+              <p class="text-gray-600 dark:text-gray-400">
+                Inspect your package upon delivery. If damaged, take photos and contact us within 48 hours. We'll arrange a replacement or refund immediately.
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-white dark:bg-dark-900 rounded-xl overflow-hidden shadow-sm">
+            <button class="faq-trigger w-full px-6 py-5 text-left flex items-center justify-between hover:bg-gray-50 dark:hover:bg-dark-800 transition-colors">
+              <span class="font-semibold text-gray-900 dark:text-white">Do you offer expedited shipping?</span>
+              <svg class="w-5 h-5 text-gray-500 transition-transform faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class="faq-content hidden px-6 pb-5">
+              <p class="text-gray-600 dark:text-gray-400">
+                Yes! Choose Express Shipping at checkout for 2-3 day delivery. Overnight shipping is available for select items - contact us for details.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 sm:py-20 bg-gradient-to-br from-primary-600 via-primary-500 to-orange-500 dark:from-primary-700 dark:via-primary-600 dark:to-orange-600 text-white relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+      <div class="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+    </div>
+    
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">Ready to Get Started?</h2>
+        <p class="text-lg text-white/90 mb-8">
+          Browse our extensive catalog of premium building materials with fast, reliable shipping.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/products" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-primary-600 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+            </svg>
+            Shop Now
+          </a>
+          <a href="/contact" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm text-white rounded-lg font-semibold hover:bg-white/20 transition-colors border-2 border-white/30">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            Contact Support
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // FAQ Toggle
+    document.querySelectorAll('.faq-trigger').forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const content = trigger.nextElementSibling;
+        const icon = trigger.querySelector('.faq-icon');
+        
+        content.classList.toggle('hidden');
+        icon.classList.toggle('rotate-180');
+      });
+    });
+  </script>
+</BaseLayout>

@@ -1,0 +1,243 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Premium building materials for your construction projects' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <style>
+      /* Prevent layout shift */
+      html {
+        scroll-behavior: smooth;
+      }
+      
+      body {
+        min-height: 100vh;
+      }
+
+      /* Consistent container */
+      .container {
+        max-width: 1280px;
+      }
+
+      /* Image aspect ratio consistency */
+      img {
+        display: block;
+      }
+
+      /* Smooth transitions with ease-in-out */
+      * {
+        transition-property: background-color, border-color, color, fill, stroke;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 150ms;
+      }
+
+      /* Prevent animation on page load */
+      .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      .animate-on-scroll.animate-slide-up {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Page Transition */
+      @keyframes pageEnter {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes pageExit {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+        }
+      }
+
+      .page-transition-enter {
+        animation: pageEnter 0.3s ease-out;
+      }
+
+      .page-transition-exit {
+        animation: pageExit 0.2s ease-in;
+      }
+
+      /* Shimmer effect for gradients */
+      @keyframes shimmer {
+        0% {
+          background-position: -200% center;
+        }
+        100% {
+          background-position: 200% center;
+        }
+      }
+
+      .animate-shimmer {
+        background-size: 200% 100%;
+        animation: shimmer 3s linear infinite;
+      }
+
+      /* Fade In Up Animation */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Pulse Slow Animation */
+      @keyframes pulse-slow {
+        0%, 100% {
+          opacity: 0.2;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.25;
+          transform: scale(1.05);
+        }
+      }
+
+      .animate-pulse-slow {
+        animation: pulse-slow 6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+
+      /* Float Slow Animation for Icons */
+      @keyframes float-slow {
+        0%, 100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-5px);
+        }
+      }
+
+      .animate-float-slow {
+        animation: float-slow 4s ease-in-out infinite;
+      }
+
+      /* Grain Animation */
+      @keyframes grain {
+        0%, 100% { transform: translate(0, 0); }
+        10% { transform: translate(-5%, -10%); }
+        20% { transform: translate(-15%, 5%); }
+        30% { transform: translate(7%, -25%); }
+        40% { transform: translate(-5%, 25%); }
+        50% { transform: translate(-15%, 10%); }
+        60% { transform: translate(15%, 0%); }
+        70% { transform: translate(0%, 15%); }
+        80% { transform: translate(3%, 35%); }
+        90% { transform: translate(-10%, 10%); }
+      }
+
+      .animate-grain {
+        animation: grain 8s steps(10) infinite;
+      }
+
+      /* Radial Gradient Utility */
+      .bg-gradient-radial {
+        background-image: radial-gradient(circle, var(--tw-gradient-stops));
+      }
+    </style>
+  </head>
+  <body class="bg-white dark:bg-dark-950 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+    <Header />
+    <main class="min-h-screen page-transition-enter">
+      <slot />
+    </main>
+    <Footer />
+    <script>
+      // Dark mode initialization
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+
+      // Cart functionality
+      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      const updateCartCount = () => {
+        const count = cart.reduce((sum: number, item: any) => sum + item.quantity, 0);
+        document.querySelectorAll('[data-cart-count]').forEach(el => {
+          el.textContent = count.toString();
+        });
+      };
+      updateCartCount();
+
+      // Wishlist functionality
+      const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+      const updateWishlistCount = () => {
+        document.querySelectorAll('[data-wishlist-count]').forEach(el => {
+          el.textContent = wishlist.length.toString();
+        });
+      };
+      updateWishlistCount();
+
+      // Smooth scroll
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const href = (this as HTMLAnchorElement).getAttribute('href');
+          if (href) {
+            const target = document.querySelector(href);
+            target?.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+
+      // Intersection Observer for animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-slide-up');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+
+      // Page Transition
+      document.addEventListener('astro:before-swap', () => {
+        document.querySelector('main')?.classList.add('page-transition-exit');
+      });
+
+      document.addEventListener('astro:after-swap', () => {
+        document.querySelector('main')?.classList.remove('page-transition-exit');
+        document.querySelector('main')?.classList.add('page-transition-enter');
+      });
+    </script>
+  </body>
+</html>
