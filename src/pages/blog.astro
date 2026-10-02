@@ -376,7 +376,7 @@ const categories = ['All', 'Tools & Equipment', 'Materials Guide', 'Construction
           <a href={`${import.meta.env.BASE_URL}contact`} class="px-8 py-4 bg-gradient-to-r from-primary-600 to-orange-500 text-white rounded-xl font-semibold hover:from-primary-700 hover:to-orange-600 transition-all duration-300 hover:scale-105 hover:shadow-xl">
             Contact Our Experts
           </a>
-          <a href={`${import.meta.env.BASE_URL}products`} class="px-8 py-4 border-2 border-primary-600 text-primary-600 dark:text-primary-400 rounded-xl font-semibold hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-all duration-300 hover:scale-105">
+          <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/products`} class="px-8 py-4 border-2 border-primary-600 text-primary-600 dark:text-primary-400 rounded-xl font-semibold hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-all duration-300 hover:scale-105">
             Browse Products
           </a>
         </div>

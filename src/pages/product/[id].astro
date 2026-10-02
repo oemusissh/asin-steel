@@ -94,7 +94,7 @@ const relatedProducts = [
     <nav class="flex items-center gap-2 text-sm mb-8 animate-fade-in">
       <a href={import.meta.env.BASE_URL} class="text-gray-600 dark:text-gray-400 hover:text-primary-600">Home</a>
       <span class="text-gray-400">/</span>
-      <a href={`${import.meta.env.BASE_URL}products`} class="text-gray-600 dark:text-gray-400 hover:text-primary-600">Products</a>
+      <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/products`} class="text-gray-600 dark:text-gray-400 hover:text-primary-600">Products</a>
       <span class="text-gray-400">/</span>
       <a href={`/categories/${product.category.toLowerCase()}`} class="text-gray-600 dark:text-gray-400 hover:text-primary-600">{product.category}</a>
       <span class="text-gray-400">/</span>

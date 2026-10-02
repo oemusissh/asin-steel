@@ -167,7 +167,7 @@ const featuredProducts = [
         
         <!-- CTA Buttons - Enhanced with 60px Glow and Staggered Animation - Mobile Optimized -->
         <div class="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-5 mb-10 sm:mb-14 px-4" style="animation: fadeInUp 0.8s ease-in-out 0.9s both;">
-          <a href={`${import.meta.env.BASE_URL}products`} class="group relative inline-flex items-center justify-center gap-2 sm:gap-3 px-8 sm:px-12 py-3.5 sm:py-5 bg-white text-primary-600 rounded-2xl font-bold text-base sm:text-lg hover:bg-primary-50 transition-all duration-500 ease-in-out hover:shadow-[0_0_60px_rgba(255,255,255,0.6)] transform hover:scale-105 hover:-translate-y-1 overflow-hidden w-full sm:w-auto">
+          <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/products`} class="group relative inline-flex items-center justify-center gap-2 sm:gap-3 px-8 sm:px-12 py-3.5 sm:py-5 bg-white text-primary-600 rounded-2xl font-bold text-base sm:text-lg hover:bg-primary-50 transition-all duration-500 ease-in-out hover:shadow-[0_0_60px_rgba(255,255,255,0.6)] transform hover:scale-105 hover:-translate-y-1 overflow-hidden w-full sm:w-auto">
             <span class="relative z-10">Shop Now</span>
             <svg class="w-5 h-5 sm:w-6 sm:h-6 relative z-10 group-hover:translate-x-2 transition-transform duration-500 ease-in-out" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -325,7 +325,7 @@ const featuredProducts = [
   <section class="container mx-auto px-4 py-12">
     <div class="flex justify-between items-center mb-7">
       <h2 class="text-3xl font-bold animate-on-scroll">Featured Products</h2>
-      <a href={`${import.meta.env.BASE_URL}products`} class="text-primary-600 dark:text-primary-400 font-semibold hover:underline animate-on-scroll">
+      <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/products`} class="text-primary-600 dark:text-primary-400 font-semibold hover:underline animate-on-scroll">
         View All →
       </a>
     </div>
