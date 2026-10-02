@@ -128,10 +128,10 @@
       <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-xs sm:text-sm text-gray-600 dark:text-gray-400">
         <p class="text-center md:text-left">&copy; 2026 ASIN STILL. All rights reserved.</p>
         <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
-          <a href={`${import.meta.env.BASE_URL}privacy`} class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Privacy Policy</a>
-          <a href={`${import.meta.env.BASE_URL}terms`} class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Terms of Service</a>
-          <a href={`${import.meta.env.BASE_URL}cookies`} class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Cookie Policy</a>
-          <a href={`${import.meta.env.BASE_URL}sitemap`} class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Sitemap</a>
+          <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/privacy`} class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Privacy Policy</a>
+          <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/terms`} class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Terms of Service</a>
+          <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/cookies`} class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Cookie Policy</a>
+          <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/sitemap`} class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Sitemap</a>
         </div>
       </div>
     </div>

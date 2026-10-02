@@ -41,7 +41,7 @@
     grid!.innerHTML = recentlyViewed.slice(0, 6).map((id: string) => {
       const product = mockProducts[id] || { id, name: 'Product', price: 0, image: '' };
       return `
-        <a href="/product/${id}" class="group block bg-white dark:bg-dark-800 rounded-xl overflow-hidden border border-gray-200 dark:border-dark-700 hover:border-primary-500 dark:hover:border-primary-500 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+        <a href="${import.meta.env.BASE_URL}product/${id}" class="group block bg-white dark:bg-dark-800 rounded-xl overflow-hidden border border-gray-200 dark:border-dark-700 hover:border-primary-500 dark:hover:border-primary-500 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
           <div class="aspect-square overflow-hidden bg-gray-100 dark:bg-dark-700">
             <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
           </div>
