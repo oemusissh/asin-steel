@@ -198,7 +198,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         }
         
         // Redirect to account page
-        window.location.href = '/account';
+        window.location.href = `${import.meta.env.BASE_URL}/account`;
       }, 1500);
     });
   </script>
