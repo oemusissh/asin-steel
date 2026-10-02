@@ -622,10 +622,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           We're here to help. Contact our privacy team or visit our help center.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="/contact" class="bg-orange-500 text-white px-8 py-3 rounded-lg font-bold hover:bg-orange-600 transition-colors">
+          <a href={`${import.meta.env.BASE_URL}contact`} class="bg-orange-500 text-white px-8 py-3 rounded-lg font-bold hover:bg-orange-600 transition-colors">
             Contact Privacy Team
           </a>
-          <a href="/help" class="bg-white dark:bg-gray-700 text-gray-900 dark:text-white px-8 py-3 rounded-lg font-bold hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors border-2 border-gray-200 dark:border-gray-600">
+          <a href={`${import.meta.env.BASE_URL}help`} class="bg-white dark:bg-gray-700 text-gray-900 dark:text-white px-8 py-3 rounded-lg font-bold hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors border-2 border-gray-200 dark:border-gray-600">
             Visit Help Center
           </a>
         </div>

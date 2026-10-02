@@ -7,7 +7,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <div class="w-full max-w-md">
       <!-- Logo/Brand -->
       <div class="text-center mb-8">
-        <a href="/" class="inline-block">
+        <a href={import.meta.env.BASE_URL} class="inline-block">
           <div class="w-16 h-16 bg-gradient-to-br from-primary-600 to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
@@ -79,7 +79,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
               <input type="checkbox" id="remember" class="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500" />
               <span class="text-sm text-gray-700 dark:text-gray-300">Remember me</span>
             </label>
-            <a href="/forgot-password" class="text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-semibold">
+            <a href={`${import.meta.env.BASE_URL}forgot-password`} class="text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-semibold">
               Forgot password?
             </a>
           </div>
@@ -133,7 +133,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         <!-- Sign Up Link -->
         <p class="text-center text-sm text-gray-600 dark:text-gray-400 mt-6">
           Don't have an account? 
-          <a href="/register" class="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-semibold">
+          <a href={`${import.meta.env.BASE_URL}register`} class="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-semibold">
             Create one now
           </a>
         </p>
@@ -141,13 +141,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
       <!-- Quick Links -->
       <div class="mt-6 grid grid-cols-2 gap-4">
-        <a href="/" class="flex items-center justify-center gap-2 px-4 py-2.5 bg-white dark:bg-dark-800 border border-gray-200 dark:border-dark-700 rounded-lg hover:bg-gray-50 dark:hover:bg-dark-700 transition-colors text-sm font-medium text-gray-700 dark:text-gray-300">
+        <a href={import.meta.env.BASE_URL} class="flex items-center justify-center gap-2 px-4 py-2.5 bg-white dark:bg-dark-800 border border-gray-200 dark:border-dark-700 rounded-lg hover:bg-gray-50 dark:hover:bg-dark-700 transition-colors text-sm font-medium text-gray-700 dark:text-gray-300">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
           </svg>
           Back to Home
         </a>
-        <a href="/support" class="flex items-center justify-center gap-2 px-4 py-2.5 bg-white dark:bg-dark-800 border border-gray-200 dark:border-dark-700 rounded-lg hover:bg-gray-50 dark:hover:bg-dark-700 transition-colors text-sm font-medium text-gray-700 dark:text-gray-300">
+        <a href={`${import.meta.env.BASE_URL}support`} class="flex items-center justify-center gap-2 px-4 py-2.5 bg-white dark:bg-dark-800 border border-gray-200 dark:border-dark-700 rounded-lg hover:bg-gray-50 dark:hover:bg-dark-700 transition-colors text-sm font-medium text-gray-700 dark:text-gray-300">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
           </svg>

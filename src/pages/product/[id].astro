@@ -92,9 +92,9 @@ const relatedProducts = [
   <div class="container mx-auto px-4 py-8">
     <!-- Breadcrumb -->
     <nav class="flex items-center gap-2 text-sm mb-8 animate-fade-in">
-      <a href="/" class="text-gray-600 dark:text-gray-400 hover:text-primary-600">Home</a>
+      <a href={import.meta.env.BASE_URL} class="text-gray-600 dark:text-gray-400 hover:text-primary-600">Home</a>
       <span class="text-gray-400">/</span>
-      <a href="/products" class="text-gray-600 dark:text-gray-400 hover:text-primary-600">Products</a>
+      <a href={`${import.meta.env.BASE_URL}products`} class="text-gray-600 dark:text-gray-400 hover:text-primary-600">Products</a>
       <span class="text-gray-400">/</span>
       <a href={`/categories/${product.category.toLowerCase()}`} class="text-gray-600 dark:text-gray-400 hover:text-primary-600">{product.category}</a>
       <span class="text-gray-400">/</span>

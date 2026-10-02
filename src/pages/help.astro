@@ -62,10 +62,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Orders & Tracking</h3>
           <p class="text-gray-600 dark:text-gray-400 mb-4">Track and manage your orders</p>
           <div class="space-y-2">
-            <a href="/track-order" class="help-link block text-orange-600 dark:text-orange-400 hover:underline">Track my order</a>
+            <a href={`${import.meta.env.BASE_URL}track-order`} class="help-link block text-orange-600 dark:text-orange-400 hover:underline">Track my order</a>
             <a href="#" class="help-link block text-orange-600 dark:text-orange-400 hover:underline" data-article="modify-order">Modify or cancel order</a>
             <a href="#" class="help-link block text-orange-600 dark:text-orange-400 hover:underline" data-article="order-status">Understanding order status</a>
-            <a href="/account/orders" class="help-link block text-orange-600 dark:text-orange-400 hover:underline">View order history</a>
+            <a href={`${import.meta.env.BASE_URL}account/orders`} class="help-link block text-orange-600 dark:text-orange-400 hover:underline">View order history</a>
           </div>
         </div>
 
@@ -75,7 +75,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Shipping & Delivery</h3>
           <p class="text-gray-600 dark:text-gray-400 mb-4">Everything about shipping and delivery</p>
           <div class="space-y-2">
-            <a href="/shipping-info" class="help-link block text-orange-600 dark:text-orange-400 hover:underline">Shipping options & rates</a>
+            <a href={`${import.meta.env.BASE_URL}shipping-info`} class="help-link block text-orange-600 dark:text-orange-400 hover:underline">Shipping options & rates</a>
             <a href="#" class="help-link block text-orange-600 dark:text-orange-400 hover:underline" data-article="delivery-time">Delivery timeframes</a>
             <a href="#" class="help-link block text-orange-600 dark:text-orange-400 hover:underline" data-article="shipping-zones">Shipping zones</a>
             <a href="#" class="help-link block text-orange-600 dark:text-orange-400 hover:underline" data-article="freight-delivery">Freight delivery info</a>
@@ -88,7 +88,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Returns & Refunds</h3>
           <p class="text-gray-600 dark:text-gray-400 mb-4">Return policy and refund process</p>
           <div class="space-y-2">
-            <a href="/returns" class="help-link block text-orange-600 dark:text-orange-400 hover:underline">Return policy</a>
+            <a href={`${import.meta.env.BASE_URL}returns`} class="help-link block text-orange-600 dark:text-orange-400 hover:underline">Return policy</a>
             <a href="#" class="help-link block text-orange-600 dark:text-orange-400 hover:underline" data-article="start-return">How to start a return</a>
             <a href="#" class="help-link block text-orange-600 dark:text-orange-400 hover:underline" data-article="refund-process">Refund processing time</a>
             <a href="#" class="help-link block text-orange-600 dark:text-orange-400 hover:underline" data-article="exchange-items">Exchange items</a>
@@ -103,7 +103,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <div class="space-y-2">
             <a href="#" class="help-link block text-orange-600 dark:text-orange-400 hover:underline" data-article="reset-password">Reset password</a>
             <a href="#" class="help-link block text-orange-600 dark:text-orange-400 hover:underline" data-article="update-profile">Update profile info</a>
-            <a href="/account/addresses" class="help-link block text-orange-600 dark:text-orange-400 hover:underline">Manage addresses</a>
+            <a href={`${import.meta.env.BASE_URL}account/addresses`} class="help-link block text-orange-600 dark:text-orange-400 hover:underline">Manage addresses</a>
             <a href="#" class="help-link block text-orange-600 dark:text-orange-400 hover:underline" data-article="account-security">Account security tips</a>
           </div>
         </div>
@@ -132,25 +132,25 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </h2>
       
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-        <a href="/faq" class="bg-white dark:bg-gray-900 rounded-xl p-6 text-center hover:shadow-lg transition-shadow border-2 border-transparent hover:border-orange-500">
+        <a href={`${import.meta.env.BASE_URL}faq`} class="bg-white dark:bg-gray-900 rounded-xl p-6 text-center hover:shadow-lg transition-shadow border-2 border-transparent hover:border-orange-500">
           <div class="text-4xl mb-3">❓</div>
           <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">FAQ</h3>
           <p class="text-gray-600 dark:text-gray-400 text-sm">Frequently asked questions</p>
         </a>
 
-        <a href="/support" class="bg-white dark:bg-gray-900 rounded-xl p-6 text-center hover:shadow-lg transition-shadow border-2 border-transparent hover:border-orange-500">
+        <a href={`${import.meta.env.BASE_URL}support`} class="bg-white dark:bg-gray-900 rounded-xl p-6 text-center hover:shadow-lg transition-shadow border-2 border-transparent hover:border-orange-500">
           <div class="text-4xl mb-3">💬</div>
           <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Contact Support</h3>
           <p class="text-gray-600 dark:text-gray-400 text-sm">Get help from our team</p>
         </a>
 
-        <a href="/track-order" class="bg-white dark:bg-gray-900 rounded-xl p-6 text-center hover:shadow-lg transition-shadow border-2 border-transparent hover:border-orange-500">
+        <a href={`${import.meta.env.BASE_URL}track-order`} class="bg-white dark:bg-gray-900 rounded-xl p-6 text-center hover:shadow-lg transition-shadow border-2 border-transparent hover:border-orange-500">
           <div class="text-4xl mb-3">📍</div>
           <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Track Order</h3>
           <p class="text-gray-600 dark:text-gray-400 text-sm">Check your order status</p>
         </a>
 
-        <a href="/returns" class="bg-white dark:bg-gray-900 rounded-xl p-6 text-center hover:shadow-lg transition-shadow border-2 border-transparent hover:border-orange-500">
+        <a href={`${import.meta.env.BASE_URL}returns`} class="bg-white dark:bg-gray-900 rounded-xl p-6 text-center hover:shadow-lg transition-shadow border-2 border-transparent hover:border-orange-500">
           <div class="text-4xl mb-3">🔄</div>
           <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Returns</h3>
           <p class="text-gray-600 dark:text-gray-400 text-sm">Start a return or exchange</p>
@@ -175,7 +175,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               <div class="flex-1">
                 <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Create Your Account</h3>
                 <p class="text-gray-600 dark:text-gray-400 mb-3">Sign up for a free ASIN STILL account to access exclusive deals, track orders, and save your favorite products.</p>
-                <a href="/register" class="text-orange-600 dark:text-orange-400 hover:underline font-medium">Create Account →</a>
+                <a href={`${import.meta.env.BASE_URL}register`} class="text-orange-600 dark:text-orange-400 hover:underline font-medium">Create Account →</a>
               </div>
             </div>
           </div>
@@ -187,7 +187,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               <div class="flex-1">
                 <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Browse Products</h3>
                 <p class="text-gray-600 dark:text-gray-400 mb-3">Explore our wide range of building materials, from cement and concrete to tools and hardware.</p>
-                <a href="/products" class="text-orange-600 dark:text-orange-400 hover:underline font-medium">Browse Products →</a>
+                <a href={`${import.meta.env.BASE_URL}products`} class="text-orange-600 dark:text-orange-400 hover:underline font-medium">Browse Products →</a>
               </div>
             </div>
           </div>
@@ -199,7 +199,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               <div class="flex-1">
                 <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Add to Cart & Checkout</h3>
                 <p class="text-gray-600 dark:text-gray-400 mb-3">Add items to your cart, review your order, and proceed to secure checkout with multiple payment options.</p>
-                <a href="/cart" class="text-orange-600 dark:text-orange-400 hover:underline font-medium">View Cart →</a>
+                <a href={`${import.meta.env.BASE_URL}cart`} class="text-orange-600 dark:text-orange-400 hover:underline font-medium">View Cart →</a>
               </div>
             </div>
           </div>
@@ -211,7 +211,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               <div class="flex-1">
                 <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Track Your Order</h3>
                 <p class="text-gray-600 dark:text-gray-400 mb-3">Monitor your order status in real-time from processing to delivery with our tracking system.</p>
-                <a href="/track-order" class="text-orange-600 dark:text-orange-400 hover:underline font-medium">Track Order →</a>
+                <a href={`${import.meta.env.BASE_URL}track-order`} class="text-orange-600 dark:text-orange-400 hover:underline font-medium">Track Order →</a>
               </div>
             </div>
           </div>
@@ -231,13 +231,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           Our support team is here to assist you 24/7
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="/support" class="bg-white text-orange-600 px-8 py-4 rounded-lg font-bold hover:bg-orange-50 transition-colors inline-flex items-center justify-center gap-2">
+          <a href={`${import.meta.env.BASE_URL}support`} class="bg-white text-orange-600 px-8 py-4 rounded-lg font-bold hover:bg-orange-50 transition-colors inline-flex items-center justify-center gap-2">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
             </svg>
             Contact Support
           </a>
-          <a href="/contact" class="bg-orange-700 text-white px-8 py-4 rounded-lg font-bold hover:bg-orange-800 transition-colors inline-flex items-center justify-center gap-2">
+          <a href={`${import.meta.env.BASE_URL}contact`} class="bg-orange-700 text-white px-8 py-4 rounded-lg font-bold hover:bg-orange-800 transition-colors inline-flex items-center justify-center gap-2">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
             </svg>

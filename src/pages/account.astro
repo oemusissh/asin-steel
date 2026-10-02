@@ -155,7 +155,7 @@ const addresses = [
         <div class="bg-white dark:bg-dark-800 rounded-lg border border-gray-200 dark:border-dark-700 mb-4 shadow-sm overflow-hidden">
           <div class="px-4 py-2.5 border-b border-gray-200 dark:border-dark-700 flex items-center justify-between">
             <h2 class="text-base font-bold">Recent Orders</h2>
-            <a href="/account/orders" class="text-xs text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white font-medium transition-colors">View All →</a>
+            <a href={`${import.meta.env.BASE_URL}account/orders`} class="text-xs text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white font-medium transition-colors">View All →</a>
           </div>
           <div class="divide-y divide-gray-100 dark:divide-dark-700">
             {recentOrders.map((order, i) => (

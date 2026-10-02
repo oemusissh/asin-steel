@@ -19,7 +19,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </svg>
           <h2 class="text-xl sm:text-2xl font-bold mb-2">Your cart is empty</h2>
           <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-6">Add some products to get started!</p>
-          <a href="/products" class="inline-block px-6 sm:px-8 py-2.5 sm:py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-semibold transition-colors text-sm sm:text-base active:scale-95">
+          <a href={`${import.meta.env.BASE_URL}products`} class="inline-block px-6 sm:px-8 py-2.5 sm:py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-semibold transition-colors text-sm sm:text-base active:scale-95">
             Continue Shopping
           </a>
         </div>
@@ -52,10 +52,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </div>
 
           <div class="space-y-2 sm:space-y-3">
-            <a href="/checkout" class="block w-full py-2.5 sm:py-3 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-xl font-semibold transition-all duration-300 hover:shadow-lg transform hover:scale-105 active:scale-95 text-sm sm:text-base">
+            <a href={`${import.meta.env.BASE_URL}checkout`} class="block w-full py-2.5 sm:py-3 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-xl font-semibold transition-all duration-300 hover:shadow-lg transform hover:scale-105 active:scale-95 text-sm sm:text-base">
               Proceed to Checkout
             </a>
-            <a href="/products" class="block w-full py-2.5 sm:py-3 bg-gray-200 dark:bg-dark-700 hover:bg-gray-300 dark:hover:bg-dark-600 text-center rounded-xl font-semibold transition-colors text-sm sm:text-base active:scale-95">
+            <a href={`${import.meta.env.BASE_URL}products`} class="block w-full py-2.5 sm:py-3 bg-gray-200 dark:bg-dark-700 hover:bg-gray-300 dark:hover:bg-dark-600 text-center rounded-xl font-semibold transition-colors text-sm sm:text-base active:scale-95">
               Continue Shopping
             </a>
           </div>

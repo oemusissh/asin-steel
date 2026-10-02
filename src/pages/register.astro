@@ -7,7 +7,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="w-full max-w-md">
       <!-- Logo/Brand -->
       <div class="text-center mb-8">
-        <a href="/" class="inline-block">
+        <a href={import.meta.env.BASE_URL} class="inline-block">
           <div class="w-16 h-16 bg-gradient-to-br from-primary-600 to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
@@ -205,7 +205,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <!-- Login Link -->
         <p class="text-center text-sm text-gray-600 dark:text-gray-400 mt-6">
           Already have an account? 
-          <a href="/login" class="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-semibold">
+          <a href={`${import.meta.env.BASE_URL}login`} class="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-semibold">
             Sign in
           </a>
         </p>
@@ -213,7 +213,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
       <!-- Back to Home -->
       <div class="text-center mt-6">
-        <a href="/" class="inline-flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+        <a href={import.meta.env.BASE_URL} class="inline-flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
