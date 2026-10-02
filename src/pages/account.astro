@@ -339,7 +339,7 @@ const addresses = [
   const storedUser = localStorage.getItem('user');
 
   if (!storedUser) {
-    window.location.href = `${import.meta.env.BASE_URL}account/signin`;
+    window.location.href = `${import.meta.env.BASE_URL}/account/signin`;
   } else {
     const currentUser = JSON.parse(storedUser);
 
