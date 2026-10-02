@@ -168,7 +168,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     const checkoutItems = document.getElementById('checkout-items');
 
     if (cart.length === 0) {
-      window.location.href = '/cart';
+      window.location.href = `${import.meta.env.BASE_URL}/cart`;
       return;
     }
 

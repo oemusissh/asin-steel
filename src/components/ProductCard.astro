@@ -89,7 +89,7 @@ const estimatedDelivery = 'Est. delivery: 2-3 days';
   </div>
 
   <!-- Image with Enhanced Zoom (110%) and Gradient Overlay -->
-  <a href={`/product/${id}`} class="block relative overflow-hidden bg-gray-100 dark:bg-dark-700 aspect-square cursor-zoom-in">
+  <a href={`${import.meta.env.BASE_URL}/product/${id}`} class="block relative overflow-hidden bg-gray-100 dark:bg-dark-700 aspect-square cursor-zoom-in">
     <img
       src={image}
       alt={name}
@@ -119,7 +119,7 @@ const estimatedDelivery = 'Est. delivery: 2-3 days';
     </div>
 
     <!-- Name - Mobile Optimized -->
-    <a href={`/product/${id}`} class="block">
+    <a href={`${import.meta.env.BASE_URL}/product/${id}`} class="block">
       <h3 class="font-semibold text-sm sm:text-base text-gray-900 dark:text-white mb-2 sm:mb-3 line-clamp-2 leading-snug group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors min-h-[2.5rem]">
         {name}
       </h3>
@@ -263,7 +263,7 @@ const estimatedDelivery = 'Est. delivery: 2-3 days';
       e.preventDefault();
       const id = (e.currentTarget as HTMLElement).dataset.quickView!;
       // In production, this would open a modal with product details
-      window.location.href = `/product/${id}`;
+      window.location.href = `${import.meta.env.BASE_URL}/product/${id}`;
     });
   });
 

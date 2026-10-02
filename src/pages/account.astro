@@ -109,7 +109,7 @@ const addresses = [
           { icon: '👤', label: 'Profile', active: false },
           { icon: '⚙️', label: 'Settings', active: false }
         ].map((item, i) => (
-          <a href={`/account/${item.label.toLowerCase()}`} class={`group flex items-center gap-2 px-5 py-2.5 transition-all duration-300 whitespace-nowrap ${item.active ? 'bg-gray-900 dark:bg-gray-800 text-white' : 'hover:bg-gray-50 dark:hover:bg-dark-700 text-gray-700 dark:text-gray-300'} ${i > 0 ? 'border-l border-gray-100 dark:border-dark-700' : ''}`}>
+          <a href={`${import.meta.env.BASE_URL}/account/${item.label.toLowerCase()}`} class={`group flex items-center gap-2 px-5 py-2.5 transition-all duration-300 whitespace-nowrap ${item.active ? 'bg-gray-900 dark:bg-gray-800 text-white' : 'hover:bg-gray-50 dark:hover:bg-dark-700 text-gray-700 dark:text-gray-300'} ${i > 0 ? 'border-l border-gray-100 dark:border-dark-700' : ''}`}>
             <span class="text-base">{item.icon}</span>
             <span class="font-medium text-sm">{item.label}</span>
           </a>
@@ -188,7 +188,7 @@ const addresses = [
                     {order.statusColor === 'blue' && (
                       <button class="font-medium text-blue-600 dark:text-blue-400 hover:underline">Track</button>
                     )}
-                    <a href={`/account/orders/${order.id}`} class="font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">Details</a>
+                    <a href={`${import.meta.env.BASE_URL}/account/orders/${order.id}`} class="font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">Details</a>
                   </div>
                 </div>
               </div>

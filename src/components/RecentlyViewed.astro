@@ -64,7 +64,7 @@
   renderRecentlyViewed();
   
   // Track product views
-  if (window.location.pathname.startsWith('/product/')) {
+  if (window.location.pathname.startsWith(`${import.meta.env.BASE_URL}/product/`)) {
     const productId = window.location.pathname.split('/').pop();
     if (productId) {
       const recentlyViewed = JSON.parse(localStorage.getItem('recentlyViewed') || '[]');

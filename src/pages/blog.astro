@@ -205,7 +205,7 @@ const categories = ['All', 'Tools & Equipment', 'Materials Guide', 'Construction
                     </div>
                   </div>
                   
-                  <a href={`/blog/${post.id}`} class="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-semibold text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
+                  <a href={`${import.meta.env.BASE_URL}/blog/${post.id}`} class="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-semibold text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
                     Read More
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -262,7 +262,7 @@ const categories = ['All', 'Tools & Equipment', 'Materials Guide', 'Construction
                     </div>
                   </div>
                   
-                  <a href={`/blog/${post.id}`} class="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-semibold text-xs">
+                  <a href={`${import.meta.env.BASE_URL}/blog/${post.id}`} class="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-semibold text-xs">
                     Read →
                   </a>
                 </div>
@@ -351,7 +351,7 @@ const categories = ['All', 'Tools & Equipment', 'Materials Guide', 'Construction
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
           {['Concrete', 'Roofing', 'Insulation', 'Framing', 'Plumbing', 'Electrical', 'Flooring', 'Drywall', 'Painting', 'Safety', 'Tools', 'Budget'].map(topic => (
             <a 
-              href={`/blog?topic=${topic.toLowerCase()}`}
+              href={`${import.meta.env.BASE_URL}/blog?topic=${topic.toLowerCase()}`}
               class="px-4 py-3 bg-white dark:bg-dark-900 rounded-xl text-center font-medium text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:text-primary-600 dark:hover:text-primary-400 transition-all duration-300 hover:scale-105 border border-gray-200 dark:border-dark-700"
             >
               {topic}
