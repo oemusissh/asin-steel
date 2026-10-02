@@ -1,4 +1,4 @@
-# 🏗️ ASIN STILL - Premium Building Materials E-commerce Theme
+# 🏗️ ASIN STEEL - Premium Building Materials E-commerce Theme
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
@@ -222,7 +222,7 @@ If you like this theme, please:
 
 **© 2026 Kantong Aplikasi. All Rights Reserved.**
 
-ASIN STILL Theme - Premium Building Materials E-commerce Theme  
+ASIN STEEL Theme - Premium Building Materials E-commerce Theme  
 Licensed under MIT License
 
 **Made with ❤️ by Kantong Aplikasi**

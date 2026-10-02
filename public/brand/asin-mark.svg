@@ -1,0 +1,61 @@
+<svg
+  width="160"
+  height="160"
+  viewBox="0 0 160 160"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <defs>
+    <linearGradient id="steel" x1="28" y1="20" x2="132" y2="140" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#93C5FD"/>
+      <stop offset="0.45" stop-color="#3B82F6"/>
+      <stop offset="1" stop-color="#1E3A8A"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Outer steel frame -->
+  <path
+    d="M80 10
+       L137 43
+       V108
+       L80 141
+       L23 108
+       V43
+       L80 10Z"
+    stroke="url(#steel)"
+    stroke-width="7"
+    stroke-linejoin="round"
+  />
+
+  <!-- Inner A structure -->
+  <path
+    d="M48 104
+       L80 40
+       L112 104"
+    stroke="white"
+    stroke-width="9"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+
+  <!-- A cross beam / steel section -->
+  <path
+    d="M60 82H100"
+    stroke="white"
+    stroke-width="9"
+    stroke-linecap="round"
+  />
+
+  <!-- S negative-space structure -->
+  <path
+    d="M99 55
+       C91 48 76 48 67 55
+       C58 62 62 72 73 77
+       L91 85
+       C102 90 104 99 95 105
+       C86 112 70 111 61 103"
+    stroke="#60A5FA"
+    stroke-width="7"
+    stroke-linecap="round"
+  />
+</svg>
