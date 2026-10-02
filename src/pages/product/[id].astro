@@ -96,7 +96,7 @@ const relatedProducts = [
       <span class="text-gray-400">/</span>
       <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/products`} class="text-gray-600 dark:text-gray-400 hover:text-primary-600">Products</a>
       <span class="text-gray-400">/</span>
-      <a href={`/categories/${product.category.toLowerCase()}`} class="text-gray-600 dark:text-gray-400 hover:text-primary-600">{product.category}</a>
+      <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/categories/${product.category.toLowerCase()}`} class="text-gray-600 dark:text-gray-400 hover:text-primary-600">{product.category}</a>
       <span class="text-gray-400">/</span>
       <span class="text-gray-900 dark:text-white font-semibold">{product.name}</span>
     </nav>
@@ -211,7 +211,7 @@ const relatedProducts = [
           </div>
           <div class="flex items-center gap-3">
             <span class="text-gray-600 dark:text-gray-400">Category:</span>
-            <a href={`/categories/${product.category.toLowerCase()}`} class="font-semibold text-primary-600 dark:text-primary-400 hover:underline">{product.category}</a>
+            <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/categories/${product.category.toLowerCase()}`} class="font-semibold text-primary-600 dark:text-primary-400 hover:underline">{product.category}</a>
           </div>
         </div>
       </div>

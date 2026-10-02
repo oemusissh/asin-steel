@@ -343,7 +343,7 @@
         </li>
         {['Steel & Metal', 'Lumber & Wood', 'Tools & Equipment', 'Electrical', 'Plumbing'].map(item => (
           <li class="relative group">
-            <a href={`/categories/${item.toLowerCase().replace(/\s+/g, '-')}`} class="py-2 inline-block transition-colors duration-500 ease-in-out relative">
+            <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/categories/${item.toLowerCase().replace(/\s+/g, '-')}`} class="py-2 inline-block transition-colors duration-500 ease-in-out relative">
               <span class="relative z-10">{item}</span>
               <!-- Animated Underline -->
               <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-600 to-primary-400 group-hover:w-full transition-all duration-500 ease-in-out"></span>
