@@ -3,89 +3,348 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProductCard from '../../components/ProductCard.astro';
 
 export function getStaticPaths() {
-  return [
-    { params: { id: '1' } },
-    { params: { id: '2' } },
-    { params: { id: '3' } },
-    { params: { id: '4' } },
-    { params: { id: '5' } },
-  ];
+  return Array.from({ length: 12 }, (_, i) => ({
+    params: { id: `prod-${i + 1}` }
+  }));
 }
 
 // Mock product data
-const product = {
-  id: '1',
-  name: 'Premium Portland Cement - 50kg Bag',
-  price: 12.99,
-  originalPrice: 15.99,
-  images: [
-    'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=800&fit=crop',
-    'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=800&h=800&fit=crop',
-    'https://images.unsplash.com/photo-1563453392212-326f5e854473?w=800&h=800&fit=crop',
-  ],
-  rating: 4.8,
-  reviews: 234,
-  inStock: true,
-  sku: 'CEM-PORT-50',
-  category: 'Cement & Concrete',
-  brand: 'BuildPro',
-  description: 'High-quality Portland cement perfect for all construction projects. Provides excellent strength and durability for foundations, walls, and structural applications.',
-  features: [
-    'Premium grade Portland cement',
-    'High compressive strength',
-    'Consistent quality and performance',
-    'Suitable for all weather conditions',
-    'Meets ASTM C150 standards',
-    'Fast setting time'
-  ],
-  specifications: {
-    'Weight': '50 kg (110 lbs)',
-    'Type': 'Portland Cement Type I',
-    'Compressive Strength': '4000+ PSI',
-    'Setting Time': '45-60 minutes',
-    'Color': 'Gray',
-    'Storage': 'Keep dry and covered'
-  }
-};
+const productId = Astro.params.id;
 
-const relatedProducts = [
+const products = [
   {
-    id: '2',
-    name: 'Steel Reinforcement Bars',
-    price: 45.50,
-    image: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=500&h=500&fit=crop',
-    rating: 4.9,
-    reviews: 189,
-    inStock: true
+    id: 'prod-1',
+    name: 'تیرآهن',
+    price: 0,
+    images: [
+      'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=800&fit=crop'
+    ],
+    rating: 5,
+    reviews: 0,
+    inStock: true,
+    sku: 'ASIN-BEAM-01',
+    category: 'تیرآهن',
+    brand: 'ASIN STEEL',
+    description: 'انواع تیرآهن مناسب برای پروژه‌های ساختمانی و عمرانی.',
+    features: [
+      'مناسب پروژه‌های ساختمانی و عمرانی',
+      'قابل تأمین در ابعاد و مشخصات مختلف',
+      'امکان استعلام قیمت و موجودی',
+      'مناسب برای خرید پروژه‌ای'
+    ],
+    specifications: {
+      'نوع محصول': 'تیرآهن',
+      'برند': 'ASIN STEEL',
+      'وضعیت': 'قابل استعلام',
+      'کاربرد': 'ساختمانی و عمرانی'
+    }
   },
   {
-    id: '3',
-    name: 'Premium Pine Lumber',
-    price: 8.99,
-    image: 'https://images.unsplash.com/photo-1563453392212-326f5e854473?w=500&h=500&fit=crop',
-    rating: 4.7,
-    reviews: 456,
-    inStock: true
+    id: 'prod-2',
+    name: 'میلگرد',
+    price: 0,
+    images: [
+      'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=800&h=800&fit=crop'
+    ],
+    rating: 5,
+    reviews: 0,
+    inStock: true,
+    sku: 'ASIN-REBAR-01',
+    category: 'میلگرد',
+    brand: 'ASIN STEEL',
+    description: 'انواع میلگرد برای استفاده در پروژه‌های ساختمانی و عمرانی.',
+    features: [
+      'مناسب پروژه‌های ساختمانی',
+      'قابل تأمین در سایزهای مختلف',
+      'امکان استعلام قیمت و موجودی',
+      'مناسب خرید پروژه‌ای'
+    ],
+    specifications: {
+      'نوع محصول': 'میلگرد',
+      'برند': 'ASIN STEEL',
+      'وضعیت': 'قابل استعلام',
+      'کاربرد': 'ساختمانی و عمرانی'
+    }
   },
   {
-    id: '4',
-    name: 'Professional Power Drill',
-    price: 129.99,
-    image: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=500&h=500&fit=crop',
-    rating: 4.9,
-    reviews: 678,
-    inStock: true
+    id: 'prod-3',
+    name: 'ورق فولادی',
+    price: 0,
+    images: [
+      'https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=800&h=800&fit=crop'
+    ],
+    rating: 5,
+    reviews: 0,
+    inStock: true,
+    sku: 'ASIN-SHEET-01',
+    category: 'ورق فولادی',
+    brand: 'ASIN STEEL',
+    description: 'تأمین انواع ورق فولادی برای کاربردهای صنعتی، ساختمانی و عمرانی.',
+    features: [
+      'قابل تأمین در ضخامت‌های مختلف',
+      'مناسب کاربردهای صنعتی و ساختمانی',
+      'امکان بررسی مشخصات فنی',
+      'قابل استعلام قیمت و موجودی'
+    ],
+    specifications: {
+      'نوع محصول': 'ورق فولادی',
+      'برند': 'ASIN STEEL',
+      'وضعیت': 'قابل استعلام',
+      'کاربرد': 'صنعتی و ساختمانی'
+    }
   },
   {
-    id: '5',
-    name: 'Copper Electrical Wire',
-    price: 89.99,
-    image: 'https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=500&h=500&fit=crop',
-    rating: 4.6,
-    reviews: 123,
-    inStock: true
+    id: 'prod-4',
+    name: 'پروفیل',
+    price: 0,
+    images: [
+      'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&h=800&fit=crop'
+    ],
+    rating: 5,
+    reviews: 0,
+    inStock: true,
+    sku: 'ASIN-PROFILE-01',
+    category: 'پروفیل',
+    brand: 'ASIN STEEL',
+    description: 'انواع پروفیل و مقاطع فلزی برای پروژه‌های مختلف.',
+    features: [
+      'تنوع در ابعاد و مقاطع',
+      'مناسب پروژه‌های ساختمانی',
+      'مناسب کاربردهای صنعتی',
+      'امکان استعلام و تأمین پروژه‌ای'
+    ],
+    specifications: {
+      'نوع محصول': 'پروفیل',
+      'برند': 'ASIN STEEL',
+      'وضعیت': 'قابل استعلام',
+      'کاربرد': 'ساختمانی و صنعتی'
+    }
+  },
+  {
+    id: 'prod-5',
+    name: 'نبشی و ناودانی',
+    price: 0,
+    images: [
+      'https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=800&h=800&fit=crop'
+    ],
+    rating: 5,
+    reviews: 0,
+    inStock: true,
+    sku: 'ASIN-ANGLE-01',
+    category: 'نبشی و ناودانی',
+    brand: 'ASIN STEEL',
+    description: 'تأمین انواع نبشی و ناودانی برای کاربردهای ساختمانی و صنعتی.',
+    features: [
+      'مناسب سازه‌های فلزی',
+      'قابل تأمین در ابعاد مختلف',
+      'مناسب پروژه‌های ساختمانی و صنعتی',
+      'امکان استعلام قیمت'
+    ],
+    specifications: {
+      'نوع محصول': 'نبشی و ناودانی',
+      'برند': 'ASIN STEEL',
+      'وضعیت': 'قابل استعلام',
+      'کاربرد': 'ساختمانی و صنعتی'
+    }
+  },
+  {
+    id: 'prod-6',
+    name: 'قوطی و لوله',
+    price: 0,
+    images: [
+      'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=800&fit=crop'
+    ],
+    rating: 5,
+    reviews: 0,
+    inStock: true,
+    sku: 'ASIN-TUBE-01',
+    category: 'قوطی و لوله',
+    brand: 'ASIN STEEL',
+    description: 'انواع قوطی و لوله فلزی برای کاربردهای ساختمانی و صنعتی.',
+    features: [
+      'تنوع در ابعاد',
+      'مناسب سازه‌های فلزی',
+      'مناسب کاربردهای صنعتی',
+      'امکان استعلام موجودی و قیمت'
+    ],
+    specifications: {
+      'نوع محصول': 'قوطی و لوله',
+      'برند': 'ASIN STEEL',
+      'وضعیت': 'قابل استعلام',
+      'کاربرد': 'ساختمانی و صنعتی'
+    }
+  },
+  {
+    id: 'prod-7',
+    name: 'شمش فولادی',
+    price: 0,
+    images: [
+      'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=800&h=800&fit=crop'
+    ],
+    rating: 5,
+    reviews: 0,
+    inStock: true,
+    sku: 'ASIN-BILLET-01',
+    category: 'شمش فولادی',
+    brand: 'ASIN STEEL',
+    description: 'تأمین شمش فولادی برای کاربردهای صنعتی و تولید مقاطع فلزی.',
+    features: [
+      'مناسب صنایع فولادی',
+      'مناسب تولید مقاطع',
+      'قابل تأمین برای پروژه‌ها',
+      'امکان استعلام مشخصات و قیمت'
+    ],
+    specifications: {
+      'نوع محصول': 'شمش فولادی',
+      'برند': 'ASIN STEEL',
+      'وضعیت': 'قابل استعلام',
+      'کاربرد': 'صنعتی'
+    }
+  },
+  {
+    id: 'prod-8',
+    name: 'محصولات آلیاژی',
+    price: 0,
+    images: [
+      'https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=800&h=800&fit=crop'
+    ],
+    rating: 5,
+    reviews: 0,
+    inStock: true,
+    sku: 'ASIN-ALLOY-01',
+    category: 'محصولات آلیاژی',
+    brand: 'ASIN STEEL',
+    description: 'تأمین محصولات فلزی و آلیاژی برای کاربردهای تخصصی.',
+    features: [
+      'مناسب کاربردهای تخصصی',
+      'قابل بررسی بر اساس مشخصات فنی',
+      'مناسب صنایع مختلف',
+      'امکان استعلام و تأمین'
+    ],
+    specifications: {
+      'نوع محصول': 'محصولات آلیاژی',
+      'برند': 'ASIN STEEL',
+      'وضعیت': 'قابل استعلام',
+      'کاربرد': 'صنعتی'
+    }
+  },
+  {
+    id: 'prod-9',
+    name: 'مقاطع فولادی',
+    price: 0,
+    images: [
+      'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&h=800&fit=crop'
+    ],
+    rating: 5,
+    reviews: 0,
+    inStock: true,
+    sku: 'ASIN-SECTION-01',
+    category: 'مقاطع فولادی',
+    brand: 'ASIN STEEL',
+    description: 'انواع مقاطع فولادی مورد استفاده در پروژه‌های مختلف.',
+    features: [
+      'تنوع در مقاطع',
+      'مناسب پروژه‌های ساختمانی',
+      'مناسب کاربردهای صنعتی',
+      'امکان استعلام مشخصات'
+    ],
+    specifications: {
+      'نوع محصول': 'مقاطع فولادی',
+      'برند': 'ASIN STEEL',
+      'وضعیت': 'قابل استعلام',
+      'کاربرد': 'ساختمانی و صنعتی'
+    }
+  },
+  {
+    id: 'prod-10',
+    name: 'محصولات آهنی',
+    price: 0,
+    images: [
+      'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=800&fit=crop'
+    ],
+    rating: 5,
+    reviews: 0,
+    inStock: true,
+    sku: 'ASIN-IRON-01',
+    category: 'محصولات آهنی',
+    brand: 'ASIN STEEL',
+    description: 'تأمین انواع محصولات آهنی و مقاطع فلزی برای پروژه‌های مختلف.',
+    features: [
+      'تنوع محصولات آهنی',
+      'مناسب پروژه‌های مختلف',
+      'امکان استعلام قیمت',
+      'تأمین متناسب با نیاز پروژه'
+    ],
+    specifications: {
+      'نوع محصول': 'محصولات آهنی',
+      'برند': 'ASIN STEEL',
+      'وضعیت': 'قابل استعلام',
+      'کاربرد': 'ساختمانی و صنعتی'
+    }
+  },
+  {
+    id: 'prod-11',
+    name: 'محصولات استیل',
+    price: 0,
+    images: [
+      'https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=800&h=800&fit=crop'
+    ],
+    rating: 5,
+    reviews: 0,
+    inStock: true,
+    sku: 'ASIN-STEEL-01',
+    category: 'محصولات استیل',
+    brand: 'ASIN STEEL',
+    description: 'انواع محصولات استیل برای کاربردهای صنعتی و تخصصی.',
+    features: [
+      'مناسب کاربردهای صنعتی',
+      'قابل بررسی بر اساس گرید و مشخصات',
+      'تنوع محصولات',
+      'امکان استعلام و تأمین'
+    ],
+    specifications: {
+      'نوع محصول': 'محصولات استیل',
+      'برند': 'ASIN STEEL',
+      'وضعیت': 'قابل استعلام',
+      'کاربرد': 'صنعتی'
+    }
+  },
+  {
+    id: 'prod-12',
+    name: 'سایر محصولات فلزی',
+    price: 0,
+    images: [
+      'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&h=800&fit=crop'
+    ],
+    rating: 5,
+    reviews: 0,
+    inStock: true,
+    sku: 'ASIN-METAL-01',
+    category: 'سایر محصولات فلزی',
+    brand: 'ASIN STEEL',
+    description: 'سایر محصولات و مقاطع فلزی قابل تأمین توسط ASIN STEEL.',
+    features: [
+      'تنوع محصولات فلزی',
+      'قابل تأمین بر اساس نیاز پروژه',
+      'امکان بررسی مشخصات فنی',
+      'استعلام قیمت و موجودی'
+    ],
+    specifications: {
+      'نوع محصول': 'محصولات فلزی',
+      'برند': 'ASIN STEEL',
+      'وضعیت': 'قابل استعلام',
+      'کاربرد': 'متنوع'
+    }
   }
 ];
+
+const product = products.find(item => item.id === productId) ?? products[0];
+
+const relatedProducts = products
+  .filter(item => item.id !== product.id)
+  .slice(0, 4);
+
+
 ---
 
 <BaseLayout title={`${product.name} - ASIN STEEL`}>

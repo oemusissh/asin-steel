@@ -85,10 +85,10 @@ A modern, fully responsive, and feature-rich e-commerce theme built specifically
 
 ```bash
 # Clone the repository
-git clone https://github.com/helmibamualim/Kantong-Aplikasi-Tema-Astro-Js.git
+git clone https://github.com/oemusissh/asin-steel.git
 
 # Navigate to project directory
-cd Kantong-Aplikasi-Tema-Astro-Js
+cd asin-steel
 
 # Install dependencies
 npm install
@@ -197,9 +197,9 @@ Perfect for:
 ## 📞 Support
 
 For support and questions:
-- **Email**: helmibamualim@gmail.com
-- **Phone/WhatsApp**: +62 813-9244-2358
-- **Website**: https://kantongaplikasi.com
+
+- **Developer**: O E M
+- **GitHub**: https://github.com/oemusissh
 
 ## 🤝 Contributing
 
@@ -220,9 +220,12 @@ If you like this theme, please:
 
 ---
 
-**© 2026 Kantong Aplikasi. All Rights Reserved.**
+---
 
-ASIN STEEL Theme - Premium Building Materials E-commerce Theme  
+**© 2026 O E M.**
+
+ASIN STEEL - Industrial Metal & Steel Supply Website
+
 Licensed under MIT License
 
-**Made with ❤️ by Kantong Aplikasi**
+**Made with ❤️ by O E M**
