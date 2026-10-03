@@ -1,0 +1,336 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="راهکارها | ASIN STEEL"
+  description="راهکارهای تأمین آهن، فولاد و محصولات فلزی برای پروژه‌های ساختمانی، صنعتی و عمرانی"
+>
+  <section class="relative overflow-hidden bg-dark-950 text-white">
+  <!-- Breadcrumb -->
+  <div class="container mx-auto px-4 pt-8 relative z-10">
+    <nav class="flex items-center gap-2 text-sm animate-fade-in">
+      <a
+        href={import.meta.env.BASE_URL}
+        class="text-white/50 hover:text-white transition-colors"
+    >
+        Home
+      </a>
+
+      <span class="text-white/25">/</span>
+
+      <span class="text-white/80 font-semibold">
+        Solutions
+      </span>
+    </nav>
+  </div>
+  <!-- Hero -->
+
+    <div class="absolute inset-0 bg-gradient-to-br from-dark-950 via-primary-950 to-dark-900"></div>
+
+    <div class="absolute inset-0 opacity-[0.04]">
+      <svg class="w-full h-full">
+        <defs>
+          <pattern
+            id="solution-grid"
+            width="80"
+            height="80"
+            patternUnits="userSpaceOnUse"
+          >
+            <path
+              d="M80 0H0V80"
+              fill="none"
+              stroke="white"
+              stroke-width="0.5"
+            />
+          </pattern>
+        </defs>
+
+        <rect width="100%" height="100%" fill="url(#solution-grid)" />
+      </svg>
+    </div>
+
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-primary-500/10 blur-[120px] rounded-full"></div>
+
+
+    <!-- Centered Hero Content -->
+    <div class="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+
+      <div class="max-w-4xl mx-auto text-center">
+
+        <div class="flex items-center justify-center gap-4 mb-7">
+          <span class="w-12 h-px bg-primary-400"></span>
+
+          <span class="text-primary-300 text-sm font-bold tracking-[0.3em]">
+            ASIN STEEL
+          </span>
+
+          <span class="w-12 h-px bg-primary-400"></span>
+        </div>
+
+
+        <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] tracking-tight">
+
+          <span class="block text-white">
+            راهکارهای تأمین
+          </span>
+
+          <span class="block text-primary-400 mt-2">
+            برای پروژه‌های شما
+          </span>
+
+        </h1>
+
+
+        <p class="mt-7 max-w-2xl mx-auto text-base sm:text-lg text-white/60 leading-8">
+          راهکارهای تخصصی ASIN STEEL برای تأمین آهن، فولاد و محصولات فلزی؛
+          از انتخاب محصول و بررسی مشخصات فنی تا استعلام، تأمین و هماهنگی پروژه.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- Wave -->
+    <div class="absolute bottom-[-1px] left-0 right-0">
+      <svg
+        viewBox="0 0 1440 80"
+        class="w-full"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M0 80 C180 55 300 28 480 24 C660 20 780 42 960 55 C1140 68 1290 68 1440 58 V80 H0Z"
+          class="fill-white dark:fill-dark-950"
+        />
+      </svg>
+    </div>
+
+  </section>
+
+
+  <!-- Solutions -->
+  <section class="bg-white dark:bg-dark-950 py-20 lg:py-28">
+
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="max-w-3xl mx-auto text-center mb-14">
+
+        <span class="text-primary-600 dark:text-primary-400 text-sm font-bold tracking-wider">
+          SOLUTIONS
+        </span>
+
+        <h2 class="mt-3 text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white">
+          راهکارهای ما
+        </h2>
+
+        <p class="mt-4 text-gray-500 dark:text-gray-400 leading-7">
+          مجموعه‌ای از خدمات و راهکارها برای ساده‌تر شدن فرآیند تأمین
+          محصولات فلزی و پاسخ‌گویی به نیاز پروژه‌ها.
+        </p>
+
+      </div>
+
+
+      <!-- Solution Cards -->
+      <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        {[
+          {
+            number: '01',
+            title: 'تأمین پروژه',
+            description: 'تأمین محصولات موردنیاز پروژه‌های ساختمانی، صنعتی و عمرانی متناسب با نیاز سفارش.'
+          },
+          {
+            number: '02',
+            title: 'مشاوره و انتخاب محصول',
+            description: 'بررسی نیاز پروژه و کمک به انتخاب محصول، مقطع و مشخصات فنی مناسب.'
+          },
+          {
+            number: '03',
+            title: 'استعلام و سفارش',
+            description: 'دریافت درخواست، بررسی مشخصات و هماهنگی برای تأمین سفارش موردنظر.'
+          },
+          {
+            number: '04',
+            title: 'استانداردها و مشخصات فنی',
+            description: 'اطلاعات مرتبط با ابعاد، گریدها، استانداردها و مشخصات محصولات.'
+          },
+          {
+            number: '05',
+            title: 'کاربرد محصولات',
+            description: 'بررسی کاربرد آهن، فولاد و مقاطع فلزی در صنایع و پروژه‌های مختلف.'
+          },
+          {
+            number: '06',
+            title: 'پشتیبانی و پاسخ‌گویی',
+            description: 'پاسخ به پرسش‌ها و همراهی در فرآیند انتخاب و تأمین محصول.'
+          }
+        ].map((solution) => (
+
+          <article
+            class="group relative p-7 rounded-2xl border border-gray-200 dark:border-dark-800 bg-gray-50 dark:bg-dark-900 hover:bg-white dark:hover:bg-dark-800 hover:border-primary-500/40 hover:-translate-y-1 transition-all duration-500"
+          >
+
+            <div class="flex items-center justify-between mb-7">
+
+              <span class="text-4xl font-black text-gray-200 dark:text-dark-700 group-hover:text-primary-500/20 transition-colors">
+                {solution.number}
+              </span>
+
+              <div class="w-11 h-11 rounded-xl bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center group-hover:bg-primary-600 transition-colors duration-300">
+
+                <svg
+                  class="w-5 h-5 text-primary-600 dark:text-primary-400 group-hover:text-white transition-colors"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.8"
+                    d="M12 3v18M3 12h18"
+                  />
+                </svg>
+
+              </div>
+
+            </div>
+
+
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white">
+              {solution.title}
+            </h3>
+
+            <p class="mt-3 text-sm text-gray-500 dark:text-gray-400 leading-7">
+              {solution.description}
+            </p>
+
+
+            <div class="absolute bottom-0 left-7 right-7 h-px bg-gradient-to-r from-transparent via-primary-500/0 to-transparent group-hover:via-primary-500/60 transition-all duration-500"></div>
+
+          </article>
+
+        ))}
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- Process -->
+  <section class="bg-gray-50 dark:bg-dark-900 py-20 lg:py-28">
+
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="max-w-2xl mx-auto text-center mb-14">
+
+        <span class="text-primary-600 dark:text-primary-400 text-sm font-bold tracking-wider">
+          OUR PROCESS
+        </span>
+
+        <h2 class="mt-3 text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white">
+          فرآیند تأمین
+        </h2>
+
+        <p class="mt-4 text-gray-500 dark:text-gray-400 leading-7">
+          مسیر ساده و شفاف از اعلام نیاز تا هماهنگی تأمین.
+        </p>
+
+      </div>
+
+
+      <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+
+        {[
+          ['01', 'اعلام نیاز', 'نیاز و مشخصات موردنظر خود را اعلام کنید.'],
+          ['02', 'بررسی', 'محصول و مشخصات موردنیاز بررسی می‌شود.'],
+          ['03', 'استعلام', 'اطلاعات تأمین و قیمت بررسی و ارائه می‌شود.'],
+          ['04', 'تأمین', 'پس از تأیید، فرآیند تأمین و هماهنگی انجام می‌شود.']
+        ].map(([number, title, description]) => (
+
+          <div class="relative text-center">
+
+            <div class="mx-auto w-14 h-14 rounded-full bg-primary-600 text-white flex items-center justify-center font-bold shadow-lg shadow-primary-600/20">
+              {number}
+            </div>
+
+            <h3 class="mt-5 font-bold text-gray-900 dark:text-white">
+              {title}
+            </h3>
+
+            <p class="mt-2 text-sm text-gray-500 dark:text-gray-400 leading-6">
+              {description}
+            </p>
+
+          </div>
+
+        ))}
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- CTA -->
+  <section class="bg-dark-950 text-white py-20">
+
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="max-w-6xl mx-auto relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary-900 to-dark-900 border border-white/10 px-6 sm:px-10 lg:px-16 py-14">
+
+        <div class="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+
+          <div class="text-center lg:text-right">
+
+            <span class="text-primary-300 text-sm font-bold">
+              ASIN STEEL
+            </span>
+
+            <h2 class="mt-3 text-3xl sm:text-4xl font-extrabold">
+              برای پروژه خود استعلام بگیرید
+            </h2>
+
+            <p class="mt-4 max-w-2xl text-white/60 leading-7">
+              مشخصات محصول یا نیاز پروژه خود را ارسال کنید تا فرآیند بررسی و تأمین آغاز شود.
+            </p>
+
+          </div>
+
+
+          <a
+            href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/contact`}
+            class="shrink-0 inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-white text-dark-950 font-bold hover:bg-primary-50 transition-colors duration-300"
+          >
+            درخواست استعلام
+
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 12h14M13 6l6 6-6 6"
+              />
+            </svg>
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</BaseLayout>
