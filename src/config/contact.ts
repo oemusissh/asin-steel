@@ -4,14 +4,14 @@
 export const CONTACT_INFO = {
   // General Inquiries
   general: {
-    email: 'contact@kantongaplikasi.com',
+    email: 'asinsteel@gmail.com',
     label: 'General Inquiries',
     description: 'For further information or clarification regarding our services, please contact us.',
   },
   
   // Technical Support
   support: {
-    email: 'support@kantongaplikasi.com',
+    email: 'support@asinsteel.com',
     label: 'Technical Support',
     description: 'For technical matters or support-related inquiries, please reach out to.',
   },
@@ -26,7 +26,7 @@ export const CONTACT_INFO = {
   // Company Info
   company: {
     name: 'Kantong Aplikasi',
-    website: 'https://kantongaplikasi.com',
+    website: 'https://asinsteel.com',
     description: 'Professional Web Development & Design',
   },
   
