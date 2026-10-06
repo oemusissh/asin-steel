@@ -5,18 +5,18 @@ import FilterSidebar from '../../components/FilterSidebar.astro';
 
 export function getStaticPaths() {
   return [
-    { params: { category: 'cement' } },
-    { params: { category: 'cement-concrete' } },
-    { params: { category: 'steel-metal' } },
-    { params: { category: 'steel-&-metal' } },
-    { params: { category: 'lumber-wood' } },
-    { params: { category: 'lumber-&-wood' } },
-    { params: { category: 'tools-equipment' } },
-    { params: { category: 'tools-&-equipment' } },
-    { params: { category: 'electrical' } },
-    { params: { category: 'plumbing' } },
-    { params: { category: 'paint' } },
-    { params: { category: 'roofing' } }
+    { params: { category: 'milgerd' } },
+    { params: { category: 'tirahan' } },
+    { params: { category: 'profile' } },
+    { params: { category: 'vargarm' } },
+    { params: { category: 'varsard' } },
+    { params: { category: 'nabshee-naodani' } },
+    { params: { category: 'loole' } },
+    { params: { category: 'tajhizat' } },
+    { params: { category: 'mahsoulat-moftoli' } },
+    { params: { category: 'shiralat' } },
+    { params: { category: 'etesalat' } },
+    { params: { category: 'foulad-aliaghi' } }
   ];
 }
 
@@ -24,65 +24,93 @@ const { category } = Astro.params;
 
 // Category data
 const categoryData: Record<string, any> = {
-  'cement': {
-    name: 'Cement & Concrete',
-    icon: '🏗️',
-    description: 'Premium cement and concrete products for all your construction needs',
-    banner: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&h=400&fit=crop',
+  'milgerd': {
+    name: 'میلگرد',
+    icon: '🔩',
+    description: 'انواع میلگرد فولادی با کیفیت بالا برای پروژه‌های ساختمانی و عمرانی',
+    banner: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=1200&h=400&fit=crop',
     totalProducts: 2450
   },
-  'cement-concrete': {
-    name: 'Cement & Concrete',
+  'tirahan': {
+    name: 'تیرآهن',
     icon: '🏗️',
-    description: 'Premium cement and concrete products for all your construction needs',
-    banner: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&h=400&fit=crop',
-    totalProducts: 2450
-  },
-  'steel-metal': {
-    name: 'Steel & Metal',
-    icon: '⚙️',
-    description: 'High-quality steel and metal materials for structural projects',
+    description: 'انواع تیرآهن فولادی مناسب برای پروژه‌های ساختمانی، عمرانی و صنعتی',
     banner: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=1200&h=400&fit=crop',
     totalProducts: 1890
   },
-  'steel-&-metal': {
-    name: 'Steel & Metal',
-    icon: '⚙️',
-    description: 'High-quality steel and metal materials for structural projects',
+  'profile': {
+    name: 'پروفیل',
+    icon: '▣',
+    description: 'انواع پروفیل فولادی ساختمانی و صنعتی در ابعاد و ضخامت‌های مختلف',
     banner: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=1200&h=400&fit=crop',
-    totalProducts: 1890
+    totalProducts: 1650
   },
-  'lumber-wood': {
-    name: 'Lumber & Wood',
-    icon: '🪵',
-    description: 'Premium lumber and wood products for construction and finishing',
-    banner: 'https://images.unsplash.com/photo-1563453392212-326f5e854473?w=1200&h=400&fit=crop',
-    totalProducts: 3200
+  'vargarm': {
+    name: 'ورق گرم',
+    icon: '📄',
+    description: 'انواع ورق گرم فولادی برای کاربردهای ساختمانی، صنعتی و تولیدی',
+    banner: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=1200&h=400&fit=crop',
+    totalProducts: 1320
   },
-  'lumber-&-wood': {
-    name: 'Lumber & Wood',
-    icon: '🪵',
-    description: 'Premium lumber and wood products for construction and finishing',
-    banner: 'https://images.unsplash.com/photo-1563453392212-326f5e854473?w=1200&h=400&fit=crop',
-    totalProducts: 3200
+  'varsard': {
+    name: 'ورق سرد',
+    icon: '📄',
+    description: 'انواع ورق سرد فولادی با کیفیت بالا برای کاربردهای صنعتی و تولیدی',
+    banner: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=1200&h=400&fit=crop',
+    totalProducts: 980
   },
-  'tools-equipment': {
-    name: 'Tools & Equipment',
-    icon: '🔨',
-    description: 'Professional tools and equipment for every construction task',
-    banner: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=1200&h=400&fit=crop',
-    totalProducts: 5600
+  'nabshee-naodani': {
+    name: 'نبشی و ناودانی',
+    icon: '📐',
+    description: 'انواع نبشی و ناودانی فولادی برای پروژه‌های ساختمانی و صنعتی',
+    banner: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=1200&h=400&fit=crop',
+    totalProducts: 860
   },
-  'tools-&-equipment': {
-    name: 'Tools & Equipment',
-    icon: '🔨',
-    description: 'Professional tools and equipment for every construction task',
-    banner: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=1200&h=400&fit=crop',
-    totalProducts: 5600
+  'loole': {
+    name: 'لوله',
+    icon: '🔧',
+    description: 'انواع لوله فولادی و صنعتی در سایزها و ضخامت‌های مختلف',
+    banner: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=1200&h=400&fit=crop',
+    totalProducts: 1240
+  },
+  'tajhizat': {
+    name: 'تجهیزات',
+    icon: '⚙️',
+    description: 'تجهیزات و ملزومات صنعتی مورد نیاز پروژه‌های فولادی و ساختمانی',
+    banner: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=1200&h=400&fit=crop',
+    totalProducts: 740
+  },
+  'mahsoulat-moftoli': {
+    name: 'محصولات مفتولی',
+    icon: '〰️',
+    description: 'انواع محصولات مفتولی فولادی برای کاربردهای ساختمانی و صنعتی',
+    banner: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=1200&h=400&fit=crop',
+    totalProducts: 620
+  },
+  'shiralat': {
+    name: 'شیرآلات',
+    icon: '🔩',
+    description: 'انواع شیرآلات صنعتی و فولادی برای کاربردهای مختلف',
+    banner: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=1200&h=400&fit=crop',
+    totalProducts: 510
+  },
+  'etesalat': {
+    name: 'اتصالات',
+    icon: '🔗',
+    description: 'انواع اتصالات فولادی و صنعتی برای سیستم‌های مختلف',
+    banner: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=1200&h=400&fit=crop',
+    totalProducts: 680
+  },
+  'foulad-aliaghi': {
+    name: 'فولاد آلیاژی',
+    icon: '⚙️',
+    description: 'انواع فولاد آلیاژی با کیفیت بالا برای کاربردهای تخصصی صنعتی',
+    banner: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=1200&h=400&fit=crop',
+    totalProducts: 430
   }
 };
 
-const currentCategory = categoryData[category || 'cement'] || categoryData['cement'];
+const currentCategory = categoryData[category || 'milgerd'] || categoryData['milgerd'];
 
 // Mock products by category
 const productsByCategory: Record<string, any[]> = {
@@ -444,7 +472,7 @@ const productsByCategory: Record<string, any[]> = {
   ]
 };
 
-const products = productsByCategory[category || 'cement'] || productsByCategory['cement'];
+const products = productsByCategory[category || 'milgerd'] || productsByCategory['steel-metal'];
 ---
 
 <BaseLayout title={`${currentCategory.name} - ASIN STEEL`} description={currentCategory.description}>

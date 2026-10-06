@@ -191,7 +191,7 @@
                 <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/products`} class="group flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-100 dark:hover:bg-dark-800 font-medium transition-all text-gray-900 dark:text-white relative">
                   <span class="absolute left-0 top-0 bottom-0 w-1 bg-primary-600 rounded-r opacity-0 group-hover:opacity-100 transition-opacity"></span>
                   <span class="text-lg">🏗️</span>
-                  <span class="text-sm"> محصولات </span>
+                  <span class="text-sm"> لیست محصولات </span>
                 </a>
               </li>
               <li style="display: block;">
@@ -338,7 +338,7 @@
         href="/asin-steel/products"
         class="flex items-center justify-center gap-1 py-2 transition-colors duration-500 ease-in-out relative"
       >
-        <span class="relative z-10">محصولات</span>
+        <span class="relative z-10">لیست محصولات</span>
 
         <svg
           class="w-4 h-4 group-hover:rotate-180 transition-transform duration-500 ease-in-out relative z-10"
@@ -360,106 +360,828 @@
       </a>
 
 
-      <!-- Products Dropdown -->
-      <div class="absolute right-0 top-full pt-3 z-[100] opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 ease-out">
 
-        <div class="w-[500px] rounded-2xl bg-white dark:bg-dark-900 border border-gray-200 dark:border-dark-700 shadow-2xl overflow-hidden">
+```astro
+<!-- Products Mega Menu -->
+<div class="absolute right-0 top-full pt-3 z-[100] opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 ease-out">
 
-          <!-- Header -->
-          <div class="px-5 py-4 border-b border-gray-200 dark:border-dark-700">
-            <div class="flex items-center gap-3">
+  <div
+    class="w-[900px] rounded-2xl bg-white dark:bg-dark-900 border border-gray-200 dark:border-dark-700 shadow-2xl overflow-hidden"
+    dir="rtl"
+  >
 
-              <div class="w-10 h-10 rounded-xl bg-primary-600 flex items-center justify-center">
-                <svg
-                  class="w-5 h-5 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.8"
-                    d="M5 20h14M7 20V8l5-4 5 4v12M9 20v-5h6v5"
-                  />
-                </svg>
-              </div>
+    <!-- Header -->
+    <div class="px-5 py-3 border-b border-gray-200 dark:border-dark-700">
+      <div class="flex items-center justify-between">
 
-              <div>
-                <h3 class="font-bold text-gray-900 dark:text-white">
-                  انواع محصولات
-                </h3>
+        <div class="flex items-center gap-3">
 
-                <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
-                  آهن، فولاد و محصولات فلزی
-                </p>
-              </div>
-
-            </div>
+          <div class="w-10 h-10 rounded-xl bg-primary-600 flex items-center justify-center text-white shrink-0">
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.8"
+                d="M20 7.5L12 3 4 7.5m16 0L12 12m8-4.5V16.5L12 21m0-9L4 7.5M12 12v9M4 7.5V16.5L12 21"
+              />
+            </svg>
           </div>
 
+          <div>
+            <h3 class="font-bold text-gray-900 dark:text-white text-sm">
+              انواع محصولات
+            </h3>
 
-          <!-- Categories -->
-          <div class="p-4 grid grid-cols-2 gap-2">
+            <p class="text-[10px] text-gray-500 dark:text-gray-400 mt-1">
+              آهن، فولاد و محصولات فلزی
+            </p>
+          </div>
 
-            {[
-              ['آهن', 'انواع محصولات آهنی'],
-              ['فولاد', 'مقاطع و محصولات فولادی'],
-              ['استیل', 'محصولات استنلس استیل'],
-              ['مس', 'محصولات و مقاطع مسی'],
-              ['آلومینیوم', 'مقاطع آلومینیومی'],
-              ['مقاطع فلزی', 'پروفیل و مقاطع مختلف'],
-            ].map(([title, description]) => (
+        </div>
 
-              <a
-                href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/products`}
-                class="group/item flex items-center gap-3 p-3 rounded-xl hover:bg-primary-50 dark:hover:bg-dark-800 transition-all duration-300"
+        <a
+          href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/products`}
+          class="text-xs font-semibold text-primary-600 dark:text-primary-400 hover:underline"
+        >
+          همه محصولات
+        </a>
+
+      </div>
+    </div>
+
+
+    <!-- Mega Menu -->
+    <div class="grid grid-cols-4 min-h-[300px]">
+
+
+      <!-- Column 1 : Categories -->
+      <div class="border-l border-gray-200 dark:border-dark-700 bg-gray-50/70 dark:bg-dark-950/40 p-3">
+
+        <div class="text-[10px] font-bold text-gray-400 mb-2 px-2">
+          دسته‌بندی
+        </div>
+
+        <div class="space-y-0.5">
+
+          {[
+            'میلگرد',
+            'تیرآهن',
+            'پروفیل',
+            'ورق گرم',
+            'ورق سرد',
+            'نبشی و ناودانی',
+            'لوله',
+            'تجهیزات',
+            'محصولات مفتولی',
+            'شیرآلات',
+            'اتصالات',
+            'فولاد آلیاژی'
+          ].map((category, index) => (
+
+            <button
+              type="button"
+              class={`mega-category w-full flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-all duration-200 ${
+                index === 0
+                  ? 'bg-primary-50 dark:bg-dark-800 text-primary-600 dark:text-primary-400'
+                  : 'text-gray-700 dark:text-gray-300 hover:bg-white dark:hover:bg-dark-800 hover:text-primary-600'
+              }`}
+              data-category={category}
+            >
+
+              <span>{category}</span>
+
+              <svg
+                class="w-3.5 h-3.5 opacity-50"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
               >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
 
-                <div class="w-9 h-9 shrink-0 rounded-lg bg-gray-100 dark:bg-dark-800 group-hover/item:bg-primary-600 flex items-center justify-center transition-all duration-300">
+            </button>
 
-                  <svg
-                    class="w-4 h-4 text-gray-500 dark:text-gray-400 group-hover/item:text-white transition-colors"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.8"
-                      d="M6 19V5M6 5h12M6 12h8M14 12v7"
-                    />
-                  </svg>
+          ))}
 
-                </div>
-
-                <div>
-                  <div class="text-sm font-bold text-gray-900 dark:text-white group-hover/item:text-primary-600 dark:group-hover/item:text-primary-400 transition-colors">
-                    {title}
-                  </div>
-
-                  <div class="text-[10px] text-gray-500 dark:text-gray-400 mt-0.5">
-                    {description}
-                  </div>
-                </div>
-
-              </a>
-
-            ))}
-
-          </div>
+        </div>
+      </div>
 
 
-          <!-- All Products -->
+      <!-- Column 2 : Types -->
+      <div class="p-3 border-l border-gray-200 dark:border-dark-700 bg-gray-50/30 dark:bg-dark-950/20">
+
+        <div class="text-[10px] font-bold text-gray-400 mb-2 px-2">
+          انواع محصول
+        </div>
+
+        <div id="mega-types" class="space-y-0.5">
+          <!-- Dynamic -->
+        </div>
+
+      </div>
+
+
+      <!-- Column 3 : Main Options -->
+      <div class="p-3 border-l border-gray-200 dark:border-dark-700 bg-gray-50/20 dark:bg-dark-950/10">
+
+        <div class="text-[10px] font-bold text-gray-400 mb-2 px-2">
+          انتخاب سریع
+        </div>
+
+        <div id="mega-options" class="space-y-0.5">
+          <!-- Dynamic -->
+        </div>
+
+      </div>
+
+
+      <!-- Column 4 : Dynamic Content -->
+      <div class="p-3">
+
+        <div
+          id="mega-detail-title"
+          class="text-[10px] font-bold text-gray-400 mb-2 px-2"
+        >
+          سایزهای منتخب
+        </div>
+
+        <div id="mega-detail" class="space-y-0.5">
+          <!-- Dynamic -->
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Bottom -->
+    <a
+      href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/products`}
+      class="flex items-center justify-center gap-2 px-5 py-3 border-t border-gray-200 dark:border-dark-700 text-xs font-bold text-primary-600 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-dark-800 transition-colors"
+    >
+
+      مشاهده همه محصولات
+
+      <svg
+        class="w-3.5 h-3.5"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M5 12h14M13 6l6 6-6 6"
+        />
+      </svg>
+
+    </a>
+
+  </div>
+</div>
+
+
+<style>
+
+  /* ================================
+     Column 2
+     ================================ */
+
+  .mega-type-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 34px;
+    transition: all 0.2s ease;
+  }
+
+  .mega-type-item:hover {
+    transform: translateX(-1px);
+  }
+
+
+  /* ================================
+     Column 3
+     ================================ */
+
+  .mega-option {
+    box-sizing: border-box;
+
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+
+    width: 100%;
+    height: 34px;
+    min-height: 34px;
+
+    margin: 0;
+    padding: 0 12px;
+
+    border: 0;
+    border-radius: 8px;
+    outline: none;
+
+    background: transparent;
+
+    font-family: inherit;
+    font-size: 11px;
+    line-height: 1;
+    font-weight: 500;
+
+    color: rgb(75 85 99);
+
+    text-align: right;
+    cursor: pointer;
+
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease,
+      transform 0.2s ease,
+      font-weight 0.2s ease;
+  }
+
+  .mega-option span {
+    display: block;
+    min-width: 0;
+
+    text-align: right;
+
+    white-space: nowrap;
+  }
+
+  .mega-option svg {
+    display: block;
+
+    width: 14px;
+    height: 14px;
+
+    flex-shrink: 0;
+
+    justify-self: start;
+
+    opacity: 0.5;
+  }
+
+  .mega-option:hover,
+  .mega-option.active {
+    background: rgb(239 246 255);
+    color: rgb(37 99 235);
+    font-weight: 700;
+    transform: translateX(-1px);
+  }
+
+  .dark .mega-option {
+    color: rgb(209 213 219);
+  }
+
+  .dark .mega-option:hover,
+  .dark .mega-option.active {
+    background: rgb(31 41 55);
+    color: rgb(96 165 250);
+    font-weight: 700;
+  }
+
+
+  /* ================================
+     Column 4
+     ================================ */
+
+  .mega-detail-link,
+  .mega-detail-item {
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    min-height: 34px;
+
+    margin: 0;
+    padding: 0 12px;
+
+    border-radius: 8px;
+
+    font-size: 11px;
+    line-height: 1;
+    font-weight: 500;
+
+    color: rgb(75 85 99);
+
+    background: transparent;
+    border: 0;
+
+    transition: all 0.2s ease;
+  }
+
+  .mega-detail-link span,
+  .mega-detail-item span {
+    min-width: 0;
+    text-align: right;
+  }
+
+  .mega-detail-link svg,
+  .mega-detail-item svg {
+    display: block;
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    opacity: 0.5;
+  }
+
+  .mega-detail-link:hover,
+  .mega-detail-item:hover {
+    background: rgb(239 246 255);
+    color: rgb(37 99 235);
+    font-weight: 700;
+    transform: translateX(-1px);
+  }
+
+  .dark .mega-detail-link,
+  .dark .mega-detail-item {
+    color: rgb(209 213 219);
+  }
+
+  .dark .mega-detail-link:hover,
+  .dark .mega-detail-item:hover {
+    background: rgb(31 41 55);
+    color: rgb(96 165 250);
+    font-weight: 700;
+  }
+
+</style>
+
+
+<script>
+
+  const megaData = {
+
+    'میلگرد': {
+      types: [
+        'میلگرد آجدار',
+        'میلگرد ساده',
+        'میلگرد کلاف'
+      ],
+
+      selectedSizes: [
+        '12',
+        '14',
+        '16',
+        '18',
+        '20',
+        '22',
+        '25',
+        '28',
+        '32'
+      ],
+
+      selectedFactories: [
+        'ذوب‌آهن اصفهان',
+        'فولاد خراسان',
+        'فولاد کویر',
+        'فولاد آذربایجان'
+      ],
+
+      allFactories: [
+        'ذوب‌آهن اصفهان',
+        'فولاد خراسان',
+        'فولاد کویر',
+        'فولاد آذربایجان',
+        'فولاد میانه',
+        'فولاد بافق',
+        'فولاد نیشابور',
+        'فولاد ارگ'
+      ]
+    },
+
+
+    'تیرآهن': {
+      types: [
+        'تیرآهن IPE',
+        'تیرآهن INP',
+        'تیرآهن IPB / H'
+      ],
+
+      selectedSizes: [
+        '12',
+        '14',
+        '16',
+        '18',
+        '20',
+        '22',
+        '24',
+        '27',
+        '30'
+      ],
+
+      selectedFactories: [
+        'ذوب‌آهن اصفهان',
+        'فایکو',
+        'آریان فولاد'
+      ],
+
+      allFactories: [
+        'ذوب‌آهن اصفهان',
+        'فایکو',
+        'آریان فولاد',
+        'ظفر بناب',
+        'نورد فولاد یزد',
+        'فولاد ناب تبریز'
+      ]
+    },
+
+
+    'پروفیل': {
+      types: [
+        'پروفیل ساختمانی',
+        'پروفیل صنعتی',
+        'قوطی'
+      ],
+
+      selectedSizes: [
+        '20×20',
+        '30×30',
+        '40×40',
+        '50×50',
+        '60×60',
+        '80×80'
+      ],
+
+      selectedFactories: [
+        'صنعتی نیکان',
+        'صدرا پروفیل',
+        'یاران'
+      ],
+
+      allFactories: [
+        'صنعتی نیکان',
+        'صدرا پروفیل',
+        'یاران',
+        'پروفیل ساوه',
+        'نورد و پروفیل تهران'
+      ]
+    },
+
+
+    'ورق گرم': {
+      types: [
+        'ورق سیاه',
+        'ورق آجدار',
+        'ورق صنعتی'
+      ],
+
+      selectedSizes: [
+        '2mm',
+        '3mm',
+        '4mm',
+        '5mm',
+        '6mm',
+        '8mm',
+        '10mm'
+      ],
+
+      selectedFactories: [
+        'فولاد مبارکه',
+        'فولاد اکسین',
+        'فولاد گیلان'
+      ],
+
+      allFactories: [
+        'فولاد مبارکه',
+        'فولاد اکسین',
+        'فولاد گیلان',
+        'فولاد کاویان',
+        'فولاد سبا'
+      ]
+    },
+
+
+    'ورق سرد': {
+      types: [
+        'ورق روغنی',
+        'ورق گالوانیزه',
+        'ورق رنگی'
+      ],
+
+      selectedSizes: [
+        '0.5mm',
+        '0.6mm',
+        '0.7mm',
+        '0.8mm',
+        '1mm',
+        '1.5mm'
+      ],
+
+      selectedFactories: [
+        'فولاد مبارکه',
+        'فولاد غرب آسیا',
+        'هفت الماس'
+      ],
+
+      allFactories: [
+        'فولاد مبارکه',
+        'فولاد غرب آسیا',
+        'هفت الماس',
+        'فولاد امیرکبیر',
+        'فولاد تاراز'
+      ]
+    },
+
+
+    'نبشی و ناودانی': {
+      types: [
+        'نبشی',
+        'ناودانی UPN',
+        'ناودانی UPE'
+      ],
+
+      selectedSizes: [
+        '4',
+        '5',
+        '6',
+        '8',
+        '10',
+        '12',
+        '14'
+      ],
+
+      selectedFactories: [
+        'ناب تبریز',
+        'فولاد شکفته',
+        'ذوب‌آهن اصفهان'
+      ],
+
+      allFactories: [
+        'ناب تبریز',
+        'فولاد شکفته',
+        'ذوب‌آهن اصفهان',
+        'آریان فولاد',
+        'فولاد البرز ایرانیان'
+      ]
+    },
+
+
+    'لوله': {
+      types: [
+        'لوله صنعتی',
+        'لوله داربستی',
+        'لوله گالوانیزه'
+      ],
+
+      selectedSizes: [
+        '1/2"',
+        '1"',
+        '2"',
+        '3"',
+        '4"',
+        '6"'
+      ],
+
+      selectedFactories: [
+        'گروه صنعتی سپاهان',
+        'لوله و پروفیل سپنتا',
+        'نورد و لوله اهواز'
+      ],
+
+      allFactories: [
+        'گروه صنعتی سپاهان',
+        'لوله و پروفیل سپنتا',
+        'نورد و لوله اهواز',
+        'لوله دقیق کاوه',
+        'لوله‌سازی اهواز'
+      ]
+    },
+
+
+    'تجهیزات': {
+      types: [
+        'تجهیزات صنعتی',
+        'تجهیزات ساختمانی'
+      ],
+
+      selectedSizes: [
+        'استاندارد',
+        'سفارشی'
+      ],
+
+      selectedFactories: [
+        'تأمین‌کننده منتخب ۱',
+        'تأمین‌کننده منتخب ۲'
+      ],
+
+      allFactories: [
+        'تأمین‌کننده منتخب ۱',
+        'تأمین‌کننده منتخب ۲',
+        'تأمین‌کننده منتخب ۳'
+      ]
+    },
+
+
+    'محصولات مفتولی': {
+      types: [
+        'سیم مفتول',
+        'توری',
+        'سیم آرماتوربندی'
+      ],
+
+      selectedSizes: [
+        '1.5',
+        '2',
+        '2.5',
+        '3',
+        '4'
+      ],
+
+      selectedFactories: [
+        'فولاد نوین',
+        'تولیدکننده منتخب ۲'
+      ],
+
+      allFactories: [
+        'فولاد نوین',
+        'تولیدکننده منتخب ۲',
+        'تولیدکننده منتخب ۳'
+      ]
+    },
+
+
+    'شیرآلات': {
+      types: [
+        'شیر کشویی',
+        'شیر پروانه‌ای',
+        'شیر یک‌طرفه'
+      ],
+
+      selectedSizes: [
+        '1"',
+        '2"',
+        '3"',
+        '4"',
+        '6"',
+        '8"'
+      ],
+
+      selectedFactories: [
+        'کیز ایران',
+        'میراب',
+        'سگال'
+      ],
+
+      allFactories: [
+        'کیز ایران',
+        'میراب',
+        'سگال',
+        'وگ ایران',
+        'برندهای دیگر'
+      ]
+    },
+
+
+    'اتصالات': {
+      types: [
+        'فلنج',
+        'زانو',
+        'سه‌راهی',
+        'تبدیل'
+      ],
+
+      selectedSizes: [
+        '1/2"',
+        '1"',
+        '2"',
+        '3"',
+        '4"',
+        '6"'
+      ],
+
+      selectedFactories: [
+        'اتصالات گاز ایران',
+        'تولیدکننده منتخب ۲'
+      ],
+
+      allFactories: [
+        'اتصالات گاز ایران',
+        'تولیدکننده منتخب ۲',
+        'تولیدکننده منتخب ۳'
+      ]
+    },
+
+
+    'فولاد آلیاژی': {
+      types: [
+        'فولاد کربنی',
+        'فولاد آلیاژی',
+        'فولاد ابزار'
+      ],
+
+      selectedSizes: [
+        'گرد',
+        'شش‌گوش',
+        'تسمه',
+        'چهارگوش'
+      ],
+
+      selectedFactories: [
+        'فولاد آلیاژی ایران',
+        'اسفراین',
+        'فولاد آلیاژی پاسارگاد'
+      ],
+
+      allFactories: [
+        'فولاد آلیاژی ایران',
+        'اسفراین',
+        'فولاد آلیاژی پاسارگاد',
+        'فولاد آلیاژی اصفهان'
+      ]
+    }
+
+  };
+
+
+  const baseUrl =
+    `${import.meta.env.BASE_URL.replace(/\/$/, '')}`;
+
+
+  const typeContainer =
+    document.getElementById('mega-types');
+
+  const optionsContainer =
+    document.getElementById('mega-options');
+
+  const detailContainer =
+    document.getElementById('mega-detail');
+
+  const detailTitle =
+    document.getElementById('mega-detail-title');
+
+  const categoryButtons =
+    document.querySelectorAll('.mega-category');
+
+
+  let currentCategory = 'میلگرد';
+  let currentOption = 'sizes';
+
+
+  function renderDetail(category, option) {
+
+    const data = megaData[category];
+
+    if (!data) return;
+
+
+    let title = '';
+    let items = [];
+
+
+    if (option === 'sizes') {
+
+      title = 'سایزهای منتخب';
+      items = data.selectedSizes;
+
+    } else if (option === 'factories') {
+
+      title = 'کارخانه‌های منتخب';
+      items = data.selectedFactories;
+
+    } else if (option === 'all-factories') {
+
+      title = `همه کارخانه‌های ${category}`;
+      items = data.allFactories;
+
+    }
+
+
+    detailTitle.textContent = title;
+
+
+    if (option === 'sizes') {
+
+      detailContainer.className =
+        'space-y-0.5';
+
+      detailContainer.innerHTML = items
+        .map(item => `
           <a
-            href="/asin-steel/products"
-            class="flex items-center justify-center gap-2 px-5 py-3 border-t border-gray-200 dark:border-dark-700 text-sm font-semibold text-primary-600 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-dark-800 transition-colors duration-300"
+            href="${baseUrl}/products"
+            class="mega-detail-item"
           >
-            مشاهده همه محصولات
+            <span>${item}</span>
 
             <svg
-              class="w-4 h-4"
+              class="w-3.5 h-3.5 opacity-50 shrink-0"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -468,15 +1190,289 @@
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
-                d="M5 12h14M13 6l6 6-6 6"
+                d="M9 5l7 7-7 7"
               />
             </svg>
           </a>
+        `)
+        .join('');
 
-        </div>
-      </div>
+    } else {
 
-    </li>
+      detailContainer.className =
+        'space-y-0.5';
+
+      detailContainer.innerHTML = items
+        .map(item => `
+          <a
+            href="${baseUrl}/products"
+            class="mega-detail-link"
+          >
+            <span>${item}</span>
+
+            <svg
+              class="w-3.5 h-3.5 opacity-50 shrink-0"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </a>
+        `)
+        .join('');
+
+    }
+
+  }
+
+
+  function renderOptions(category) {
+
+    const data = megaData[category];
+
+    if (!data) return;
+
+
+    optionsContainer.innerHTML = `
+
+      <button
+        type="button"
+        class="mega-option"
+        data-option="sizes"
+      >
+        <span>سایزهای منتخب</span>
+
+        <svg
+          class="w-3.5 h-3.5 opacity-50 shrink-0"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 5l7 7-7 7"
+          />
+        </svg>
+      </button>
+
+
+      <button
+        type="button"
+        class="mega-option"
+        data-option="factories"
+      >
+        <span>کارخانه‌های منتخب</span>
+
+        <svg
+          class="w-3.5 h-3.5 opacity-50 shrink-0"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 5l7 7-7 7"
+          />
+        </svg>
+      </button>
+
+
+      <button
+        type="button"
+        class="mega-option"
+        data-option="all-factories"
+      >
+        <span>همه کارخانه‌های ${category}</span>
+
+        <svg
+          class="w-3.5 h-3.5 opacity-50 shrink-0"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 5l7 7-7 7"
+          />
+        </svg>
+      </button>
+
+    `;
+
+
+    const optionButtons =
+      optionsContainer.querySelectorAll('.mega-option');
+
+
+    optionButtons.forEach(button => {
+
+      button.addEventListener(
+        'mouseenter',
+        () => {
+
+          const option =
+            button.dataset.option;
+
+          currentOption = option;
+
+          optionButtons.forEach(item => {
+            item.classList.remove('active');
+          });
+
+          button.classList.add('active');
+
+          renderDetail(
+            currentCategory,
+            currentOption
+          );
+
+        }
+      );
+
+    });
+
+
+    const firstOption =
+      optionsContainer.querySelector(
+        '[data-option="sizes"]'
+      );
+
+    if (firstOption) {
+      firstOption.classList.add('active');
+    }
+
+    currentOption = 'sizes';
+
+    renderDetail(
+      currentCategory,
+      currentOption
+    );
+
+  }
+
+
+  function updateMegaMenu(category) {
+
+    const data = megaData[category];
+
+    if (!data) return;
+
+
+    currentCategory = category;
+
+
+    /* Column 2 */
+
+    typeContainer.innerHTML =
+      data.types
+        .map(item => `
+          <a
+            href="${baseUrl}/products"
+            class="mega-type-item w-full flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-dark-800 hover:text-primary-600 dark:hover:text-primary-400 transition-all duration-200"
+          >
+
+            <span>${item}</span>
+
+            <svg
+              class="w-3.5 h-3.5 opacity-50"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+
+          </a>
+        `)
+        .join('');
+
+
+    /* Column 3 */
+
+    renderOptions(category);
+
+
+    /* Active Category */
+
+    categoryButtons.forEach(button => {
+
+      const isActive =
+        button.dataset.category === category;
+
+
+      button.classList.toggle(
+        'bg-primary-50',
+        isActive
+      );
+
+      button.classList.toggle(
+        'dark:bg-dark-800',
+        isActive
+      );
+
+      button.classList.toggle(
+        'text-primary-600',
+        isActive
+      );
+
+      button.classList.toggle(
+        'dark:text-primary-400',
+        isActive
+      );
+
+
+      if (!isActive) {
+
+        button.classList.remove(
+          'bg-primary-50',
+          'dark:bg-dark-800',
+          'text-primary-600',
+          'dark:text-primary-400'
+        );
+
+      }
+
+    });
+
+  }
+
+
+  categoryButtons.forEach(button => {
+
+    button.addEventListener(
+      'mouseenter',
+      () => {
+
+        updateMegaMenu(
+          button.dataset.category
+        );
+
+      }
+    );
+
+  });
+
+
+  updateMegaMenu('میلگرد');
+
+</script>
 
 
     <!-- راهکارها -->
