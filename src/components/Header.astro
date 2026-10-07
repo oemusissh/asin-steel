@@ -3,86 +3,104 @@
 
 <header class="sticky top-0 z-50 bg-white/85 dark:bg-dark-900/85 backdrop-blur-xl border-b border-gray-200/50 dark:border-dark-800/50 transition-all duration-500 ease-in-out shadow-sm hover:shadow-md">
 
-  <!-- Live Market Ticker -->
-<div dir="rtl" class="flex-1 min-w-0 overflow-hidden">
-  <div class="relative overflow-hidden whitespace-nowrap">
+  <!-- Top Bar - Mobile Optimized -->
+  <div class="bg-primary-600 dark:bg-primary-700 text-white py-2 text-xs sm:text-sm">
+    <div class="container mx-auto px-4 flex items-center gap-4">
 
-    <div class="live-market-ticker inline-flex items-center gap-6">
-
-      <!-- عنوان -->
-      <div class="flex items-center gap-2 shrink-0 font-bold">
-        <span class="relative flex h-2 w-2">
-          <span class="absolute inline-flex h-full w-full rounded-full bg-emerald-300 opacity-75 animate-ping"></span>
-          <span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-300"></span>
-        </span>
-        <span>بازار زنده</span>
+      <!-- Contact Info -->
+      <div class="flex items-center gap-2 sm:gap-4 shrink-0">
+        <span class="hidden sm:inline">📞 +62 813-9244-2358</span>
+        <span class="sm:hidden">📞 Call Us</span>
+        <span class="hidden md:inline">✉️ asinsteel@gmail.com</span>
       </div>
 
-      <span class="opacity-40">|</span>
+      <!-- Live Market News Ticker -->
+      <div dir="rtl" class="flex-1 min-w-0 overflow-hidden">
+        <div class="overflow-hidden whitespace-nowrap">
 
-      <!-- دلار -->
-      <div class="flex items-center gap-1.5 shrink-0">
-        <span class="opacity-70">دلار آزاد:</span>
-        <strong class="text-emerald-200">۹۴,۵۰۰</strong>
-        <span class="opacity-60">تومان</span>
-        <span class="text-emerald-200">▲</span>
+          <div class="live-market-ticker inline-flex items-center gap-5">
+
+            <!-- Title -->
+            <div class="flex items-center gap-2 shrink-0 font-bold">
+              <span class="relative flex h-2 w-2">
+                <span class="absolute inline-flex h-full w-full rounded-full bg-emerald-300 opacity-75 animate-ping"></span>
+                <span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-300"></span>
+              </span>
+              <span>بازار زنده</span>
+            </div>
+
+            <span class="opacity-40">|</span>
+
+            <!-- Dollar -->
+            <div class="flex items-center gap-1.5 shrink-0">
+              <span class="opacity-70">دلار آزاد:</span>
+              <strong class="text-emerald-200">۹۴,۵۰۰</strong>
+              <span class="opacity-60">تومان</span>
+              <span class="text-emerald-200">▲</span>
+            </div>
+
+            <span class="opacity-40">|</span>
+
+            <!-- Steel Billet -->
+            <div class="flex items-center gap-1.5 shrink-0">
+              <span class="opacity-70">شمش فولاد:</span>
+              <strong class="text-red-200">۲۸,۴۰۰</strong>
+              <span class="opacity-60">تومان</span>
+              <span class="text-red-200">▼</span>
+            </div>
+
+            <span class="opacity-40">|</span>
+
+            <!-- I-Beam -->
+            <div class="flex items-center gap-1.5 shrink-0">
+              <span class="opacity-70">تیرآهن ذوب‌آهن:</span>
+              <strong class="text-emerald-200">۳۶,۲۰۰</strong>
+              <span class="opacity-60">تومان</span>
+              <span class="text-emerald-200">▲</span>
+            </div>
+
+            <span class="opacity-40">|</span>
+
+            <!-- Rebar -->
+            <div class="flex items-center gap-1.5 shrink-0">
+              <span class="opacity-70">میلگرد A3:</span>
+              <strong class="text-emerald-200">۳۲,۴۰۰</strong>
+              <span class="opacity-60">تومان</span>
+              <span class="text-emerald-200">▲</span>
+            </div>
+
+            <span class="opacity-40">|</span>
+
+            <!-- Sheet -->
+            <div class="flex items-center gap-1.5 shrink-0">
+              <span class="opacity-70">ورق سیاه:</span>
+              <strong class="text-red-200">۴۱,۸۰۰</strong>
+              <span class="opacity-60">تومان</span>
+              <span class="text-red-200">▼</span>
+            </div>
+
+          </div>
+
+        </div>
       </div>
 
-      <span class="opacity-40">|</span>
+      <!-- Top Links -->
+      <div class="flex items-center gap-2 sm:gap-4 shrink-0">
+        <a
+          href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/track-order`}
+          class="hover:text-primary-200 transition-colors"
+        >
+          Track
+        </a>
 
-      <!-- شمش -->
-      <div class="flex items-center gap-1.5 shrink-0">
-        <span class="opacity-70">شمش فولاد:</span>
-        <strong class="text-red-200">۲۸,۴۰۰</strong>
-        <span class="opacity-60">تومان</span>
-        <span class="text-red-200">▼</span>
+        <a
+          href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/help`}
+          class="hover:text-primary-200 transition-colors"
+        >
+          Help
+        </a>
       </div>
 
-      <span class="opacity-40">|</span>
-
-      <!-- تیرآهن -->
-      <div class="flex items-center gap-1.5 shrink-0">
-        <span class="opacity-70">تیرآهن ذوب‌آهن:</span>
-        <strong class="text-emerald-200">۳۶,۲۰۰</strong>
-        <span class="opacity-60">تومان</span>
-        <span class="text-emerald-200">▲</span>
-      </div>
-
-      <span class="opacity-40">|</span>
-
-      <!-- میلگرد -->
-      <div class="flex items-center gap-1.5 shrink-0">
-        <span class="opacity-70">میلگرد A3:</span>
-        <strong class="text-emerald-200">۳۲,۴۰۰</strong>
-        <span class="opacity-60">تومان</span>
-        <span class="text-emerald-200">▲</span>
-      </div>
-
-      <span class="opacity-40">|</span>
-
-      <!-- ورق -->
-      <div class="flex items-center gap-1.5 shrink-0">
-        <span class="opacity-70">ورق سیاه:</span>
-        <strong class="text-red-200">۴۱,۸۰۰</strong>
-        <span class="opacity-60">تومان</span>
-        <span class="text-red-200">▼</span>
-      </div>
-
-      <span class="opacity-40">|</span>
-
-      <!-- بروزرسانی -->
-      <div class="flex items-center gap-2 shrink-0 opacity-70">
-        <span>آخرین بروزرسانی: امروز</span>
-      </div>
-
-    </div>
-
-  </div>
-</div>
-      <div class="flex items-center gap-2 sm:gap-4">
-        <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/track-order`} class="hover:underline transition-all duration-300">Track</a>
-        <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/help`} class="hover:underline transition-all duration-300">Help</a>
-      </div>
     </div>
   </div>
 
