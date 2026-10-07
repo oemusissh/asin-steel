@@ -103,7 +103,27 @@
 
     </div>
   </div>
+<style>
+  .live-market-ticker {
+    display: inline-flex;
+    animation: marketTicker 25s linear infinite;
+    white-space: nowrap;
+  }
 
+  .live-market-ticker:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes marketTicker {
+    from {
+      transform: translateX(100%);
+    }
+
+    to {
+      transform: translateX(-100%);
+    }
+  }
+</style>
   <!-- Main Header - Mobile Optimized -->
   <div class="container mx-auto px-4 py-3 sm:py-4">
     <div dir="rtl" class="flex items-center justify-between gap-2 sm:gap-4">
