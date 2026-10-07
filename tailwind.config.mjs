@@ -6,7 +6,7 @@ export default {
     extend: {
       fontFamily: {
       sans: ['Estedad', 'sans-serif'],
-    },
+      },
       colors: {
         primary: {
           50: '#eff6ff',
