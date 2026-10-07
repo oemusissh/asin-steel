@@ -119,18 +119,27 @@ const categories = [
 >
   <main class="price-page" dir="rtl">
 
-    <!-- HERO -->
+    <!-- =========================================
+         HERO
+    ========================================== -->
+
     <section class="price-hero">
+
       <div class="hero-grid"></div>
-      <div class="hero-glow"></div>
+
+      <div class="hero-glow hero-glow-one"></div>
+      <div class="hero-glow hero-glow-two"></div>
+
+      <div class="hero-scan"></div>
 
       <div class="container hero-container">
 
         <div class="hero-content">
 
-          <div class="hero-topline">
-            <span class="status-dot"></span>
-            <span>مرکز استعلام قیمت فولاد</span>
+          <div class="hero-badge">
+            <span class="pulse-dot"></span>
+            <span>مرکز آنلاین قیمت آهن و فولاد</span>
+            <span class="badge-arrow">←</span>
           </div>
 
           <h1>
@@ -139,86 +148,152 @@ const categories = [
           </h1>
 
           <p>
-            بررسی قیمت میلگرد، تیرآهن، ورق، پروفیل و سایر مقاطع
-            فولادی از کارخانه‌های معتبر کشور.
+            قیمت لحظه‌ای و به‌روز میلگرد، تیرآهن، ورق، پروفیل
+            و سایر محصولات فولادی از معتبرترین کارخانه‌های کشور.
           </p>
 
-          <div class="hero-info">
+          <div class="hero-actions">
 
-            <div class="info-item">
-              <span class="info-label">آخرین بروزرسانی</span>
-              <strong>امروز، ۱۲:۳۰</strong>
+            <a href="#price-table" class="hero-main-btn">
+              مشاهده قیمت‌ها
+              <span>↓</span>
+            </a>
+
+            <div class="hero-update">
+              <span class="update-dot"></span>
+
+              <div>
+                <small>آخرین بروزرسانی</small>
+                <strong>امروز، ۱۲:۳۰</strong>
+              </div>
             </div>
 
-            <div class="info-divider"></div>
+          </div>
 
-            <div class="info-item">
-              <span class="info-label">واحد قیمت</span>
-              <strong>تومان / کیلوگرم</strong>
+          <div class="hero-stats">
+
+            <div class="hero-stat">
+              <strong>+۱۲۰</strong>
+              <span>محصول فولادی</span>
             </div>
 
-            <div class="info-divider"></div>
+            <div class="stat-line"></div>
 
-            <div class="info-item">
-              <span class="info-label">وضعیت بازار</span>
-              <strong class="market-status">
-                <span></span>
-                فعال
-              </strong>
+            <div class="hero-stat">
+              <strong>+۳۰</strong>
+              <span>کارخانه معتبر</span>
+            </div>
+
+            <div class="stat-line"></div>
+
+            <div class="hero-stat">
+              <strong>روزانه</strong>
+              <span>بروزرسانی قیمت</span>
             </div>
 
           </div>
 
         </div>
 
-        <div class="hero-visual">
-          <div class="visual-ring ring-one"></div>
-          <div class="visual-ring ring-two"></div>
-          <div class="visual-ring ring-three"></div>
 
-          <div class="visual-center">
-            <span>ASIN</span>
-            <strong>STILL</strong>
+        <!-- HERO VISUAL -->
+
+        <div class="hero-visual">
+
+          <div class="visual-orbit orbit-one"></div>
+          <div class="visual-orbit orbit-two"></div>
+          <div class="visual-orbit orbit-three"></div>
+
+          <div class="steel-symbol">
+
+            <div class="symbol-lines">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+
+            <div class="symbol-text">
+              <small>ASIN</small>
+              <strong>STILL</strong>
+            </div>
+
           </div>
 
-          <div class="visual-line line-one"></div>
-          <div class="visual-line line-two"></div>
+          <div class="floating-card card-price">
+
+            <span class="mini-label">قیمت بازار</span>
+
+            <strong>
+              ۳۲,۴۰۰
+              <small>تومان</small>
+            </strong>
+
+            <span class="up-small">▲ ۰.۸٪</span>
+
+          </div>
+
+          <div class="floating-card card-market">
+
+            <span class="market-icon">↗</span>
+
+            <div>
+              <small>وضعیت بازار</small>
+              <strong>فعال</strong>
+            </div>
+
+          </div>
+
+          <div class="visual-cross cross-one"></div>
+          <div class="visual-cross cross-two"></div>
+
         </div>
 
       </div>
     </section>
 
 
-    <!-- MAIN -->
+    <!-- =========================================
+         MAIN
+    ========================================== -->
+
     <section class="price-section">
+
       <div class="container">
 
-        <!-- FILTER BOX -->
+        <!-- FILTERS -->
+
         <div class="filters-card">
 
-          <div class="search-box">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <circle cx="11" cy="11" r="7"></circle>
-              <path d="m20 20-3.5-3.5"></path>
-            </svg>
+          <div class="filter-search">
+
+            <div class="search-icon">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="11" cy="11" r="7"></circle>
+                <path d="m20 20-3.5-3.5"></path>
+              </svg>
+            </div>
 
             <input
               id="productSearch"
               type="text"
               placeholder="جستجوی محصول، سایز یا کارخانه..."
             />
+
+            <kbd>Ctrl K</kbd>
+
           </div>
 
-          <div class="factory-box">
 
-            <span class="filter-label">کارخانه</span>
+          <div class="factory-filter">
+
+            <span class="select-label">انتخاب کارخانه</span>
 
             <select id="factoryFilter">
               <option value="all">همه کارخانه‌ها</option>
@@ -229,146 +304,246 @@ const categories = [
               <option value="فولاد ناب تبریز">فولاد ناب تبریز</option>
             </select>
 
+            <span class="select-arrow">⌄</span>
+
           </div>
 
         </div>
 
 
-        <!-- CATEGORIES -->
-        <div class="categories" id="categories">
+        <!-- CATEGORY FILTER -->
 
-          {categories.map((category, index) => (
-            <button
-              class:list={[
-                "category-btn",
-                { active: index === 0 },
-              ]}
-              data-category={category.id}
-            >
-              {category.title}
-            </button>
-          ))}
+        <div class="category-wrapper">
+
+          <div class="category-title">
+            <span class="category-title-line"></span>
+            دسته‌بندی محصولات
+          </div>
+
+          <div class="categories" id="categories">
+
+            {categories.map((category, index) => (
+              <button
+                class:list={[
+                  "category-btn",
+                  { active: index === 0 },
+                ]}
+                data-category={category.id}
+              >
+                {category.title}
+
+                {index === 0 && (
+                  <span class="category-count">
+                    ۹
+                  </span>
+                )}
+              </button>
+            ))}
+
+          </div>
 
         </div>
 
 
-        <!-- TABLE -->
-        <div class="table-card">
+        <!-- =========================================
+             TABLE
+        ========================================== -->
+
+        <div class="table-card" id="price-table">
 
           <div class="table-header">
 
-            <div>
-              <div class="section-kicker">
-                <span></span>
-                لیست قیمت
+            <div class="table-heading">
+
+              <div class="heading-icon">
+
+                <svg
+                  width="23"
+                  height="23"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <path d="M4 19V5"></path>
+                  <path d="M4 19h16"></path>
+                  <path d="m7 15 3-4 3 2 5-7"></path>
+                </svg>
+
               </div>
 
-              <h2>قیمت روز محصولات فولادی</h2>
+              <div>
 
-              <p>
-                <strong id="productCount">۹</strong>
-                محصول در جدول نمایش داده می‌شود
-              </p>
+                <div class="heading-kicker">
+                  <span></span>
+                  بازار فولاد
+                </div>
+
+                <h2>قیمت روز محصولات</h2>
+
+                <p>
+                  آخرین قیمت‌های ثبت‌شده در بازار
+                </p>
+
+              </div>
+
             </div>
 
-            <div class="live-badge">
-              <span></span>
-              بروزرسانی آنلاین
+
+            <div class="table-status">
+
+              <span class="status-live-dot"></span>
+
+              <div>
+                <small>وضعیت</small>
+                <strong>بروزرسانی فعال</strong>
+              </div>
+
             </div>
 
           </div>
 
+
+          <!-- TABLE -->
 
           <div class="table-scroll">
 
             <table>
 
               <thead>
+
                 <tr>
                   <th>محصول</th>
                   <th>کارخانه</th>
                   <th>مشخصات</th>
                   <th>قیمت</th>
-                  <th>روند</th>
-                  <th>تحویل</th>
-                  <th>استعلام</th>
+                  <th>روند بازار</th>
+                  <th>محل تحویل</th>
+                  <th>عملیات</th>
                 </tr>
+
               </thead>
+
 
               <tbody id="productRows">
 
                 {products.map((product) => (
+
                   <tr
                     data-category={product.category}
                     data-factory={product.factory}
                     data-name={product.name}
                   >
 
+                    <!-- PRODUCT -->
+
                     <td>
+
                       <div class="product-name">
 
                         <div class={`product-icon icon-${product.category}`}>
+
                           {product.category === "rebar" && "میل"}
                           {product.category === "beam" && "تیر"}
                           {product.category === "sheet" && "ورق"}
                           {product.category === "profile" && "پروف"}
                           {product.category === "angle" && "نبش"}
+
                         </div>
 
                         <div class="product-title">
-                          <strong>{product.name}</strong>
-                          <small>{product.categoryName}</small>
+
+                          <strong>
+                            {product.name}
+                          </strong>
+
+                          <small>
+                            {product.categoryName}
+                          </small>
+
                         </div>
 
                       </div>
+
                     </td>
 
 
+                    <!-- FACTORY -->
+
                     <td>
+
                       <div class="factory-name">
-                        <span class="factory-mark"></span>
+
+                        <span class="factory-logo">
+                          <span></span>
+                        </span>
+
                         {product.factory}
+
                       </div>
+
                     </td>
 
 
+                    <!-- SPECIFICATIONS -->
+
                     <td>
+
                       <div class="unit-info">
-                        <strong>{product.unit}</strong>
-                        <span>{product.weight}</span>
+
+                        <strong>
+                          {product.unit}
+                        </strong>
+
+                        <span>
+                          وزن تقریبی: {product.weight}
+                        </span>
+
                       </div>
+
                     </td>
 
 
+                    <!-- PRICE -->
+
                     <td>
+
                       <div class="price-box">
+
                         <strong>
                           {product.price.toLocaleString("fa-IR")}
                         </strong>
-                        <span>تومان</span>
+
+                        <span>
+                          تومان
+                        </span>
+
                       </div>
+
                     </td>
 
+
+                    <!-- TREND -->
 
                     <td>
 
                       {product.change === "up" && (
                         <span class="trend trend-up">
-                          <span>↑</span>
+                          <span class="trend-arrow">↗</span>
                           افزایشی
                         </span>
                       )}
 
                       {product.change === "down" && (
                         <span class="trend trend-down">
-                          <span>↓</span>
+                          <span class="trend-arrow">↘</span>
                           کاهشی
                         </span>
                       )}
 
                       {product.change === "same" && (
                         <span class="trend trend-same">
-                          <span>—</span>
+                          <span class="trend-arrow">→</span>
                           ثابت
                         </span>
                       )}
@@ -376,24 +551,44 @@ const categories = [
                     </td>
 
 
+                    <!-- DELIVERY -->
+
                     <td>
-                      <span class="delivery">
+
+                      <div class="delivery">
+
+                        <span class="delivery-pin">
+                          ●
+                        </span>
+
                         {product.delivery}
-                      </span>
+
+                      </div>
+
                     </td>
 
 
+                    <!-- ACTION -->
+
                     <td>
+
                       <button
                         class="quote-btn"
                         data-product={product.name}
                       >
-                        استعلام
-                        <span>←</span>
+
+                        <span>
+                          استعلام قیمت
+                        </span>
+
+                        <b>←</b>
+
                       </button>
+
                     </td>
 
                   </tr>
+
                 ))}
 
               </tbody>
@@ -404,12 +599,14 @@ const categories = [
 
 
           <!-- EMPTY -->
+
           <div id="emptyState" class="empty-state hidden">
 
             <div class="empty-icon">
+
               <svg
-                width="25"
-                height="25"
+                width="26"
+                height="26"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -418,9 +615,12 @@ const categories = [
                 <circle cx="11" cy="11" r="7"></circle>
                 <path d="m20 20-3.5-3.5"></path>
               </svg>
+
             </div>
 
-            <h3>محصولی پیدا نشد</h3>
+            <h3>
+              محصولی پیدا نشد
+            </h3>
 
             <p>
               عبارت جستجو یا فیلتر کارخانه را تغییر دهید.
@@ -428,46 +628,89 @@ const categories = [
 
           </div>
 
+
+          <!-- TABLE FOOTER -->
+
+          <div class="table-footer">
+
+            <div class="footer-info">
+
+              <span class="footer-live"></span>
+
+              قیمت‌ها به صورت دوره‌ای بروزرسانی می‌شوند.
+
+            </div>
+
+            <span class="unit-footer">
+              واحد قیمت: تومان / کیلوگرم
+            </span>
+
+          </div>
+
         </div>
 
 
         <!-- NOTE -->
+
         <div class="price-note">
 
-          <div class="note-icon">!</div>
+          <div class="note-icon">
+            !
+          </div>
 
-          <div>
-            <strong>توجه درباره قیمت‌ها</strong>
+          <div class="note-content">
+
+            <strong>
+              درباره قیمت‌های نمایش داده شده
+            </strong>
 
             <p>
-              قیمت‌های نمایش داده شده در این نسخه جهت نمونه و نمایش
-              ساختار جدول هستند. قیمت نهایی پس از استعلام و تأیید
+              قیمت‌های این صفحه در نسخه فعلی جهت نمایش ساختار
+              سامانه هستند. قیمت نهایی پس از استعلام و تأیید
               واحد فروش اعلام خواهد شد.
             </p>
+
           </div>
 
         </div>
 
       </div>
+
     </section>
+
+
+    <!-- TOAST -->
+
+    <div id="quoteToast" class="quote-toast">
+
+      <div class="toast-check">
+        ✓
+      </div>
+
+      <div class="toast-content">
+
+        <strong>
+          درخواست استعلام ثبت شد
+        </strong>
+
+        <span id="toastProduct"></span>
+
+      </div>
+
+      <button
+        class="toast-close"
+        aria-label="بستن"
+      >
+        ×
+      </button>
+
+    </div>
 
   </main>
 
 
-  <!-- TOAST -->
-  <div id="quoteToast" class="quote-toast">
-
-    <div class="toast-check">✓</div>
-
-    <div>
-      <strong>درخواست استعلام</strong>
-      <span id="toastProduct"></span>
-    </div>
-
-  </div>
-
-
   <script>
+
     const searchInput =
       document.getElementById("productSearch");
 
@@ -496,7 +739,9 @@ const categories = [
     function updateTable() {
 
       const search =
-        searchInput.value.trim().toLowerCase();
+        searchInput.value
+          .trim()
+          .toLowerCase();
 
       const factory =
         factoryFilter.value;
@@ -542,13 +787,17 @@ const categories = [
           show ? "" : "none";
 
 
-        if (show) visible++;
+        if (show) {
+          visible++;
+        }
 
       });
 
 
-      count.textContent =
-        visible.toLocaleString("fa-IR");
+      if (count) {
+        count.textContent =
+          visible.toLocaleString("fa-IR");
+      }
 
 
       emptyState.classList.toggle(
@@ -577,9 +826,9 @@ const categories = [
         "click",
         () => {
 
-          categoryButtons.forEach((item) =>
-            item.classList.remove("active")
-          );
+          categoryButtons.forEach((item) => {
+            item.classList.remove("active");
+          });
 
           button.classList.add("active");
 
@@ -594,6 +843,19 @@ const categories = [
     });
 
 
+    const toast =
+      document.getElementById("quoteToast");
+
+    const toastProduct =
+      document.getElementById("toastProduct");
+
+    const toastClose =
+      document.querySelector(".toast-close");
+
+
+    let toastTimer;
+
+
     document
       .querySelectorAll(".quote-btn")
       .forEach((button) => {
@@ -605,44 +867,92 @@ const categories = [
             const product =
               button.dataset.product;
 
-            document.getElementById(
-              "toastProduct"
-            ).textContent =
+            toastProduct.textContent =
               `محصول «${product}»`;
-
-
-            const toast =
-              document.getElementById(
-                "quoteToast"
-              );
 
 
             toast.classList.add("show");
 
 
-            setTimeout(() => {
-              toast.classList.remove("show");
-            }, 3000);
+            clearTimeout(toastTimer);
+
+
+            toastTimer =
+              setTimeout(() => {
+                toast.classList.remove("show");
+              }, 4000);
 
           }
         );
 
       });
+
+
+    toastClose.addEventListener(
+      "click",
+      () => {
+        toast.classList.remove("show");
+      }
+    );
+
+
+    /* CTRL + K SEARCH */
+
+    document.addEventListener(
+      "keydown",
+      (event) => {
+
+        if (
+          (event.ctrlKey || event.metaKey) &&
+          event.key.toLowerCase() === "k"
+        ) {
+
+          event.preventDefault();
+
+          searchInput.focus();
+
+        }
+
+      }
+    );
+
+
+    updateTable();
+
   </script>
 
 
   <style>
 
-    /* =========================
+    /* =====================================================
        BASE
-    ========================= */
+    ===================================================== */
 
     .price-page {
-      direction: rtl;
+      --navy-950: #040b14;
+      --navy-900: #071321;
+      --navy-800: #0b1b2d;
+      --navy-700: #102a43;
+
+      --steel-500: #3b82f6;
+      --steel-400: #60a5fa;
+      --steel-300: #93c5fd;
+
+      --green: #10b981;
+      --red: #ef4444;
+
       min-height: 100vh;
-      background: #f5f7fa;
-      color: #0b1220;
+      background:
+        linear-gradient(
+          180deg,
+          #f3f6fa 0%,
+          #f8fafc 55%,
+          #f1f5f9 100%
+        );
+
+      color: #0f172a;
       font-family: inherit;
+      overflow: hidden;
     }
 
     .price-page *,
@@ -652,957 +962,2089 @@ const categories = [
     }
 
     .container {
-      width: min(1380px, calc(100% - 36px));
+      width: min(1400px, calc(100% - 40px));
       margin-inline: auto;
     }
 
 
-    /* =========================
+    /* =====================================================
        HERO
-    ========================= */
+    ===================================================== */
 
     .price-hero {
       position: relative;
+      min-height: 520px;
       overflow: hidden;
-      min-height: 390px;
-      color: white;
+
       background:
         radial-gradient(
-          circle at 15% 20%,
-          rgba(37, 99, 235, .16),
-          transparent 30%
+          circle at 75% 30%,
+          rgba(37,99,235,.16),
+          transparent 26%
+        ),
+        radial-gradient(
+          circle at 20% 70%,
+          rgba(14,165,233,.08),
+          transparent 28%
         ),
         linear-gradient(
-          135deg,
-          #050b14 0%,
-          #091522 48%,
-          #0d1c2d 100%
+          125deg,
+          #030911 0%,
+          #06111e 45%,
+          #0b1d31 100%
         );
+
+      color: white;
     }
+
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+
+      background-image:
+        linear-gradient(
+          rgba(148,163,184,.075) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(148,163,184,.075) 1px,
+          transparent 1px
+        );
+
+      background-size: 52px 52px;
+
+      mask-image:
+        linear-gradient(
+          to left,
+          black,
+          transparent 80%
+        );
+
+      opacity: .8;
+    }
+
+
+    .hero-glow {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(80px);
+    }
+
+    .hero-glow-one {
+      width: 430px;
+      height: 430px;
+      left: -160px;
+      top: -120px;
+      background: rgba(37,99,235,.09);
+    }
+
+    .hero-glow-two {
+      width: 350px;
+      height: 350px;
+      right: 15%;
+      bottom: -220px;
+      background: rgba(14,165,233,.07);
+    }
+
+
+    .hero-scan {
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      top: 38%;
+      left: 0;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(96,165,250,.25),
+          transparent
+        );
+
+      opacity: .6;
+    }
+
 
     .hero-container {
       position: relative;
-      min-height: 390px;
+      min-height: 520px;
+
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
-    .hero-grid {
-      position: absolute;
-      inset: 0;
-      opacity: .12;
-      background-image:
-        linear-gradient(
-          rgba(148,163,184,.15) 1px,
-          transparent 1px
-        ),
-        linear-gradient(
-          90deg,
-          rgba(148,163,184,.15) 1px,
-          transparent 1px
-        );
-      background-size: 50px 50px;
-      mask-image: linear-gradient(
-        to left,
-        black,
-        transparent 75%
-      );
-    }
-
-    .hero-glow {
-      position: absolute;
-      width: 500px;
-      height: 500px;
-      left: -180px;
-      top: -150px;
-      border-radius: 50%;
-      background: rgba(37,99,235,.08);
-      filter: blur(70px);
-    }
 
     .hero-content {
       position: relative;
-      z-index: 2;
-      max-width: 720px;
-      padding: 70px 0;
+      z-index: 5;
+
+      width: 650px;
+      padding: 75px 0;
     }
 
-    .hero-topline {
+
+    /* HERO BADGE */
+
+    .hero-badge {
       display: inline-flex;
       align-items: center;
       gap: 9px;
-      padding: 9px 14px;
-      border: 1px solid rgba(148,163,184,.16);
-      border-radius: 8px;
-      background: rgba(15,23,42,.45);
-      color: #a8b5c6;
-      font-size: 13px;
+
+      padding: 9px 13px;
+
+      border: 1px solid rgba(148,163,184,.2);
+      border-radius: 9px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(30,64,175,.16),
+          rgba(15,23,42,.3)
+        );
+
+      color: #b6c5d8;
+
+      font-size: 12px;
       font-weight: 500;
       line-height: 1.7;
-      margin-bottom: 24px;
+
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.04),
+        0 10px 35px rgba(0,0,0,.1);
     }
 
-    .status-dot {
+
+    .pulse-dot {
       width: 7px;
       height: 7px;
+
       border-radius: 50%;
+
       background: #22c55e;
-      box-shadow: 0 0 14px rgba(34,197,94,.8);
+
+      box-shadow:
+        0 0 0 4px rgba(34,197,94,.08),
+        0 0 15px rgba(34,197,94,.7);
     }
 
+
+    .badge-arrow {
+      color: #60a5fa;
+      font-size: 15px;
+    }
+
+
+    /* HERO TITLE */
+
     .price-hero h1 {
-      margin: 0;
-      font-size: clamp(40px, 5vw, 64px);
-      line-height: 1.3;
-      letter-spacing: 0;
+      margin: 25px 0 0;
+
+      font-size: clamp(42px, 5.3vw, 70px);
+      line-height: 1.25;
+
+      letter-spacing: -.5px;
+
       font-weight: 800;
     }
 
+
     .price-hero h1 span {
       display: block;
-      margin-top: 5px;
-      color: #60a5fa;
+
+      margin-top: 4px;
+
+      background:
+        linear-gradient(
+          90deg,
+          #ffffff 0%,
+          #93c5fd 45%,
+          #60a5fa 100%
+        );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+
+      color: transparent;
     }
 
-    .price-hero p {
+
+    .hero-content > p {
       max-width: 620px;
+
       margin: 22px 0 0;
-      color: #93a4b8;
-      font-size: 16px;
+
+      color: #91a4b9;
+
+      font-size: 15px;
       font-weight: 400;
       line-height: 2.1;
     }
 
-    .hero-info {
+
+    /* HERO ACTIONS */
+
+    .hero-actions {
       display: flex;
       align-items: center;
-      gap: 24px;
-      margin-top: 35px;
+      gap: 17px;
+
+      margin-top: 31px;
     }
 
-    .info-item {
+
+    .hero-main-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 13px;
+
+      height: 48px;
+      padding: 0 21px;
+
+      border: 1px solid rgba(147,197,253,.25);
+      border-radius: 10px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #2563eb,
+          #174ea6
+        );
+
+      color: white;
+
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 700;
+
+      text-decoration: none;
+
+      box-shadow:
+        0 10px 30px rgba(37,99,235,.22);
+
+      transition: .25s;
+    }
+
+
+    .hero-main-btn span {
+      font-size: 17px;
+      transition: .25s;
+    }
+
+
+    .hero-main-btn:hover {
+      transform: translateY(-2px);
+
+      box-shadow:
+        0 15px 38px rgba(37,99,235,.3);
+    }
+
+
+    .hero-main-btn:hover span {
+      transform: translateY(3px);
+    }
+
+
+    .hero-update {
       display: flex;
-      flex-direction: column;
-      gap: 6px;
+      align-items: center;
+      gap: 10px;
     }
 
-    .info-label {
+
+    .update-dot {
+      width: 8px;
+      height: 8px;
+
+      border-radius: 50%;
+
+      background: #22c55e;
+
+      box-shadow:
+        0 0 13px rgba(34,197,94,.7);
+    }
+
+
+    .hero-update small,
+    .hero-update strong {
+      display: block;
+    }
+
+
+    .hero-update small {
       color: #64748b;
-      font-size: 11px;
-      font-weight: 400;
+      font-size: 10px;
       line-height: 1.7;
     }
 
-    .info-item strong {
-      color: #dbe4ef;
-      font-size: 14px;
+
+    .hero-update strong {
+      margin-top: 2px;
+      color: #cbd5e1;
+      font-size: 12px;
       font-weight: 600;
-      line-height: 1.8;
+      line-height: 1.7;
     }
 
-    .info-divider {
-      width: 1px;
-      height: 35px;
-      background: #26384c;
-    }
 
-    .market-status {
+    /* HERO STATS */
+
+    .hero-stats {
       display: flex;
       align-items: center;
-      gap: 6px;
-    }
 
-    .market-status span {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #22c55e;
+      margin-top: 45px;
     }
 
 
-    /* HERO VISUAL */
+    .hero-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+
+      min-width: 110px;
+    }
+
+
+    .hero-stat strong {
+      color: #e5edf7;
+      font-size: 19px;
+      font-weight: 800;
+      line-height: 1.6;
+    }
+
+
+    .hero-stat span {
+      color: #66788d;
+      font-size: 10px;
+      line-height: 1.7;
+    }
+
+
+    .stat-line {
+      width: 1px;
+      height: 32px;
+      margin: 0 25px;
+
+      background:
+        linear-gradient(
+          to bottom,
+          transparent,
+          #34475d,
+          transparent
+        );
+    }
+
+
+    /* =====================================================
+       HERO VISUAL
+    ===================================================== */
 
     .hero-visual {
       position: relative;
-      width: 440px;
-      height: 440px;
+
+      width: 500px;
+      height: 500px;
+
       flex-shrink: 0;
-      opacity: .72;
     }
 
-    .visual-ring {
+
+    .visual-orbit {
       position: absolute;
-      border: 1px solid rgba(148,163,184,.17);
+
+      border: 1px solid rgba(96,165,250,.12);
+
       border-radius: 50%;
     }
 
-    .ring-one {
-      width: 420px;
-      height: 420px;
-      top: 10px;
-      left: 10px;
+
+    .orbit-one {
+      width: 460px;
+      height: 460px;
+
+      top: 20px;
+      left: 20px;
     }
 
-    .ring-two {
-      width: 300px;
-      height: 300px;
-      top: 70px;
-      left: 70px;
-      border-color: rgba(96,165,250,.2);
+
+    .orbit-two {
+      width: 335px;
+      height: 335px;
+
+      top: 82px;
+      left: 82px;
+
+      border-color:
+        rgba(96,165,250,.2);
     }
 
-    .ring-three {
-      width: 175px;
-      height: 175px;
-      top: 132px;
-      left: 132px;
-      border-color: rgba(96,165,250,.28);
+
+    .orbit-three {
+      width: 210px;
+      height: 210px;
+
+      top: 144px;
+      left: 144px;
+
+      border-color:
+        rgba(96,165,250,.3);
+
+      box-shadow:
+        0 0 70px rgba(37,99,235,.07);
     }
 
-    .visual-center {
+
+    .steel-symbol {
       position: absolute;
-      top: 165px;
-      left: 165px;
-      width: 110px;
-      height: 110px;
+
+      width: 145px;
+      height: 145px;
+
+      top: 177px;
+      left: 177px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border: 1px solid rgba(147,197,253,.32);
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(30,64,175,.16),
+          rgba(4,11,20,.9)
+        );
+
+      box-shadow:
+        0 0 70px rgba(37,99,235,.12),
+        inset 0 0 35px rgba(96,165,250,.04);
+    }
+
+
+    .symbol-lines {
+      position: absolute;
+      inset: 20px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+
+      opacity: .45;
+    }
+
+
+    .symbol-lines span {
+      display: block;
+
+      width: 1px;
+      height: 70px;
+
+      background:
+        linear-gradient(
+          to bottom,
+          transparent,
+          #60a5fa,
+          transparent
+        );
+
+      transform: rotate(38deg);
+    }
+
+
+    .symbol-lines span:nth-child(2) {
+      height: 90px;
+    }
+
+
+    .symbol-text {
+      position: relative;
+      z-index: 2;
+
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-      border: 1px solid rgba(96,165,250,.35);
-      border-radius: 50%;
-      background: rgba(8,18,31,.8);
-      box-shadow:
-        0 0 50px rgba(37,99,235,.1),
-        inset 0 0 30px rgba(37,99,235,.05);
     }
 
-    .visual-center span {
+
+    .symbol-text small {
       color: #94a3b8;
+
       font-size: 12px;
-      letter-spacing: 2px;
-    }
-
-    .visual-center strong {
-      color: #60a5fa;
-      font-size: 18px;
       letter-spacing: 3px;
+      line-height: 1.7;
     }
 
-    .visual-line {
+
+    .symbol-text strong {
+      color: #60a5fa;
+
+      font-size: 22px;
+      font-weight: 800;
+
+      letter-spacing: 4px;
+      line-height: 1.7;
+    }
+
+
+    /* FLOATING CARDS */
+
+    .floating-card {
       position: absolute;
+
+      display: flex;
+
+      border: 1px solid rgba(148,163,184,.17);
+      border-radius: 11px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(14,29,47,.94),
+          rgba(6,15,26,.9)
+        );
+
+      box-shadow:
+        0 18px 45px rgba(0,0,0,.2),
+        inset 0 1px 0 rgba(255,255,255,.035);
+
+      backdrop-filter: blur(12px);
+    }
+
+
+    .card-price {
+      top: 85px;
+      right: 5px;
+
+      width: 165px;
+
+      flex-direction: column;
+
+      padding: 14px 16px;
+    }
+
+
+    .mini-label {
+      color: #718398;
+
+      font-size: 9px;
+      line-height: 1.7;
+    }
+
+
+    .card-price strong {
+      margin-top: 4px;
+
+      color: #e8f1fb;
+
+      font-size: 20px;
+      font-weight: 800;
+      line-height: 1.7;
+    }
+
+
+    .card-price strong small {
+      color: #718398;
+
+      font-size: 9px;
+      font-weight: 400;
+    }
+
+
+    .up-small {
+      margin-top: 4px;
+
+      color: #34d399;
+
+      font-size: 9px;
+      font-weight: 600;
+    }
+
+
+    .card-market {
+      left: 5px;
+      bottom: 100px;
+
+      align-items: center;
+      gap: 10px;
+
+      padding: 12px 15px;
+    }
+
+
+    .market-icon {
+      width: 32px;
+      height: 32px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 8px;
+
+      background:
+        rgba(16,185,129,.09);
+
+      color: #34d399;
+
+      font-size: 18px;
+    }
+
+
+    .card-market small,
+    .card-market strong {
+      display: block;
+    }
+
+
+    .card-market small {
+      color: #64748b;
+      font-size: 9px;
+    }
+
+
+    .card-market strong {
+      margin-top: 2px;
+
+      color: #dbeafe;
+
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+
+    /* CROSS */
+
+    .visual-cross {
+      position: absolute;
+
+      width: 9px;
+      height: 9px;
+    }
+
+
+    .visual-cross::before,
+    .visual-cross::after {
+      content: "";
+
+      position: absolute;
+
+      background: #60a5fa;
+      opacity: .5;
+    }
+
+
+    .visual-cross::before {
+      width: 1px;
+      height: 9px;
+      left: 4px;
+    }
+
+
+    .visual-cross::after {
+      width: 9px;
       height: 1px;
-      background: linear-gradient(
-        to left,
-        transparent,
-        #475569,
-        transparent
-      );
-    }
-
-    .line-one {
-      width: 560px;
-      top: 220px;
-      left: -60px;
-      transform: rotate(32deg);
-    }
-
-    .line-two {
-      width: 560px;
-      top: 220px;
-      left: -60px;
-      transform: rotate(-32deg);
+      top: 4px;
     }
 
 
-    /* =========================
+    .cross-one {
+      top: 50px;
+      left: 150px;
+    }
+
+
+    .cross-two {
+      right: 90px;
+      bottom: 80px;
+    }
+
+
+    /* =====================================================
        MAIN
-    ========================= */
+    ===================================================== */
 
     .price-section {
-      padding: 55px 0 85px;
+      padding: 65px 0 90px;
     }
 
 
-    /* =========================
+    /* =====================================================
        FILTERS
-    ========================= */
+    ===================================================== */
 
     .filters-card {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 280px;
-      gap: 12px;
-      padding: 10px;
-      border: 1px solid #e2e8f0;
+
+      grid-template-columns:
+        minmax(0, 1fr)
+        290px;
+
+      gap: 10px;
+
+      padding: 9px;
+
+      border: 1px solid #dfe6ef;
       border-radius: 16px;
-      background: white;
+
+      background:
+        rgba(255,255,255,.92);
+
       box-shadow:
-        0 10px 35px rgba(15,23,42,.045);
+        0 15px 45px rgba(15,23,42,.055);
     }
 
-    .search-box,
-    .factory-box {
+
+    .filter-search,
+    .factory-filter {
       position: relative;
     }
 
-    .search-box svg {
+
+    .filter-search {
+      display: flex;
+      align-items: center;
+    }
+
+
+    .search-icon {
       position: absolute;
+
       right: 17px;
-      top: 50%;
-      transform: translateY(-50%);
+
       color: #64748b;
+
       pointer-events: none;
     }
 
-    .search-box input,
-    .factory-box select {
+
+    .filter-search input,
+    .factory-filter select {
       width: 100%;
-      height: 56px;
-      border: 1px solid #e2e8f0;
+      height: 58px;
+
+      border: 1px solid #e3e8ef;
       border-radius: 11px;
+
       outline: none;
-      background: #f8fafc;
+
+      background: #f7f9fb;
+
       color: #0f172a;
+
       font-family: inherit;
-      font-size: 14px;
+
+      font-size: 13px;
       font-weight: 400;
+
       transition: .2s;
     }
 
-    .search-box input {
-      padding: 0 52px 0 18px;
+
+    .filter-search input {
+      padding:
+        0 53px 0 75px;
     }
 
-    .factory-box select {
-      padding: 0 15px;
+
+    .filter-search input::placeholder {
+      color: #94a3b8;
     }
 
-    .search-box input:focus,
-    .factory-box select:focus {
-      border-color: #2563eb;
+
+    .filter-search input:focus,
+    .factory-filter select:focus {
+      border-color: #60a5fa;
+
       background: white;
+
       box-shadow:
-        0 0 0 3px rgba(37,99,235,.08);
-    }
-
-    .filter-label {
-      display: none;
+        0 0 0 4px rgba(37,99,235,.07);
     }
 
 
-    /* =========================
+    kbd {
+      position: absolute;
+
+      left: 13px;
+
+      padding: 3px 7px;
+
+      border: 1px solid #d9e0e8;
+      border-bottom-width: 2px;
+      border-radius: 5px;
+
+      background: white;
+
+      color: #94a3b8;
+
+      font-family: inherit;
+      font-size: 9px;
+    }
+
+
+    .factory-filter select {
+      appearance: none;
+
+      padding: 0 17px 0 42px;
+
+      cursor: pointer;
+    }
+
+
+    .select-label {
+      position: absolute;
+
+      top: 9px;
+      right: 17px;
+
+      color: #94a3b8;
+
+      font-size: 9px;
+
+      pointer-events: none;
+    }
+
+
+    .factory-filter select {
+      padding-top: 12px;
+    }
+
+
+    .select-arrow {
+      position: absolute;
+
+      left: 16px;
+      bottom: 15px;
+
+      color: #64748b;
+
+      font-size: 15px;
+
+      pointer-events: none;
+    }
+
+
+    /* =====================================================
        CATEGORIES
-    ========================= */
+    ===================================================== */
+
+    .category-wrapper {
+      padding: 25px 0 17px;
+    }
+
+
+    .category-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      margin-bottom: 12px;
+
+      color: #64748b;
+
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+
+    .category-title-line {
+      width: 5px;
+      height: 5px;
+
+      border-radius: 50%;
+
+      background: #2563eb;
+    }
+
 
     .categories {
       display: flex;
       gap: 8px;
-      padding: 18px 0;
+
       overflow-x: auto;
+
       scrollbar-width: none;
     }
+
 
     .categories::-webkit-scrollbar {
       display: none;
     }
 
+
     .category-btn {
-      height: 44px;
-      padding: 0 19px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      height: 45px;
+
       flex-shrink: 0;
-      border: 1px solid #e2e8f0;
+
+      padding: 0 17px;
+
+      border: 1px solid #dfe6ee;
       border-radius: 9px;
+
       background: white;
+
       color: #64748b;
+
       font-family: inherit;
-      font-size: 13px;
+
+      font-size: 12px;
       font-weight: 600;
-      line-height: 1.7;
+
       cursor: pointer;
+
       transition: .2s;
     }
 
+
     .category-btn:hover {
-      border-color: #94a3b8;
-      color: #0f2744;
+      border-color: #9fb2c7;
+
+      color: #102a43;
+
+      transform: translateY(-1px);
     }
+
 
     .category-btn.active {
-      border-color: #102a43;
-      background: #102a43;
+      border-color: #173b64;
+
+      background:
+        linear-gradient(
+          135deg,
+          #102a43,
+          #173b64
+        );
+
       color: white;
+
       box-shadow:
-        0 7px 20px rgba(15,39,68,.16);
+        0 9px 25px rgba(16,42,67,.16);
     }
 
 
-    /* =========================
+    .category-count {
+      min-width: 21px;
+      height: 21px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 6px;
+
+      background: rgba(255,255,255,.12);
+
+      color: #bfdbfe;
+
+      font-size: 9px;
+    }
+
+
+    /* =====================================================
        TABLE CARD
-    ========================= */
+    ===================================================== */
 
     .table-card {
       overflow: hidden;
-      border: 1px solid #e1e7ef;
+
+      border: 1px solid #dfe6ef;
       border-radius: 18px;
+
       background: white;
+
       box-shadow:
-        0 12px 45px rgba(15,23,42,.055);
+        0 20px 60px rgba(15,23,42,.065);
     }
+
 
     .table-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
+
       gap: 20px;
-      padding: 27px 28px;
-      border-bottom: 1px solid #edf1f5;
+
+      padding: 25px 27px;
+
+      border-bottom: 1px solid #e9eef4;
+
+      background:
+        linear-gradient(
+          180deg,
+          #ffffff,
+          #fbfcfe
+        );
     }
 
-    .section-kicker {
+
+    .table-heading {
       display: flex;
       align-items: center;
-      gap: 8px;
-      margin-bottom: 9px;
-      color: #2563eb;
-      font-size: 12px;
-      font-weight: 700;
-      line-height: 1.7;
+      gap: 13px;
     }
 
-    .section-kicker span {
-      width: 6px;
-      height: 6px;
+
+    .heading-icon {
+      width: 48px;
+      height: 48px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border: 1px solid #dbe7f5;
+      border-radius: 11px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #eff6ff,
+          #f8fbff
+        );
+
+      color: #2563eb;
+    }
+
+
+    .heading-kicker {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+
+      margin-bottom: 3px;
+
+      color: #2563eb;
+
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+
+    .heading-kicker span {
+      width: 5px;
+      height: 5px;
+
       border-radius: 50%;
+
       background: #2563eb;
     }
 
+
     .table-header h2 {
       margin: 0;
-      color: #0b1220;
+
+      color: #0b1728;
+
       font-size: 21px;
       font-weight: 800;
+
       line-height: 1.7;
     }
+
 
     .table-header p {
-      margin: 8px 0 0;
+      margin: 3px 0 0;
+
       color: #94a3b8;
-      font-size: 12px;
-      line-height: 1.8;
+
+      font-size: 11px;
+
+      line-height: 1.7;
     }
 
-    .table-header p strong {
-      color: #475569;
-      font-weight: 700;
-    }
 
-    .live-badge {
+    /* STATUS */
+
+    .table-status {
       display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 9px 12px;
-      border: 1px solid #dbe5df;
-      border-radius: 8px;
-      background: #f8fcf9;
-      color: #15803d;
-      font-size: 11px;
-      font-weight: 600;
-      line-height: 1.7;
-      white-space: nowrap;
+      gap: 9px;
+
+      padding: 9px 13px;
+
+      border: 1px solid #d8eee4;
+      border-radius: 9px;
+
+      background: #f5fcf8;
     }
 
-    .live-badge span {
-      width: 6px;
-      height: 6px;
+
+    .status-live-dot {
+      width: 7px;
+      height: 7px;
+
       border-radius: 50%;
-      background: #22c55e;
-      box-shadow: 0 0 8px rgba(34,197,94,.5);
+
+      background: #10b981;
+
+      box-shadow:
+        0 0 0 4px rgba(16,185,129,.08),
+        0 0 12px rgba(16,185,129,.5);
     }
 
 
-    /* =========================
+    .table-status small,
+    .table-status strong {
+      display: block;
+    }
+
+
+    .table-status small {
+      color: #94a3b8;
+      font-size: 8px;
+    }
+
+
+    .table-status strong {
+      margin-top: 2px;
+
+      color: #047857;
+
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+
+    /* =====================================================
        TABLE
-    ========================= */
+    ===================================================== */
 
     .table-scroll {
       overflow-x: auto;
     }
 
+
     table {
       width: 100%;
-      min-width: 1080px;
+
+      min-width: 1120px;
+
       border-collapse: collapse;
+
       text-align: right;
     }
 
+
     th {
-      padding: 16px 18px;
-      border-bottom: 1px solid #e9eef3;
-      background: #f8fafc;
-      color: #475569;
-      font-size: 13px;
+      padding: 15px 18px;
+
+      border-bottom: 1px solid #e6ebf1;
+
+      background:
+        linear-gradient(
+          180deg,
+          #f8fafc,
+          #f4f7fa
+        );
+
+      color: #64748b;
+
+      font-size: 12px;
       font-weight: 700;
+
       line-height: 1.8;
+
       white-space: nowrap;
     }
 
-    td {
-      padding: 19px 18px;
-      border-bottom: 1px solid #f1f4f7;
-      font-size: 14px;
-      line-height: 1.8;
-      vertical-align: middle;
+
+    th:first-child {
+      padding-right: 25px;
     }
+
+
+    td {
+      position: relative;
+
+      padding: 19px 18px;
+
+      border-bottom: 1px solid #eef2f6;
+
+      font-size: 13px;
+
+      line-height: 1.8;
+
+      vertical-align: middle;
+
+      transition: .2s;
+    }
+
+
+    td:first-child {
+      padding-right: 25px;
+    }
+
 
     tbody tr {
-      transition: .16s;
+      transition: .2s;
     }
 
+
     tbody tr:hover {
-      background: #f8fafc;
+      background:
+        linear-gradient(
+          90deg,
+          #ffffff,
+          #f8fbff
+        );
     }
+
+
+    tbody tr:hover td:first-child::before {
+      content: "";
+
+      position: absolute;
+
+      right: 0;
+      top: 12px;
+      bottom: 12px;
+
+      width: 3px;
+
+      border-radius: 5px;
+
+      background:
+        linear-gradient(
+          to bottom,
+          #2563eb,
+          #60a5fa
+        );
+    }
+
 
     tbody tr:last-child td {
       border-bottom: none;
     }
 
 
-    /* PRODUCT */
+    /* =====================================================
+       PRODUCT
+    ===================================================== */
 
     .product-name {
       display: flex;
       align-items: center;
       gap: 12px;
-      min-width: 245px;
+
+      min-width: 250px;
     }
 
+
     .product-icon {
-      width: 42px;
-      height: 42px;
+      width: 43px;
+      height: 43px;
+
       flex-shrink: 0;
+
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid #dbe4ee;
+
+      border: 1px solid #dce6f1;
       border-radius: 10px;
-      background: #f4f7fb;
+
+      background:
+        linear-gradient(
+          135deg,
+          #f5f8fc,
+          #edf3f9
+        );
+
       color: #173b64;
-      font-size: 9px;
+
+      font-size: 8px;
       font-weight: 800;
-      line-height: 1.5;
+
+      transition: .2s;
     }
+
+
+    tbody tr:hover .product-icon {
+      border-color: #b8d1ee;
+
+      background: #eff6ff;
+
+      color: #2563eb;
+
+      transform: scale(1.04);
+    }
+
 
     .product-title strong {
       display: block;
-      margin-bottom: 5px;
-      color: #111827;
+
+      margin-bottom: 4px;
+
+      color: #172033;
+
       font-size: 14px;
       font-weight: 700;
+
       line-height: 1.8;
     }
 
+
     .product-title small {
       color: #94a3b8;
-      font-size: 11px;
+
+      font-size: 10px;
       font-weight: 400;
+
       line-height: 1.7;
     }
 
 
-    /* FACTORY */
+    /* =====================================================
+       FACTORY
+    ===================================================== */
 
     .factory-name {
       display: flex;
       align-items: center;
       gap: 8px;
+
       color: #334155;
-      font-size: 13px;
+
+      font-size: 12px;
       font-weight: 500;
+
       line-height: 1.8;
+
       white-space: nowrap;
     }
 
-    .factory-mark {
-      width: 6px;
-      height: 6px;
-      border-radius: 2px;
-      background: #94a3b8;
+
+    .factory-logo {
+      width: 25px;
+      height: 25px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border: 1px solid #e0e7ef;
+      border-radius: 7px;
+
+      background: #f8fafc;
     }
 
 
-    /* UNIT */
+    .factory-logo span {
+      width: 7px;
+      height: 7px;
+
+      border: 2px solid #64748b;
+      border-radius: 2px;
+
+      transform: rotate(45deg);
+    }
+
+
+    /* =====================================================
+       SPEC
+    ===================================================== */
 
     .unit-info {
       display: flex;
       flex-direction: column;
-      gap: 4px;
+
+      gap: 3px;
+
       white-space: nowrap;
     }
 
+
     .unit-info strong {
       color: #334155;
-      font-size: 13px;
+
+      font-size: 12px;
       font-weight: 600;
+
       line-height: 1.8;
     }
 
+
     .unit-info span {
       color: #94a3b8;
-      font-size: 11px;
+
+      font-size: 10px;
       font-weight: 400;
+
       line-height: 1.7;
     }
 
 
-    /* PRICE */
+    /* =====================================================
+       PRICE
+    ===================================================== */
 
     .price-box {
       display: flex;
       align-items: baseline;
-      gap: 6px;
-      direction: rtl;
+
+      gap: 5px;
+
       white-space: nowrap;
     }
 
+
     .price-box strong {
-      color: #102a43;
-      font-size: 18px;
+      color: #0d3155;
+
+      font-size: 19px;
       font-weight: 800;
+
       line-height: 1.6;
+
       letter-spacing: 0;
     }
 
+
     .price-box span {
       color: #94a3b8;
-      font-size: 10px;
+
+      font-size: 9px;
       font-weight: 500;
+
       line-height: 1.7;
     }
 
 
-    /* TREND */
+    /* =====================================================
+       TREND
+    ===================================================== */
 
     .trend {
       display: inline-flex;
       align-items: center;
       gap: 6px;
+
       padding: 7px 10px;
+
       border-radius: 8px;
-      font-size: 11px;
+
+      font-size: 10px;
       font-weight: 700;
+
       line-height: 1.7;
+
       white-space: nowrap;
     }
 
-    .trend span {
+
+    .trend-arrow {
       font-size: 13px;
       font-weight: 800;
     }
 
+
     .trend-up {
-      color: #be123c;
-      background: #fff1f2;
+      border: 1px solid #fee2e2;
+
+      background:
+        linear-gradient(
+          135deg,
+          #fff5f5,
+          #fff1f2
+        );
+
+      color: #dc2626;
     }
+
 
     .trend-down {
-      color: #047857;
-      background: #ecfdf5;
+      border: 1px solid #d1fae5;
+
+      background:
+        linear-gradient(
+          135deg,
+          #f2fff9,
+          #ecfdf5
+        );
+
+      color: #059669;
     }
+
 
     .trend-same {
+      border: 1px solid #e2e8f0;
+
+      background: #f8fafc;
+
       color: #64748b;
-      background: #f1f5f9;
     }
 
 
-    /* DELIVERY */
+    /* =====================================================
+       DELIVERY
+    ===================================================== */
 
     .delivery {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+
       color: #475569;
-      font-size: 12px;
+
+      font-size: 11px;
       font-weight: 500;
-      line-height: 1.8;
+
       white-space: nowrap;
     }
 
 
-    /* QUOTE */
+    .delivery-pin {
+      color: #94a3b8;
+      font-size: 7px;
+    }
+
+
+    /* =====================================================
+       QUOTE BUTTON
+    ===================================================== */
 
     .quote-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 7px;
-      height: 38px;
+      gap: 9px;
+
+      height: 39px;
+
       padding: 0 14px;
-      border: 1px solid #173b64;
+
+      border: 1px solid #1d4f80;
       border-radius: 8px;
-      background: #102a43;
+
+      background:
+        linear-gradient(
+          135deg,
+          #102f50,
+          #173f67
+        );
+
       color: white;
+
       font-family: inherit;
-      font-size: 12px;
+
+      font-size: 11px;
       font-weight: 700;
+
       line-height: 1.7;
+
       cursor: pointer;
+
       white-space: nowrap;
-      transition: .2s;
+
+      box-shadow:
+        0 6px 16px rgba(16,42,67,.12);
+
+      transition: .22s;
     }
 
-    .quote-btn span {
-      font-size: 13px;
-      transition: .2s;
+
+    .quote-btn b {
+      font-size: 14px;
+      font-weight: 500;
+
+      transition: .22s;
     }
+
 
     .quote-btn:hover {
-      background: #173b64;
-      transform: translateY(-1px);
+      border-color: #2563eb;
+
+      background:
+        linear-gradient(
+          135deg,
+          #173f67,
+          #1d4f80
+        );
+
+      transform: translateY(-2px);
+
       box-shadow:
-        0 7px 18px rgba(16,42,67,.15);
-    }
-
-    .quote-btn:hover span {
-      transform: translateX(-3px);
+        0 10px 23px rgba(16,42,67,.2);
     }
 
 
-    /* =========================
+    .quote-btn:hover b {
+      transform: translateX(-4px);
+    }
+
+
+    /* =====================================================
+       TABLE FOOTER
+    ===================================================== */
+
+    .table-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 13px 22px;
+
+      border-top: 1px solid #edf1f5;
+
+      background: #fafbfd;
+    }
+
+
+    .footer-info {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+
+      color: #94a3b8;
+
+      font-size: 9px;
+    }
+
+
+    .footer-live {
+      width: 5px;
+      height: 5px;
+
+      border-radius: 50%;
+
+      background: #10b981;
+    }
+
+
+    .unit-footer {
+      color: #94a3b8;
+
+      font-size: 9px;
+    }
+
+
+    /* =====================================================
        EMPTY
-    ========================= */
+    ===================================================== */
 
     .empty-state {
-      padding: 75px 20px;
+      padding: 80px 20px;
+
       text-align: center;
     }
+
 
     .empty-state.hidden {
       display: none;
     }
 
+
     .empty-icon {
-      width: 58px;
-      height: 58px;
+      width: 60px;
+      height: 60px;
+
       display: flex;
       align-items: center;
       justify-content: center;
+
       margin: auto;
-      border: 1px solid #e2e8f0;
+
+      border: 1px solid #dfe6ef;
       border-radius: 50%;
+
       background: #f8fafc;
+
       color: #64748b;
     }
 
+
     .empty-state h3 {
-      margin: 16px 0 5px;
+      margin: 17px 0 5px;
+
+      color: #1e293b;
+
       font-size: 17px;
       font-weight: 700;
+
       line-height: 1.8;
     }
 
+
     .empty-state p {
       margin: 0;
+
       color: #94a3b8;
-      font-size: 12px;
+
+      font-size: 11px;
+
       line-height: 1.9;
     }
 
 
-    /* =========================
+    /* =====================================================
        NOTE
-    ========================= */
+    ===================================================== */
 
     .price-note {
       display: flex;
       align-items: flex-start;
+
       gap: 13px;
-      margin-top: 16px;
-      padding: 17px 18px;
-      border: 1px solid #e1e7ef;
+
+      margin-top: 17px;
+
+      padding: 17px 19px;
+
+      border: 1px solid #dfe6ef;
       border-radius: 13px;
-      background: #f8fafc;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255,255,255,.9),
+          rgba(248,250,252,.95)
+        );
     }
+
 
     .note-icon {
       width: 29px;
       height: 29px;
+
       flex-shrink: 0;
+
       display: flex;
       align-items: center;
       justify-content: center;
+
+      border: 1px solid #dce5ef;
       border-radius: 8px;
-      background: #e2e8f0;
-      color: #475569;
+
+      background: #f1f5f9;
+
+      color: #64748b;
+
       font-size: 13px;
       font-weight: 800;
     }
 
-    .price-note strong {
+
+    .note-content strong {
+      display: block;
+
       color: #334155;
-      font-size: 12px;
+
+      font-size: 11px;
       font-weight: 700;
+
       line-height: 1.8;
     }
 
-    .price-note p {
+
+    .note-content p {
       margin: 4px 0 0;
+
       color: #64748b;
-      font-size: 11px;
+
+      font-size: 10px;
+
       line-height: 2;
     }
 
 
-    /* =========================
+    /* =====================================================
        TOAST
-    ========================= */
+    ===================================================== */
 
     .quote-toast {
       position: fixed;
+
       right: 25px;
       bottom: 25px;
-      z-index: 999;
+
+      z-index: 9999;
+
       display: flex;
       align-items: center;
+
       gap: 11px;
-      min-width: 280px;
-      padding: 15px 16px;
-      border: 1px solid #29384a;
+
+      min-width: 310px;
+
+      padding: 13px 14px;
+
+      border: 1px solid rgba(96,165,250,.2);
       border-radius: 12px;
-      background: #08121f;
+
+      background:
+        linear-gradient(
+          135deg,
+          #071321,
+          #0c2035
+        );
+
       color: white;
+
       box-shadow:
-        0 18px 50px rgba(0,0,0,.28);
-      transform: translateY(120px);
+        0 20px 60px rgba(0,0,0,.28),
+        0 0 30px rgba(37,99,235,.08);
+
+      transform: translateY(130px);
       opacity: 0;
+
       pointer-events: none;
+
       transition: .3s;
     }
+
 
     .quote-toast.show {
       transform: translateY(0);
       opacity: 1;
+
+      pointer-events: auto;
     }
 
+
     .toast-check {
-      width: 34px;
-      height: 34px;
+      width: 35px;
+      height: 35px;
+
       flex-shrink: 0;
+
       display: flex;
       align-items: center;
       justify-content: center;
+
       border-radius: 9px;
-      background: #22c55e;
+
+      background:
+        linear-gradient(
+          135deg,
+          #10b981,
+          #059669
+        );
+
       color: white;
+
       font-weight: 800;
     }
 
-    .quote-toast strong,
-    .quote-toast span {
+
+    .toast-content {
+      flex: 1;
+    }
+
+
+    .toast-content strong,
+    .toast-content span {
       display: block;
     }
 
-    .quote-toast strong {
-      font-size: 12px;
+
+    .toast-content strong {
+      color: #f8fafc;
+
+      font-size: 11px;
       font-weight: 700;
+
       line-height: 1.7;
     }
 
-    .quote-toast span {
-      margin-top: 3px;
+
+    .toast-content span {
+      margin-top: 2px;
+
       color: #94a3b8;
-      font-size: 10px;
+
+      font-size: 9px;
+
       line-height: 1.7;
     }
 
 
-    /* =========================
-       RESPONSIVE
-    ========================= */
+    .toast-close {
+      border: none;
 
-    @media (max-width: 1000px) {
+      background: transparent;
+
+      color: #64748b;
+
+      font-family: inherit;
+
+      font-size: 20px;
+
+      cursor: pointer;
+
+      transition: .2s;
+    }
+
+
+    .toast-close:hover {
+      color: white;
+    }
+
+
+    /* =====================================================
+       RESPONSIVE
+    ===================================================== */
+
+    @media (max-width: 1100px) {
+
+      .hero-content {
+        width: 590px;
+      }
+
 
       .hero-visual {
-        width: 330px;
-        height: 330px;
-        margin-left: -60px;
-      }
-
-      .ring-one {
-        width: 320px;
-        height: 320px;
-      }
-
-      .ring-two {
-        width: 235px;
-        height: 235px;
-        top: 42px;
-        left: 42px;
-      }
-
-      .ring-three {
-        width: 140px;
-        height: 140px;
-        top: 90px;
-        left: 90px;
-      }
-
-      .visual-center {
-        top: 110px;
-        left: 110px;
-      }
-
-      .visual-line {
         width: 400px;
-        left: -35px;
+        height: 400px;
+
+        margin-left: -70px;
+      }
+
+
+      .orbit-one {
+        width: 380px;
+        height: 380px;
+      }
+
+
+      .orbit-two {
+        width: 280px;
+        height: 280px;
+
+        top: 60px;
+        left: 60px;
+      }
+
+
+      .orbit-three {
+        width: 175px;
+        height: 175px;
+
+        top: 112px;
+        left: 112px;
+      }
+
+
+      .steel-symbol {
+        top: 140px;
+        left: 140px;
+      }
+
+
+      .card-price {
+        right: -5px;
+      }
+
+
+      .card-market {
+        left: -5px;
       }
 
     }
 
 
-    @media (max-width: 800px) {
-
-      .container {
-        width: min(100% - 24px, 1380px);
-      }
+    @media (max-width: 900px) {
 
       .price-hero {
         min-height: auto;
       }
 
+
       .hero-container {
         min-height: auto;
       }
 
+
       .hero-content {
-        padding: 55px 0;
+        width: 100%;
+        padding: 65px 0;
       }
+
 
       .hero-visual {
         display: none;
       }
 
-      .price-hero h1 {
-        font-size: 40px;
+
+      .filters-card {
+        grid-template-columns: 1fr 250px;
       }
 
-      .hero-info {
-        gap: 18px;
+    }
+
+
+    @media (max-width: 720px) {
+
+      .container {
+        width: calc(100% - 24px);
       }
+
+
+      .price-hero h1 {
+        font-size: 43px;
+      }
+
+
+      .hero-content > p {
+        font-size: 14px;
+      }
+
+
+      .hero-stats {
+        margin-top: 35px;
+      }
+
+
+      .hero-stat {
+        min-width: 85px;
+      }
+
+
+      .hero-stat strong {
+        font-size: 16px;
+      }
+
+
+      .stat-line {
+        margin: 0 13px;
+      }
+
 
       .filters-card {
         grid-template-columns: 1fr;
       }
+
+
+      .factory-filter {
+        height: 58px;
+      }
+
 
       .table-header {
         align-items: flex-start;
         flex-direction: column;
       }
 
-      .live-badge {
+
+      .table-status {
         display: none;
       }
 
+
       .price-section {
-        padding-top: 35px;
+        padding-top: 40px;
       }
 
     }
@@ -1611,60 +3053,102 @@ const categories = [
     @media (max-width: 520px) {
 
       .container {
-        width: calc(100% - 20px);
+        width: calc(100% - 18px);
       }
+
 
       .hero-content {
-        padding: 45px 0;
+        padding: 50px 0;
       }
+
+
+      .hero-badge {
+        font-size: 10px;
+      }
+
 
       .price-hero h1 {
-        font-size: 34px;
+        margin-top: 20px;
+        font-size: 36px;
       }
 
-      .price-hero p {
+
+      .hero-actions {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+
+      .hero-stats {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+
+      .hero-stat {
+        min-width: auto;
+      }
+
+
+      .stat-line {
+        margin: 0 8px;
+      }
+
+
+      .hero-stat strong {
         font-size: 14px;
       }
 
-      .hero-info {
-        flex-wrap: wrap;
-        gap: 15px;
+
+      .hero-stat span {
+        font-size: 8px;
       }
 
-      .info-divider {
-        display: none;
+
+      .category-wrapper {
+        padding-top: 20px;
       }
+
 
       .table-header {
         padding: 20px;
       }
 
+
+      .heading-icon {
+        width: 42px;
+        height: 42px;
+      }
+
+
       .table-header h2 {
         font-size: 18px;
       }
 
-      .categories {
-        padding: 14px 0;
+
+      .table-footer {
+        align-items: flex-start;
+        flex-direction: column;
+
+        gap: 7px;
       }
 
-      .category-btn {
-        height: 42px;
-        padding: 0 16px;
-        font-size: 12px;
-      }
 
       .price-note {
         padding: 14px;
       }
 
+
       .quote-toast {
-        right: 10px;
-        left: 10px;
-        bottom: 10px;
+        right: 9px;
+        left: 9px;
+        bottom: 9px;
+
         min-width: 0;
       }
 
     }
 
   </style>
+
 </BaseLayout>
