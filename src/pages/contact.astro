@@ -1,459 +1,3614 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const base = import.meta.env.BASE_URL;
+const image = (name) => `${base}images/${name}`;
+
+const advisors = [
+  {
+    name: "نام مشاور اول",
+    role: "مشاور فروش مقاطع فولادی",
+    phone: "09120000001",
+    displayPhone: "۰۹۱۲ ۰۰۰ ۰۰۰۱",
+    specialty: "استعلام قیمت و ثبت سفارش",
+    initials: "م۱",
+  },
+  {
+    name: "نام مشاور دوم",
+    role: "مشاور فروش و پیگیری سفارش",
+    phone: "09120000002",
+    displayPhone: "۰۹۱۲ ۰۰۰ ۰۰۰۲",
+    specialty: "هماهنگی تأمین و ارسال بار",
+    initials: "م۲",
+  },
+];
+
+const gallery = [
+  {
+    title: "میلگرد و محصولات ساختمانی",
+    description: "تأمین مقاطع فولادی موردنیاز پروژه‌ها",
+    image: "rebar.jpg",
+    number: "01",
+  },
+  {
+    title: "تیرآهن و مقاطع صنعتی",
+    description: "انتخاب مقطع متناسب با مشخصات پروژه",
+    image: "steel-beams.jpg",
+    number: "02",
+  },
+  {
+    title: "انبار و آماده‌سازی سفارش",
+    description: "هماهنگی سفارش و فرایند تحویل",
+    image: "steel-warehouse.jpg",
+    number: "03",
+  },
+];
+
+const officeAddress =
+  "استان، شهر، خیابان، نام ساختمان، طبقه و واحد دفتر";
+
+const officeMapUrl = "";
+const officeMapEmbedUrl = "";
 ---
 
-<BaseLayout title="Contact Us - ASIN STEEL">
-  <!-- Hero Section -->
-  <section class="relative bg-gradient-to-br from-primary-600 via-primary-500 to-orange-500 dark:from-primary-700 dark:via-primary-600 dark:to-orange-600 text-white py-16 sm:py-20 overflow-hidden">
-    <div class="absolute inset-0 opacity-10">
-      <div class="absolute top-10 left-10 w-72 h-72 bg-white rounded-full blur-3xl"></div>
-      <div class="absolute bottom-10 right-10 w-96 h-96 bg-white rounded-full blur-3xl"></div>
-    </div>
-    
-    <div class="container mx-auto px-4 relative z-10">
-      <div class="max-w-3xl mx-auto text-center">
-        <h1 class="text-4xl sm:text-5xl font-bold mb-4">Get in Touch</h1>
-        <p class="text-lg sm:text-xl text-white/90 leading-relaxed">
-          Have questions? We're here to help. Reach out to our team and we'll get back to you as soon as possible.
+<BaseLayout
+  title="تماس با ما | ASIN STILL"
+  description="برای استعلام قیمت، دریافت مشاوره و هماهنگی تأمین مقاطع فولادی با مجموعه ASIN STILL در ارتباط باشید."
+>
+  <main class="contact-page" dir="rtl">
+    <!-- HERO -->
+    <section class="contact-hero">
+      <div class="hero-grid"></div>
+      <div class="hero-glow hero-glow-one"></div>
+      <div class="hero-glow hero-glow-two"></div>
+
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <div class="eyebrow hero-eyebrow">
+            <span class="status-dot"></span>
+            ارتباط مستقیم با تیم فروش
+          </div>
+
+          <h1>
+            برای تأمین فولاد پروژه‌تان،
+            <span class="hero-highlight">کنار شما هستیم.</span>
+          </h1>
+
+          <p class="hero-description">
+            از استعلام قیمت تا هماهنگی تأمین و ارسال؛
+            برای انتخاب بهتر مقاطع فولادی، با تیم فروش ASIN STILL در ارتباط باشید.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#contact-form" class="button button-primary">
+              <span>ثبت درخواست مشاوره</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+              </svg>
+            </a>
+
+            <a href="#sales-advisors" class="button button-ghost">
+              ارتباط با مشاوران
+            </a>
+          </div>
+
+          <div class="hero-trust">
+            <div class="trust-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 3 4.5 6v5.5c0 4.4 3.2 7.7 7.5 9.5 4.3-1.8 7.5-5.1 7.5-9.5V6L12 3Z" />
+                <path d="m8.5 12 2.2 2.2 4.8-4.8" />
+              </svg>
+            </div>
+            <div>
+              <strong>همراه مطمئن پروژه شما</strong>
+              <span>مشاوره، استعلام و هماهنگی تأمین</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Industrial animated visual -->
+        <div class="hero-visual" aria-label="تصویر گرافیکی مقطع فولادی">
+          <div class="visual-topline">
+            <span class="visual-label">ASIN STILL / STEEL SYSTEMS</span>
+            <span class="visual-live"><i></i> INDUSTRIAL</span>
+          </div>
+
+          <div class="visual-blueprint">
+            <div class="blueprint-cross cross-one"></div>
+            <div class="blueprint-cross cross-two"></div>
+            <div class="blueprint-ring ring-one"></div>
+            <div class="blueprint-ring ring-two"></div>
+
+            <svg
+              class="steel-beam-svg"
+              viewBox="0 0 500 360"
+              role="img"
+              aria-label="مقطع تیرآهن فولادی با نمای سه‌بعدی"
+            >
+              <defs>
+                <linearGradient id="beamTop" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#c7e8ff" />
+                  <stop offset="35%" stop-color="#5aa9f5" />
+                  <stop offset="100%" stop-color="#2362ad" />
+                </linearGradient>
+
+                <linearGradient id="beamSide" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#193e72" />
+                  <stop offset="55%" stop-color="#438bd5" />
+                  <stop offset="100%" stop-color="#17365e" />
+                </linearGradient>
+
+                <linearGradient id="beamFront" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#82c4ff" />
+                  <stop offset="100%" stop-color="#214f88" />
+                </linearGradient>
+
+                <linearGradient id="beamLight" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#60baff" stop-opacity="0" />
+                  <stop offset="50%" stop-color="#b8e4ff" stop-opacity=".95" />
+                  <stop offset="100%" stop-color="#60baff" stop-opacity="0" />
+                </linearGradient>
+
+                <filter id="beamShadow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="10" />
+                </filter>
+              </defs>
+
+              <ellipse
+                cx="260"
+                cy="278"
+                rx="155"
+                ry="24"
+                fill="#148bff"
+                opacity=".23"
+                filter="url(#beamShadow)"
+              />
+
+              <g class="beam-model">
+                <path
+                  d="M112 100 L282 38 L416 94 L246 157 Z"
+                  fill="url(#beamTop)"
+                  stroke="#a4d7ff"
+                  stroke-width="1.2"
+                />
+
+                <path
+                  d="M112 100 L246 157 L246 190 L112 132 Z"
+                  fill="url(#beamFront)"
+                  stroke="#5eabef"
+                  stroke-width="1"
+                />
+
+                <path
+                  d="M246 157 L416 94 L416 126 L246 190 Z"
+                  fill="url(#beamSide)"
+                  stroke="#4d8fce"
+                  stroke-width="1"
+                />
+
+                <path
+                  d="M112 132 L246 190 L416 126 L416 153 L246 218 L112 160 Z"
+                  fill="#16345b"
+                  stroke="#427eb6"
+                  stroke-width="1"
+                />
+
+                <path
+                  d="M112 160 L246 218 L246 247 L112 189 Z"
+                  fill="#295c94"
+                  stroke="#6cb4ef"
+                  stroke-width="1"
+                />
+
+                <path
+                  d="M246 218 L416 153 L416 182 L246 247 Z"
+                  fill="#102b4c"
+                  stroke="#4078ad"
+                  stroke-width="1"
+                />
+
+                <path
+                  d="M112 189 L246 247 L416 182 L416 210 L246 275 L112 218 Z"
+                  fill="url(#beamTop)"
+                  stroke="#7fc6ff"
+                  stroke-width="1.2"
+                />
+
+                <path
+                  d="M112 218 L246 275 L246 307 L112 249 Z"
+                  fill="#214c7b"
+                  stroke="#5c9ed8"
+                  stroke-width="1"
+                />
+
+                <path
+                  d="M246 275 L416 210 L416 242 L246 307 Z"
+                  fill="#112a49"
+                  stroke="#4d85b8"
+                  stroke-width="1"
+                />
+
+                <path
+                  d="M112 100 L112 132 L246 190 L246 157 Z"
+                  fill="#82c4ff"
+                  opacity=".28"
+                />
+
+                <path
+                  d="M246 157 L246 190 L416 126 L416 94 Z"
+                  fill="#091e37"
+                  opacity=".3"
+                />
+
+                <path
+                  d="M115 105 L245 160 L412 97"
+                  fill="none"
+                  stroke="#d9f1ff"
+                  stroke-width="2"
+                  opacity=".8"
+                />
+
+                <path
+                  d="M116 222 L246 278 L412 214"
+                  fill="none"
+                  stroke="#8ed0ff"
+                  stroke-width="1.5"
+                  opacity=".75"
+                />
+
+                <path
+                  class="beam-scan"
+                  d="M120 118 L245 172 L410 110"
+                  fill="none"
+                  stroke="url(#beamLight)"
+                  stroke-width="9"
+                  stroke-linecap="round"
+                />
+              </g>
+
+              <g class="dimension-lines" fill="none" stroke="#77bfff" stroke-width="1">
+                <path d="M94 89 L94 232" stroke-dasharray="3 5" />
+                <path d="M85 99 L103 99 M85 222 L103 222" />
+                <path d="M122 264 L244 317 L426 247" stroke-dasharray="4 5" />
+                <path d="M126 254 L119 271 M420 237 L431 255" />
+              </g>
+
+              <g fill="#a9d9ff" font-size="10" font-family="monospace">
+                <text x="65" y="166" transform="rotate(-90 65 166)">STEEL PROFILE</text>
+                <text x="292" y="327">STRUCTURAL / 01</text>
+              </g>
+
+              <g class="visual-particles" fill="#7dc7ff">
+                <circle cx="82" cy="76" r="2.2" />
+                <circle cx="430" cy="82" r="2" />
+                <circle cx="447" cy="202" r="1.8" />
+                <circle cx="94" cy="258" r="2" />
+                <circle cx="370" cy="48" r="1.6" />
+                <circle cx="180" cy="316" r="1.6" />
+              </g>
+            </svg>
+
+            <div class="visual-tag tag-top">
+              <span class="tag-dot"></span>
+              <div>
+                <strong>STEEL</strong>
+                <small>مقاطع فولادی</small>
+              </div>
+            </div>
+
+            <div class="visual-tag tag-bottom">
+              <span class="tag-number">01</span>
+              <div>
+                <strong>ENGINEERED SUPPLY</strong>
+                <small>تأمین متناسب با نیاز پروژه</small>
+              </div>
+            </div>
+
+            <div class="visual-coordinate">35° 41' N / 51° 25' E</div>
+          </div>
+
+          <div class="visual-footer">
+            <span>PRECISION</span>
+            <span class="visual-footer-line"></span>
+            <span>STRENGTH</span>
+            <span class="visual-footer-line"></span>
+            <span>RELIABILITY</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-bottom-line">
+        <span>ASIN STILL</span>
+        <span>راه ارتباطی شما با دنیای مقاطع فولادی</span>
+        <a href="#contact-details">
+          اطلاعات تماس
+          <span>↓</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- INTRO -->
+    <section class="section intro-section" id="contact-details">
+      <div class="section-heading">
+        <span class="eyebrow">
+          <span class="eyebrow-line"></span>
+          در ارتباط باشیم
+        </span>
+        <h2>شروع یک همکاری، با یک <span>گفت‌وگو</span></h2>
+        <p>
+          برای دریافت اطلاعات محصولات، استعلام قیمت یا هماهنگی سفارش،
+          راه‌های ارتباطی زیر را بررسی کنید یا درخواست خود را ثبت کنید.
         </p>
       </div>
-    </div>
-  </section>
 
-  <!-- Contact Info Cards -->
-  <section class="py-12 sm:py-16 bg-white dark:bg-dark-900">
-    <div class="container mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto -mt-20 relative z-10">
-        <!-- WhatsApp -->
-        <div class="bg-white dark:bg-dark-800 rounded-xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border-t-4 border-primary-500">
-          <div class="w-14 h-14 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center mb-4">
-            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-            </svg>
+      <div class="contact-info-grid">
+        <article class="info-card info-card-featured">
+          <div class="info-card-top">
+            <div class="info-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 8.9a16 16 0 0 0 6 6l1.2-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.8 2.1Z" />
+              </svg>
+            </div>
+            <span class="card-index">01 / CONTACT</span>
           </div>
-          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">WhatsApp</h3>
-          <a href="https://wa.me/6281392442358" target="_blank" rel="noopener" class="text-primary-600 dark:text-primary-400 hover:underline font-medium">
-            +62 813-9244-2358
-          </a>
-          <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Mon-Fri: 9AM-5PM WIB</p>
-        </div>
 
-        <!-- General Inquiries -->
-        <div class="bg-white dark:bg-dark-800 rounded-xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border-t-4 border-blue-500">
-          <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mb-4">
-            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-          </div>
-          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">✉️ General Inquiries</h3>
-          <a href="mailto:asinsteel@gmail.com" class="text-primary-600 dark:text-primary-400 hover:underline font-medium break-all">
-            asinsteel@gmail.com
-          </a>
-          <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">For information & services</p>
-        </div>
+          <h3>تماس با واحد فروش</h3>
+          <p>
+            برای دریافت مشاوره و پیگیری درخواست‌های خود، با شماره تماس
+            تأییدشده مجموعه ارتباط بگیرید.
+          </p>
+          <span class="info-note">شماره تماس مجموعه را در این قسمت وارد کنید.</span>
+        </article>
 
-        <!-- Technical Support -->
-        <div class="bg-white dark:bg-dark-800 rounded-xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border-t-4 border-orange-500">
-          <div class="w-14 h-14 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center mb-4">
-            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
+        <article class="info-card">
+          <div class="info-card-top">
+            <div class="info-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="5" width="18" height="14" rx="2" />
+                <path d="m3 7 9 6 9-6" />
+              </svg>
+            </div>
+            <span class="card-index">02 / EMAIL</span>
           </div>
-          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">🛠 Technical Support</h3>
-          <a href="mailto:support@kantongaplikasi.com" class="text-primary-600 dark:text-primary-400 hover:underline font-medium break-all">
-            support@kantongaplikasi.com
-          </a>
-          <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">For technical inquiries</p>
-        </div>
+          <h3>ارتباط از طریق ایمیل</h3>
+          <p>
+            برای ارسال درخواست‌های رسمی، مشخصات فنی و اطلاعات موردنیاز
+            پروژه، ایمیل مجموعه را در این بخش قرار دهید.
+          </p>
+          <span class="info-note">نشانی ایمیل رسمی هنوز باید اضافه شود.</span>
+        </article>
 
-        <!-- Website -->
-        <div class="bg-white dark:bg-dark-800 rounded-xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border-t-4 border-purple-500">
-          <div class="w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mb-4">
-            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-            </svg>
+        <article class="info-card">
+          <div class="info-card-top">
+            <div class="info-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" />
+                <circle cx="12" cy="10" r="2.5" />
+              </svg>
+            </div>
+            <span class="card-index">03 / LOCATION</span>
           </div>
-          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Visit Website</h3>
-          <a href="https://kantongaplikasi.com" target="_blank" rel="noopener" class="text-primary-600 dark:text-primary-400 hover:underline font-medium">
-            kantongaplikasi.com
+          <h3>موقعیت دفتر</h3>
+          <p>
+            نشانی دفتر مجموعه را بررسی کنید و برای هماهنگی مراجعه حضوری،
+            از قبل با واحد فروش تماس بگیرید.
+          </p>
+          <a class="text-link" href="#office-location">
+            مشاهده اطلاعات دفتر
+            <span>←</span>
           </a>
-          <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Professional Web Development</p>
-        </div>
+        </article>
       </div>
-    </div>
-  </section>
-  <!-- Contact Form & Map -->
-  <section class="py-16 sm:py-20 bg-gray-50 dark:bg-dark-800">
-    <div class="container mx-auto px-4">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
-        <!-- Contact Form -->
-        <div>
-          <div class="mb-8">
-            <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">Send Us a Message</h2>
-            <p class="text-gray-600 dark:text-gray-400">
-              Fill out the form below and our team will get back to you within 24 hours.
-            </p>
+    </section>
+
+    <!-- CONTACT FORM -->
+    <section class="section request-section" id="contact-form">
+      <div class="request-layout">
+        <div class="request-copy">
+          <span class="eyebrow">
+            <span class="eyebrow-line"></span>
+            درخواست خود را ثبت کنید
+          </span>
+
+          <h2>نیاز پروژه شما،<br /><span>نقطه شروع ماست.</span></h2>
+
+          <p>
+            اطلاعات اولیه را وارد کنید تا درخواست شما برای بررسی و پیگیری
+            آماده باشد. برای دریافت پاسخ واقعی، فرم باید به سامانه ارسال
+            اطلاعات متصل شود.
+          </p>
+
+          <div class="request-points">
+            <div class="request-point">
+              <span class="point-check">✓</span>
+              <div>
+                <strong>مشخصات درخواست</strong>
+                <p>نوع مقطع و مقدار موردنیاز را مشخص کنید.</p>
+              </div>
+            </div>
+
+            <div class="request-point">
+              <span class="point-check">✓</span>
+              <div>
+                <strong>اطلاعات تماس</strong>
+                <p>شماره همراه خود را برای پیگیری وارد کنید.</p>
+              </div>
+            </div>
+
+            <div class="request-point">
+              <span class="point-check">✓</span>
+              <div>
+                <strong>بررسی نیاز پروژه</strong>
+                <p>جزئیات تکمیلی را در بخش توضیحات بنویسید.</p>
+              </div>
+            </div>
           </div>
 
-          <form id="contact-form" class="space-y-6">
-            <!-- Name -->
+          <div class="request-decoration">
+            <span class="decoration-line"></span>
+            <span>YOUR PROJECT. OUR PRIORITY.</span>
+          </div>
+        </div>
+
+        <div class="form-panel">
+          <div class="form-panel-heading">
             <div>
-              <label for="name" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                Full Name <span class="text-red-500">*</span>
+              <span class="form-overline">CONTACT FORM / 01</span>
+              <h3>فرم درخواست مشاوره</h3>
+            </div>
+            <div class="form-heading-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" />
+                <path d="M14 2v6h6M8 13h8M8 17h8" />
+              </svg>
+            </div>
+          </div>
+
+          <form id="contact-request-form" class="contact-form">
+            <div class="form-row">
+              <label class="form-field">
+                <span>نام و نام خانوادگی <b>*</b></span>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="نام خود را وارد کنید"
+                  autocomplete="name"
+                  required
+                />
               </label>
+
+              <label class="form-field">
+                <span>شماره همراه <b>*</b></span>
+                <input
+                  type="tel"
+                  name="mobile"
+                  placeholder="مثلاً ۰۹۱۲۱۲۳۴۵۶۷"
+                  autocomplete="tel"
+                  inputmode="tel"
+                  pattern="[0-9۰-۹+\s()-]{10,20}"
+                  required
+                />
+              </label>
+            </div>
+
+            <div class="form-row">
+              <label class="form-field">
+                <span>محصول موردنیاز</span>
+                <select name="product">
+                  <option value="">انتخاب نوع مقطع</option>
+                  <option value="rebar">میلگرد</option>
+                  <option value="beam">تیرآهن</option>
+                  <option value="sheet">ورق فولادی</option>
+                  <option value="profile">قوطی و پروفیل</option>
+                  <option value="channel">ناودانی و نبشی</option>
+                  <option value="other">سایر مقاطع فولادی</option>
+                </select>
+              </label>
+
+              <label class="form-field">
+                <span>شهر محل تحویل</span>
+                <input
+                  type="text"
+                  name="city"
+                  placeholder="شهر مقصد را وارد کنید"
+                  autocomplete="address-level2"
+                />
+              </label>
+            </div>
+
+            <label class="form-field">
+              <span>مقدار موردنیاز</span>
               <input
                 type="text"
-                id="name"
-                name="name"
-                required
-                class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 dark:border-dark-700 bg-white dark:bg-dark-900 text-gray-900 dark:text-white focus:border-primary-500 focus:outline-none focus:ring-4 focus:ring-primary-500/20 transition-all duration-300"
-                placeholder="John Doe"
+                name="quantity"
+                placeholder="مثلاً ۵ تن یا ۱۰۰ شاخه"
               />
-            </div>
+            </label>
 
-            <!-- Email -->
-            <div>
-              <label for="email" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                Email Address <span class="text-red-500">*</span>
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                required
-                class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 dark:border-dark-700 bg-white dark:bg-dark-900 text-gray-900 dark:text-white focus:border-primary-500 focus:outline-none focus:ring-4 focus:ring-primary-500/20 transition-all duration-300"
-                placeholder="john@example.com"
-              />
-            </div>
-
-            <!-- Phone -->
-            <div>
-              <label for="phone" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                Phone Number
-              </label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 dark:border-dark-700 bg-white dark:bg-dark-900 text-gray-900 dark:text-white focus:border-primary-500 focus:outline-none focus:ring-4 focus:ring-primary-500/20 transition-all duration-300"
-                placeholder="+1 (555) 123-4567"
-              />
-            </div>
-
-            <!-- Subject -->
-            <div>
-              <label for="subject" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                Subject <span class="text-red-500">*</span>
-              </label>
-              <select
-                id="subject"
-                name="subject"
-                required
-                class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 dark:border-dark-700 bg-white dark:bg-dark-900 text-gray-900 dark:text-white focus:border-primary-500 focus:outline-none focus:ring-4 focus:ring-primary-500/20 transition-all duration-300"
-              >
-                <option value="">Select a subject</option>
-                <option value="general">General Inquiry</option>
-                <option value="product">Product Question</option>
-                <option value="order">Order Support</option>
-                <option value="technical">Technical Support</option>
-                <option value="partnership">Partnership Opportunity</option>
-                <option value="feedback">Feedback</option>
-              </select>
-            </div>
-
-            <!-- Message -->
-            <div>
-              <label for="message" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                Message <span class="text-red-500">*</span>
-              </label>
+            <label class="form-field">
+              <span>توضیحات تکمیلی</span>
               <textarea
-                id="message"
                 name="message"
-                required
-                rows="6"
-                class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 dark:border-dark-700 bg-white dark:bg-dark-900 text-gray-900 dark:text-white focus:border-primary-500 focus:outline-none focus:ring-4 focus:ring-primary-500/20 transition-all duration-300 resize-none"
-                placeholder="Tell us how we can help you..."
+                rows="4"
+                placeholder="ابعاد، گرید، استاندارد یا سایر جزئیات موردنیاز..."
               ></textarea>
-            </div>
+            </label>
 
-            <!-- Submit Button -->
-            <button
-              type="submit"
-              class="w-full px-8 py-4 bg-gradient-to-r from-primary-600 to-orange-500 text-white rounded-xl font-semibold hover:from-primary-700 hover:to-orange-600 transition-all duration-300 hover:scale-105 hover:shadow-xl flex items-center justify-center gap-2"
-            >
-              <span>Send Message</span>
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            <button type="submit" class="button button-primary submit-button">
+              <span>ثبت درخواست</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
               </svg>
             </button>
 
-            <!-- Success Message -->
-            <div id="success-message" class="hidden p-4 bg-green-100 dark:bg-green-900/30 border border-green-500 rounded-lg">
-              <div class="flex items-center gap-3">
-                <svg class="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <p class="text-green-700 dark:text-green-300 font-medium">
-                  Thank you! Your message has been sent successfully. We'll get back to you soon.
-                </p>
-              </div>
-            </div>
+            <p
+              id="form-status"
+              class="form-status"
+              role="status"
+              aria-live="polite"
+            ></p>
+
+            <p class="form-privacy">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="4" y="10" width="16" height="11" rx="2" />
+                <path d="M8 10V7a4 4 0 1 1 8 0v3" />
+              </svg>
+              این فرم در حال حاضر به سامانه دریافت درخواست متصل نیست.
+            </p>
           </form>
         </div>
-
-        <!-- Map & Additional Info -->
-        <div class="space-y-6">
-          <!-- Map Placeholder -->
-          <div class="bg-white dark:bg-dark-900 rounded-xl p-6 shadow-lg">
-            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Our Location</h3>
-            <div class="aspect-video bg-gray-200 dark:bg-dark-800 rounded-lg flex items-center justify-center">
-              <div class="text-center">
-                <svg class="w-16 h-16 text-gray-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-                <p class="text-gray-600 dark:text-gray-400">Map Integration</p>
-              </div>
-            </div>
-            <div class="mt-4 space-y-2">
-              <p class="text-gray-700 dark:text-gray-300 flex items-start gap-2">
-                <svg class="w-5 h-5 text-primary-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                </svg>
-                <span>123 Builder Street, New York, NY 10001</span>
-              </p>
-              <p class="text-gray-700 dark:text-gray-300 flex items-center gap-2">
-                <svg class="w-5 h-5 text-primary-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span>Mon-Fri: 8:00 AM - 6:00 PM</span>
-              </p>
-            </div>
-          </div>
-
-          <!-- Business Hours -->
-          <div class="bg-white dark:bg-dark-900 rounded-xl p-6 shadow-lg">
-            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Business Hours</h3>
-            <div class="space-y-3">
-              <div class="flex justify-between items-center py-2 border-b border-gray-200 dark:border-dark-700">
-                <span class="text-gray-700 dark:text-gray-300 font-medium">Monday - Friday</span>
-                <span class="text-gray-900 dark:text-white font-semibold">8:00 AM - 6:00 PM</span>
-              </div>
-              <div class="flex justify-between items-center py-2 border-b border-gray-200 dark:border-dark-700">
-                <span class="text-gray-700 dark:text-gray-300 font-medium">Saturday</span>
-                <span class="text-gray-900 dark:text-white font-semibold">9:00 AM - 4:00 PM</span>
-              </div>
-              <div class="flex justify-between items-center py-2">
-                <span class="text-gray-700 dark:text-gray-300 font-medium">Sunday</span>
-                <span class="text-red-600 dark:text-red-400 font-semibold">Closed</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Quick Links -->
-          <div class="bg-gradient-to-br from-primary-50 to-orange-50 dark:from-primary-900/20 dark:to-orange-900/20 rounded-xl p-6 border-2 border-primary-200 dark:border-primary-800">
-            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Need Quick Help?</h3>
-            <div class="space-y-3">
-              <a href={`${import.meta.env.BASE_URL}help`} class="flex items-center gap-3 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span>Visit Help Center</span>
-              </a>
-              <a href={`${import.meta.env.BASE_URL}track-order`} class="flex items-center gap-3 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
-                </svg>
-                <span>Track Your Order</span>
-              </a>
-              <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/products`} class="flex items-center gap-3 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                </svg>
-                <span>Browse Products</span>
-              </a>
-            </div>
-          </div>
-        </div>
       </div>
-    </div>
-  </section>
-  <!-- FAQ Section -->
-  <section class="py-16 sm:py-20 bg-white dark:bg-dark-900">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">Frequently Asked Questions</h2>
-          <p class="text-gray-600 dark:text-gray-400">
-            Quick answers to common questions. Can't find what you're looking for? Contact us directly.
+    </section>
+
+    <!-- SALES ADVISORS -->
+    <section class="section advisors-section" id="sales-advisors">
+      <div class="section-heading section-heading-row">
+        <div>
+          <span class="eyebrow">
+            <span class="eyebrow-line"></span>
+            تیم فروش
+          </span>
+          <h2>ارتباط مستقیم با <span>مشاوران فروش</span></h2>
+          <p>
+            اطلاعات اعضای تیم را در این قسمت قرار دهید تا مشتریان بتوانند
+            برای پیگیری سفارش و استعلام قیمت با فرد موردنظر ارتباط بگیرند.
           </p>
         </div>
 
-        <div class="space-y-4">
-          <!-- FAQ Item 1 -->
-          <div class="bg-gray-50 dark:bg-dark-800 rounded-xl overflow-hidden">
-            <button class="faq-toggle w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-100 dark:hover:bg-dark-700 transition-colors">
-              <span class="font-semibold text-gray-900 dark:text-white">What are your shipping options?</span>
-              <svg class="w-5 h-5 text-gray-600 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-            <div class="faq-content hidden px-6 pb-4">
-              <p class="text-gray-600 dark:text-gray-400">
-                We offer standard shipping (5-7 business days), express shipping (2-3 business days), and same-day delivery in select areas. All orders over $500 qualify for free standard shipping.
-              </p>
-            </div>
-          </div>
-
-          <!-- FAQ Item 2 -->
-          <div class="bg-gray-50 dark:bg-dark-800 rounded-xl overflow-hidden">
-            <button class="faq-toggle w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-100 dark:hover:bg-dark-700 transition-colors">
-              <span class="font-semibold text-gray-900 dark:text-white">Do you offer bulk discounts?</span>
-              <svg class="w-5 h-5 text-gray-600 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-            <div class="faq-content hidden px-6 pb-4">
-              <p class="text-gray-600 dark:text-gray-400">
-                Yes! We offer competitive bulk pricing for contractors and businesses. Contact us at asinsteel@gmail.com or WhatsApp +62 813-9244-2358 for a custom quote.
-              </p>
-            </div>
-          </div>
-
-          <!-- FAQ Item 3 -->
-          <div class="bg-gray-50 dark:bg-dark-800 rounded-xl overflow-hidden">
-            <button class="faq-toggle w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-100 dark:hover:bg-dark-700 transition-colors">
-              <span class="font-semibold text-gray-900 dark:text-white">What is your return policy?</span>
-              <svg class="w-5 h-5 text-gray-600 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-            <div class="faq-content hidden px-6 pb-4">
-              <p class="text-gray-600 dark:text-gray-400">
-                We offer a 30-day return policy on most items. Products must be unused and in original packaging. Some items like custom-cut materials may not be eligible for return. See our full return policy for details.
-              </p>
-            </div>
-          </div>
-
-          <!-- FAQ Item 4 -->
-          <div class="bg-gray-50 dark:bg-dark-800 rounded-xl overflow-hidden">
-            <button class="faq-toggle w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-100 dark:hover:bg-dark-700 transition-colors">
-              <span class="font-semibold text-gray-900 dark:text-white">Do you provide technical support?</span>
-              <svg class="w-5 h-5 text-gray-600 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-            <div class="faq-content hidden px-6 pb-4">
-              <p class="text-gray-600 dark:text-gray-400">
-                Absolutely! Our team of construction experts is available to help with product selection, installation guidance, and technical questions. Contact us via phone, email, or live chat.
-              </p>
-            </div>
-          </div>
-
-          <!-- FAQ Item 5 -->
-          <div class="bg-gray-50 dark:bg-dark-800 rounded-xl overflow-hidden">
-            <button class="faq-toggle w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-100 dark:hover:bg-dark-700 transition-colors">
-              <span class="font-semibold text-gray-900 dark:text-white">Can I track my order?</span>
-              <svg class="w-5 h-5 text-gray-600 dark:text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-            <div class="faq-content hidden px-6 pb-4">
-              <p class="text-gray-600 dark:text-gray-400">
-                Yes! Once your order ships, you'll receive a tracking number via email. You can also track your order anytime by visiting our Track Order page or logging into your account.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-8 text-center">
-          <p class="text-gray-600 dark:text-gray-400 mb-4">Still have questions?</p>
-          <a href={`${import.meta.env.BASE_URL}help`} class="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 text-white rounded-xl font-semibold hover:bg-primary-700 transition-all duration-300 hover:scale-105">
-            <span>Visit Help Center</span>
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
-          </a>
+        <div class="heading-side-mark">
+          <span>AS</span>
+          <i></i>
+          <small>SALES TEAM</small>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- CTA Section -->
-  <section class="py-16 sm:py-20 bg-gradient-to-br from-primary-600 to-orange-500 dark:from-primary-700 dark:to-orange-600 text-white">
-    <div class="container mx-auto px-4">
-      <div class="max-w-3xl mx-auto text-center">
-        <h2 class="text-3xl sm:text-4xl font-bold mb-4">Ready to Start Your Project?</h2>
-        <p class="text-lg text-white/90 mb-8">
-          Browse our extensive catalog of premium building materials or speak with our experts today.
+      <div class="advisors-grid">
+        {advisors.map((advisor, index) => (
+          <article class="advisor-card">
+            <div class="advisor-top">
+              <span class="advisor-number">
+                ADVISOR / 0{index + 1}
+              </span>
+              <span class="advisor-status">
+                <i></i>
+                واحد فروش
+              </span>
+            </div>
+
+            <div class="advisor-profile">
+              <div class="advisor-avatar">
+                <span>{advisor.initials}</span>
+                <div class="avatar-orbit"></div>
+              </div>
+
+              <div class="advisor-info">
+                <h3>{advisor.name}</h3>
+                <p>{advisor.role}</p>
+              </div>
+            </div>
+
+            <div class="advisor-specialty">
+              <span class="specialty-icon">↗</span>
+              <span>{advisor.specialty}</span>
+            </div>
+
+            <a
+              href={`tel:${advisor.phone}`}
+              class="advisor-call"
+              aria-label={`تماس با ${advisor.name}`}
+            >
+              <span>تماس با مشاور</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 8.9a16 16 0 0 0 6 6l1.2-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.8 2.1Z" />
+              </svg>
+            </a>
+          </article>
+        ))}
+      </div>
+
+      <div class="advisor-warning">
+        <span>!</span>
+        شماره‌ها و نام‌های بالا نمونه هستند؛ پیش از انتشار سایت، اطلاعات واقعی را جایگزین کنید.
+      </div>
+    </section>
+
+    <!-- OFFICE -->
+    <section class="section office-section" id="office-location">
+      <div class="office-layout">
+        <div class="office-copy">
+          <span class="eyebrow">
+            <span class="eyebrow-line"></span>
+            موقعیت مکانی
+          </span>
+
+          <h2>از نزدیک،<br /><span>در دسترس شما هستیم.</span></h2>
+
+          <p>
+            نشانی دفتر و اطلاعات مراجعه حضوری را در این بخش قرار دهید.
+            برای جلوگیری از مراجعه اشتباه، آدرس نهایی را پیش از انتشار
+            بررسی و تکمیل کنید.
+          </p>
+
+          <div class="office-detail">
+            <div class="office-detail-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" />
+                <circle cx="12" cy="10" r="2.5" />
+              </svg>
+            </div>
+            <div>
+              <span>نشانی دفتر</span>
+              <strong>{officeAddress}</strong>
+            </div>
+          </div>
+
+          <div class="office-detail">
+            <div class="office-detail-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M12 7v5l3 2" />
+              </svg>
+            </div>
+            <div>
+              <span>زمان مراجعه</span>
+              <strong>ساعات کاری را با مجموعه هماهنگ کنید.</strong>
+            </div>
+          </div>
+
+          {officeMapUrl && (
+            <a
+              href={officeMapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="button button-primary office-map-button"
+            >
+              مشاهده روی نقشه
+              <span>↗</span>
+            </a>
+          )}
+        </div>
+
+        <div class="office-map-card">
+          <div class="map-topbar">
+            <div>
+              <span class="map-overline">LOCATION / ASIN STILL</span>
+              <strong>موقعیت دفتر مجموعه</strong>
+            </div>
+            <span class="map-coordinate">MAP 01</span>
+          </div>
+
+          {officeMapEmbedUrl ? (
+            <iframe
+              src={officeMapEmbedUrl}
+              title="موقعیت دفتر ASIN STILL روی نقشه"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen
+            ></iframe>
+          ) : (
+            <div class="map-placeholder">
+              <div class="map-contour contour-one"></div>
+              <div class="map-contour contour-two"></div>
+              <div class="map-contour contour-three"></div>
+              <div class="map-road road-one"></div>
+              <div class="map-road road-two"></div>
+              <div class="map-road road-three"></div>
+
+              <div class="map-marker">
+                <span class="marker-pulse"></span>
+                <div class="marker-pin">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" />
+                    <circle cx="12" cy="10" r="2.5" />
+                  </svg>
+                </div>
+              </div>
+
+              <div class="map-label">
+                <strong>ASIN STILL</strong>
+                <span>موقعیت دفتر پس از ثبت آدرس نمایش داده می‌شود.</span>
+              </div>
+
+              <span class="map-grid-label map-grid-a">N 35°</span>
+              <span class="map-grid-label map-grid-b">E 51°</span>
+              <span class="map-grid-label map-grid-c">LOCATION DATA</span>
+            </div>
+          )}
+
+          <div class="map-bottom">
+            <span class="map-bottom-dot"></span>
+            <span>برای نمایش نقشه واقعی، نشانی یا کد نقشه را وارد کنید.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="section services-section">
+      <div class="section-heading">
+        <span class="eyebrow">
+          <span class="eyebrow-line"></span>
+          خدمات و پشتیبانی
+        </span>
+        <h2>در مسیر تأمین، <span>همراه شما</span></h2>
+        <p>
+          بخش‌هایی که می‌توانند فرایند انتخاب و خرید مقاطع فولادی را برای
+          مشتریان شفاف‌تر و منظم‌تر کنند.
         </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/products`} class="px-8 py-4 bg-white text-primary-600 rounded-xl font-semibold hover:bg-gray-100 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
-            Browse Products
-          </a>
-          <a href="https://wa.me/6281392442358" target="_blank" rel="noopener" class="px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white rounded-xl font-semibold hover:bg-white/20 transition-all duration-300 hover:scale-105">
-            WhatsApp Us
+      </div>
+
+      <div class="services-grid">
+        <article class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="11" cy="11" r="7" />
+              <path d="m20 20-4-4M8 11h6M11 8v6" />
+            </svg>
+          </div>
+          <span class="service-number">01</span>
+          <h3>استعلام قیمت</h3>
+          <p>
+            دریافت اطلاعات قیمت مقاطع فولادی متناسب با مشخصات و مقدار سفارش.
+          </p>
+          <a href="#contact-form" aria-label="درخواست استعلام قیمت">ثبت درخواست <span>←</span></a>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 20V9l8-5 8 5v11" />
+              <path d="M9 20v-6h6v6M2 20h20" />
+            </svg>
+          </div>
+          <span class="service-number">02</span>
+          <h3>مشاوره انتخاب محصول</h3>
+          <p>
+            بررسی مشخصات موردنیاز برای انتخاب مناسب‌تر مقاطع فولادی پروژه.
+          </p>
+          <a href="#contact-form" aria-label="درخواست مشاوره محصول">دریافت مشاوره <span>←</span></a>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M3 7h11v11H3zM14 11h4l3 3v4h-7z" />
+              <circle cx="7.5" cy="19" r="2" />
+              <circle cx="17.5" cy="19" r="2" />
+            </svg>
+          </div>
+          <span class="service-number">03</span>
+          <h3>هماهنگی ارسال</h3>
+          <p>
+            هماهنگی اطلاعات مقصد، مقدار سفارش و جزئیات تحویل با تیم فروش.
+          </p>
+          <a href="#contact-form" aria-label="هماهنگی ارسال سفارش">هماهنگی سفارش <span>←</span></a>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3v18M3 12h18M5.5 5.5l13 13M18.5 5.5l-13 13" />
+              <circle cx="12" cy="12" r="8" />
+            </svg>
+          </div>
+          <span class="service-number">04</span>
+          <h3>پیگیری درخواست</h3>
+          <p>
+            پیگیری وضعیت درخواست‌ها و هماهنگی‌های انجام‌شده با واحد فروش.
+          </p>
+          <a href="#sales-advisors" aria-label="ارتباط با مشاوران فروش">ارتباط با فروش <span>←</span></a>
+        </article>
+      </div>
+    </section>
+
+    <!-- DELIVERY -->
+    <section class="delivery-section">
+      <div class="delivery-grid"></div>
+
+      <div class="delivery-inner">
+        <div class="delivery-copy">
+          <span class="eyebrow">
+            <span class="eyebrow-line"></span>
+            از سفارش تا تحویل
+          </span>
+
+          <h2>فرایند تأمین را<br /><span>شفاف و هماهنگ</span> پیش ببرید.</h2>
+
+          <p>
+            اطلاعات دقیق محصول، مقدار سفارش و محل تحویل به هماهنگی بهتر
+            و بررسی سریع‌تر درخواست شما کمک می‌کند.
+          </p>
+
+          <a href="#contact-form" class="button button-primary">
+            ثبت مشخصات پروژه
+            <span>←</span>
           </a>
         </div>
+
+        <div class="delivery-steps">
+          <div class="delivery-step">
+            <span class="step-number">01</span>
+            <div class="step-line"></div>
+            <div>
+              <h3>ثبت نیاز</h3>
+              <p>مشخصات مقطع و مقدار موردنیاز را اعلام کنید.</p>
+            </div>
+          </div>
+
+          <div class="delivery-step">
+            <span class="step-number">02</span>
+            <div class="step-line"></div>
+            <div>
+              <h3>بررسی و هماهنگی</h3>
+              <p>جزئیات سفارش و شرایط تأمین بررسی می‌شود.</p>
+            </div>
+          </div>
+
+          <div class="delivery-step">
+            <span class="step-number">03</span>
+            <div class="step-line"></div>
+            <div>
+              <h3>هماهنگی تحویل</h3>
+              <p>زمان و محل تحویل با توجه به توافق نهایی هماهنگ می‌شود.</p>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-</BaseLayout>
+    <!-- GALLERY -->
+    <section class="section gallery-section">
+      <div class="section-heading section-heading-row">
+        <div>
+          <span class="eyebrow">
+            <span class="eyebrow-line"></span>
+            دنیای مقاطع فولادی
+          </span>
+          <h2>نگاهی به حوزه <span>فعالیت ما</span></h2>
+          <p>
+            نمونه‌هایی از محصولات و محیط‌های مرتبط با صنعت فولاد.
+            تصاویر نهایی را با تصاویر واقعی مجموعه جایگزین کنید.
+          </p>
+        </div>
 
-<script>
-  // Contact Form Submission
-  const contactForm = document.getElementById('contact-form') as HTMLFormElement;
-  const successMessage = document.getElementById('success-message');
+        <div class="gallery-counter">
+          <strong>03</strong>
+          <span>VISUALS / STEEL</span>
+        </div>
+      </div>
 
-  contactForm?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    // Get form data
-    const formData = new FormData(contactForm);
-    const data = Object.fromEntries(formData.entries());
-    
-    console.log('Form submitted:', data);
-    
-    // Show success message
-    if (successMessage) {
-      successMessage.classList.remove('hidden');
-      contactForm.reset();
-      
-      // Hide success message after 5 seconds
-      setTimeout(() => {
-        successMessage.classList.add('hidden');
-      }, 5000);
-      
-      // Scroll to success message
-      successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      <div class="gallery-grid">
+        {gallery.map((item) => (
+          <article class="gallery-card">
+            <div class="gallery-image">
+              <img
+                src={image(item.image)}
+                alt={item.title}
+                loading="lazy"
+                onerror="this.style.display='none'; this.parentElement.classList.add('image-missing')"
+              />
+              <div class="gallery-image-overlay"></div>
+              <span class="gallery-index">{item.number}</span>
+              <span class="gallery-corner">AS / STEEL</span>
+            </div>
+
+            <div class="gallery-content">
+              <div>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </div>
+              <span class="gallery-arrow">↙</span>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section faq-section">
+      <div class="faq-layout">
+        <div class="faq-intro">
+          <span class="eyebrow">
+            <span class="eyebrow-line"></span>
+            راهنمای مشتریان
+          </span>
+
+          <h2>سؤالات <span>متداول</span></h2>
+
+          <p>
+            پاسخ پرسش‌های اولیه درباره استعلام قیمت، ثبت درخواست و
+            هماهنگی سفارش.
+          </p>
+
+          <div class="faq-side-mark">
+            <span>FAQ</span>
+            <i></i>
+            <small>NEED MORE INFORMATION?</small>
+          </div>
+        </div>
+
+        <div class="faq-list">
+          <details class="faq-item" open>
+            <summary>
+              چگونه می‌توانم قیمت محصولات فولادی را استعلام بگیرم؟
+              <span class="faq-plus"></span>
+            </summary>
+            <div class="faq-answer">
+              نوع مقطع، مشخصات موردنیاز، مقدار سفارش و شهر مقصد را در فرم
+              درخواست وارد کنید. برای استعلام واقعی، درخواست باید به سامانه
+              فروش متصل باشد یا از طریق راه ارتباطی معتبر مجموعه پیگیری شود.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              برای دریافت قیمت دقیق چه اطلاعاتی لازم است؟
+              <span class="faq-plus"></span>
+            </summary>
+            <div class="faq-answer">
+              نوع محصول، ابعاد، گرید یا استاندارد موردنیاز، مقدار سفارش و
+              محل تحویل از اطلاعات مفید برای بررسی قیمت و شرایط تأمین هستند.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              آیا امکان هماهنگی ارسال به شهرهای دیگر وجود دارد؟
+              <span class="faq-plus"></span>
+            </summary>
+            <div class="faq-answer">
+              شرایط ارسال باید با توجه به محل تحویل، حجم سفارش و امکانات
+              مجموعه بررسی و پیش از نهایی شدن سفارش تأیید شود.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              چگونه درخواست ثبت‌شده را پیگیری کنم؟
+              <span class="faq-plus"></span>
+            </summary>
+            <div class="faq-answer">
+              پس از اتصال فرم به سامانه دریافت درخواست، می‌توان فرایند
+              پیگیری را مشخص کرد. در وضعیت فعلی، فرم فقط پیام راهنما نمایش
+              می‌دهد و اطلاعات را به سرور ارسال نمی‌کند.
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="final-cta">
+      <div class="cta-grid"></div>
+      <div class="cta-glow"></div>
+
+      <div class="final-cta-inner">
+        <div class="cta-symbol">
+          <span>AS</span>
+          <i></i>
+        </div>
+
+        <div class="cta-copy">
+          <span class="cta-overline">ASIN STILL / CONTACT</span>
+          <h2>پروژه بعدی شما، از همین‌جا شروع می‌شود.</h2>
+          <p>
+            نیاز خود را مشخص کنید تا مسیر بررسی و هماهنگی تأمین را آغاز کنیم.
+          </p>
+        </div>
+
+        <a href="#contact-form" class="button button-light">
+          ثبت درخواست
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <style>
+    :root {
+      --contact-bg: #07111f;
+      --contact-bg-deep: #050b14;
+      --contact-panel: #0d1a2b;
+      --contact-panel-light: #10233a;
+      --contact-border: rgba(138, 180, 225, 0.15);
+      --contact-blue: #3299ff;
+      --contact-blue-light: #8bceff;
+      --contact-text: #f0f6ff;
+      --contact-muted: #a1b1c6;
+      --contact-dim: #6f829c;
     }
-    
-    // In production, send data to backend
-    // fetch('/api/contact', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(data)
-    // });
-  });
 
-  // FAQ Toggle
-  const faqToggles = document.querySelectorAll('.faq-toggle');
-  
-  faqToggles.forEach(toggle => {
-    toggle.addEventListener('click', () => {
-      const content = toggle.nextElementSibling as HTMLElement;
-      const icon = toggle.querySelector('svg');
-      
-      // Toggle content
-      if (content.classList.contains('hidden')) {
-        content.classList.remove('hidden');
-        icon?.classList.add('rotate-180');
-      } else {
-        content.classList.add('hidden');
-        icon?.classList.remove('rotate-180');
+    .contact-page {
+      overflow: hidden;
+      background: var(--contact-bg);
+      color: var(--contact-text);
+      font-family: inherit;
+      line-height: 1.9;
+    }
+
+    .contact-page *,
+    .contact-page *::before,
+    .contact-page *::after {
+      box-sizing: border-box;
+    }
+
+    .contact-page a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .contact-page button,
+    .contact-page input,
+    .contact-page select,
+    .contact-page textarea {
+      font: inherit;
+    }
+
+    .contact-page svg {
+      width: 24px;
+      height: 24px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .section {
+      width: min(1200px, calc(100% - 48px));
+      margin-inline: auto;
+      padding-block: 100px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--contact-blue-light);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .eyebrow-line {
+      display: inline-block;
+      width: 25px;
+      height: 2px;
+      background: var(--contact-blue);
+      box-shadow: 0 0 12px rgba(50, 153, 255, 0.65);
+    }
+
+    .section-heading {
+      max-width: 760px;
+      margin: 0 auto 44px;
+      text-align: center;
+    }
+
+    .section-heading h2,
+    .request-copy h2,
+    .office-copy h2,
+    .delivery-copy h2,
+    .faq-intro h2 {
+      margin: 15px 0;
+      color: var(--contact-text);
+      font-size: clamp(27px, 3.3vw, 39px);
+      font-weight: 850;
+      line-height: 1.65;
+      letter-spacing: -1.2px;
+    }
+
+    .section-heading h2 span,
+    .request-copy h2 span,
+    .office-copy h2 span,
+    .delivery-copy h2 span,
+    .faq-intro h2 span {
+      color: var(--contact-blue-light);
+    }
+
+    .section-heading > p,
+    .section-heading-row > div:first-child > p {
+      max-width: 650px;
+      margin: 0 auto;
+      color: var(--contact-muted);
+      font-size: 14px;
+      line-height: 2.2;
+    }
+
+    .section-heading-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 28px;
+      max-width: none;
+      text-align: right;
+    }
+
+    .section-heading-row h2 {
+      margin-bottom: 8px;
+    }
+
+    .section-heading-row > div:first-child > p {
+      margin-inline: 0;
+    }
+
+    /* HERO */
+
+    .contact-hero {
+      position: relative;
+      isolation: isolate;
+      min-height: 640px;
+      overflow: hidden;
+      padding: 75px max(24px, calc((100% - 1200px) / 2)) 0;
+      background:
+        radial-gradient(ellipse at 77% 42%, rgba(24, 94, 163, 0.19), transparent 38%),
+        linear-gradient(130deg, #081321 0%, #07111e 50%, #09182a 100%);
+      border-bottom: 1px solid rgba(91, 159, 224, 0.2);
+    }
+
+    .hero-grid,
+    .delivery-grid,
+    .cta-grid {
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(116, 169, 222, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(116, 169, 222, 0.055) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(to bottom, black, transparent 95%);
+    }
+
+    .hero-glow {
+      position: absolute;
+      z-index: -1;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+    }
+
+    .hero-glow-one {
+      top: 100px;
+      left: 16%;
+      background: rgba(19, 105, 206, 0.15);
+    }
+
+    .hero-glow-two {
+      right: 8%;
+      bottom: 30px;
+      background: rgba(39, 139, 242, 0.08);
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 40px;
+      width: 100%;
+      max-width: 1200px;
+      min-height: 490px;
+      margin: auto;
+      padding-bottom: 40px;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 2;
+      padding-block: 20px;
+      animation: hero-copy-enter 0.8s ease both;
+    }
+
+    .hero-eyebrow {
+      padding: 7px 12px;
+      border: 1px solid rgba(113, 179, 243, 0.2);
+      border-radius: 100px;
+      background: rgba(35, 92, 149, 0.12);
+    }
+
+    .status-dot,
+    .advisor-status i,
+    .map-bottom-dot {
+      width: 7px;
+      height: 7px;
+      flex: 0 0 7px;
+      border-radius: 50%;
+      background: #55c6ff;
+      box-shadow: 0 0 12px rgba(85, 198, 255, 0.85);
+    }
+
+    .hero-copy h1 {
+      max-width: 590px;
+      margin: 25px 0 15px;
+      color: #f5f9ff;
+      font-size: clamp(32px, 4.2vw, 53px);
+      font-weight: 900;
+      line-height: 1.65;
+      letter-spacing: -1.7px;
+    }
+
+    .hero-highlight {
+      display: inline-block;
+      color: var(--contact-blue-light);
+      text-shadow: 0 0 30px rgba(71, 163, 255, 0.16);
+    }
+
+    .hero-description {
+      max-width: 520px;
+      margin: 0;
+      color: #a7b7cb;
+      font-size: 15px;
+      line-height: 2.25;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-top: 27px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      min-height: 50px;
+      padding: 12px 21px;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 800;
+      transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+    }
+
+    .button svg {
+      width: 19px;
+      height: 19px;
+      transition: transform 0.25s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+    }
+
+    .button:hover svg {
+      transform: translateX(-3px);
+    }
+
+    .button-primary {
+      color: white !important;
+      background: linear-gradient(120deg, #1679df, #328fff);
+      box-shadow: 0 8px 26px rgba(24, 119, 226, 0.18);
+    }
+
+    .button-primary:hover {
+      background: linear-gradient(120deg, #268cf2, #58a9ff);
+      box-shadow: 0 12px 34px rgba(24, 119, 226, 0.3);
+    }
+
+    .button-ghost {
+      border-color: rgba(150, 187, 226, 0.22);
+      color: #dbe9fa !important;
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .button-ghost:hover {
+      border-color: rgba(97, 174, 255, 0.55);
+      background: rgba(51, 133, 213, 0.1);
+    }
+
+    .hero-trust {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      margin-top: 36px;
+    }
+
+    .trust-icon {
+      display: grid;
+      width: 43px;
+      height: 43px;
+      place-items: center;
+      border: 1px solid rgba(94, 173, 255, 0.24);
+      border-radius: 12px;
+      color: var(--contact-blue-light);
+      background: rgba(49, 138, 225, 0.1);
+    }
+
+    .trust-icon svg {
+      width: 23px;
+      height: 23px;
+    }
+
+    .hero-trust strong,
+    .hero-trust span {
+      display: block;
+    }
+
+    .hero-trust strong {
+      color: #e7f1ff;
+      font-size: 13px;
+    }
+
+    .hero-trust div:last-child span {
+      color: #8094ae;
+      font-size: 11px;
+    }
+
+    /* HERO INDUSTRIAL VISUAL */
+
+    .hero-visual {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 550px;
+      margin-inline: auto;
+      animation: visual-enter 1s ease both;
+    }
+
+    .visual-topline,
+    .visual-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      color: #6887a9;
+      font-family: monospace;
+      font-size: 9px;
+      letter-spacing: 1px;
+    }
+
+    .visual-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 9px;
+      border: 1px solid rgba(89, 165, 237, 0.2);
+      border-radius: 4px;
+      color: #9ecfff;
+      background: rgba(44, 112, 178, 0.08);
+    }
+
+    .visual-live i {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #48b9ff;
+      box-shadow: 0 0 8px #48b9ff;
+    }
+
+    .visual-blueprint {
+      position: relative;
+      min-height: 365px;
+      overflow: hidden;
+      margin-block: 12px;
+      border: 1px solid rgba(106, 165, 225, 0.19);
+      border-radius: 14px;
+      background:
+        radial-gradient(ellipse at 50% 55%, rgba(32, 111, 195, 0.16), transparent 55%),
+        linear-gradient(145deg, rgba(14, 37, 62, 0.78), rgba(5, 16, 29, 0.94));
+      box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.2),
+        inset 0 0 70px rgba(26, 99, 168, 0.08);
+    }
+
+    .visual-blueprint::before {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(93, 154, 210, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(93, 154, 210, 0.07) 1px, transparent 1px);
+      background-size: 24px 24px;
+      content: "";
+      mask-image: linear-gradient(135deg, black, transparent 95%);
+    }
+
+    .visual-blueprint::after {
+      position: absolute;
+      inset: 12px;
+      border: 1px solid rgba(95, 157, 215, 0.08);
+      border-radius: 8px;
+      pointer-events: none;
+      content: "";
+    }
+
+    .steel-beam-svg {
+      position: absolute;
+      z-index: 2;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .beam-model {
+      transform-origin: 260px 180px;
+      animation: beam-float 5s ease-in-out infinite;
+    }
+
+    .beam-scan {
+      stroke-dasharray: 120 600;
+      animation: beam-scan 4.5s ease-in-out infinite;
+    }
+
+    .blueprint-cross {
+      position: absolute;
+      z-index: 1;
+      width: 15px;
+      height: 15px;
+      opacity: 0.5;
+    }
+
+    .blueprint-cross::before,
+    .blueprint-cross::after {
+      position: absolute;
+      background: #6fb7f5;
+      content: "";
+    }
+
+    .blueprint-cross::before {
+      top: 7px;
+      left: 0;
+      width: 15px;
+      height: 1px;
+    }
+
+    .blueprint-cross::after {
+      top: 0;
+      left: 7px;
+      width: 1px;
+      height: 15px;
+    }
+
+    .cross-one {
+      top: 50px;
+      right: 50px;
+    }
+
+    .cross-two {
+      bottom: 55px;
+      left: 42px;
+    }
+
+    .blueprint-ring {
+      position: absolute;
+      z-index: 1;
+      border: 1px solid rgba(85, 157, 226, 0.18);
+      border-radius: 50%;
+    }
+
+    .ring-one {
+      top: 50%;
+      left: 50%;
+      width: 280px;
+      height: 280px;
+      transform: translate(-50%, -50%);
+    }
+
+    .ring-two {
+      top: 50%;
+      left: 50%;
+      width: 220px;
+      height: 220px;
+      border-style: dashed;
+      transform: translate(-50%, -50%);
+      animation: ring-rotate 30s linear infinite;
+    }
+
+    .visual-tag {
+      position: absolute;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 9px 12px;
+      border: 1px solid rgba(108, 176, 242, 0.2);
+      border-radius: 7px;
+      background: rgba(5, 19, 34, 0.88);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.17);
+      backdrop-filter: blur(12px);
+    }
+
+    .tag-top {
+      top: 34px;
+      left: 23px;
+    }
+
+    .tag-bottom {
+      right: 22px;
+      bottom: 35px;
+    }
+
+    .visual-tag strong,
+    .visual-tag small {
+      display: block;
+    }
+
+    .visual-tag strong {
+      color: #d9edff;
+      font-family: monospace;
+      font-size: 10px;
+      letter-spacing: 0.6px;
+    }
+
+    .visual-tag small {
+      color: #7897b8;
+      font-size: 9px;
+    }
+
+    .tag-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #59b7ff;
+      box-shadow: 0 0 12px #278fff;
+    }
+
+    .tag-number {
+      display: grid;
+      width: 31px;
+      height: 31px;
+      place-items: center;
+      border-radius: 5px;
+      color: #bce2ff;
+      background: rgba(45, 139, 229, 0.18);
+      font-family: monospace;
+      font-size: 12px;
+    }
+
+    .visual-coordinate {
+      position: absolute;
+      right: 17px;
+      top: 15px;
+      z-index: 3;
+      color: rgba(145, 195, 241, 0.56);
+      font-family: monospace;
+      font-size: 8px;
+      letter-spacing: 0.6px;
+    }
+
+    .visual-footer {
+      justify-content: center;
+      gap: 12px;
+      padding-block: 5px;
+      color: #7896b5;
+      font-size: 8px;
+    }
+
+    .visual-footer-line {
+      width: 22px;
+      height: 1px;
+      background: #28496d;
+    }
+
+    .hero-bottom-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      min-height: 57px;
+      border-top: 1px solid rgba(124, 169, 215, 0.13);
+      color: #758ca8;
+      font-size: 10px;
+    }
+
+    .hero-bottom-line > span:first-child {
+      color: #a5c9ee;
+      font-family: monospace;
+      font-size: 11px;
+      letter-spacing: 1px;
+    }
+
+    .hero-bottom-line a {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: #b4c9e2;
+      transition: color 0.2s ease;
+    }
+
+    .hero-bottom-line a:hover {
+      color: white;
+    }
+
+    .hero-bottom-line a span {
+      color: #55afff;
+      font-size: 16px;
+    }
+
+    /* CONTACT INFORMATION */
+
+    .intro-section {
+      padding-top: 95px;
+    }
+
+    .contact-info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 17px;
+    }
+
+    .info-card {
+      position: relative;
+      min-width: 0;
+      padding: 25px;
+      overflow: hidden;
+      border: 1px solid var(--contact-border);
+      border-radius: 13px;
+      background: linear-gradient(145deg, #0d1c2e, #0a1625);
+      transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        background 0.25s ease;
+    }
+
+    .info-card::after {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #318ff0, transparent);
+      opacity: 0;
+      content: "";
+      transition: opacity 0.25s ease;
+    }
+
+    .info-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(79, 157, 235, 0.4);
+      background: linear-gradient(145deg, #10233a, #0b192a);
+    }
+
+    .info-card:hover::after {
+      opacity: 1;
+    }
+
+    .info-card-featured {
+      border-color: rgba(64, 149, 236, 0.3);
+      background:
+        radial-gradient(ellipse at 100% 0%, rgba(39, 129, 224, 0.12), transparent 60%),
+        linear-gradient(145deg, #10243b, #0b1829);
+    }
+
+    .info-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 25px;
+    }
+
+    .info-icon {
+      display: grid;
+      width: 49px;
+      height: 49px;
+      place-items: center;
+      border: 1px solid rgba(86, 163, 239, 0.24);
+      border-radius: 12px;
+      color: #80c3ff;
+      background: rgba(43, 128, 213, 0.12);
+    }
+
+    .info-icon svg {
+      width: 23px;
+      height: 23px;
+    }
+
+    .card-index {
+      color: #637d9b;
+      font-family: monospace;
+      font-size: 9px;
+      letter-spacing: 0.6px;
+    }
+
+    .info-card h3 {
+      margin: 0 0 9px;
+      color: #edf5ff;
+      font-size: 17px;
+      font-weight: 800;
+    }
+
+    .info-card > p {
+      min-height: 78px;
+      margin: 0;
+      color: #92a6bf;
+      font-size: 12px;
+      line-height: 2.2;
+    }
+
+    .info-note {
+      display: inline-block;
+      margin-top: 16px;
+      color: #78baff;
+      font-size: 10px;
+    }
+
+    .text-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 16px;
+      color: #83c2ff !important;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .text-link span {
+      transition: transform 0.2s ease;
+    }
+
+    .text-link:hover span {
+      transform: translateX(-4px);
+    }
+
+    /* FORM */
+
+    .request-section {
+      width: 100%;
+      max-width: none;
+      padding-inline: max(24px, calc((100% - 1200px) / 2));
+      background:
+        radial-gradient(ellipse at 5% 60%, rgba(26, 90, 159, 0.1), transparent 36%),
+        #091522;
+      border-block: 1px solid rgba(114, 164, 216, 0.1);
+    }
+
+    .request-layout {
+      display: grid;
+      grid-template-columns: 0.88fr 1.12fr;
+      align-items: start;
+      gap: 65px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .request-copy {
+      padding-top: 25px;
+    }
+
+    .request-copy h2 {
+      margin-block: 20px 12px;
+      font-size: clamp(30px, 3.6vw, 43px);
+    }
+
+    .request-copy > p,
+    .office-copy > p,
+    .delivery-copy > p,
+    .faq-intro > p {
+      color: var(--contact-muted);
+      font-size: 13px;
+      line-height: 2.3;
+    }
+
+    .request-points {
+      display: grid;
+      gap: 22px;
+      margin-top: 32px;
+    }
+
+    .request-point {
+      display: flex;
+      align-items: flex-start;
+      gap: 13px;
+    }
+
+    .point-check {
+      display: grid;
+      width: 27px;
+      height: 27px;
+      flex: 0 0 27px;
+      place-items: center;
+      border: 1px solid rgba(72, 157, 242, 0.3);
+      border-radius: 50%;
+      color: #84c6ff;
+      background: rgba(48, 129, 209, 0.13);
+      font-size: 13px;
+    }
+
+    .request-point strong {
+      display: block;
+      color: #e1edfc;
+      font-size: 13px;
+    }
+
+    .request-point p {
+      margin: 2px 0 0;
+      color: #8196b0;
+      font-size: 11px;
+    }
+
+    .request-decoration {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 45px;
+      color: #496987;
+      font-family: monospace;
+      font-size: 9px;
+      letter-spacing: 1.3px;
+    }
+
+    .decoration-line {
+      width: 36px;
+      height: 1px;
+      background: #328de9;
+    }
+
+    .form-panel {
+      padding: 31px;
+      border: 1px solid rgba(117, 171, 228, 0.18);
+      border-radius: 15px;
+      background: linear-gradient(145deg, #101f32, #0b1726);
+      box-shadow: 0 24px 65px rgba(0, 0, 0, 0.16);
+    }
+
+    .form-panel-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid rgba(130, 170, 215, 0.12);
+    }
+
+    .form-overline {
+      display: block;
+      color: #649bd2;
+      font-family: monospace;
+      font-size: 9px;
+      letter-spacing: 1px;
+    }
+
+    .form-panel-heading h3 {
+      margin: 4px 0 0;
+      color: #f0f6ff;
+      font-size: 20px;
+      font-weight: 850;
+    }
+
+    .form-heading-icon {
+      display: grid;
+      width: 47px;
+      height: 47px;
+      place-items: center;
+      border: 1px solid rgba(77, 158, 241, 0.23);
+      border-radius: 11px;
+      color: #83c4ff;
+      background: rgba(38, 121, 206, 0.1);
+    }
+
+    .form-heading-icon svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 17px;
+      padding-top: 22px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .form-field {
+      display: grid;
+      align-content: start;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .form-field > span {
+      color: #c8d8ea;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .form-field b {
+      color: #69baff;
+    }
+
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      width: 100%;
+      min-width: 0;
+      border: 1px solid rgba(130, 171, 214, 0.16);
+      border-radius: 7px;
+      outline: none;
+      color: #ecf5ff;
+      background: #0a1523;
+      font-size: 12px;
+      transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .form-field input,
+    .form-field select {
+      min-height: 47px;
+      padding: 10px 13px;
+    }
+
+    .form-field textarea {
+      min-height: 110px;
+      padding: 12px 13px;
+      resize: vertical;
+    }
+
+    .form-field input::placeholder,
+    .form-field textarea::placeholder {
+      color: #5e728b;
+    }
+
+    .form-field select {
+      color-scheme: dark;
+      cursor: pointer;
+    }
+
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus {
+      border-color: rgba(74, 163, 255, 0.75);
+      background: #0c1b2c;
+      box-shadow: 0 0 0 3px rgba(48, 139, 229, 0.09);
+    }
+
+    .submit-button {
+      width: 100%;
+      margin-top: 2px;
+    }
+
+    .form-status {
+      display: none;
+      margin: 0;
+      padding: 11px 13px;
+      border: 1px solid rgba(87, 173, 255, 0.26);
+      border-radius: 7px;
+      color: #b8ddff;
+      background: rgba(39, 120, 205, 0.1);
+      font-size: 11px;
+      line-height: 1.9;
+    }
+
+    .form-status.is-visible {
+      display: block;
+    }
+
+    .form-privacy {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0;
+      color: #70849d;
+      font-size: 10px;
+      line-height: 1.9;
+    }
+
+    .form-privacy svg {
+      width: 15px;
+      height: 15px;
+      flex: 0 0 15px;
+      color: #5c9ddc;
+    }
+
+    /* ADVISORS */
+
+    .heading-side-mark {
+      display: flex;
+      flex: 0 0 auto;
+      align-items: center;
+      gap: 9px;
+      color: #5b7ea5;
+    }
+
+    .heading-side-mark > span {
+      color: #244e79;
+      font-family: monospace;
+      font-size: 36px;
+      font-weight: 900;
+      letter-spacing: -3px;
+    }
+
+    .heading-side-mark > i {
+      width: 24px;
+      height: 2px;
+      background: #328fe9;
+    }
+
+    .heading-side-mark small {
+      font-family: monospace;
+      font-size: 9px;
+      letter-spacing: 1px;
+    }
+
+    .advisors-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .advisor-card {
+      position: relative;
+      padding: 24px;
+      overflow: hidden;
+      border: 1px solid var(--contact-border);
+      border-radius: 13px;
+      background: linear-gradient(145deg, #102037, #0b1726);
+      transition:
+        transform 0.25s ease,
+        border-color 0.25s ease;
+    }
+
+    .advisor-card::before {
+      position: absolute;
+      top: -55px;
+      left: -55px;
+      width: 160px;
+      height: 160px;
+      border: 1px solid rgba(77, 151, 225, 0.1);
+      border-radius: 50%;
+      box-shadow: 0 0 0 18px rgba(77, 151, 225, 0.025), 0 0 0 36px rgba(77, 151, 225, 0.02);
+      content: "";
+      pointer-events: none;
+    }
+
+    .advisor-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(80, 163, 246, 0.38);
+    }
+
+    .advisor-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(127, 170, 215, 0.12);
+    }
+
+    .advisor-number {
+      color: #6984a3;
+      font-family: monospace;
+      font-size: 9px;
+      letter-spacing: 0.7px;
+    }
+
+    .advisor-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: #8fa9c5;
+      font-size: 10px;
+    }
+
+    .advisor-status i {
+      width: 6px;
+      height: 6px;
+      flex-basis: 6px;
+    }
+
+    .advisor-profile {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding-block: 22px;
+    }
+
+    .advisor-avatar {
+      position: relative;
+      display: grid;
+      width: 73px;
+      height: 73px;
+      flex: 0 0 73px;
+      place-items: center;
+      border: 1px solid rgba(95, 170, 242, 0.4);
+      border-radius: 50%;
+      color: #c3e3ff;
+      background:
+        radial-gradient(circle at 35% 25%, rgba(90, 170, 255, 0.28), transparent 60%),
+        #102c4a;
+      font-size: 22px;
+      font-weight: 850;
+    }
+
+    .advisor-avatar::before,
+    .advisor-avatar::after {
+      position: absolute;
+      border: 1px solid rgba(81, 162, 242, 0.18);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .advisor-avatar::before {
+      inset: -6px;
+    }
+
+    .advisor-avatar::after {
+      inset: 8px;
+    }
+
+    .advisor-avatar span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .avatar-orbit {
+      position: absolute;
+      inset: -10px;
+      border: 1px dashed rgba(103, 182, 255, 0.25);
+      border-radius: 50%;
+      animation: ring-rotate 30s linear infinite;
+    }
+
+    .advisor-info h3 {
+      margin: 0;
+      color: #f0f6ff;
+      font-size: 18px;
+      font-weight: 850;
+    }
+
+    .advisor-info p {
+      margin: 4px 0 0;
+      color: #91a7c0;
+      font-size: 11px;
+    }
+
+    .advisor-specialty {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 12px;
+      border: 1px solid rgba(127, 170, 215, 0.1);
+      border-radius: 7px;
+      color: #a9bed5;
+      background: rgba(255, 255, 255, 0.018);
+      font-size: 11px;
+    }
+
+    .specialty-icon {
+      color: #69b7ff;
+      font-size: 17px;
+    }
+
+    .advisor-call {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 14px;
+      padding: 13px 15px;
+      border: 1px solid rgba(71, 152, 233, 0.23);
+      border-radius: 7px;
+      color: #b7dcff !important;
+      background: rgba(41, 126, 206, 0.09);
+      font-size: 12px;
+      font-weight: 800;
+      transition: background 0.2s ease;
+    }
+
+    .advisor-call:hover {
+      background: rgba(41, 126, 206, 0.18);
+    }
+
+    .advisor-call svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .advisor-warning {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-top: 17px;
+      color: #8297b0;
+      font-size: 10px;
+    }
+
+    .advisor-warning > span {
+      display: grid;
+      width: 20px;
+      height: 20px;
+      flex: 0 0 20px;
+      place-items: center;
+      border: 1px solid rgba(91, 157, 225, 0.3);
+      border-radius: 50%;
+      color: #82bfff;
+    }
+
+    /* OFFICE */
+
+    .office-section {
+      width: 100%;
+      max-width: none;
+      padding-inline: max(24px, calc((100% - 1200px) / 2));
+      background:
+        radial-gradient(ellipse at 90% 60%, rgba(23, 93, 159, 0.09), transparent 45%),
+        #091522;
+      border-block: 1px solid rgba(117, 164, 213, 0.1);
+    }
+
+    .office-layout {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      align-items: center;
+      gap: 55px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .office-copy h2 {
+      margin-top: 17px;
+    }
+
+    .office-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 13px;
+      margin-top: 25px;
+    }
+
+    .office-detail-icon {
+      display: grid;
+      width: 43px;
+      height: 43px;
+      flex: 0 0 43px;
+      place-items: center;
+      border: 1px solid rgba(82, 158, 237, 0.22);
+      border-radius: 10px;
+      color: #85c4ff;
+      background: rgba(44, 126, 204, 0.1);
+    }
+
+    .office-detail-icon svg {
+      width: 21px;
+      height: 21px;
+    }
+
+    .office-detail > div:last-child {
+      min-width: 0;
+    }
+
+    .office-detail span,
+    .office-detail strong {
+      display: block;
+    }
+
+    .office-detail span {
+      margin-bottom: 3px;
+      color: #6e8ba9;
+      font-size: 10px;
+    }
+
+    .office-detail strong {
+      color: #d5e4f5;
+      font-size: 12px;
+      font-weight: 650;
+      line-height: 2;
+      overflow-wrap: anywhere;
+    }
+
+    .office-map-button {
+      margin-top: 25px;
+    }
+
+    .office-map-card {
+      overflow: hidden;
+      border: 1px solid rgba(119, 171, 224, 0.19);
+      border-radius: 13px;
+      background: #0c1929;
+      box-shadow: 0 22px 55px rgba(0, 0, 0, 0.13);
+    }
+
+    .map-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 17px 20px;
+      border-bottom: 1px solid rgba(128, 174, 219, 0.13);
+    }
+
+    .map-topbar strong,
+    .map-overline {
+      display: block;
+    }
+
+    .map-overline {
+      color: #6194c6;
+      font-family: monospace;
+      font-size: 8px;
+      letter-spacing: 1px;
+    }
+
+    .map-topbar strong {
+      margin-top: 3px;
+      color: #e3efff;
+      font-size: 13px;
+    }
+
+    .map-coordinate {
+      color: #6886a5;
+      font-family: monospace;
+      font-size: 9px;
+    }
+
+    .office-map-card iframe {
+      display: block;
+      width: 100%;
+      min-height: 330px;
+      border: 0;
+      filter: grayscale(0.75) invert(0.88) hue-rotate(170deg) contrast(0.85);
+    }
+
+    .map-placeholder {
+      position: relative;
+      min-height: 330px;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 50% 50%, rgba(38, 112, 180, 0.14), transparent 50%),
+        #0b1928;
+    }
+
+    .map-placeholder::before {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(95, 155, 211, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(95, 155, 211, 0.08) 1px, transparent 1px);
+      background-size: 28px 28px;
+      content: "";
+    }
+
+    .map-contour {
+      position: absolute;
+      border: 1px solid rgba(66, 132, 192, 0.17);
+      border-radius: 48%;
+      transform: rotate(-25deg);
+    }
+
+    .contour-one {
+      top: 25px;
+      left: 10%;
+      width: 75%;
+      height: 250px;
+    }
+
+    .contour-two {
+      top: 40px;
+      left: 18%;
+      width: 65%;
+      height: 210px;
+      transform: rotate(28deg);
+    }
+
+    .contour-three {
+      top: 70px;
+      left: 24%;
+      width: 55%;
+      height: 150px;
+      transform: rotate(-5deg);
+    }
+
+    .map-road {
+      position: absolute;
+      height: 8px;
+      border: 1px solid rgba(113, 165, 214, 0.2);
+      border-right: 0;
+      border-left: 0;
+      background: rgba(50, 98, 146, 0.13);
+    }
+
+    .road-one {
+      top: 45%;
+      left: -5%;
+      width: 115%;
+      transform: rotate(-18deg);
+    }
+
+    .road-two {
+      top: 40%;
+      left: -12%;
+      width: 120%;
+      transform: rotate(39deg);
+    }
+
+    .road-three {
+      top: 65%;
+      left: 10%;
+      width: 90%;
+      transform: rotate(-55deg);
+    }
+
+    .map-marker {
+      position: absolute;
+      top: 43%;
+      left: 50%;
+      display: grid;
+      width: 60px;
+      height: 60px;
+      place-items: center;
+      transform: translate(-50%, -50%);
+    }
+
+    .marker-pulse {
+      position: absolute;
+      inset: 0;
+      border: 1px solid rgba(69, 163, 255, 0.55);
+      border-radius: 50%;
+      animation: marker-pulse 2.5s ease-out infinite;
+    }
+
+    .marker-pin {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      width: 41px;
+      height: 41px;
+      place-items: center;
+      border: 1px solid #80c9ff;
+      border-radius: 50%;
+      color: white;
+      background: #1679d6;
+      box-shadow: 0 0 28px rgba(37, 141, 242, 0.38);
+    }
+
+    .marker-pin svg {
+      width: 21px;
+      height: 21px;
+    }
+
+    .map-label {
+      position: absolute;
+      top: calc(43% + 43px);
+      left: 50%;
+      width: max-content;
+      max-width: calc(100% - 35px);
+      padding: 9px 14px;
+      border: 1px solid rgba(100, 167, 231, 0.2);
+      border-radius: 7px;
+      background: rgba(6, 20, 35, 0.91);
+      text-align: center;
+      transform: translateX(-50%);
+    }
+
+    .map-label strong,
+    .map-label span {
+      display: block;
+    }
+
+    .map-label strong {
+      color: #cce8ff;
+      font-size: 12px;
+    }
+
+    .map-label span {
+      color: #7f99b7;
+      font-size: 9px;
+    }
+
+    .map-grid-label {
+      position: absolute;
+      color: #5b7897;
+      font-family: monospace;
+      font-size: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    .map-grid-a {
+      top: 17px;
+      right: 17px;
+    }
+
+    .map-grid-b {
+      bottom: 17px;
+      left: 17px;
+    }
+
+    .map-grid-c {
+      right: 17px;
+      bottom: 17px;
+    }
+
+    .map-bottom {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-height: 46px;
+      padding: 10px 17px;
+      border-top: 1px solid rgba(128, 174, 219, 0.12);
+      color: #7f95af;
+      font-size: 10px;
+    }
+
+    /* SERVICES */
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .service-card {
+      position: relative;
+      min-width: 0;
+      padding: 23px 19px;
+      overflow: hidden;
+      border: 1px solid var(--contact-border);
+      border-radius: 12px;
+      background: linear-gradient(145deg, #102037, #0a1726);
+      transition:
+        transform 0.25s ease,
+        border-color 0.25s ease;
+    }
+
+    .service-card::before {
+      position: absolute;
+      top: -25px;
+      left: -25px;
+      width: 90px;
+      height: 90px;
+      border: 1px solid rgba(80, 153, 223, 0.1);
+      border-radius: 50%;
+      box-shadow: 0 0 0 12px rgba(80, 153, 223, 0.025);
+      content: "";
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(77, 159, 241, 0.4);
+    }
+
+    .service-icon {
+      display: grid;
+      width: 47px;
+      height: 47px;
+      place-items: center;
+      border: 1px solid rgba(81, 159, 238, 0.23);
+      border-radius: 11px;
+      color: #83c4ff;
+      background: rgba(46, 126, 207, 0.12);
+    }
+
+    .service-icon svg {
+      width: 23px;
+      height: 23px;
+    }
+
+    .service-number {
+      position: absolute;
+      top: 26px;
+      left: 19px;
+      color: #365779;
+      font-family: monospace;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .service-card h3 {
+      margin: 22px 0 8px;
+      color: #e8f2ff;
+      font-size: 15px;
+      font-weight: 850;
+    }
+
+    .service-card p {
+      min-height: 82px;
+      margin: 0;
+      color: #91a6bf;
+      font-size: 11px;
+      line-height: 2.1;
+    }
+
+    .service-card > a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 18px;
+      padding-top: 13px;
+      border-top: 1px solid rgba(130, 172, 217, 0.12);
+      color: #83c2ff !important;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .service-card > a span {
+      font-size: 15px;
+      transition: transform 0.2s ease;
+    }
+
+    .service-card > a:hover span {
+      transform: translateX(-4px);
+    }
+
+    /* DELIVERY */
+
+    .delivery-section {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      padding: 75px 24px;
+      border-block: 1px solid rgba(101, 165, 228, 0.16);
+      background:
+        radial-gradient(ellipse at 15% 50%, rgba(22, 99, 176, 0.18), transparent 45%),
+        linear-gradient(110deg, #0d2137, #091522 65%);
+    }
+
+    .delivery-grid {
+      opacity: 0.6;
+      mask-image: linear-gradient(90deg, black, transparent);
+    }
+
+    .delivery-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 65px;
+      width: 100%;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .delivery-copy h2 {
+      font-size: clamp(28px, 3.3vw, 39px);
+    }
+
+    .delivery-copy .button {
+      margin-top: 17px;
+    }
+
+    .delivery-steps {
+      display: grid;
+      gap: 0;
+    }
+
+    .delivery-step {
+      display: grid;
+      grid-template-columns: 48px 1px 1fr;
+      align-items: stretch;
+      gap: 17px;
+      min-height: 105px;
+    }
+
+    .step-number {
+      display: grid;
+      width: 43px;
+      height: 43px;
+      place-items: center;
+      border: 1px solid rgba(85, 166, 243, 0.28);
+      border-radius: 10px;
+      color: #91cbff;
+      background: rgba(39, 122, 203, 0.13);
+      font-family: monospace;
+      font-size: 13px;
+    }
+
+    .step-line {
+      width: 1px;
+      background: linear-gradient(to bottom, #2e8ce9, rgba(46, 140, 233, 0.04));
+    }
+
+    .delivery-step:last-child .step-line {
+      background: transparent;
+    }
+
+    .delivery-step h3 {
+      margin: 0 0 5px;
+      color: #e2efff;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .delivery-step p {
+      margin: 0;
+      color: #8fa5bf;
+      font-size: 11px;
+      line-height: 2.1;
+    }
+
+    /* GALLERY */
+
+    .gallery-counter {
+      display: flex;
+      flex: 0 0 auto;
+      align-items: center;
+      gap: 12px;
+      color: #6383a6;
+      font-family: monospace;
+      font-size: 9px;
+      letter-spacing: 0.7px;
+    }
+
+    .gallery-counter strong {
+      color: #6abaff;
+      font-size: 30px;
+      font-weight: 800;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .gallery-card {
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid var(--contact-border);
+      border-radius: 12px;
+      background: #0c1929;
+      transition:
+        transform 0.25s ease,
+        border-color 0.25s ease;
+    }
+
+    .gallery-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(76, 160, 242, 0.4);
+    }
+
+    .gallery-image {
+      position: relative;
+      height: 230px;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 50% 45%, rgba(48, 132, 209, 0.3), transparent 55%),
+        linear-gradient(135deg, #1a3550, #0a1624);
+    }
+
+    .gallery-image::before {
+      position: absolute;
+      z-index: 1;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(123, 175, 224, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(123, 175, 224, 0.06) 1px, transparent 1px);
+      background-size: 24px 24px;
+      content: "";
+      pointer-events: none;
+    }
+
+    .gallery-image img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .gallery-card:hover .gallery-image img {
+      transform: scale(1.06);
+    }
+
+    .gallery-image-overlay {
+      position: absolute;
+      z-index: 1;
+      inset: 0;
+      background: linear-gradient(to top, rgba(4, 12, 22, 0.72), transparent 65%);
+      pointer-events: none;
+    }
+
+    .gallery-index,
+    .gallery-corner {
+      position: absolute;
+      z-index: 2;
+      top: 13px;
+      color: #d8edff;
+      font-family: monospace;
+      font-size: 10px;
+    }
+
+    .gallery-index {
+      right: 13px;
+      display: grid;
+      width: 30px;
+      height: 30px;
+      place-items: center;
+      border: 1px solid rgba(151, 203, 255, 0.25);
+      border-radius: 5px;
+      background: rgba(7, 23, 39, 0.72);
+    }
+
+    .gallery-corner {
+      left: 13px;
+      color: #91b5d9;
+      font-size: 8px;
+      letter-spacing: 1px;
+    }
+
+    .gallery-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 18px;
+    }
+
+    .gallery-content h3 {
+      margin: 0;
+      color: #e7f2ff;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .gallery-content p {
+      margin: 5px 0 0;
+      color: #859ab4;
+      font-size: 10px;
+      line-height: 1.9;
+    }
+
+    .gallery-arrow {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      flex: 0 0 34px;
+      place-items: center;
+      border: 1px solid rgba(78, 155, 235, 0.23);
+      border-radius: 50%;
+      color: #83c3ff;
+      background: rgba(47, 124, 202, 0.08);
+      font-size: 16px;
+      transition:
+        color 0.2s ease,
+        background 0.2s ease;
+    }
+
+    .gallery-card:hover .gallery-arrow {
+      color: white;
+      background: #237ed6;
+    }
+
+    .gallery-image.image-missing::after {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: rgba(177, 216, 255, 0.75);
+      font-family: monospace;
+      font-size: 12px;
+      letter-spacing: 2px;
+      content: "ASIN STILL / STEEL";
+    }
+
+    /* FAQ */
+
+    .faq-section {
+      border-top: 1px solid rgba(111, 163, 217, 0.1);
+    }
+
+    .faq-layout {
+      display: grid;
+      grid-template-columns: 0.72fr 1.28fr;
+      align-items: start;
+      gap: 60px;
+    }
+
+    .faq-intro h2 {
+      margin-top: 18px;
+    }
+
+    .faq-side-mark {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 40px;
+      color: #5d7c9d;
+      font-family: monospace;
+      font-size: 8px;
+      letter-spacing: 0.8px;
+    }
+
+    .faq-side-mark > span {
+      color: #24517e;
+      font-size: 36px;
+      font-weight: 900;
+    }
+
+    .faq-side-mark > i {
+      width: 25px;
+      height: 1px;
+      background: #328fe9;
+    }
+
+    .faq-list {
+      border-top: 1px solid rgba(130, 171, 214, 0.16);
+    }
+
+    .faq-item {
+      border-bottom: 1px solid rgba(130, 171, 214, 0.16);
+    }
+
+    .faq-item summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 19px 0;
+      color: #dce9f8;
+      cursor: pointer;
+      list-style: none;
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-plus {
+      position: relative;
+      display: grid;
+      width: 29px;
+      height: 29px;
+      flex: 0 0 29px;
+      place-items: center;
+      border: 1px solid rgba(86, 158, 230, 0.24);
+      border-radius: 7px;
+      color: #80c3ff;
+      background: rgba(46, 122, 196, 0.09);
+      transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+    }
+
+    .faq-plus::before,
+    .faq-plus::after {
+      position: absolute;
+      width: 10px;
+      height: 1px;
+      background: currentColor;
+      content: "";
+    }
+
+    .faq-plus::after {
+      transform: rotate(90deg);
+      transition: transform 0.2s ease;
+    }
+
+    .faq-item[open] .faq-plus {
+      background: rgba(46, 122, 196, 0.2);
+    }
+
+    .faq-item[open] .faq-plus::after {
+      transform: rotate(0);
+    }
+
+    .faq-answer {
+      padding: 0 0 19px;
+      color: #91a6bf;
+      font-size: 12px;
+      line-height: 2.25;
+      animation: faq-open 0.25s ease;
+    }
+
+    /* FINAL CTA */
+
+    .final-cta {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      padding: 40px 24px;
+      border-top: 1px solid rgba(95, 162, 229, 0.22);
+      background:
+        radial-gradient(ellipse at 80% 50%, rgba(38, 119, 198, 0.2), transparent 50%),
+        linear-gradient(110deg, #102944, #0b1c30);
+    }
+
+    .cta-grid {
+      opacity: 0.4;
+      mask-image: linear-gradient(90deg, transparent, black, transparent);
+    }
+
+    .cta-glow {
+      position: absolute;
+      z-index: -1;
+      top: -100px;
+      right: 30%;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: rgba(29, 121, 211, 0.13);
+      filter: blur(90px);
+    }
+
+    .final-cta-inner {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      width: 100%;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .cta-symbol {
+      position: relative;
+      display: grid;
+      width: 68px;
+      height: 68px;
+      flex: 0 0 68px;
+      place-items: center;
+      border: 1px solid rgba(112, 184, 250, 0.35);
+      border-radius: 12px;
+      color: #a6d6ff;
+      background: rgba(41, 123, 199, 0.13);
+      font-family: monospace;
+      font-size: 23px;
+      font-weight: 900;
+    }
+
+    .cta-symbol i {
+      position: absolute;
+      right: -1px;
+      bottom: -1px;
+      width: 15px;
+      height: 15px;
+      border-right: 2px solid #5fb4ff;
+      border-bottom: 2px solid #5fb4ff;
+    }
+
+    .cta-copy {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .cta-overline {
+      color: #72baff;
+      font-family: monospace;
+      font-size: 9px;
+      letter-spacing: 1px;
+    }
+
+    .cta-copy h2 {
+      margin: 4px 0;
+      color: #f0f6ff;
+      font-size: clamp(18px, 2.3vw, 26px);
+      font-weight: 850;
+      line-height: 1.8;
+    }
+
+    .cta-copy p {
+      margin: 0;
+      color: #9cb2cc;
+      font-size: 11px;
+    }
+
+    .button-light {
+      flex: 0 0 auto;
+      color: #09213a !important;
+      background: #d9edff;
+    }
+
+    .button-light:hover {
+      background: white;
+      box-shadow: 0 8px 25px rgba(107, 181, 246, 0.17);
+    }
+
+    /* ANIMATIONS */
+
+    @keyframes hero-copy-enter {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
       }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes visual-enter {
+      from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes beam-float {
+      0%, 100% {
+        transform: translateY(0) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-7px) rotate(0.5deg);
+      }
+    }
+
+    @keyframes beam-scan {
+      0% {
+        stroke-dashoffset: 350;
+        opacity: 0;
+      }
+      20% {
+        opacity: 0.9;
+      }
+      70% {
+        opacity: 0.9;
+      }
+      100% {
+        stroke-dashoffset: -350;
+        opacity: 0;
+      }
+    }
+
+    @keyframes ring-rotate {
+      from {
+        transform: translate(-50%, -50%) rotate(0deg);
+      }
+      to {
+        transform: translate(-50%, -50%) rotate(360deg);
+      }
+    }
+
+    @keyframes marker-pulse {
+      0% {
+        opacity: 0.8;
+        transform: scale(0.65);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(1.5);
+      }
+    }
+
+    @keyframes faq-open {
+      from {
+        opacity: 0;
+        transform: translateY(-4px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* RESPONSIVE */
+
+    @media (min-width: 1500px) {
+      .contact-hero {
+        padding-inline: max(32px, calc((100% - 1300px) / 2));
+      }
+    }
+
+    @media (max-width: 1050px) {
+      .hero-inner {
+        gap: 20px;
+      }
+
+      .hero-copy h1 {
+        font-size: 40px;
+      }
+
+      .visual-blueprint {
+        min-height: 320px;
+      }
+
+      .request-layout,
+      .office-layout {
+        gap: 35px;
+      }
+
+      .services-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .service-card p {
+        min-height: 55px;
+      }
+
+      .gallery-image {
+        height: 195px;
+      }
+
+      .faq-layout {
+        gap: 35px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .section {
+        width: calc(100% - 36px);
+        padding-block: 68px;
+      }
+
+      .section-heading {
+        margin-bottom: 30px;
+      }
+
+      .section-heading h2,
+      .request-copy h2,
+      .office-copy h2,
+      .delivery-copy h2,
+      .faq-intro h2 {
+        font-size: 29px;
+        letter-spacing: -0.7px;
+      }
+
+      .section-heading > p,
+      .section-heading-row > div:first-child > p {
+        font-size: 12px;
+      }
+
+      .contact-hero {
+        padding: 45px 20px 0;
+      }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        min-height: auto;
+        padding-bottom: 27px;
+      }
+
+      .hero-copy {
+        padding-top: 5px;
+      }
+
+      .hero-copy h1 {
+        max-width: 540px;
+        margin-top: 18px;
+        font-size: clamp(31px, 7vw, 42px);
+        line-height: 1.7;
+      }
+
+      .hero-description {
+        font-size: 13px;
+      }
+
+      .hero-trust {
+        margin-top: 23px;
+      }
+
+      .hero-visual {
+        width: min(100%, 510px);
+        margin-top: 8px;
+      }
+
+      .visual-blueprint {
+        min-height: clamp(270px, 65vw, 350px);
+      }
+
+      .hero-bottom-line {
+        min-height: 52px;
+        gap: 10px;
+        font-size: 9px;
+      }
+
+      .hero-bottom-line > span:nth-child(2) {
+        max-width: 180px;
+        text-align: center;
+      }
+
+      .contact-info-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .info-card {
+        padding: 21px;
+      }
+
+      .info-card-top {
+        margin-bottom: 15px;
+      }
+
+      .info-card > p {
+        min-height: auto;
+      }
+
+      .request-section,
+      .office-section {
+        padding: 65px 18px;
+      }
+
+      .request-layout,
+      .office-layout,
+      .delivery-inner,
+      .faq-layout {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+
+      .request-copy {
+        padding-top: 0;
+      }
+
+      .request-points {
+        gap: 17px;
+        margin-top: 24px;
+      }
+
+      .request-decoration {
+        margin-top: 25px;
+      }
+
+      .form-panel {
+        padding: 23px 18px;
+      }
+
+      .section-heading-row {
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .heading-side-mark {
+        display: none;
+      }
+
+      .advisors-grid {
+        grid-template-columns: 1fr;
+        gap: 13px;
+      }
+
+      .office-layout {
+        gap: 28px;
+      }
+
+      .office-map-card iframe,
+      .map-placeholder {
+        min-height: 280px;
+      }
+
+      .delivery-section {
+        padding: 60px 20px;
+      }
+
+      .delivery-inner {
+        gap: 30px;
+      }
+
+      .delivery-steps {
+        padding-top: 5px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+
+      .gallery-image {
+        height: clamp(200px, 57vw, 300px);
+      }
+
+      .gallery-content {
+        padding: 16px;
+      }
+
+      .faq-layout {
+        gap: 25px;
+      }
+
+      .faq-side-mark {
+        margin-top: 20px;
+      }
+
+      .faq-item summary {
+        font-size: 12px;
+      }
+
+      .final-cta {
+        padding: 32px 20px;
+      }
+
+      .final-cta-inner {
+        flex-wrap: wrap;
+        gap: 17px;
+      }
+
+      .cta-symbol {
+        width: 55px;
+        height: 55px;
+        flex-basis: 55px;
+        font-size: 19px;
+      }
+
+      .cta-copy {
+        flex-basis: calc(100% - 75px);
+      }
+
+      .cta-copy h2 {
+        font-size: 18px;
+      }
+
+      .cta-copy p {
+        font-size: 10px;
+      }
+
+      .button-light {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .section {
+        width: calc(100% - 30px);
+      }
+
+      .contact-hero {
+        padding-inline: 15px;
+      }
+
+      .hero-actions {
+        align-items: stretch;
+      }
+
+      .hero-actions .button {
+        flex: 1 1 auto;
+        padding-inline: 13px;
+        font-size: 11px;
+      }
+
+      .visual-topline,
+      .visual-footer {
+        font-size: 7px;
+      }
+
+      .visual-blueprint {
+        min-height: 260px;
+      }
+
+      .tag-top {
+        top: 20px;
+        left: 12px;
+      }
+
+      .tag-bottom {
+        right: 12px;
+        bottom: 20px;
+      }
+
+      .visual-tag {
+        padding: 7px 9px;
+      }
+
+      .visual-tag strong {
+        font-size: 8px;
+      }
+
+      .visual-tag small {
+        font-size: 8px;
+      }
+
+      .visual-coordinate {
+        font-size: 7px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .form-panel-heading h3 {
+        font-size: 17px;
+      }
+
+      .service-card {
+        padding: 20px 16px;
+      }
+
+      .services-grid {
+        gap: 10px;
+      }
+
+      .service-card h3 {
+        font-size: 13px;
+      }
+
+      .service-card p {
+        font-size: 10px;
+      }
+
+      .gallery-counter {
+        gap: 6px;
+      }
+
+      .gallery-counter strong {
+        font-size: 24px;
+      }
+
+      .gallery-counter span {
+        font-size: 7px;
+      }
+
+      .hero-bottom-line > span:nth-child(2) {
+        display: none;
+      }
+
+      .hero-bottom-line {
+        justify-content: space-between;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .contact-page *,
+      .contact-page *::before,
+      .contact-page *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+
+  <script>
+    const contactForm = document.querySelector("#contact-request-form");
+    const formStatus = document.querySelector("#form-status");
+
+    if (
+      contactForm instanceof HTMLFormElement &&
+      formStatus instanceof HTMLElement
+    ) {
+      contactForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        formStatus.textContent =
+          "فرم هنوز به سامانه ارسال اطلاعات متصل نیست؛ اطلاعات شما ارسال یا ذخیره نشد. برای ثبت واقعی درخواست، باید فرم به یک سرویس سمت سرور متصل شود.";
+
+        formStatus.classList.add("is-visible");
+      });
+    }
+
+    // Smooth scrolling for internal section links.
+    document.querySelectorAll('.contact-page a[href^="#"]').forEach((link) => {
+      link.addEventListener("click", (event) => {
+        const href = link.getAttribute("href");
+
+        if (!href || href === "#") return;
+
+        const target = document.querySelector(href);
+
+        if (!target) return;
+
+        event.preventDefault();
+
+        target.scrollIntoView({
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+            ? "auto"
+            : "smooth",
+          block: "start",
+        });
+      });
     });
-  });
-</script>
+  </script>
+</BaseLayout>
+```

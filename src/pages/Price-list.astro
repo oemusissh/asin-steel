@@ -6,6 +6,8 @@ const products = [
     name: "میلگرد ۱۴ آجدار A3",
     category: "rebar",
     categoryName: "میلگرد",
+    type: "میلگرد آجدار",
+    size: "14",
     factory: "ذوب آهن اصفهان",
     unit: "شاخه ۱۲ متری",
     weight: "۱۴.۵ کیلوگرم",
@@ -17,6 +19,8 @@ const products = [
     name: "میلگرد ۱۶ آجدار A3",
     category: "rebar",
     categoryName: "میلگرد",
+    type: "میلگرد آجدار",
+    size: "16",
     factory: "ذوب آهن اصفهان",
     unit: "شاخه ۱۲ متری",
     weight: "۱۹ کیلوگرم",
@@ -28,6 +32,8 @@ const products = [
     name: "میلگرد ۱۸ آجدار A3",
     category: "rebar",
     categoryName: "میلگرد",
+    type: "میلگرد آجدار",
+    size: "18",
     factory: "فولاد کویر یزد",
     unit: "شاخه ۱۲ متری",
     weight: "۲۴ کیلوگرم",
@@ -39,6 +45,8 @@ const products = [
     name: "تیرآهن ۱۴ IPE",
     category: "beam",
     categoryName: "تیرآهن",
+    type: "تیرآهن IPE",
+    size: "14",
     factory: "ذوب آهن اصفهان",
     unit: "شاخه ۱۲ متری",
     weight: "۱۵۵ کیلوگرم",
@@ -50,6 +58,8 @@ const products = [
     name: "تیرآهن ۱۶ IPE",
     category: "beam",
     categoryName: "تیرآهن",
+    type: "تیرآهن IPE",
+    size: "16",
     factory: "ذوب آهن اصفهان",
     unit: "شاخه ۱۲ متری",
     weight: "۱۹۰ کیلوگرم",
@@ -61,6 +71,8 @@ const products = [
     name: "ورق سیاه ۲ میل",
     category: "sheet",
     categoryName: "ورق",
+    type: "ورق سیاه",
+    size: "2mm",
     factory: "فولاد مبارکه",
     unit: "شیت ۱×۲ متر",
     weight: "۳۱.۴ کیلوگرم",
@@ -431,6 +443,8 @@ const categories = [
 
                   <tr
                     data-category={product.category}
+                    data-type={product.type || ""}
+                    data-size={product.size || ""}
                     data-factory={product.factory}
                     data-name={product.name}
                   >
@@ -734,78 +748,109 @@ const categories = [
       document.getElementById("emptyState");
 
     let selectedCategory = "all";
+    const urlParams =
+  new URLSearchParams(window.location.search);
 
+const urlCategory =
+  urlParams.get("category");
 
+const urlType =
+  urlParams.get("type");
+
+const urlSize =
+  urlParams.get("size");
+
+const urlFactory =
+  urlParams.get("factory");
+
+if (urlCategory) {
+  selectedCategory = urlCategory;
+}
+
+if (urlFactory && factoryFilter) {
+  factoryFilter.value = urlFactory;
+}
     function updateTable() {
+  const search =
+    searchInput.value
+      .trim()
+      .toLowerCase();
 
-      const search =
-        searchInput.value
-          .trim()
-          .toLowerCase();
+  const factory =
+    factoryFilter.value;
 
-      const factory =
-        factoryFilter.value;
+  const type =
+    urlType || "";
 
-      let visible = 0;
+  const size =
+    urlSize || "";
 
+  let visible = 0;
 
-      rows.forEach((row) => {
+  rows.forEach((row) => {
+    const category =
+      row.dataset.category;
 
-        const category =
-          row.dataset.category;
+    const rowType =
+      row.dataset.type || "";
 
-        const rowFactory =
-          row.dataset.factory;
+    const rowSize =
+      row.dataset.size || "";
 
-        const name =
-          row.dataset.name.toLowerCase();
+    const rowFactory =
+      row.dataset.factory;
 
+    const name =
+      row.dataset.name.toLowerCase();
 
-        const categoryMatch =
-          selectedCategory === "all" ||
-          category === selectedCategory;
+    const categoryMatch =
+      selectedCategory === "all" ||
+      category === selectedCategory;
 
+    const typeMatch =
+      !type ||
+      rowType === type;
 
-        const factoryMatch =
-          factory === "all" ||
-          rowFactory === factory;
+    const sizeMatch =
+      !size ||
+      rowSize === size;
 
+    const factoryMatch =
+      factory === "all" ||
+      rowFactory === factory;
 
-        const searchMatch =
-          !search ||
-          name.includes(search) ||
-          rowFactory.toLowerCase().includes(search);
+    const searchMatch =
+      !search ||
+      name.includes(search) ||
+      rowFactory
+        .toLowerCase()
+        .includes(search);
 
+    const show =
+      categoryMatch &&
+      typeMatch &&
+      sizeMatch &&
+      factoryMatch &&
+      searchMatch;
 
-        const show =
-          categoryMatch &&
-          factoryMatch &&
-          searchMatch;
+    row.style.display =
+      show ? "" : "none";
 
-
-        row.style.display =
-          show ? "" : "none";
-
-
-        if (show) {
-          visible++;
-        }
-
-      });
-
-
-      if (count) {
-        count.textContent =
-          visible.toLocaleString("fa-IR");
-      }
-
-
-      emptyState.classList.toggle(
-        "hidden",
-        visible !== 0
-      );
-
+    if (show) {
+      visible++;
     }
+  });
+
+  if (count) {
+    count.textContent =
+      visible.toLocaleString("fa-IR");
+  }
+
+  emptyState.classList.toggle(
+    "hidden",
+    visible !== 0
+  );
+}
 
 
     searchInput.addEventListener(
@@ -834,13 +879,45 @@ const categories = [
 
           selectedCategory =
             button.dataset.category;
+          if (urlCategory) {
+            const activeButton =
+            categoryButtons.find(
+            (button) =>
+            button.dataset.category === urlCategory
+           );
 
+           if (activeButton) {
+            categoryButtons.forEach((item) => {
+            item.classList.remove("active");
+           });
+
+            activeButton.classList.add("active");
+         }
+        }
+
+          updateTable();
           updateTable();
 
         }
       );
 
     });
+
+    if (urlCategory) {
+  const activeButton =
+    categoryButtons.find(
+      (button) =>
+        button.dataset.category === urlCategory
+    );
+
+  if (activeButton) {
+    categoryButtons.forEach((item) => {
+      item.classList.remove("active");
+    });
+
+    activeButton.classList.add("active");
+  }
+}
 
 
     const toast =
@@ -1107,7 +1184,7 @@ const categories = [
           rgba(15,23,42,.3)
         );
 
-      color: #b6c5d8;
+      color: #ffffff;
 
       font-size: 12px;
       font-weight: 500;
@@ -1161,7 +1238,7 @@ const categories = [
       background:
         linear-gradient(
           90deg,
-          #ffffff 0%,
+          #fcfbfb 0%,
           #93c5fd 45%,
           #60a5fa 100%
         );
@@ -1692,11 +1769,11 @@ const categories = [
 
       padding: 9px;
 
-      border: 1px solid #dfe6ef;
+      border: 1px solid #ffffff;
       border-radius: 16px;
 
       background:
-        rgba(255,255,255,.92);
+        rgba(253, 253, 254, 0.92);
 
       box-shadow:
         0 15px 45px rgba(15,23,42,.055);

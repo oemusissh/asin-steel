@@ -1,6 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import ProformaModal from "../components/ProformaModal.astro";
 
 interface Props {
   title: string;
@@ -13,6 +14,7 @@ const { title, description = 'Premium building materials for your construction p
 <!doctype html>
 <html lang="fa" class="dark">
   <head>
+
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,43 +23,48 @@ const { title, description = 'Premium building materials for your construction p
     <title>{title}</title>
 
     <style is:global>
-      @font-face {
-        font-family: "Estedad";
-        src: url("/asin-steel/Estedad-Regular.woff2") format("woff2");
-        font-weight: 400;
-        font-style: normal;
-        font-display: swap;
-      }
 
-      @font-face {
-        font-family: "Estedad";
-        src: url("/asin-steel/Estedad-Medium.woff2") format("woff2");
-        font-weight: 500;
-        font-style: normal;
-        font-display: swap;
-      }
+  @font-face {
+    font-family: "Estedad";
+    src: url("/asin-steel/Estedad-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
 
-      @font-face {
-        font-family: "Estedad";
-        src: url("/asin-steel/Estedad-SemiBold.woff2") format("woff2");
-        font-weight: 600;
-        font-style: normal;
-        font-display: swap;
-      }
+  @font-face {
+    font-family: "Estedad";
+    src: url("/asin-steel/Estedad-Medium.woff2") format("woff2");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
 
-      @font-face {
-        font-family: "Estedad";
-        src: url("/asin-steel/Estedad-ExtraBold.woff2") format("woff2");
-        font-weight: 800;
-        font-style: normal;
-        font-display: swap;
-      }
+  @font-face {
+    font-family: "Estedad";
+    src: url("/asin-steel/Estedad-SemiBold.woff2") format("woff2");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
 
-      html,
-      body {
-        font-family: "Estedad", sans-serif;
-      }
-    </style>
+  @font-face {
+    font-family: "Estedad";
+    src: url("/asin-steel/Estedad-ExtraBold.woff2") format("woff2");
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  html,
+  body,
+  button,
+  input,
+  textarea,
+  select {
+    font-family: "Estedad", sans-serif !important;
+  }
+  </style>
   </head>
     <style>
       /* Prevent layout shift */
@@ -279,5 +286,6 @@ const { title, description = 'Premium building materials for your construction p
         document.querySelector('main')?.classList.add('page-transition-enter');
       });
     </script>
+    <ProformaModal />
   </body>
 </html>

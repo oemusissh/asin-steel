@@ -1,0 +1,1001 @@
+<div
+  id="proforma-modal"
+  class="fixed inset-0 z-[9999] hidden items-center justify-center bg-slate-950/75 p-3 backdrop-blur-md sm:p-4"
+>
+  <!-- Main Modal -->
+  <div
+    class="relative flex max-h-[92vh] w-full max-w-5xl flex-col overflow-hidden rounded-[28px] border border-white/10 bg-slate-900/95 shadow-2xl backdrop-blur-xl"
+  >
+    <!-- Header -->
+    <div
+      class="flex shrink-0 items-center justify-between border-b border-white/10 bg-slate-900/95 px-4 py-4 sm:px-6 sm:py-5"
+    >
+      <!-- Title -->
+      <div class="flex min-w-0 items-center gap-3">
+        <!-- Invoice Icon -->
+        <div
+          class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-500/15 text-blue-400 sm:h-11 sm:w-11"
+        >
+          <svg
+            class="h-5 w-5 sm:h-6 sm:w-6"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              d="M7 3h7l5 5v13H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"
+              stroke-width="1.8"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M14 3v5h5"
+              stroke-width="1.8"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M9 13h6M9 17h6M9 9h1"
+              stroke-width="1.8"
+              stroke-linecap="round"
+            />
+          </svg>
+        </div>
+
+        <div class="min-w-0">
+          <h2 class="text-base font-bold text-white sm:text-lg">
+            پیش‌فاکتور
+          </h2>
+
+          <p class="mt-0.5 text-xs text-slate-400 sm:text-sm">
+            اقلام انتخاب‌شده برای خرید
+          </p>
+        </div>
+      </div>
+
+      <!-- Close -->
+      <button
+        id="close-proforma"
+        type="button"
+        class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-slate-400 transition hover:bg-white/10 hover:text-white sm:h-10 sm:w-10"
+        aria-label="بستن"
+        title="بستن"
+      >
+        <svg
+          class="h-6 w-6"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            d="M6 6L18 18M18 6L6 18"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Scrollable Content -->
+    <div
+      class="min-h-0 flex-1 overflow-y-auto overscroll-contain p-4 sm:p-6"
+    >
+      <!-- Empty State -->
+      <div
+        id="proforma-empty"
+        class="flex flex-col items-center justify-center py-12 text-center sm:py-16"
+      >
+        <!-- Empty Invoice Icon -->
+        <div
+          class="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/5 text-slate-500 sm:h-20 sm:w-20"
+        >
+          <svg
+            class="h-8 w-8 sm:h-9 sm:w-9"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              d="M7 3h7l5 5v13H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"
+              stroke-width="1.7"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M14 3v5h5"
+              stroke-width="1.7"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M12 12v6M9 15h6"
+              stroke-width="1.7"
+              stroke-linecap="round"
+            />
+          </svg>
+        </div>
+
+        <h3 class="text-base font-bold text-white sm:text-lg">
+          پیش‌فاکتور خالی است
+        </h3>
+
+        <p
+          class="mt-2 max-w-md text-xs leading-6 text-slate-400 sm:text-sm sm:leading-7"
+        >
+          محصولات موردنظر خود را از جدول قیمت یا محاسبه‌گر وزن و هزینه
+          به پیش‌فاکتور اضافه کنید.
+        </p>
+      </div>
+
+      <!-- Main Content -->
+      <div id="proforma-content" class="hidden">
+        <!-- Items -->
+        <div class="overflow-hidden rounded-2xl border border-white/10">
+          <div class="overflow-x-auto">
+            <table class="w-full min-w-[700px] text-sm">
+              <thead class="bg-white/5">
+                <tr class="text-right text-slate-300">
+                  <th class="px-4 py-4 font-semibold">
+                    محصول
+                  </th>
+
+                  <th class="px-4 py-4 font-semibold">
+                    وزن
+                  </th>
+
+                  <th class="px-4 py-4 font-semibold">
+                    قیمت واحد
+                  </th>
+
+                  <th class="px-4 py-4 font-semibold">
+                    مبلغ
+                  </th>
+
+                  <th class="px-4 py-4"></th>
+                </tr>
+              </thead>
+
+              <tbody id="proforma-items"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Buyer Information -->
+        <div class="mt-5 grid gap-4 md:grid-cols-2">
+          <!-- Buyer -->
+          <div>
+            <label
+              for="proforma-buyer"
+              class="mb-2 block text-xs font-semibold text-slate-300 sm:text-sm"
+            >
+              نام خریدار / شرکت
+            </label>
+
+            <input
+              id="proforma-buyer"
+              type="text"
+              placeholder="مثلاً شرکت فولاد تهران"
+              class="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-blue-500/50 focus:bg-white/[0.07] focus:ring-2 focus:ring-blue-500/10"
+            />
+          </div>
+
+          <!-- Type -->
+          <div>
+            <label
+              for="proforma-type"
+              class="mb-2 block text-xs font-semibold text-slate-300 sm:text-sm"
+            >
+              نوع پیش‌فاکتور
+            </label>
+
+            <select
+              id="proforma-type"
+              class="w-full rounded-xl border border-white/10 bg-slate-800 px-4 py-3 text-sm text-white outline-none transition focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/10"
+            >
+              <option value="market">
+                پیش‌فاکتور فروش
+              </option>
+
+              <option value="official">
+                پیش‌فاکتور رسمی
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Totals -->
+        <div
+          class="mt-5 rounded-2xl border border-white/10 bg-white/[0.03] p-4 sm:p-5"
+        >
+          <!-- Subtotal -->
+          <div
+            class="flex items-center justify-between gap-4 py-2 text-sm text-slate-400"
+          >
+            <span>
+              جمع کل
+            </span>
+
+            <strong
+              id="proforma-subtotal"
+              class="text-sm font-bold text-white sm:text-base"
+            >
+              ۰ تومان
+            </strong>
+          </div>
+
+          <!-- VAT -->
+          <div
+            class="flex items-center justify-between gap-4 py-2 text-sm text-slate-400"
+          >
+            <span>
+              مالیات بر ارزش افزوده
+            </span>
+
+            <strong
+              id="proforma-vat"
+              class="text-sm font-bold text-white sm:text-base"
+            >
+              ۰ تومان
+            </strong>
+          </div>
+
+          <div class="my-3 border-t border-white/10"></div>
+
+          <!-- Final -->
+          <div class="flex items-center justify-between gap-4">
+            <span class="font-bold text-white">
+              مبلغ نهایی
+            </span>
+
+            <strong
+              id="proforma-total"
+              class="text-lg font-black text-blue-400 sm:text-xl"
+            >
+              ۰ تومان
+            </strong>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div
+          class="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-end"
+        >
+          <!-- Clear -->
+          <button
+            id="clear-proforma"
+            type="button"
+            class="inline-flex items-center justify-center rounded-xl border border-red-500/20 bg-red-500/10 px-5 py-3 text-sm font-semibold text-red-400 transition hover:bg-red-500/20"
+          >
+            <svg
+              class="ml-2 h-4 w-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                d="M4 7h16M10 11v6M14 11v6M6 7l1 14h10l1-14M9 7V4h6v3"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+
+            پاک کردن
+          </button>
+
+          <!-- Print -->
+          <button
+            id="print-proforma"
+            type="button"
+            class="inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+          >
+            <svg
+              class="ml-2 h-4 w-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                d="M7 8V4h10v4M7 17H5a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M7 14h10v7H7z"
+                stroke-width="1.8"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M17 11h.01"
+                stroke-width="2.5"
+                stroke-linecap="round"
+              />
+            </svg>
+
+            چاپ
+          </button>
+
+          <!-- Submit -->
+          <button
+            id="submit-proforma"
+            type="button"
+            class="inline-flex items-center justify-center rounded-xl bg-blue-600 px-6 py-3 text-sm font-bold text-white transition hover:bg-blue-500"
+          >
+            <svg
+              class="ml-2 h-4 w-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                d="M22 2L11 13"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M22 2l-7 20-4-9-9-4L22 2Z"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+
+            ارسال درخواست
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  type ProformaItem = {
+    id: string;
+    name: string;
+    price: number;
+    weight: number;
+  };
+
+  let items: ProformaItem[] = [];
+
+  /* ---------------------------------------------------------
+     Elements
+  --------------------------------------------------------- */
+
+  const modal =
+    document.getElementById("proforma-modal");
+
+  const closeButton =
+    document.getElementById("close-proforma");
+
+  const emptyState =
+    document.getElementById("proforma-empty");
+
+  const content =
+    document.getElementById("proforma-content");
+
+  const itemsContainer =
+    document.getElementById("proforma-items");
+
+  const subtotalElement =
+    document.getElementById("proforma-subtotal");
+
+  const vatElement =
+    document.getElementById("proforma-vat");
+
+  const totalElement =
+    document.getElementById("proforma-total");
+
+  const buyerInput =
+    document.getElementById(
+      "proforma-buyer"
+    ) as HTMLInputElement | null;
+
+
+  /* ---------------------------------------------------------
+     Number Formatter
+  --------------------------------------------------------- */
+
+  function formatNumber(value: number) {
+    return new Intl.NumberFormat("fa-IR").format(
+      Math.round(value)
+    );
+  }
+
+
+  /* ---------------------------------------------------------
+     Open Modal
+  --------------------------------------------------------- */
+
+  function openModal() {
+    if (!modal) return;
+
+    modal.classList.remove("hidden");
+    modal.classList.add("flex");
+
+    document.body.classList.add("overflow-hidden");
+  }
+
+
+  /* ---------------------------------------------------------
+     Close Modal
+  --------------------------------------------------------- */
+
+  function closeModal() {
+    if (!modal) return;
+
+    modal.classList.add("hidden");
+    modal.classList.remove("flex");
+
+    document.body.classList.remove("overflow-hidden");
+  }
+
+
+  /* ---------------------------------------------------------
+     Render Items
+  --------------------------------------------------------- */
+
+  function renderItems() {
+    if (
+      !itemsContainer ||
+      !emptyState ||
+      !content
+    ) {
+      return;
+    }
+
+
+    /* Empty */
+
+    if (items.length === 0) {
+      emptyState.classList.remove("hidden");
+      content.classList.add("hidden");
+
+      updateTotals();
+
+      return;
+    }
+
+
+    /* Has Items */
+
+    emptyState.classList.add("hidden");
+    content.classList.remove("hidden");
+
+
+    /* Render Table */
+
+    itemsContainer.innerHTML =
+      items
+        .map((item, index) => {
+
+          const total =
+            item.price * item.weight;
+
+          return `
+            <tr class="border-t border-white/10 transition hover:bg-white/[0.025]">
+
+              <td class="px-4 py-4 text-white">
+                ${item.name}
+              </td>
+
+              <td class="px-4 py-4 text-slate-300">
+                ${formatNumber(item.weight)}
+                کیلوگرم
+              </td>
+
+              <td class="px-4 py-4 text-slate-300">
+                ${formatNumber(item.price)}
+                تومان
+              </td>
+
+              <td class="px-4 py-4 font-semibold text-blue-400">
+                ${formatNumber(total)}
+                تومان
+              </td>
+
+              <td class="px-4 py-4 text-left">
+
+                <button
+                  type="button"
+                  data-remove-index="${index}"
+                  class="flex h-8 w-8 items-center justify-center rounded-lg text-red-400 transition hover:bg-red-500/10 hover:text-red-300"
+                  title="حذف"
+                  aria-label="حذف محصول"
+                >
+                  <svg
+                    class="h-4 w-4"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M4 7h16M10 11v6M14 11v6M6 7l1 14h10l1-14M9 7V4h6v3"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </button>
+
+              </td>
+
+            </tr>
+          `;
+        })
+        .join("");
+
+
+    /* Remove Buttons */
+
+    itemsContainer
+      .querySelectorAll(
+        "[data-remove-index]"
+      )
+      .forEach((button) => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            const index =
+              Number(
+                (
+                  button as HTMLElement
+                ).dataset.removeIndex
+              );
+
+            if (
+              !Number.isFinite(index)
+            ) {
+              return;
+            }
+
+            if (
+              index < 0 ||
+              index >= items.length
+            ) {
+              return;
+            }
+
+            items.splice(index, 1);
+
+            renderItems();
+            updateBadge();
+
+          }
+        );
+
+      });
+
+
+    updateTotals();
+  }
+
+
+  /* ---------------------------------------------------------
+     Totals
+  --------------------------------------------------------- */
+
+  function updateTotals() {
+
+    const subtotal =
+      items.reduce(
+        (sum, item) =>
+          sum +
+          item.price *
+            item.weight,
+        0
+      );
+
+
+    const vat =
+      subtotal * 0.1;
+
+
+    const total =
+      subtotal + vat;
+
+
+    if (subtotalElement) {
+      subtotalElement.textContent =
+        `${formatNumber(subtotal)} تومان`;
+    }
+
+
+    if (vatElement) {
+      vatElement.textContent =
+        `${formatNumber(vat)} تومان`;
+    }
+
+
+    if (totalElement) {
+      totalElement.textContent =
+        `${formatNumber(total)} تومان`;
+    }
+  }
+
+
+  /* ---------------------------------------------------------
+     Badge
+  --------------------------------------------------------- */
+
+  function updateBadge() {
+
+    document.dispatchEvent(
+      new CustomEvent(
+        "asin:proforma-count",
+        {
+          detail: {
+            count: items.length,
+          },
+        }
+      )
+    );
+
+  }
+
+
+  /* ---------------------------------------------------------
+     Open Event
+  --------------------------------------------------------- */
+
+  document.addEventListener(
+    "asin:open-proforma",
+    () => {
+      openModal();
+    }
+  );
+
+
+  /* ---------------------------------------------------------
+     Add Item Event
+  --------------------------------------------------------- */
+
+  document.addEventListener(
+    "asin:add-to-proforma",
+    (event) => {
+
+      const customEvent =
+        event as CustomEvent;
+
+
+      /*
+       * پشتیبانی از هر دو ساختار:
+       *
+       * detail: item
+       *
+       * و:
+       *
+       * detail: {
+       *   item: item
+       * }
+       */
+
+      const item =
+        customEvent.detail?.item ??
+        customEvent.detail;
+
+
+      if (!item) {
+        return;
+      }
+
+
+      /*
+       * قیمت:
+       *
+       * price
+       * یا
+       * pricePerKg
+       */
+
+      const price =
+        Number(
+          item.price ??
+          item.pricePerKg ??
+          0
+        );
+
+
+      /*
+       * وزن:
+       *
+       * weight
+       * یا
+       * weightKg
+       */
+
+      const weight =
+        Number(
+          item.weight ??
+          item.weightKg ??
+          0
+        );
+
+
+      if (
+        !Number.isFinite(price) ||
+        !Number.isFinite(weight)
+      ) {
+        return;
+      }
+
+
+      /* Add Item */
+
+      items.push({
+
+        id:
+          item.id ??
+          crypto.randomUUID(),
+
+        name:
+          item.name ??
+          "محصول",
+
+        price,
+
+        weight,
+
+      });
+
+
+      renderItems();
+      updateBadge();
+      openModal();
+
+    }
+  );
+
+
+  /* ---------------------------------------------------------
+     Close Button
+  --------------------------------------------------------- */
+
+  closeButton?.addEventListener(
+    "click",
+    closeModal
+  );
+
+
+  /* ---------------------------------------------------------
+     Close Outside
+  --------------------------------------------------------- */
+
+  modal?.addEventListener(
+    "click",
+    (event) => {
+
+      if (
+        event.target === modal
+      ) {
+        closeModal();
+      }
+
+    }
+  );
+
+
+  /* ---------------------------------------------------------
+     Escape
+  --------------------------------------------------------- */
+
+  document.addEventListener(
+    "keydown",
+    (event) => {
+
+      if (
+        event.key === "Escape"
+      ) {
+        closeModal();
+      }
+
+    }
+  );
+
+
+  /* ---------------------------------------------------------
+     Clear
+  --------------------------------------------------------- */
+
+  document
+    .getElementById(
+      "clear-proforma"
+    )
+    ?.addEventListener(
+      "click",
+      () => {
+
+        items = [];
+
+        renderItems();
+        updateBadge();
+
+      }
+    );
+
+
+  /* ---------------------------------------------------------
+     Print
+  --------------------------------------------------------- */
+
+  document
+    .getElementById(
+      "print-proforma"
+    )
+    ?.addEventListener(
+      "click",
+      () => {
+
+        window.print();
+
+      }
+    );
+
+
+  /* ---------------------------------------------------------
+     Submit
+  --------------------------------------------------------- */
+
+  document
+    .getElementById(
+      "submit-proforma"
+    )
+    ?.addEventListener(
+      "click",
+      () => {
+
+        if (
+          items.length === 0
+        ) {
+
+          alert(
+            "ابتدا حداقل یک محصول به پیش‌فاکتور اضافه کنید."
+          );
+
+          return;
+        }
+
+
+        const buyer =
+          buyerInput?.value.trim();
+
+
+        if (!buyer) {
+
+          alert(
+            "لطفاً نام خریدار یا شرکت را وارد کنید."
+          );
+
+          buyerInput?.focus();
+
+          return;
+        }
+
+
+        alert(
+          `درخواست پیش‌فاکتور برای «${buyer}» آماده شد.`
+        );
+
+      }
+    );
+
+
+  /* ---------------------------------------------------------
+     Initial State
+  --------------------------------------------------------- */
+
+  renderItems();
+  updateBadge();
+</script>
+
+<style>
+  /* ---------------------------------------------------------
+     Scrollbar
+  --------------------------------------------------------- */
+
+  #proforma-modal
+    > div
+    > div::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  #proforma-modal
+    > div
+    > div::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  #proforma-modal
+    > div
+    > div::-webkit-scrollbar-thumb {
+    background: rgba(148, 163, 184, 0.25);
+    border-radius: 999px;
+  }
+
+  #proforma-modal
+    > div
+    > div::-webkit-scrollbar-thumb:hover {
+    background: rgba(148, 163, 184, 0.4);
+  }
+
+
+  /* ---------------------------------------------------------
+     Mobile
+  --------------------------------------------------------- */
+
+  @media (max-width: 640px) {
+    #proforma-modal {
+      align-items: flex-start;
+      padding-top: 12px;
+      padding-bottom: 12px;
+    }
+
+    #proforma-modal > div {
+      max-height: calc(100vh - 24px);
+      border-radius: 22px;
+    }
+  }
+
+
+  /* ---------------------------------------------------------
+     Print
+  --------------------------------------------------------- */
+
+  @media print {
+
+    body * {
+      visibility: hidden;
+    }
+
+
+    #proforma-modal,
+    #proforma-modal * {
+      visibility: visible;
+    }
+
+
+    #proforma-modal {
+      position: absolute;
+      inset: 0;
+      display: flex !important;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 0;
+      background: white !important;
+      backdrop-filter: none !important;
+    }
+
+
+    #proforma-modal > div {
+      width: 100%;
+      max-width: none;
+      max-height: none;
+      overflow: visible;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+      background: white !important;
+      color: black !important;
+    }
+
+
+    #proforma-modal
+      > div
+      > div {
+      overflow: visible !important;
+    }
+
+
+    #proforma-modal
+      button {
+      display: none !important;
+    }
+  }
+</style>

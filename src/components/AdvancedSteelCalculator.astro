@@ -1,0 +1,923 @@
+---
+---
+
+<section
+  id="steel-calculator"
+  dir="rtl"
+  class="relative w-full overflow-hidden rounded-3xl border border-slate-700/60 bg-slate-950/80 p-4 shadow-2xl shadow-black/20 backdrop-blur-xl sm:p-5 lg:p-6"
+>
+  <!-- Decorative Background -->
+  <div
+    class="pointer-events-none absolute -right-32 -top-32 h-72 w-72 rounded-full bg-blue-600/10 blur-3xl"
+  ></div>
+
+  <div
+    class="pointer-events-none absolute -bottom-32 -left-32 h-72 w-72 rounded-full bg-blue-500/5 blur-3xl"
+  ></div>
+
+  <!-- Header -->
+  <div class="relative z-10 max-w-3xl">
+    <div
+      class="mb-3 inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-3 py-1.5 text-xs font-bold text-blue-400"
+    >
+      <svg
+        class="h-4 w-4"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M9 7h6M9 11h6M9 15h3m-8 6h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z"
+        />
+      </svg>
+
+      محاسبه آنلاین وزن و قیمت
+    </div>
+
+    <h2 
+      class="text-xl font-black tracking-tight text-white sm:text-2xl lg:text-3xl">
+    >
+      محاسبه‌گر پیشرفته وزن و هزینه مقاطع فولادی
+    </h2>
+
+    <p class="mt-1 text-xs leading-5 text-slate-400 sm:text-sm">
+      مشخصات مقطع فولادی را وارد کنید تا وزن تقریبی، تناژ و هزینه کل بار
+      به‌صورت لحظه‌ای محاسبه شود.
+    </p>
+  </div>
+
+  <!-- Main Calculator -->
+  <div class="relative z-10 mt-4 grid items-stretch gap-4 lg:grid-cols-12 lg:gap-5">
+    <!-- Form -->
+    <div
+      class="rounded-2xl border border-slate-700/70 bg-slate-900/70 p-5 shadow-xl sm:p-6 lg:col-span-7"
+    >
+      <!-- Section title -->
+      <div class="mb-5 flex items-center gap-3">
+        <div
+          class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-500/10 text-blue-400"
+        >
+          <svg
+            class="h-5 w-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.8"
+              d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"
+            />
+          </svg>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-white">مشخصات مقطع</h3>
+          <p class="mt-0.5 text-xs text-slate-500">
+            نوع محصول و ابعاد را انتخاب کنید
+          </p>
+        </div>
+      </div>
+
+      <!-- Type Selector -->
+      <div>
+        <label class="mb-2 block text-xs font-bold text-slate-300">
+          نوع مقطع فولادی را انتخاب کنید:
+        </label>
+
+        <div class="grid grid-cols-3 gap-2 sm:gap-3">
+          <button
+            type="button"
+            id="calcBtn-rebar"
+            class="calc-type-btn flex flex-col items-center justify-center rounded-xl border border-blue-500/30 bg-blue-600 px-2 py-3 font-bold text-white shadow-lg shadow-blue-600/10 transition-all duration-200 hover:bg-blue-500"
+            data-type="rebar"
+          >
+            <svg
+              class="mb-1.5 h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 7h16M4 12h16M4 17h16"
+              />
+            </svg>
+            <span class="text-xs">میلگرد</span>
+          </button>
+
+          <button
+            type="button"
+            id="calcBtn-sheet"
+            class="calc-type-btn flex flex-col items-center justify-center rounded-xl border border-slate-700 bg-slate-800/80 px-2 py-3 font-bold text-slate-300 transition-all duration-200 hover:border-slate-600 hover:bg-slate-700"
+            data-type="sheet"
+          >
+            <svg
+              class="mb-1.5 h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.8"
+                d="M5 4h14v16H5zM8 8h8M8 12h8M8 16h5"
+              />
+            </svg>
+            <span class="text-xs">ورق فولادی</span>
+          </button>
+
+          <button
+            type="button"
+            id="calcBtn-pipe"
+            class="calc-type-btn flex flex-col items-center justify-center rounded-xl border border-slate-700 bg-slate-800/80 px-2 py-3 font-bold text-slate-300 transition-all duration-200 hover:border-slate-600 hover:bg-slate-700"
+            data-type="pipe"
+          >
+            <svg
+              class="mb-1.5 h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <circle
+                cx="12"
+                cy="12"
+                r="7"
+                stroke-width="1.8"
+              ></circle>
+              <circle
+                cx="12"
+                cy="12"
+                r="3"
+                stroke-width="1.8"
+              ></circle>
+            </svg>
+            <span class="text-xs">لوله / قوطی</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Dynamic Inputs -->
+      <div id="calcInputsContainer" class="mt-5 space-y-4"></div>
+
+      <!-- Price & Quantity -->
+      <div class="mt-5 border-t border-slate-800 pt-5">
+        <div class="mb-3 flex items-center gap-2">
+          <div
+            class="flex h-7 w-7 items-center justify-center rounded-lg bg-slate-800 text-slate-400"
+          >
+            <svg
+              class="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.8"
+                d="M12 8c-2.5 0-4 1-4 2.5S9.5 13 12 13s4 1 4 2.5S14.5 18 12 18m0-13v14M19 5H5"
+              />
+            </svg>
+          </div>
+
+          <span class="text-xs font-bold text-slate-300">
+            قیمت و تعداد
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <!-- Unit Price -->
+          <div>
+            <label
+              for="calcUnitPrice"
+              class="mb-1.5 block text-xs font-semibold text-slate-400"
+            >
+              قیمت پایه هر کیلو
+            </label>
+
+            <div class="relative">
+              <input
+                type="number"
+                id="calcUnitPrice"
+                value="32500"
+                min="0"
+                inputmode="numeric"
+                class="w-full rounded-xl border border-slate-700 bg-slate-950/70 px-3 py-3 pl-16 text-sm font-bold text-blue-400 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10"
+              />
+
+              <span
+                class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[10px] font-medium text-slate-500"
+              >
+                تومان / کیلو
+              </span>
+            </div>
+          </div>
+
+          <!-- Quantity -->
+          <div>
+            <label
+              for="calcQuantity"
+              class="mb-1.5 block text-xs font-semibold text-slate-400"
+            >
+              تعداد شاخه / رول
+            </label>
+
+            <input
+              type="number"
+              id="calcQuantity"
+              value="100"
+              min="1"
+              step="1"
+              inputmode="numeric"
+              class="w-full rounded-xl border border-slate-700 bg-slate-950/70 px-3 py-3 text-sm font-bold text-white outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10"
+            />
+
+            <p class="mt-1 text-[10px] text-slate-600">
+              تعداد مورد نیاز خود را وارد کنید.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Result Card -->
+    <div
+      class="flex flex-col justify-between rounded-2xl border border-slate-700/70 bg-gradient-to-b from-slate-800/90 to-slate-950/90 p-5 shadow-xl sm:p-6 lg:col-span-5"
+    >
+      <div>
+        <!-- Result Header -->
+        <div
+          class="flex items-center justify-between border-b border-slate-700/80 pb-4"
+        >
+          <div>
+            <h3 class="text-lg font-black text-white">
+              نتایج محاسبه
+            </h3>
+
+            <p class="mt-1 text-[11px] text-slate-500">
+              نتیجه بر اساس اطلاعات واردشده
+            </p>
+          </div>
+
+          <div
+            class="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-500/10 text-blue-400"
+          >
+            <svg
+              class="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.8"
+                d="M4 19V5m0 14h16M8 16v-5m4 5V7m4 9v-8"
+              />
+            </svg>
+          </div>
+        </div>
+
+        <!-- Results -->
+        <div class="mt-5 space-y-4">
+          <!-- Single Weight -->
+          <div
+            class="flex items-center justify-between gap-4 rounded-xl border border-slate-800 bg-slate-950/40 p-3.5"
+          >
+            <span class="text-xs text-slate-400">
+              وزن یک شاخه / واحد
+            </span>
+
+            <span
+              id="resSingleWeight"
+              class="text-sm font-black text-white"
+            >
+              ۱۱٫۸۵ کیلوگرم
+            </span>
+          </div>
+
+          <!-- Total Weight -->
+          <div
+            class="flex items-center justify-between gap-4 rounded-xl border border-blue-500/10 bg-blue-500/5 p-3.5"
+          >
+            <span class="text-xs text-slate-400">
+              وزن کل بار
+            </span>
+
+            <span
+              id="resTotalWeight"
+              class="text-lg font-black text-blue-400"
+            >
+              ۱٬۱۸۵ کیلوگرم
+            </span>
+          </div>
+
+          <!-- Tonnage -->
+          <div
+            class="flex items-center justify-between gap-4 px-1"
+          >
+            <span class="text-xs text-slate-400">
+              معادل تن
+            </span>
+
+            <span
+              id="resTonnage"
+              class="text-sm font-bold text-slate-200"
+            >
+              ۱٫۱۹ تن
+            </span>
+          </div>
+
+          <!-- Total Price -->
+          <div
+            class="mt-2 border-t border-slate-700/80 pt-4"
+          >
+            <div class="flex items-end justify-between gap-4">
+              <div>
+                <span class="block text-xs font-semibold text-slate-400">
+                  هزینه کل برآوردی
+                </span>
+
+                <span class="mt-1 block text-[10px] text-slate-600">
+                  بدون احتساب مالیات ارزش افزوده
+                </span>
+              </div>
+
+              <span
+                id="resTotalPrice"
+                class="text-xl font-black text-blue-400 sm:text-2xl"
+              >
+                ۳۸٬۵۱۲٬۵۰۰ تومان
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add To Proforma -->
+      <div class="mt-7">
+        <button
+          id="addCalculatedToProforma"
+          type="button"
+          class="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3.5 text-sm font-black text-white shadow-lg shadow-blue-600/20 transition-all duration-200 hover:bg-blue-500 hover:shadow-blue-500/25 active:scale-[0.98]"
+        >
+          <svg
+            class="h-5 w-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 5v14M5 12h14"
+            />
+          </svg>
+
+          افزودن این محاسبه به پیش‌فاکتور
+        </button>
+
+        <p class="mt-2 text-center text-[10px] text-slate-600">
+          مشخصات و هزینه محاسبه‌شده به پیش‌فاکتور شما اضافه می‌شود.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Simple Help -->
+  <div
+    class="relative z-10 mt-5 flex flex-col gap-3 rounded-2xl border border-slate-800 bg-slate-900/40 p-4 sm:flex-row sm:items-center"
+  >
+    <div
+      class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-slate-800 text-slate-400"
+    >
+      <svg
+        class="h-4 w-4"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.8"
+          d="M12 17h.01M12 14a2.5 2.5 0 10-2.5-2.5M12 14v-1"
+        />
+        <circle cx="12" cy="12" r="9" stroke-width="1.8"></circle>
+      </svg>
+    </div>
+
+    <div>
+      <p class="text-xs font-bold text-slate-300">
+        راهنمای محاسبه
+      </p>
+
+      <p class="mt-1 text-[11px] leading-6 text-slate-500">
+        قیمت هر کیلو و تعداد مورد نیاز را وارد کنید. وزن و هزینه کل
+        به‌صورت خودکار محاسبه می‌شود. این محاسبات تخمینی هستند و
+        ممکن است با وزن واقعی کارخانه کمی اختلاف داشته باشند.
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+  type CalcType = "rebar" | "sheet" | "pipe";
+
+  let currentCalcType: CalcType = "rebar";
+
+  let currentSingleWeight = 0;
+  let currentTotalWeight = 0;
+  let currentTotalPrice = 0;
+
+  const numberFa = (
+    value: number,
+    maximumFractionDigits = 2
+  ) => {
+    return value.toLocaleString("fa-IR", {
+      maximumFractionDigits,
+      minimumFractionDigits: 0,
+    });
+  };
+
+  const getNumber = (
+    id: string,
+    fallback = 0
+  ) => {
+    const element = document.getElementById(id) as HTMLInputElement | null;
+
+    if (!element) return fallback;
+
+    const value = Number(element.value);
+
+    return Number.isFinite(value) ? value : fallback;
+  };
+
+  const createInput = ({
+    id,
+    label,
+    value,
+    unit,
+    step = "1",
+    help,
+  }: {
+    id: string;
+    label: string;
+    value: string;
+    unit: string;
+    step?: string;
+    help: string;
+  }) => {
+    return `
+      <div>
+        <label
+          for="${id}"
+          class="mb-1.5 block text-xs font-semibold text-slate-300"
+        >
+          ${label}
+        </label>
+
+        <div class="relative">
+          <input
+            type="number"
+            id="${id}"
+            value="${value}"
+            min="0"
+            step="${step}"
+            inputmode="decimal"
+            class="w-full rounded-xl border border-slate-700 bg-slate-950/70 px-3 py-3 pl-16 text-sm font-bold text-white outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10"
+          />
+
+          <span
+            class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[10px] font-medium text-slate-500"
+          >
+            ${unit}
+          </span>
+        </div>
+
+        <p class="mt-1 text-[10px] leading-5 text-slate-600">
+          ${help}
+        </p>
+      </div>
+    `;
+  };
+
+  const setCalcType = (type: CalcType) => {
+    currentCalcType = type;
+
+    document.querySelectorAll(".calc-type-btn").forEach((button) => {
+      button.classList.remove(
+        "bg-blue-600",
+        "text-white",
+        "border-blue-500/30",
+        "shadow-lg",
+        "shadow-blue-600/10"
+      );
+
+      button.classList.add(
+        "bg-slate-800/80",
+        "text-slate-300",
+        "border-slate-700"
+      );
+    });
+
+    const activeButton = document.getElementById(
+      `calcBtn-${type}`
+    );
+
+    activeButton?.classList.remove(
+      "bg-slate-800/80",
+      "text-slate-300",
+      "border-slate-700"
+    );
+
+    activeButton?.classList.add(
+      "bg-blue-600",
+      "text-white",
+      "border-blue-500/30",
+      "shadow-lg",
+      "shadow-blue-600/10"
+    );
+
+    const container = document.getElementById(
+      "calcInputsContainer"
+    );
+
+    if (!container) return;
+
+    if (type === "rebar") {
+      container.innerHTML = `
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          ${createInput({
+            id: "rebarDia",
+            label: "سایز میلگرد",
+            value: "16",
+            unit: "میلی‌متر",
+            help: "مثال: برای میلگرد 16 عدد 16 را وارد کنید.",
+          })}
+
+          ${createInput({
+            id: "rebarLen",
+            label: "طول هر شاخه",
+            value: "12",
+            unit: "متر",
+            help: "طول استاندارد بسیاری از شاخه‌ها 12 متر است.",
+          })}
+        </div>
+      `;
+    }
+
+    if (type === "sheet") {
+      container.innerHTML = `
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          ${createInput({
+            id: "sheetThick",
+            label: "ضخامت ورق",
+            value: "2",
+            unit: "میلی‌متر",
+            step: "0.1",
+            help: "مثال: ورق 2 میلی‌متر.",
+          })}
+
+          ${createInput({
+            id: "sheetWidth",
+            label: "عرض ورق",
+            value: "125",
+            unit: "سانتی‌متر",
+            step: "0.1",
+            help: "مثال: عرض 125 سانتی‌متر.",
+          })}
+
+          ${createInput({
+            id: "sheetLen",
+            label: "طول ورق",
+            value: "250",
+            unit: "سانتی‌متر",
+            step: "0.1",
+            help: "مثال: طول 250 سانتی‌متر.",
+          })}
+        </div>
+      `;
+    }
+
+    if (type === "pipe") {
+      container.innerHTML = `
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          ${createInput({
+            id: "pipeDia",
+            label: "قطر بیرونی / ضلع",
+            value: "40",
+            unit: "میلی‌متر",
+            step: "0.1",
+            help: "برای لوله قطر بیرونی و برای قوطی ضلع را وارد کنید.",
+          })}
+
+          ${createInput({
+            id: "pipeThick",
+            label: "ضخامت دیواره",
+            value: "2",
+            unit: "میلی‌متر",
+            step: "0.1",
+            help: "مثال: ضخامت 2 میلی‌متر.",
+          })}
+
+          ${createInput({
+            id: "pipeLen",
+            label: "طول شاخه",
+            value: "6",
+            unit: "متر",
+            step: "0.1",
+            help: "طول شاخه را برحسب متر وارد کنید.",
+          })}
+        </div>
+      `;
+    }
+
+    bindInputEvents();
+    runCalculator();
+  };
+
+  const runCalculator = () => {
+    const unitPrice = Math.max(
+      0,
+      getNumber("calcUnitPrice", 0)
+    );
+
+    const quantity = Math.max(
+      1,
+      getNumber("calcQuantity", 1)
+    );
+
+    let singleWeight = 0;
+
+    if (currentCalcType === "rebar") {
+      const dia = Math.max(
+        0,
+        getNumber("rebarDia", 16)
+      );
+
+      const len = Math.max(
+        0,
+        getNumber("rebarLen", 12)
+      );
+
+      /*
+       * فرمول استاندارد وزن تقریبی میلگرد:
+       * وزن = قطر² × طول / 162
+       */
+      singleWeight =
+        (Math.pow(dia, 2) * len) / 162;
+    }
+
+    if (currentCalcType === "sheet") {
+      const thick = Math.max(
+        0,
+        getNumber("sheetThick", 2)
+      );
+
+      const widthM =
+        Math.max(
+          0,
+          getNumber("sheetWidth", 125)
+        ) / 100;
+
+      const lenM =
+        Math.max(
+          0,
+          getNumber("sheetLen", 250)
+        ) / 100;
+
+      /*
+       * چگالی تقریبی فولاد: 7.85 g/cm³
+       */
+      singleWeight =
+        thick * widthM * lenM * 7.85;
+    }
+
+    if (currentCalcType === "pipe") {
+      const outer =
+        Math.max(
+          0,
+          getNumber("pipeDia", 40)
+        );
+
+      const thick =
+        Math.max(
+          0,
+          getNumber("pipeThick", 2)
+        );
+
+      const len =
+        Math.max(
+          0,
+          getNumber("pipeLen", 6)
+        );
+
+      /*
+       * فرمول تقریبی مقطع دایره‌ای/قوطی برای
+       * برآورد سریع وزن.
+       *
+       * در مرحله بعد می‌توانیم قوطی مستطیلی را
+       * به‌صورت جداگانه دقیق‌تر محاسبه کنیم.
+       */
+      const inner = Math.max(
+        0,
+        outer - 2 * thick
+      );
+
+      const area =
+        Math.PI *
+        (Math.pow(outer, 2) -
+          Math.pow(inner, 2)) /
+        4;
+
+      singleWeight =
+        area * 0.00785 * len * 1000;
+    }
+
+    currentSingleWeight = singleWeight;
+    currentTotalWeight =
+      singleWeight * quantity;
+
+    currentTotalPrice =
+      currentTotalWeight * unitPrice;
+
+    const singleElement =
+      document.getElementById(
+        "resSingleWeight"
+      );
+
+    const totalElement =
+      document.getElementById(
+        "resTotalWeight"
+      );
+
+    const tonnageElement =
+      document.getElementById(
+        "resTonnage"
+      );
+
+    const priceElement =
+      document.getElementById(
+        "resTotalPrice"
+      );
+
+    if (singleElement) {
+      singleElement.textContent =
+        `${numberFa(singleWeight, 2)} کیلوگرم`;
+    }
+
+    if (totalElement) {
+      totalElement.textContent =
+        `${numberFa(currentTotalWeight, 1)} کیلوگرم`;
+    }
+
+    if (tonnageElement) {
+      tonnageElement.textContent =
+        `${numberFa(currentTotalWeight / 1000, 2)} تن`;
+    }
+
+    if (priceElement) {
+      priceElement.textContent =
+        `${numberFa(Math.round(currentTotalPrice), 0)} تومان`;
+    }
+  };
+
+  const bindInputEvents = () => {
+    document
+      .querySelectorAll(
+        "#calcInputsContainer input, #calcUnitPrice, #calcQuantity"
+      )
+      .forEach((input) => {
+        input.addEventListener("input", runCalculator);
+      });
+  };
+
+  const getCalcName = () => {
+    if (currentCalcType === "rebar") {
+      const dia = getNumber("rebarDia", 16);
+      const len = getNumber("rebarLen", 12);
+
+      return `میلگرد ${numberFa(dia, 1)} — طول ${numberFa(len, 1)} متر`;
+    }
+
+    if (currentCalcType === "sheet") {
+      const thick = getNumber("sheetThick", 2);
+      const width = getNumber("sheetWidth", 125);
+      const len = getNumber("sheetLen", 250);
+
+      return `ورق فولادی ${numberFa(thick, 1)} میلی‌متر — ${numberFa(width, 1)}×${numberFa(len, 1)} سانتی‌متر`;
+    }
+
+    const dia = getNumber("pipeDia", 40);
+    const thick = getNumber("pipeThick", 2);
+    const len = getNumber("pipeLen", 6);
+
+    return `لوله / قوطی ${numberFa(dia, 1)} میلی‌متر — ضخامت ${numberFa(thick, 1)} — طول ${numberFa(len, 1)} متر`;
+  };
+
+  const addCalculatedToProforma = () => {
+    runCalculator();
+
+    const unitPrice = Math.max(
+      0,
+      getNumber("calcUnitPrice", 0)
+    );
+
+    const quantity = Math.max(
+      1,
+      getNumber("calcQuantity", 1)
+    );
+
+    const item = {
+      id: `calc-${Date.now()}`,
+      name: getCalcName(),
+      pricePerKg: unitPrice,
+      weightKg: currentTotalWeight,
+      quantity,
+      totalPrice: Math.round(currentTotalPrice),
+      source: "steel-calculator",
+    };
+
+    /*
+     * اتصال مستقیم به سیستم پیش‌فاکتور ASIN STILL
+     */
+    document.dispatchEvent(
+      new CustomEvent("asin:add-to-proforma", {
+        detail: {
+          item,
+        },
+      })
+    );
+
+    /*
+     * باز کردن پیش‌فاکتور بعد از اضافه شدن
+     */
+    setTimeout(() => {
+      document.dispatchEvent(
+        new CustomEvent("asin:open-proforma")
+      );
+    }, 100);
+  };
+
+  document.addEventListener("DOMContentLoaded", () => {
+    setCalcType("rebar");
+
+    document
+      .getElementById("calcUnitPrice")
+      ?.addEventListener(
+        "input",
+        runCalculator
+      );
+
+    document
+      .getElementById("calcQuantity")
+      ?.addEventListener(
+        "input",
+        runCalculator
+      );
+
+    document
+      .getElementById("addCalculatedToProforma")
+      ?.addEventListener(
+        "click",
+        addCalculatedToProforma
+      );
+  });
+</script>
+
+<style>
+  #steel-calculator,
+  #steel-calculator input,
+  #steel-calculator button {
+    font-family: Vazirmatn, sans-serif;
+  }
+
+  #steel-calculator input::-webkit-outer-spin-button,
+  #steel-calculator input::-webkit-inner-spin-button {
+    margin: 0;
+    -webkit-appearance: none;
+  }
+
+  #steel-calculator input[type="number"] {
+    -moz-appearance: textfield;
+  }
+</style>
