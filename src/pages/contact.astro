@@ -106,213 +106,79 @@ const officeMapEmbedUrl = "";
           </div>
         </div>
 
-        <!-- Industrial animated visual -->
-        <div class="hero-visual" aria-label="تصویر گرافیکی مقطع فولادی">
+        <!-- Persian steel supply animation: only the hero visual is replaced -->
+        <div class="hero-visual" aria-label="نمایش متحرک تأمین و ارسال مقاطع فولادی">
           <div class="visual-topline">
-            <span class="visual-label">ASIN STILL / STEEL SYSTEMS</span>
-            <span class="visual-live"><i></i> INDUSTRIAL</span>
+            <span class="visual-label">آسین استیل | تأمین فولاد</span>
+            <span class="visual-live"><i></i> آماده همکاری</span>
           </div>
 
-          <div class="visual-blueprint">
-            <div class="blueprint-cross cross-one"></div>
-            <div class="blueprint-cross cross-two"></div>
-            <div class="blueprint-ring ring-one"></div>
-            <div class="blueprint-ring ring-two"></div>
+          <div class="visual-blueprint supply-scene">
+            <div class="scene-glow"></div>
+            <div class="scene-orbit orbit-a"></div>
+            <div class="scene-orbit orbit-b"></div>
+            <div class="scene-spark spark-a"></div>
+            <div class="scene-spark spark-b"></div>
+            <div class="scene-spark spark-c"></div>
 
-            <svg
-              class="steel-beam-svg"
-              viewBox="0 0 500 360"
-              role="img"
-              aria-label="مقطع تیرآهن فولادی با نمای سه‌بعدی"
-            >
-              <defs>
-                <linearGradient id="beamTop" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stop-color="#c7e8ff" />
-                  <stop offset="35%" stop-color="#5aa9f5" />
-                  <stop offset="100%" stop-color="#2362ad" />
-                </linearGradient>
-
-                <linearGradient id="beamSide" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0%" stop-color="#193e72" />
-                  <stop offset="55%" stop-color="#438bd5" />
-                  <stop offset="100%" stop-color="#17365e" />
-                </linearGradient>
-
-                <linearGradient id="beamFront" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#82c4ff" />
-                  <stop offset="100%" stop-color="#214f88" />
-                </linearGradient>
-
-                <linearGradient id="beamLight" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0%" stop-color="#60baff" stop-opacity="0" />
-                  <stop offset="50%" stop-color="#b8e4ff" stop-opacity=".95" />
-                  <stop offset="100%" stop-color="#60baff" stop-opacity="0" />
-                </linearGradient>
-
-                <filter id="beamShadow" x="-50%" y="-50%" width="200%" height="200%">
-                  <feGaussianBlur stdDeviation="10" />
-                </filter>
-              </defs>
-
-              <ellipse
-                cx="260"
-                cy="278"
-                rx="155"
-                ry="24"
-                fill="#148bff"
-                opacity=".23"
-                filter="url(#beamShadow)"
-              />
-
-              <g class="beam-model">
-                <path
-                  d="M112 100 L282 38 L416 94 L246 157 Z"
-                  fill="url(#beamTop)"
-                  stroke="#a4d7ff"
-                  stroke-width="1.2"
-                />
-
-                <path
-                  d="M112 100 L246 157 L246 190 L112 132 Z"
-                  fill="url(#beamFront)"
-                  stroke="#5eabef"
-                  stroke-width="1"
-                />
-
-                <path
-                  d="M246 157 L416 94 L416 126 L246 190 Z"
-                  fill="url(#beamSide)"
-                  stroke="#4d8fce"
-                  stroke-width="1"
-                />
-
-                <path
-                  d="M112 132 L246 190 L416 126 L416 153 L246 218 L112 160 Z"
-                  fill="#16345b"
-                  stroke="#427eb6"
-                  stroke-width="1"
-                />
-
-                <path
-                  d="M112 160 L246 218 L246 247 L112 189 Z"
-                  fill="#295c94"
-                  stroke="#6cb4ef"
-                  stroke-width="1"
-                />
-
-                <path
-                  d="M246 218 L416 153 L416 182 L246 247 Z"
-                  fill="#102b4c"
-                  stroke="#4078ad"
-                  stroke-width="1"
-                />
-
-                <path
-                  d="M112 189 L246 247 L416 182 L416 210 L246 275 L112 218 Z"
-                  fill="url(#beamTop)"
-                  stroke="#7fc6ff"
-                  stroke-width="1.2"
-                />
-
-                <path
-                  d="M112 218 L246 275 L246 307 L112 249 Z"
-                  fill="#214c7b"
-                  stroke="#5c9ed8"
-                  stroke-width="1"
-                />
-
-                <path
-                  d="M246 275 L416 210 L416 242 L246 307 Z"
-                  fill="#112a49"
-                  stroke="#4d85b8"
-                  stroke-width="1"
-                />
-
-                <path
-                  d="M112 100 L112 132 L246 190 L246 157 Z"
-                  fill="#82c4ff"
-                  opacity=".28"
-                />
-
-                <path
-                  d="M246 157 L246 190 L416 126 L416 94 Z"
-                  fill="#091e37"
-                  opacity=".3"
-                />
-
-                <path
-                  d="M115 105 L245 160 L412 97"
-                  fill="none"
-                  stroke="#d9f1ff"
-                  stroke-width="2"
-                  opacity=".8"
-                />
-
-                <path
-                  d="M116 222 L246 278 L412 214"
-                  fill="none"
-                  stroke="#8ed0ff"
-                  stroke-width="1.5"
-                  opacity=".75"
-                />
-
-                <path
-                  class="beam-scan"
-                  d="M120 118 L245 172 L410 110"
-                  fill="none"
-                  stroke="url(#beamLight)"
-                  stroke-width="9"
-                  stroke-linecap="round"
-                />
-              </g>
-
-              <g class="dimension-lines" fill="none" stroke="#77bfff" stroke-width="1">
-                <path d="M94 89 L94 232" stroke-dasharray="3 5" />
-                <path d="M85 99 L103 99 M85 222 L103 222" />
-                <path d="M122 264 L244 317 L426 247" stroke-dasharray="4 5" />
-                <path d="M126 254 L119 271 M420 237 L431 255" />
-              </g>
-
-              <g fill="#a9d9ff" font-size="10" font-family="monospace">
-                <text x="65" y="166" transform="rotate(-90 65 166)">STEEL PROFILE</text>
-                <text x="292" y="327">STRUCTURAL / 01</text>
-              </g>
-
-              <g class="visual-particles" fill="#7dc7ff">
-                <circle cx="82" cy="76" r="2.2" />
-                <circle cx="430" cy="82" r="2" />
-                <circle cx="447" cy="202" r="1.8" />
-                <circle cx="94" cy="258" r="2" />
-                <circle cx="370" cy="48" r="1.6" />
-                <circle cx="180" cy="316" r="1.6" />
-              </g>
-            </svg>
-
-            <div class="visual-tag tag-top">
-              <span class="tag-dot"></span>
-              <div>
-                <strong>STEEL</strong>
-                <small>مقاطع فولادی</small>
-              </div>
+            <div class="scene-heading">
+              <span class="scene-kicker">از انتخاب تا تحویل</span>
+              <strong>فولاد موردنیاز پروژه‌تان</strong>
+              <small>در سه قدم ساده</small>
             </div>
 
-            <div class="visual-tag tag-bottom">
-              <span class="tag-number">01</span>
-              <div>
-                <strong>ENGINEERED SUPPLY</strong>
-                <small>تأمین متناسب با نیاز پروژه</small>
-              </div>
+            <div class="steel-stack" aria-hidden="true">
+              <div class="steel-bar bar-back"></div>
+              <div class="steel-bar bar-mid"></div>
+              <div class="steel-bar bar-front"></div>
+              <div class="bar-shine"></div>
             </div>
 
-            <div class="visual-coordinate">35° 41' N / 51° 25' E</div>
+            <div class="scene-step step-order">
+              <span class="step-icon">۱</span>
+              <span>انتخاب محصول</span>
+            </div>
+            <div class="scene-step step-supply">
+              <span class="step-icon">۲</span>
+              <span>آماده‌سازی بار</span>
+            </div>
+
+            <div class="scene-road">
+              <span class="road-dash dash-one"></span>
+              <span class="road-dash dash-two"></span>
+              <span class="road-dash dash-three"></span>
+            </div>
+
+            <div class="delivery-truck" aria-hidden="true">
+              <div class="truck-load">
+                <i></i><i></i><i></i>
+              </div>
+              <div class="truck-cab">
+                <span class="truck-window"></span>
+                <span class="truck-light"></span>
+              </div>
+              <div class="truck-body"></div>
+              <div class="truck-wheel wheel-one"><i></i></div>
+              <div class="truck-wheel wheel-two"><i></i></div>
+            </div>
+
+            <div class="scene-step step-delivery">
+              <span class="step-icon">۳</span>
+              <span>هماهنگی ارسال</span>
+            </div>
+
+            <div class="scene-bottom-note">
+              <span class="note-check">✓</span>
+              <span>از استعلام قیمت تا هماهنگی تحویل</span>
+            </div>
           </div>
 
           <div class="visual-footer">
-            <span>PRECISION</span>
+            <span>انتخاب آسان</span>
             <span class="visual-footer-line"></span>
-            <span>STRENGTH</span>
+            <span>تأمین فولاد</span>
             <span class="visual-footer-line"></span>
-            <span>RELIABILITY</span>
+            <span>هماهنگی ارسال</span>
           </div>
         </div>
       </div>
@@ -3566,6 +3432,454 @@ const officeMapEmbedUrl = "";
         animation-iteration-count: 1 !important;
         scroll-behavior: auto !important;
         transition-duration: 0.01ms !important;
+      }
+    }
+
+
+    /* Hero animation replacement — intentionally scoped to the visual beside the headline */
+    .hero-visual .visual-topline,
+    .hero-visual .visual-footer {
+      font-family: inherit;
+      letter-spacing: 0;
+      font-size: 11px;
+    }
+
+    .hero-visual .visual-label {
+      color: #b5d9ff;
+      font-weight: 800;
+    }
+
+    .hero-visual .visual-live {
+      color: #c5e7ff;
+      border-radius: 999px;
+      padding: 6px 11px;
+    }
+
+    .hero-visual .visual-blueprint.supply-scene {
+      min-height: 365px;
+      isolation: isolate;
+      background:
+        radial-gradient(ellipse at 50% 45%, rgba(37, 139, 255, .25), transparent 48%),
+        linear-gradient(145deg, #102c49 0%, #071523 72%, #06101c 100%);
+    }
+
+    .supply-scene .scene-glow {
+      position: absolute;
+      width: 230px;
+      height: 180px;
+      left: 50%;
+      top: 43%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: rgba(33, 135, 255, .18);
+      filter: blur(36px);
+      animation: scene-glow-pulse 4s ease-in-out infinite;
+    }
+
+    .supply-scene .scene-orbit {
+      position: absolute;
+      left: 50%;
+      top: 45%;
+      border: 1px solid rgba(115, 190, 255, .18);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .supply-scene .orbit-a {
+      width: 300px;
+      height: 190px;
+      animation: orbit-breathe 6s ease-in-out infinite;
+    }
+
+    .supply-scene .orbit-b {
+      width: 245px;
+      height: 145px;
+      border-style: dashed;
+      animation: orbit-turn 26s linear infinite;
+    }
+
+    .supply-scene .scene-heading {
+      position: absolute;
+      z-index: 3;
+      top: 22px;
+      right: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      text-align: right;
+    }
+
+    .supply-scene .scene-kicker {
+      color: #78c5ff;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .supply-scene .scene-heading strong {
+      color: #f2f8ff;
+      font-size: clamp(15px, 2vw, 20px);
+      font-weight: 900;
+      line-height: 1.7;
+    }
+
+    .supply-scene .scene-heading small {
+      color: #9ab4d0;
+      font-size: 11px;
+    }
+
+    .supply-scene .steel-stack {
+      position: absolute;
+      z-index: 2;
+      width: 220px;
+      height: 125px;
+      top: 115px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: steel-stack-float 4.8s ease-in-out infinite;
+    }
+
+    .supply-scene .steel-bar {
+      position: absolute;
+      left: 10px;
+      width: 195px;
+      height: 28px;
+      border: 1px solid rgba(205, 235, 255, .72);
+      border-radius: 4px;
+      background: linear-gradient(180deg, #c2e6ff 0%, #579bd6 35%, #1c4b78 100%);
+      box-shadow: 0 9px 18px rgba(0, 0, 0, .23), inset 0 2px 0 rgba(255,255,255,.45);
+      transform: skewY(-9deg);
+    }
+
+    .supply-scene .bar-back {
+      top: 4px;
+      left: 25px;
+      opacity: .78;
+      background: linear-gradient(180deg, #82bce8, #245580);
+    }
+
+    .supply-scene .bar-mid {
+      top: 31px;
+      left: 17px;
+      background: linear-gradient(180deg, #d3edff, #5597d0 45%, #214e7c);
+    }
+
+    .supply-scene .bar-front {
+      top: 58px;
+      background: linear-gradient(180deg, #f0f9ff, #6bb0e9 38%, #285b8b);
+    }
+
+    .supply-scene .bar-shine {
+      position: absolute;
+      z-index: 2;
+      top: 58px;
+      left: -10px;
+      width: 250px;
+      height: 3px;
+      border-radius: 50%;
+      background: #e5f6ff;
+      box-shadow: 0 0 14px 4px rgba(105, 194, 255, .5);
+      transform: rotate(-9deg);
+      animation: bar-shine-pass 3.6s ease-in-out infinite;
+    }
+
+    .supply-scene .scene-step {
+      position: absolute;
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 10px;
+      color: #e5f3ff;
+      border: 1px solid rgba(116, 187, 255, .24);
+      border-radius: 9px;
+      background: rgba(5, 19, 34, .88);
+      box-shadow: 0 8px 24px rgba(0,0,0,.2);
+      font-size: 10px;
+      font-weight: 800;
+      white-space: nowrap;
+      backdrop-filter: blur(8px);
+    }
+
+    .supply-scene .step-icon {
+      display: grid;
+      place-items: center;
+      width: 23px;
+      height: 23px;
+      flex: 0 0 23px;
+      border-radius: 7px;
+      color: #061728;
+      background: linear-gradient(135deg, #b8e5ff, #4bafff);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .supply-scene .step-order {
+      top: 118px;
+      right: 18px;
+      animation: step-pop 5s ease-in-out infinite;
+    }
+
+    .supply-scene .step-supply {
+      top: 203px;
+      left: 15px;
+      animation: step-pop 5s ease-in-out 1.2s infinite;
+    }
+
+    .supply-scene .step-delivery {
+      right: 18px;
+      bottom: 60px;
+      animation: step-pop 5s ease-in-out 2.4s infinite;
+    }
+
+    .supply-scene .scene-road {
+      position: absolute;
+      z-index: 1;
+      right: 0;
+      bottom: 43px;
+      left: 0;
+      height: 44px;
+      border-top: 1px solid rgba(117, 184, 245, .2);
+      border-bottom: 1px solid rgba(117, 184, 245, .13);
+      background: linear-gradient(180deg, rgba(22, 53, 82, .2), rgba(4, 13, 23, .75));
+    }
+
+    .supply-scene .road-dash {
+      position: absolute;
+      top: 21px;
+      width: 38px;
+      height: 2px;
+      border-radius: 4px;
+      background: #4b8fca;
+      opacity: .65;
+    }
+
+    .supply-scene .dash-one { left: 10%; animation: road-move 2.4s linear infinite; }
+    .supply-scene .dash-two { left: 48%; animation: road-move 2.4s linear .8s infinite; }
+    .supply-scene .dash-three { left: 82%; animation: road-move 2.4s linear 1.6s infinite; }
+
+    .supply-scene .delivery-truck {
+      position: absolute;
+      z-index: 5;
+      left: 50%;
+      bottom: 50px;
+      width: 120px;
+      height: 68px;
+      transform: translateX(-50%);
+      animation: truck-bob 2.8s ease-in-out infinite;
+    }
+
+    .supply-scene .truck-body {
+      position: absolute;
+      right: 28px;
+      bottom: 12px;
+      width: 70px;
+      height: 30px;
+      border: 1px solid #9bd4ff;
+      border-radius: 4px 2px 2px 4px;
+      background: linear-gradient(180deg, #4a9de1, #145087);
+      box-shadow: inset 0 3px 0 rgba(255,255,255,.25), 0 5px 12px rgba(0,0,0,.25);
+    }
+
+    .supply-scene .truck-cab {
+      position: absolute;
+      right: 4px;
+      bottom: 12px;
+      width: 34px;
+      height: 27px;
+      border: 1px solid #a9dcff;
+      border-radius: 4px 7px 2px 2px;
+      background: linear-gradient(135deg, #bfe7ff, #438fc9 68%, #1c5487);
+      clip-path: polygon(0 0, 70% 0, 100% 45%, 100% 100%, 0 100%);
+    }
+
+    .supply-scene .truck-window {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      width: 15px;
+      height: 9px;
+      border-radius: 2px;
+      background: #0b2b48;
+      transform: skewY(15deg);
+    }
+
+    .supply-scene .truck-light {
+      position: absolute;
+      right: 0;
+      bottom: 5px;
+      width: 4px;
+      height: 5px;
+      border-radius: 2px;
+      background: #d8f3ff;
+      box-shadow: 0 0 8px #70c8ff;
+    }
+
+    .supply-scene .truck-load {
+      position: absolute;
+      z-index: 2;
+      right: 31px;
+      bottom: 43px;
+      display: flex;
+      gap: 4px;
+      transform: rotate(-3deg);
+    }
+
+    .supply-scene .truck-load i {
+      display: block;
+      width: 58px;
+      height: 6px;
+      border: 1px solid #d4edff;
+      border-radius: 2px;
+      background: linear-gradient(180deg, #d8efff, #4e91c7);
+      box-shadow: 0 0 7px rgba(112, 190, 255, .18);
+    }
+
+    .supply-scene .truck-wheel {
+      position: absolute;
+      z-index: 4;
+      bottom: 2px;
+      width: 19px;
+      height: 19px;
+      display: grid;
+      place-items: center;
+      border: 3px solid #13283c;
+      border-radius: 50%;
+      background: #07111d;
+      box-shadow: 0 0 0 1px #70b7ec;
+      animation: wheel-turn 1.5s linear infinite;
+    }
+
+    .supply-scene .wheel-one { right: 62px; }
+    .supply-scene .wheel-two { right: 10px; }
+
+    .supply-scene .truck-wheel i {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #91cfff;
+    }
+
+    .supply-scene .scene-bottom-note {
+      position: absolute;
+      z-index: 6;
+      right: 50%;
+      bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      width: max-content;
+      max-width: calc(100% - 24px);
+      color: #b6d7f5;
+      font-size: 10px;
+      transform: translateX(50%);
+    }
+
+    .supply-scene .note-check {
+      display: grid;
+      place-items: center;
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      color: #061727;
+      background: #79d8b0;
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .supply-scene .scene-spark {
+      position: absolute;
+      z-index: 2;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #bde8ff;
+      box-shadow: 0 0 12px 3px rgba(85, 177, 255, .42);
+      animation: spark-blink 2.6s ease-in-out infinite;
+    }
+
+    .supply-scene .spark-a { top: 95px; left: 22%; }
+    .supply-scene .spark-b { top: 185px; right: 16%; animation-delay: .8s; }
+    .supply-scene .spark-c { bottom: 102px; left: 24%; animation-delay: 1.5s; }
+
+    .hero-visual .visual-footer {
+      color: #91abc7;
+      font-size: 10px;
+    }
+
+    .hero-visual .visual-footer-line {
+      width: 16px;
+      background: #3a6389;
+    }
+
+    @keyframes steel-stack-float {
+      0%, 100% { transform: translate(-50%, 0) rotate(0deg); }
+      50% { transform: translate(-50%, -7px) rotate(-1deg); }
+    }
+
+    @keyframes bar-shine-pass {
+      0%, 100% { opacity: .25; transform: translateX(-15px) rotate(-9deg); }
+      50% { opacity: .95; transform: translateX(15px) rotate(-9deg); }
+    }
+
+    @keyframes scene-glow-pulse {
+      0%, 100% { opacity: .55; transform: translate(-50%, -50%) scale(.9); }
+      50% { opacity: 1; transform: translate(-50%, -50%) scale(1.12); }
+    }
+
+    @keyframes orbit-breathe {
+      0%, 100% { opacity: .35; transform: translate(-50%, -50%) scale(.96); }
+      50% { opacity: .8; transform: translate(-50%, -50%) scale(1.04); }
+    }
+
+    @keyframes orbit-turn {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    @keyframes step-pop {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.28); }
+    }
+
+    @keyframes road-move {
+      from { transform: translateX(18px); opacity: .15; }
+      30% { opacity: .75; }
+      to { transform: translateX(-45px); opacity: .1; }
+    }
+
+    @keyframes truck-bob {
+      0%, 100% { margin-left: 0; }
+      50% { margin-left: 3px; }
+    }
+
+    @keyframes wheel-turn {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes spark-blink {
+      0%, 100% { opacity: .3; transform: scale(.7); }
+      50% { opacity: 1; transform: scale(1.35); }
+    }
+
+    @media (max-width: 760px) {
+      .supply-scene .scene-heading { top: 18px; right: 16px; }
+      .supply-scene .steel-stack { top: 122px; transform: translateX(-50%) scale(.84); }
+      .supply-scene .step-order { top: 120px; right: 10px; }
+      .supply-scene .step-supply { top: 205px; left: 8px; }
+      .supply-scene .step-delivery { right: 10px; bottom: 59px; }
+      .supply-scene .scene-step { gap: 5px; padding: 5px 7px; font-size: 9px; }
+      .supply-scene .step-icon { width: 20px; height: 20px; flex-basis: 20px; }
+      .supply-scene .delivery-truck { transform: translateX(-50%) scale(.88); }
+      .supply-scene .scene-bottom-note { font-size: 9px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .supply-scene *,
+      .supply-scene *::before,
+      .supply-scene *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
       }
     }
   </style>
