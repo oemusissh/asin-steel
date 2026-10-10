@@ -1,387 +1,2177 @@
+
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const base = import.meta.env.BASE_URL;
+const url = (path = '') =>
+  `${base.replace(/\/$/, '')}/${path.replace(/^\//, '')}`;
+
+const images = {
+  warehouse: url('images/about/steel-warehouse.jpg'),
+  products: url('images/about/steel-products.jpg'),
+  loading: url('images/about/steel-loading.jpg'),
+  detail: url('images/about/steel-detail.jpg'),
+};
+
+const productTypes = [
+  {
+    number: '01',
+    title: 'میلگرد',
+    english: 'REBAR',
+    description: 'برای پروژه‌های ساختمانی و سازه‌های بتنی',
+    image: images.products,
+    className: 'product-rebar',
+  },
+  {
+    number: '02',
+    title: 'تیرآهن',
+    english: 'STEEL BEAM',
+    description: 'برای اسکلت فلزی و ساخت‌وساز',
+    image: images.detail,
+    className: 'product-beam',
+  },
+  {
+    number: '03',
+    title: 'ورق فولادی',
+    english: 'STEEL SHEET',
+    description: 'برای کاربردهای صنعتی و ساخت قطعات',
+    image: images.warehouse,
+    className: 'product-sheet',
+  },
+  {
+    number: '04',
+    title: 'قوطی و پروفیل',
+    english: 'STEEL PROFILE',
+    description: 'برای چهارچوب‌ها و سازه‌های فلزی',
+    image: images.loading,
+    className: 'product-profile',
+  },
+];
 ---
 
-<BaseLayout title="About Us - ASIN STEEL">
-  <!-- Hero Section -->
-  <section class="relative bg-gradient-to-br from-primary-600 via-primary-500 to-orange-500 dark:from-primary-700 dark:via-primary-600 dark:to-orange-600 text-white py-20 sm:py-24 overflow-hidden">
-    <div class="absolute inset-0 opacity-10">
-      <div class="absolute top-10 left-10 w-72 h-72 bg-white rounded-full blur-3xl"></div>
-      <div class="absolute bottom-10 right-10 w-96 h-96 bg-white rounded-full blur-3xl"></div>
-    </div>
-    
-    <div class="container mx-auto px-4 relative z-10">
-      <div class="max-w-4xl mx-auto text-center">
-        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">About ASIN STEEL</h1>
-        <p class="text-lg sm:text-xl text-white/90 mb-8 leading-relaxed">
-          Your trusted partner for premium building materials, fast nationwide delivery, and expert construction support.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/products`} class="px-8 py-4 bg-white text-primary-600 rounded-xl font-semibold hover:bg-gray-100 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
-            Shop Now
-          </a>
-          <a href={`${import.meta.env.BASE_URL}help`} class="px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white rounded-xl font-semibold hover:bg-white/20 transition-all duration-300 hover:scale-105">
-            Contact Support
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
+<BaseLayout title="درباره آسین استیل | تأمین مقاطع فولادی">
+  <main class="about-page" dir="rtl">
 
-  <!-- Our Mission & Values -->
-  <section class="py-16 sm:py-20 bg-gray-50 dark:bg-dark-800">
-    <div class="container mx-auto px-4">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">Our Mission & Values</h2>
-        <div class="w-20 h-1 bg-gradient-to-r from-primary-600 to-orange-500 mx-auto rounded-full"></div>
-      </div>
+    <!-- HERO: معرفی شرکت -->
+    <section class="hero">
+      <div class="hero-lines" aria-hidden="true"></div>
+      <div class="hero-orb hero-orb-one"></div>
+      <div class="hero-orb hero-orb-two"></div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-        <div class="bg-white dark:bg-dark-900 rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 group">
-          <div class="w-14 h-14 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
+      <div class="container hero-layout">
+        <div class="hero-copy reveal">
+          <div class="hero-tag">
+            <span class="live-dot"></span>
+            درباره مجموعه آسین استیل
           </div>
-          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Quality Assurance</h3>
-          <p class="text-gray-600 dark:text-gray-400">Every product is carefully inspected and sourced from trusted manufacturers to ensure premium quality.</p>
-        </div>
 
-        <div class="bg-white dark:bg-dark-900 rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 group">
-          <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Reliable Nationwide Delivery</h3>
-          <p class="text-gray-600 dark:text-gray-400">Fast and secure shipping to all locations with real-time tracking and on-time delivery guarantee.</p>
-        </div>
+          <h1>
+            پشت هر سازه،
+            <span class="hero-highlight">انتخابی مهم</span>
+            برای فولاد وجود دارد.
+          </h1>
 
-        <div class="bg-white dark:bg-dark-900 rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 group">
-          <div class="w-14 h-14 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Secure Transactions</h3>
-          <p class="text-gray-600 dark:text-gray-400">Bank-level encryption and multiple payment options ensure your transactions are always safe.</p>
-        </div>
-
-        <div class="bg-white dark:bg-dark-900 rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 group">
-          <div class="w-14 h-14 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Competitive Pricing</h3>
-          <p class="text-gray-600 dark:text-gray-400">Best value for your money with regular deals, bulk discounts, and transparent pricing.</p>
-        </div>
-
-        <div class="bg-white dark:bg-dark-900 rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 group sm:col-span-2 lg:col-span-1">
-          <div class="w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Customer-First Support</h3>
-          <p class="text-gray-600 dark:text-gray-400">Dedicated support team available 24/7 to assist with orders, queries, and technical guidance.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Who We Are -->
-  <section class="py-16 sm:py-20 bg-white dark:bg-dark-900">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">Who We Are</h2>
-          <div class="w-20 h-1 bg-gradient-to-r from-primary-600 to-orange-500 mx-auto rounded-full"></div>
-        </div>
-        
-        <div class="bg-gray-50 dark:bg-dark-800 rounded-2xl p-8 sm:p-10 shadow-lg">
-          <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed text-center">
-            ASIN STEEL is a premium online marketplace dedicated to providing high-quality construction materials for builders, contractors, and DIY enthusiasts. 
-            We combine decades of industry expertise with modern e-commerce convenience to deliver exceptional products at competitive prices. 
-            Our commitment to quality assurance, reliable delivery, and customer satisfaction has made us a trusted name in the building materials industry.
+          <p class="hero-text">
+            آسین استیل در حوزه فروش مقاطع فولادی فعالیت می‌کند.
+            ما اینجا هستیم تا مسیر پیدا کردن محصول موردنیاز،
+            بررسی مشخصات و استعلام قیمت برای شما ساده‌تر و روشن‌تر باشد.
           </p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- Why Choose ASIN STEEL -->
-  <section class="py-16 sm:py-20 bg-white dark:bg-dark-900">
-    <div class="container mx-auto px-4">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">Why Choose ASIN STEEL</h2>
-        <div class="w-20 h-1 bg-gradient-to-r from-primary-600 to-orange-500 mx-auto rounded-full"></div>
-        <p class="text-gray-600 dark:text-gray-400 mt-4 max-w-2xl mx-auto">
-          We go beyond just selling materials – we're your construction partner every step of the way.
-        </p>
-      </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-        <div class="text-center group">
-          <div class="w-20 h-20 bg-gradient-to-br from-primary-100 to-primary-200 dark:from-primary-900/30 dark:to-primary-800/30 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-            <svg class="w-10 h-10 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-            </svg>
+          <div class="hero-buttons">
+            <a href={url('products')} class="btn btn-main">
+              آشنایی با محصولات
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M19 12H5m7 7-7-7 7-7"/>
+              </svg>
+            </a>
+
+            <a href={url('contact')} class="btn btn-glass">
+              صحبت با کارشناسان
+            </a>
           </div>
-          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">10,000+ Products</h3>
-          <p class="text-sm text-gray-600 dark:text-gray-400">Comprehensive catalog covering all construction needs from foundation to finishing.</p>
-        </div>
 
-        <div class="text-center group">
-          <div class="w-20 h-20 bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900/30 dark:to-blue-800/30 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-            <svg class="w-10 h-10 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-            </svg>
+          <div class="hero-footnote">
+            <span class="footnote-icon">✓</span>
+            <span>برای شروع خرید، لازم نیست متخصص فولاد باشید.</span>
           </div>
-          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Expert Consultation</h3>
-          <p class="text-sm text-gray-600 dark:text-gray-400">Free technical advice from experienced construction professionals.</p>
         </div>
 
-        <div class="text-center group">
-          <div class="w-20 h-20 bg-gradient-to-br from-green-100 to-green-200 dark:from-green-900/30 dark:to-green-800/30 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-            <svg class="w-10 h-10 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
-          </div>
-          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Same-Day Dispatch</h3>
-          <p class="text-sm text-gray-600 dark:text-gray-400">Orders placed before 2 PM ship the same day for faster project completion.</p>
-        </div>
+        <div class="hero-photo-wrap reveal reveal-late">
+          <div class="hero-photo">
+            <img
+              src={images.warehouse}
+              alt="نمایی از انبار یا محل نگهداری مقاطع فولادی آسین استیل"
+              fetchpriority="high"
+              onerror="this.style.display='none'; this.parentElement.classList.add('image-missing')"
+            />
 
-        <div class="text-center group">
-          <div class="w-20 h-20 bg-gradient-to-br from-orange-100 to-orange-200 dark:from-orange-900/30 dark:to-orange-800/30 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-            <svg class="w-10 h-10 text-orange-600 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-            </svg>
-          </div>
-          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">30-Day Returns</h3>
-          <p class="text-sm text-gray-600 dark:text-gray-400">Hassle-free returns and exchanges with full refund guarantee.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- Service Commitment -->
-  <section class="py-16 sm:py-20 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-dark-800 dark:to-dark-900">
-    <div class="container mx-auto px-4">
-      <div class="max-w-5xl mx-auto">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">Our Service Commitment</h2>
-          <div class="w-20 h-1 bg-gradient-to-r from-primary-600 to-orange-500 mx-auto rounded-full"></div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="bg-white dark:bg-dark-900 rounded-xl p-6 shadow-lg border-t-4 border-primary-500">
-            <div class="flex items-center gap-3 mb-4">
-              <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center">
-                <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
-                </svg>
-              </div>
-              <h3 class="text-xl font-bold text-gray-900 dark:text-white">Delivery Standards</h3>
+            <div class="image-placeholder">
+              <span class="placeholder-symbol">AS</span>
+              <strong>تصویر واقعی مجموعه</strong>
+              <span>عکس انبار، محل نگهداری یا مقاطع فولادی</span>
             </div>
-            <ul class="space-y-2 text-gray-600 dark:text-gray-400">
-              <li class="flex items-start gap-2">
-                <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                <span>Same-day dispatch for orders before 2 PM</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                <span>Real-time tracking for all shipments</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                <span>Nationwide coverage with trusted carriers</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                <span>Secure packaging for damage-free delivery</span>
-              </li>
-            </ul>
+
+            <div class="photo-shade"></div>
+
+            <div class="photo-top-label">
+              <span class="photo-dot"></span>
+              ASIN STILL
+            </div>
+
+            <div class="photo-bottom-label">
+              <span class="photo-caption-small">STEEL SUPPLY</span>
+              <strong>آسین استیل</strong>
+              <span>تأمین مقاطع فولادی</span>
+            </div>
+
+            <div class="photo-crosshair crosshair-one"></div>
+            <div class="photo-crosshair crosshair-two"></div>
           </div>
 
-          <div class="bg-white dark:bg-dark-900 rounded-xl p-6 shadow-lg border-t-4 border-blue-500">
-            <div class="flex items-center gap-3 mb-4">
-              <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
-                <svg class="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                </svg>
-              </div>
-              <h3 class="text-xl font-bold text-gray-900 dark:text-white">Return Policy</h3>
+          <div class="floating-note floating-note-top">
+            <span class="floating-note-icon">01</span>
+            <div>
+              <strong>انتخاب محصول</strong>
+              <small>متناسب با نیاز شما</small>
             </div>
-            <ul class="space-y-2 text-gray-600 dark:text-gray-400">
-              <li class="flex items-start gap-2">
-                <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                <span>30-day return window for all products</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                <span>Full refund or free exchange option</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                <span>Free return shipping for defective items</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                <span>Simple online return process</span>
-              </li>
-            </ul>
           </div>
 
-          <div class="bg-white dark:bg-dark-900 rounded-xl p-6 shadow-lg border-t-4 border-green-500">
-            <div class="flex items-center gap-3 mb-4">
-              <div class="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
-                <svg class="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
-                </svg>
-              </div>
-              <h3 class="text-xl font-bold text-gray-900 dark:text-white">Satisfaction Guarantee</h3>
+          <div class="floating-note floating-note-bottom">
+            <span class="floating-note-icon accent-icon">02</span>
+            <div>
+              <strong>استعلام قیمت</strong>
+              <small>پیش از ثبت سفارش</small>
             </div>
-            <ul class="space-y-2 text-gray-600 dark:text-gray-400">
-              <li class="flex items-start gap-2">
-                <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                <span>24/7 customer support availability</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                <span>Expert technical consultation included</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                <span>Quality guarantee on all products</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                <span>Dedicated account manager for bulk orders</span>
-              </li>
-            </ul>
+          </div>
+
+          <div class="hero-counter" aria-hidden="true">
+            <span>AS</span>
+            <span class="counter-line"></span>
+            <span>STEEL</span>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-  <!-- Theme Credits / Made By -->
-  <section class="py-16 sm:py-20 bg-white dark:bg-dark-900">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">Theme Credits</h2>
-          <div class="w-20 h-1 bg-gradient-to-r from-primary-600 to-orange-500 mx-auto rounded-full"></div>
-          <p class="text-gray-600 dark:text-gray-400 mt-4">
-            This premium ASIN STEEL theme is professionally crafted by
+
+      <div class="hero-bottom">
+        <div class="container hero-bottom-inner">
+          <span>مقاطع فولادی</span>
+          <span class="bottom-dot"></span>
+          <span>اطلاعات روشن</span>
+          <span class="bottom-dot"></span>
+          <span>ارتباط مستقیم با مجموعه</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- داستان و معرفی شرکت -->
+    <section class="story section-padding">
+      <div class="container">
+        <div class="story-layout">
+          <div class="story-side reveal">
+            <span class="section-label">داستان ما</span>
+            <h2>
+              فولاد فقط یک محصول نیست؛
+              <span>بخشی از مسیر ساختن است.</span>
+            </h2>
+
+            <div class="story-line">
+              <span></span>
+            </div>
+
+            <p class="story-side-note">
+              از انتخاب یک مقطع تا بررسی شرایط خرید،
+              اطلاعات درست می‌تواند تصمیم‌گیری را ساده‌تر کند.
+            </p>
+          </div>
+
+          <div class="story-content reveal reveal-late">
+            <p class="story-lead">
+              آسین استیل با تمرکز بر فروش مقاطع فولادی،
+              تلاش می‌کند ارتباط میان خریدار و محصول موردنیازش را ساده‌تر کند.
+            </p>
+
+            <p>
+              خرید فولاد ممکن است برای بسیاری از افراد پیچیده به نظر برسد.
+              تنوع محصولات، اندازه‌ها، وزن‌ها و تفاوت قیمت‌ها باعث می‌شود
+              خریدار پیش از سفارش به اطلاعات دقیق‌تری نیاز داشته باشد.
+            </p>
+
+            <p>
+              نگاه ما در آسین استیل این است که مشتری بتواند با شناخت بهتر
+              محصولات، نیاز خود را واضح‌تر بیان کند و پیش از خرید،
+              درباره مشخصات و شرایط سفارش سؤال بپرسد.
+            </p>
+
+            <p>
+              چه برای یک پروژه ساختمانی به دنبال مقطع فولادی باشید،
+              چه برای یک کارگاه یا فعالیت صنعتی، می‌توانید از مسیر محصولات
+              شروع کنید یا مستقیماً با مجموعه در ارتباط باشید.
+            </p>
+
+            <a href={url('contact')} class="story-link">
+              با آسین استیل در ارتباط باشید
+              <span>←</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- تصویر عریض با پیام برند -->
+    <section class="wide-photo-section">
+      <div class="wide-photo">
+        <img
+          src={images.loading}
+          alt="مقاطع فولادی در محل بارگیری یا انبار"
+          loading="lazy"
+          onerror="this.style.display='none'; this.parentElement.classList.add('image-missing')"
+        />
+
+        <div class="image-placeholder">
+          <span class="placeholder-symbol">AS</span>
+          <strong>تصویر بارگیری یا حمل فولاد</strong>
+          <span>یک عکس عریض و واقعی از فعالیت مجموعه</span>
+        </div>
+
+        <div class="wide-photo-overlay"></div>
+
+        <div class="wide-photo-content reveal">
+          <span class="wide-kicker">ASIN STILL / STEEL SUPPLY</span>
+          <h2>
+            انتخاب آگاهانه‌تر،
+            <br />
+            شروع مطمئن‌تر.
+          </h2>
+          <p>
+            قبل از خرید، محصول را بشناسید؛
+            مشخصات را بررسی کنید و بعد تصمیم بگیرید.
+          </p>
+
+          <a href={url('products')} class="btn btn-white">
+            مشاهده محصولات
+            <span>←</span>
+          </a>
+        </div>
+
+        <span class="wide-vertical-label" aria-hidden="true">
+          BUILT ON STEEL
+        </span>
+      </div>
+    </section>
+
+    <!-- معرفی گروه‌های محصول -->
+    <section class="product-section section-padding">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div>
+            <span class="section-label">حوزه فعالیت</span>
+            <h2>با مقاطع فولادی بیشتر آشنا شوید</h2>
+            <p>
+              هر مقطع کاربرد متفاوتی دارد. از اینجا می‌توانید با گروه‌های مختلف
+              محصولات آشنا شوید.
+            </p>
+          </div>
+
+          <a href={url('products')} class="all-products-link">
+            دیدن همه محصولات
+            <span>←</span>
+          </a>
+        </div>
+
+        <div class="product-grid">
+          {productTypes.map((product) => (
+            <a
+              href={url('products')}
+              class={`product-card ${product.className} reveal`}
+              aria-label={`مشاهده محصولات: ${product.title}`}
+            >
+              <div class="product-image">
+                <img
+                  src={product.image}
+                  alt={product.title}
+                  loading="lazy"
+                  onerror="this.style.display='none'; this.parentElement.classList.add('image-missing')"
+                />
+
+                <div class="image-placeholder">
+                  <span class="placeholder-symbol">AS</span>
+                  <strong>{product.title}</strong>
+                  <span>تصویر واقعی این محصول</span>
+                </div>
+
+                <div class="product-image-shade"></div>
+                <span class="product-en">{product.english}</span>
+                <span class="product-number">{product.number}</span>
+              </div>
+
+              <div class="product-info">
+                <div class="product-title-row">
+                  <h3>{product.title}</h3>
+                  <span class="product-arrow">↗</span>
+                </div>
+
+                <p>{product.description}</p>
+
+                <div class="product-footer">
+                  <span>مشاهده محصولات</span>
+                  <span>←</span>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+
+        <div class="product-bottom-note reveal">
+          <span class="note-question">؟</span>
+          <p>
+            نام محصول را نمی‌دانید؟
+            <strong>نیاز پروژه‌تان را برای ما توضیح دهید.</strong>
+          </p>
+          <a href={url('contact')}>دریافت راهنمایی <span>←</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- نحوه همراهی با مشتری -->
+    <section class="approach-section section-padding">
+      <div class="container">
+        <div class="approach-heading reveal">
+          <span class="section-label">همراهی با مشتری</span>
+          <h2>از کجا شروع کنیم؟</h2>
+          <p>
+            مسیر ارتباط و خرید را تا جای ممکن ساده در نظر گرفته‌ایم.
           </p>
         </div>
 
-        <div class="bg-gradient-to-br from-primary-50 to-orange-50 dark:from-primary-900/20 dark:to-orange-900/20 rounded-2xl p-8 sm:p-12 shadow-xl border-2 border-primary-200 dark:border-primary-800">
-          <div class="text-center mb-8">
-            <div class="w-24 h-24 bg-gradient-to-br from-primary-600 to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
-              <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+        <div class="approach-layout">
+          <div class="approach-image reveal">
+            <img
+              src={images.detail}
+              alt="نمای نزدیک از سطح و جزئیات مقاطع فولادی"
+              loading="lazy"
+              onerror="this.style.display='none'; this.parentElement.classList.add('image-missing')"
+            />
+
+            <div class="image-placeholder">
+              <span class="placeholder-symbol">AS</span>
+              <strong>نمای نزدیک مقاطع فولادی</strong>
+              <span>تصویر باکیفیت از سطح یا برش فولاد</span>
+            </div>
+
+            <div class="approach-image-overlay"></div>
+            <div class="approach-image-caption">
+              <span>ASIN STILL</span>
+              <strong>شناخت محصول، پیش از خرید</strong>
+            </div>
+          </div>
+
+          <div class="steps-list">
+            <article class="step reveal">
+              <span class="step-index">۱</span>
+              <div>
+                <h3>نیازتان را مشخص کنید</h3>
+                <p>
+                  اگر نوع محصول را می‌دانید، نام آن را در بخش محصولات پیدا کنید.
+                  اگر مطمئن نیستید، می‌توانید نیازتان را با ما مطرح کنید.
+                </p>
+              </div>
+            </article>
+
+            <article class="step reveal">
+              <span class="step-index">۲</span>
+              <div>
+                <h3>مشخصات و قیمت را بپرسید</h3>
+                <p>
+                  پیش از سفارش، درباره اندازه، نوع مقطع، مقدار موردنیاز،
+                  قیمت و شرایط خرید سؤال کنید.
+                </p>
+              </div>
+            </article>
+
+            <article class="step reveal">
+              <span class="step-index">۳</span>
+              <div>
+                <h3>برای سفارش هماهنگ کنید</h3>
+                <p>
+                  پس از بررسی اطلاعات و توافق درباره شرایط،
+                  مراحل ثبت سفارش را با مجموعه پیگیری کنید.
+                </p>
+              </div>
+            </article>
+
+            <a href={url('contact')} class="btn btn-main steps-button">
+              شروع ارتباط با آسین استیل
+              <span>←</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- اصول کاری -->
+    <section class="values-section section-padding">
+      <div class="container">
+        <div class="values-heading reveal">
+          <span class="section-label">نگاه ما به همکاری</span>
+          <h2>در خرید فولاد، چه چیزهایی اهمیت دارد؟</h2>
+          <p>
+            اصولی که می‌خواهیم در ارتباط با مشتریانمان به آن‌ها پایبند باشیم.
+          </p>
+        </div>
+
+        <div class="values-grid">
+          <article class="value-card reveal">
+            <span class="value-number">01</span>
+            <div class="value-icon">
+              <svg viewBox="0 0 48 48" aria-hidden="true">
+                <path d="M8 12h32v25H8z"/>
+                <path d="M15 20h18M15 26h13M15 32h9"/>
               </svg>
             </div>
-            <h3 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Kantong Aplikasi</h3>
-            <p class="text-lg text-gray-600 dark:text-gray-400 mb-6">Professional Web Development & Design</p>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
-            <div class="bg-white dark:bg-dark-900 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div class="flex items-center gap-3 mb-3">
-                <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
-                  <svg class="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-                  </svg>
-                </div>
-                <h4 class="font-bold text-gray-900 dark:text-white">Website</h4>
-              </div>
-              <a href="https://kantongaplikasi.com" target="_blank" rel="noopener noreferrer" class="text-primary-600 dark:text-primary-400 hover:underline font-medium">
-                kantongaplikasi.com
-              </a>
-            </div>
-
-            <div class="bg-white dark:bg-dark-900 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div class="flex items-center gap-3 mb-3">
-                <div class="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center">
-                  <svg class="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
-                </div>
-                <h4 class="font-bold text-gray-900 dark:text-white">Created By</h4>
-              </div>
-              <p class="text-gray-700 dark:text-gray-300 font-medium">Kantong Aplikasi</p>
-            </div>
-
-            <div class="bg-white dark:bg-dark-900 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div class="flex items-center gap-3 mb-3">
-                <div class="w-10 h-10 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center">
-                  <svg class="w-5 h-5 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                </div>
-                <h4 class="font-bold text-gray-900 dark:text-white">Email</h4>
-              </div>
-              <a href="mailto:helmibamualim@gmail.com" class="text-primary-600 dark:text-primary-400 hover:underline font-medium break-all">
-                helmibamualim@gmail.com
-              </a>
-            </div>
-
-            <div class="bg-white dark:bg-dark-900 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div class="flex items-center gap-3 mb-3">
-                <div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
-                  <svg class="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
-                </div>
-                <h4 class="font-bold text-gray-900 dark:text-white">Call / WhatsApp</h4>
-              </div>
-              <a href="tel:+6281392442358" class="text-primary-600 dark:text-primary-400 hover:underline font-medium">
-                +62 813-9244-2358
-              </a>
-            </div>
-          </div>
-
-          <div class="mt-8 pt-8 border-t border-primary-200 dark:border-primary-800 text-center">
-            <p class="text-gray-600 dark:text-gray-400 text-sm">
-              Need a custom e-commerce theme or web application? Contact us for professional development services.
+            <h3>شفافیت اطلاعات</h3>
+            <p>
+              اطلاعات محصول و شرایط سفارش باید تا حد امکان روشن و قابل بررسی باشد.
             </p>
-            <div class="mt-4">
-              <a href="https://kantongaplikasi.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-600 to-orange-500 text-white rounded-xl font-semibold hover:from-primary-700 hover:to-orange-600 transition-all duration-300 hover:scale-105 hover:shadow-xl">
-                <span>Visit Our Website</span>
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </a>
+          </article>
+
+          <article class="value-card value-card-dark reveal reveal-late">
+            <span class="value-number">02</span>
+            <div class="value-icon">
+              <svg viewBox="0 0 48 48" aria-hidden="true">
+                <path d="M24 7a15 15 0 0 0-9 27v6h18v-6a15 15 0 0 0-9-27z"/>
+                <path d="M18 46h12M19 25l4 4 7-9"/>
+              </svg>
             </div>
-          </div>
+            <h3>انتخاب آگاهانه</h3>
+            <p>
+              مشتری باید فرصت داشته باشد مشخصات محصول را بشناسد و با نیاز خود
+              مقایسه کند.
+            </p>
+          </article>
+
+          <article class="value-card reveal reveal-late-more">
+            <span class="value-number">03</span>
+            <div class="value-icon">
+              <svg viewBox="0 0 48 48" aria-hidden="true">
+                <path d="M7 11h34v24H27l-9 7v-7H7z"/>
+                <path d="M15 20h18M15 26h12"/>
+              </svg>
+            </div>
+            <h3>ارتباط روشن</h3>
+            <p>
+              اگر درباره محصول یا شرایط خرید سؤالی دارید،
+              امکان مطرح کردن آن با مجموعه اهمیت دارد.
+            </p>
+          </article>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
+    <!-- CTA نهایی -->
+    <section class="contact-cta">
+      <div class="cta-glow"></div>
+      <div class="cta-grid" aria-hidden="true"></div>
+
+      <div class="container cta-layout reveal">
+        <div class="cta-copy">
+          <span class="cta-label">
+            <span class="live-dot"></span>
+            قدم بعدی با شماست
+          </span>
+
+          <h2>
+            برای تأمین فولاد پروژه‌تان
+            <span>از همین‌جا شروع کنید.</span>
+          </h2>
+
+          <p>
+            محصولات را بررسی کنید یا درباره نیازتان با آسین استیل صحبت کنید.
+            برای شروع، فقط کافی است ارتباط بگیرید.
+          </p>
+        </div>
+
+        <div class="cta-actions">
+          <a href={url('products')} class="btn btn-main">
+            مشاهده محصولات
+            <span>←</span>
+          </a>
+
+          <a href={url('contact')} class="btn btn-cta-outline">
+            تماس با آسین استیل
+          </a>
+        </div>
+
+        <div class="cta-brand" aria-hidden="true">
+          AS<span>.</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <style>
+    .about-page {
+      --navy: #102a43;
+      --navy-deep: #091c2e;
+      --navy-light: #183c56;
+      --teal: #19aaa2;
+      --teal-light: #75e2d4;
+      --ink: #263745;
+      --muted: #6d7e8c;
+      --paper: #ffffff;
+      --soft: #f3f6f9;
+      --line: #e0e7ed;
+      direction: rtl;
+      color: var(--ink);
+      font-family: inherit;
+      overflow: clip;
+    }
+
+    .about-page *,
+    .about-page *::before,
+    .about-page *::after {
+      box-sizing: border-box;
+    }
+
+    .about-page a {
+      text-decoration: none;
+    }
+
+    .about-page img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .about-page .container {
+      width: min(1160px, calc(100% - 44px));
+      margin-inline: auto;
+    }
+
+    .section-padding {
+      padding-block: 100px;
+    }
+
+    .section-label {
+      display: inline-block;
+      margin-bottom: 16px;
+      color: #108780;
+      font-size: 12px;
+      font-weight: 850;
+      line-height: 1.8;
+    }
+
+    /* Hero */
+
+    .hero {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      color: white;
+      background: linear-gradient(125deg, #091c2e 0%, #102a43 55%, #1b4057 100%);
+    }
+
+    .hero-lines,
+    .cta-grid {
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      pointer-events: none;
+      opacity: .15;
+      background-image:
+        linear-gradient(rgba(255,255,255,.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.12) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(100deg, transparent, #000);
+    }
+
+    .hero-orb {
+      position: absolute;
+      z-index: -1;
+      width: 320px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      filter: blur(95px);
+      opacity: .19;
+      pointer-events: none;
+      animation: orbMove 10s ease-in-out infinite alternate;
+    }
+
+    .hero-orb-one {
+      top: -120px;
+      right: -130px;
+      background: #19aaa2;
+    }
+
+    .hero-orb-two {
+      bottom: -170px;
+      left: 25%;
+      background: #467ba0;
+      animation-delay: -5s;
+    }
+
+    .hero-layout {
+      display: grid;
+      grid-template-columns: 1.02fr .98fr;
+      align-items: center;
+      gap: 65px;
+      padding-block: 80px 92px;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 14px;
+      margin-bottom: 23px;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 50px;
+      color: #d8e9f1;
+      background: rgba(255,255,255,.05);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .live-dot,
+    .photo-dot {
+      width: 8px;
+      height: 8px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: var(--teal-light);
+      box-shadow: 0 0 0 5px rgba(117,226,212,.12);
+    }
+
+    .hero h1 {
+      max-width: 620px;
+      margin: 0;
+      color: #fff;
+      font-size: clamp(32px, 4vw, 53px);
+      font-weight: 900;
+      line-height: 1.7;
+      letter-spacing: -.6px;
+    }
+
+    .hero-highlight {
+      display: block;
+      color: var(--teal-light);
+    }
+
+    .hero-text {
+      max-width: 560px;
+      margin: 19px 0 0;
+      color: #d1dee8;
+      font-size: 14px;
+      line-height: 2.35;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 29px;
+    }
+
+    .btn {
+      display: inline-flex;
+      min-height: 50px;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px 20px;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.7;
+      text-align: center;
+      transition:
+        transform .25s ease,
+        background .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    .btn svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .btn-main {
+      color: #092d34;
+      background: var(--teal-light);
+      box-shadow: 0 9px 28px rgba(25,170,162,.17);
+    }
+
+    .btn-main:hover {
+      background: #9cece2;
+      box-shadow: 0 13px 30px rgba(25,170,162,.25);
+    }
+
+    .btn-glass {
+      color: white;
+      border-color: rgba(255,255,255,.3);
+      background: rgba(255,255,255,.04);
+    }
+
+    .btn-glass:hover,
+    .btn-cta-outline:hover {
+      background: rgba(255,255,255,.12);
+    }
+
+    .hero-footnote {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 23px;
+      color: #c6d7e2;
+      font-size: 11px;
+      line-height: 2;
+    }
+
+    .footnote-icon {
+      display: grid;
+      place-items: center;
+      width: 20px;
+      height: 20px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      color: var(--teal-light);
+      background: rgba(117,226,212,.12);
+      font-weight: 900;
+    }
+
+    /* Hero photo */
+
+    .hero-photo-wrap {
+      position: relative;
+      min-width: 0;
+      padding: 14px;
+    }
+
+    .hero-photo {
+      position: relative;
+      height: 430px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 20px;
+      background:
+        linear-gradient(145deg, #426278, #122a3e 65%, #0b1b2a);
+      box-shadow: 0 32px 75px rgba(0,0,0,.27);
+    }
+
+    .hero-photo > img,
+    .wide-photo > img,
+    .product-image > img,
+    .approach-image > img {
+      position: absolute;
+      inset: 0;
+      transition: transform .8s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .hero-photo:hover > img,
+    .wide-photo:hover > img {
+      transform: scale(1.045);
+    }
+
+    .photo-shade {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(
+        180deg,
+        rgba(6,21,34,.15),
+        transparent 35%,
+        rgba(6,21,34,.2) 55%,
+        rgba(6,21,34,.92) 100%
+      );
+    }
+
+    .photo-top-label {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 8px;
+      color: white;
+      background: rgba(9,28,46,.5);
+      backdrop-filter: blur(8px);
+      font-size: 10px;
+      font-weight: 850;
+      letter-spacing: 1px;
+    }
+
+    .photo-bottom-label {
+      position: absolute;
+      right: 25px;
+      bottom: 25px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 5px;
+      color: white;
+    }
+
+    .photo-caption-small {
+      color: var(--teal-light);
+      font-size: 10px;
+      font-weight: 850;
+      letter-spacing: 2px;
+    }
+
+    .photo-bottom-label strong {
+      font-size: 28px;
+      font-weight: 900;
+    }
+
+    .photo-bottom-label > span:last-child {
+      color: #d6e1e9;
+      font-size: 12px;
+    }
+
+    .photo-crosshair {
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      border-color: rgba(117,226,212,.8);
+      border-style: solid;
+      opacity: .7;
+      animation: crosshairPulse 4s ease-in-out infinite;
+    }
+
+    .crosshair-one {
+      top: 70px;
+      left: 24px;
+      border-width: 1px 0 0 1px;
+    }
+
+    .crosshair-two {
+      right: 24px;
+      bottom: 105px;
+      border-width: 0 1px 1px 0;
+      animation-delay: -2s;
+    }
+
+    .floating-note {
+      position: absolute;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      min-width: 180px;
+      padding: 12px;
+      border: 1px solid rgba(255,255,255,.55);
+      border-radius: 12px;
+      color: var(--ink);
+      background: white;
+      box-shadow: 0 15px 35px rgba(0,0,0,.2);
+      animation: noteFloat 5s ease-in-out infinite;
+    }
+
+    .floating-note-top {
+      top: 85px;
+      right: -2px;
+    }
+
+    .floating-note-bottom {
+      bottom: 77px;
+      left: -7px;
+      animation-delay: -2.5s;
+    }
+
+    .floating-note-icon {
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      flex: 0 0 auto;
+      border-radius: 9px;
+      color: white;
+      background: var(--navy);
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .accent-icon {
+      color: #09534f;
+      background: #d8f6f0;
+    }
+
+    .floating-note strong,
+    .floating-note small {
+      display: block;
+    }
+
+    .floating-note strong {
+      font-size: 12px;
+    }
+
+    .floating-note small {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .hero-counter {
+      position: absolute;
+      left: 15px;
+      top: 25px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: rgba(255,255,255,.8);
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      transform: rotate(-90deg) translateX(-100%);
+      transform-origin: top left;
+    }
+
+    .hero-counter > span:first-child {
+      color: var(--teal-light);
+    }
+
+    .counter-line {
+      width: 35px;
+      height: 1px;
+      background: rgba(255,255,255,.55);
+    }
+
+    .hero-bottom {
+      border-top: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.1);
+    }
+
+    .hero-bottom-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 18px;
+      padding-block: 18px;
+      color: #d2e0e9;
+      font-size: 11px;
+      font-weight: 750;
+    }
+
+    .bottom-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--teal-light);
+    }
+
+    /* Image placeholders */
+
+    .image-placeholder {
+      position: absolute;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 11px;
+      padding: 25px;
+      color: #e5f0f6;
+      background:
+        radial-gradient(circle at 70% 30%, rgba(25,170,162,.2), transparent 40%),
+        linear-gradient(145deg, #35566d, #102a43 72%);
+      text-align: center;
+    }
+
+    .image-placeholder .placeholder-symbol {
+      display: grid;
+      place-items: center;
+      width: 64px;
+      height: 64px;
+      border: 1px solid rgba(117,226,212,.6);
+      border-radius: 15px;
+      color: var(--teal-light);
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    .image-placeholder strong {
+      font-size: 15px;
+    }
+
+    .image-placeholder > span:last-child {
+      max-width: 260px;
+      color: #c3d4df;
+      font-size: 11px;
+      line-height: 2;
+    }
+
+    .image-missing .image-placeholder {
+      display: flex;
+    }
+
+    /* Story */
+
+    .story {
+      background: white;
+    }
+
+    .story-layout {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      align-items: start;
+      gap: 90px;
+    }
+
+    .story-side {
+      position: relative;
+      padding-top: 4px;
+    }
+
+    .story-side h2 {
+      margin: 0;
+      color: var(--navy);
+      font-size: clamp(26px, 3vw, 39px);
+      font-weight: 900;
+      line-height: 1.9;
+    }
+
+    .story-side h2 span {
+      display: block;
+      color: #168e88;
+    }
+
+    .story-line {
+      width: 100%;
+      max-width: 290px;
+      height: 3px;
+      margin-top: 28px;
+      overflow: hidden;
+      border-radius: 5px;
+      background: #e6eff2;
+    }
+
+    .story-line span {
+      display: block;
+      width: 45%;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--teal);
+      animation: lineTravel 4s ease-in-out infinite alternate;
+    }
+
+    .story-side-note {
+      max-width: 370px;
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 2.2;
+    }
+
+    .story-content {
+      padding-top: 8px;
+    }
+
+    .story-content p {
+      margin: 0 0 17px;
+      color: #687987;
+      font-size: 13px;
+      line-height: 2.45;
+    }
+
+    .story-content .story-lead {
+      margin-bottom: 20px;
+      color: #1d3c51;
+      font-size: 17px;
+      font-weight: 800;
+      line-height: 2.1;
+    }
+
+    .story-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 9px;
+      color: #087d79;
+      font-size: 13px;
+      font-weight: 850;
+    }
+
+    .story-link span {
+      transition: transform .2s ease;
+    }
+
+    .story-link:hover span {
+      transform: translateX(-5px);
+    }
+
+    /* Wide image */
+
+    .wide-photo-section {
+      padding: 0 22px;
+      background: white;
+    }
+
+    .wide-photo {
+      position: relative;
+      isolation: isolate;
+      min-height: 440px;
+      overflow: hidden;
+      border-radius: 18px;
+      color: white;
+      background: linear-gradient(120deg, #102a43, #294f66);
+    }
+
+    .wide-photo-overlay {
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(5,21,35,.85), rgba(5,21,35,.4) 60%, rgba(5,21,35,.12)),
+        linear-gradient(0deg, rgba(5,21,35,.2), transparent);
+    }
+
+    .wide-photo-content {
+      position: relative;
+      z-index: 1;
+      width: min(1160px, calc(100% - 44px));
+      margin-inline: auto;
+      padding-block: 78px;
+    }
+
+    .wide-kicker {
+      display: inline-block;
+      margin-bottom: 15px;
+      color: var(--teal-light);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    .wide-photo h2 {
+      margin: 0;
+      color: white;
+      font-size: clamp(31px, 4vw, 47px);
+      font-weight: 900;
+      line-height: 1.8;
+    }
+
+    .wide-photo-content p {
+      max-width: 470px;
+      margin: 13px 0 25px;
+      color: #d9e4eb;
+      font-size: 13px;
+      line-height: 2.2;
+    }
+
+    .btn-white {
+      color: var(--navy);
+      background: white;
+    }
+
+    .btn-white:hover {
+      background: #e4faf6;
+    }
+
+    .wide-vertical-label {
+      position: absolute;
+      left: 20px;
+      bottom: 25px;
+      color: rgba(255,255,255,.65);
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 3px;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+    }
+
+    /* Product section */
+
+    .product-section {
+      background: var(--soft);
+      border-block: 1px solid #e8eef3;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 25px;
+      margin-bottom: 35px;
+    }
+
+    .section-heading h2,
+    .approach-heading h2,
+    .values-heading h2 {
+      margin: 0;
+      color: var(--navy);
+      font-size: clamp(25px, 3vw, 35px);
+      font-weight: 900;
+      line-height: 1.8;
+    }
+
+    .section-heading p,
+    .approach-heading > p,
+    .values-heading > p {
+      margin: 9px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 2.2;
+    }
+
+    .all-products-link {
+      display: inline-flex;
+      flex: 0 0 auto;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 8px;
+      color: #087d79;
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .all-products-link span {
+      font-size: 19px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .product-card {
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid #e0e7ed;
+      border-radius: 14px;
+      background: white;
+      transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-7px);
+      border-color: #a5d8d2;
+      box-shadow: 0 18px 35px rgba(16,42,67,.1);
+    }
+
+    .product-image {
+      position: relative;
+      height: 190px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #46687d, #102a43);
+    }
+
+    .product-image > img {
+      transition: transform .6s ease;
+    }
+
+    .product-card:hover .product-image > img {
+      transform: scale(1.07);
+    }
+
+    .product-image-shade {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(6,20,32,.08), rgba(6,20,32,.66));
+    }
+
+    .product-en {
+      position: absolute;
+      right: 15px;
+      bottom: 15px;
+      color: white;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1.4px;
+    }
+
+    .product-number {
+      position: absolute;
+      top: 13px;
+      left: 13px;
+      display: grid;
+      place-items: center;
+      width: 33px;
+      height: 33px;
+      border: 1px solid rgba(255,255,255,.5);
+      border-radius: 8px;
+      color: white;
+      background: rgba(9,28,46,.5);
+      font-size: 10px;
+      font-weight: 850;
+      backdrop-filter: blur(6px);
+    }
+
+    .product-info {
+      padding: 18px 17px 15px;
+    }
+
+    .product-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .product-title-row h3 {
+      margin: 0;
+      color: #17364b;
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .product-arrow {
+      display: grid;
+      place-items: center;
+      width: 29px;
+      height: 29px;
+      flex: 0 0 auto;
+      border-radius: 8px;
+      color: #087d79;
+      background: #eaf7f5;
+      transition: transform .2s ease;
+    }
+
+    .product-card:hover .product-arrow {
+      transform: translate(-3px, -3px);
+    }
+
+    .product-info > p {
+      min-height: 45px;
+      margin: 10px 0 15px;
+      color: #73818d;
+      font-size: 11px;
+      line-height: 2;
+    }
+
+    .product-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding-top: 12px;
+      border-top: 1px solid #edf1f4;
+      color: #087d79;
+      font-size: 11px;
+      font-weight: 850;
+    }
+
+    .product-bottom-note {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      margin-top: 24px;
+      padding: 18px 20px;
+      border: 1px solid #d8e9e7;
+      border-radius: 12px;
+      background: #fafffe;
+    }
+
+    .note-question {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      flex: 0 0 auto;
+      border-radius: 10px;
+      color: white;
+      background: #138b86;
+      font-size: 20px;
+      font-weight: 900;
+    }
+
+    .product-bottom-note p {
+      flex: 1;
+      margin: 0;
+      color: #637783;
+      font-size: 12px;
+      line-height: 2;
+    }
+
+    .product-bottom-note p strong {
+      color: #1b4656;
+    }
+
+    .product-bottom-note > a {
+      display: inline-flex;
+      flex: 0 0 auto;
+      align-items: center;
+      gap: 8px;
+      color: #087d79;
+      font-size: 11px;
+      font-weight: 850;
+    }
+
+    /* Approach */
+
+    .approach-section {
+      background: white;
+    }
+
+    .approach-heading {
+      margin-bottom: 38px;
+    }
+
+    .approach-layout {
+      display: grid;
+      grid-template-columns: .95fr 1.05fr;
+      gap: 55px;
+      align-items: center;
+    }
+
+    .approach-image {
+      position: relative;
+      min-height: 445px;
+      overflow: hidden;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #35566d, #102a43);
+    }
+
+    .approach-image-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(0deg, rgba(6,20,32,.85), transparent 65%);
+    }
+
+    .approach-image-caption {
+      position: absolute;
+      right: 23px;
+      bottom: 25px;
+      left: 23px;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      color: white;
+    }
+
+    .approach-image-caption span {
+      color: var(--teal-light);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    .approach-image-caption strong {
+      font-size: 20px;
+      line-height: 1.8;
+    }
+
+    .steps-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 48px minmax(0, 1fr);
+      gap: 16px;
+      padding-block: 23px;
+      border-bottom: 1px solid #e7edf1;
+    }
+
+    .step:first-child {
+      padding-top: 0;
+    }
+
+    .step-index {
+      display: grid;
+      place-items: center;
+      width: 43px;
+      height: 43px;
+      border: 1px solid #d4e9e6;
+      border-radius: 12px;
+      color: #087d79;
+      background: #effaf8;
+      font-size: 17px;
+      font-weight: 900;
+      transition: transform .25s ease, background .25s ease;
+    }
+
+    .step:hover .step-index {
+      transform: scale(1.07) rotate(-4deg);
+      color: white;
+      background: #138b86;
+    }
+
+    .step h3 {
+      margin: 0 0 7px;
+      color: #17364b;
+      font-size: 15px;
+      font-weight: 900;
+      line-height: 1.9;
+    }
+
+    .step p {
+      margin: 0;
+      color: #6a7a87;
+      font-size: 12px;
+      line-height: 2.2;
+    }
+
+    .steps-button {
+      align-self: flex-start;
+      margin-top: 23px;
+    }
+
+    /* Values */
+
+    .values-section {
+      background: #f2f6f9;
+      border-top: 1px solid #e5ecf1;
+    }
+
+    .values-heading {
+      max-width: 720px;
+      margin: 0 auto 40px;
+      text-align: center;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .value-card {
+      position: relative;
+      min-width: 0;
+      min-height: 275px;
+      padding: 26px 23px;
+      overflow: hidden;
+      border: 1px solid #e0e7ed;
+      border-radius: 14px;
+      background: white;
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+
+    .value-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 17px 35px rgba(16,42,67,.08);
+    }
+
+    .value-number {
+      position: absolute;
+      top: 18px;
+      left: 20px;
+      color: #c2d0d9;
+      font-size: 25px;
+      font-weight: 900;
+    }
+
+    .value-icon {
+      display: grid;
+      place-items: center;
+      width: 54px;
+      height: 54px;
+      margin-bottom: 22px;
+      border-radius: 13px;
+      color: #087d79;
+      background: #e9f8f5;
+    }
+
+    .value-icon svg {
+      width: 31px;
+      height: 31px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .value-card h3 {
+      margin: 0 0 10px;
+      color: #18364a;
+      font-size: 16px;
+      font-weight: 900;
+      line-height: 1.9;
+    }
+
+    .value-card p {
+      margin: 0;
+      color: #6c7d89;
+      font-size: 12px;
+      line-height: 2.2;
+    }
+
+    .value-card-dark {
+      border-color: #173e55;
+      background: linear-gradient(145deg, #102a43, #183e55);
+    }
+
+    .value-card-dark .value-number {
+      color: rgba(255,255,255,.25);
+    }
+
+    .value-card-dark .value-icon {
+      color: var(--teal-light);
+      background: rgba(117,226,212,.12);
+    }
+
+    .value-card-dark h3 {
+      color: white;
+    }
+
+    .value-card-dark p {
+      color: #c8d7e1;
+    }
+
+    /* CTA */
+
+    .contact-cta {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      color: white;
+      background: linear-gradient(115deg, #091c2e, #143a53);
+    }
+
+    .cta-glow {
+      position: absolute;
+      z-index: -1;
+      top: -170px;
+      left: 10%;
+      width: 350px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: #19aaa2;
+      filter: blur(120px);
+      opacity: .18;
+      animation: orbMove 8s ease-in-out infinite alternate;
+    }
+
+    .cta-layout {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 35px;
+      padding-block: 67px;
+    }
+
+    .cta-copy {
+      max-width: 680px;
+    }
+
+    .cta-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #d1e5eb;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .cta-label .live-dot {
+      width: 7px;
+      height: 7px;
+    }
+
+    .cta-copy h2 {
+      margin: 15px 0 10px;
+      color: white;
+      font-size: clamp(25px, 3vw, 37px);
+      font-weight: 900;
+      line-height: 1.9;
+    }
+
+    .cta-copy h2 span {
+      display: block;
+      color: var(--teal-light);
+    }
+
+    .cta-copy p {
+      max-width: 570px;
+      margin: 0;
+      color: #cbdbe4;
+      font-size: 12px;
+      line-height: 2.25;
+    }
+
+    .cta-actions {
+      display: flex;
+      flex: 0 0 auto;
+      flex-direction: column;
+      gap: 11px;
+      min-width: 190px;
+    }
+
+    .btn-cta-outline {
+      color: white;
+      border-color: rgba(255,255,255,.3);
+      background: rgba(255,255,255,.025);
+    }
+
+    .cta-brand {
+      position: absolute;
+      left: 15px;
+      bottom: -55px;
+      color: rgba(255,255,255,.035);
+      font-size: 190px;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -15px;
+      pointer-events: none;
+    }
+
+    .cta-brand span {
+      color: rgba(117,226,212,.14);
+    }
+
+    /* Animations */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(23px);
+      transition:
+        opacity .75s ease,
+        transform .75s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-late {
+      transition-delay: .14s;
+    }
+
+    .reveal-late-more {
+      transition-delay: .25s;
+    }
+
+    @keyframes orbMove {
+      from { transform: translate3d(0,0,0) scale(1); }
+      to { transform: translate3d(35px,-25px,0) scale(1.14); }
+    }
+
+    @keyframes noteFloat {
+      0%, 100% { translate: 0 0; }
+      50% { translate: 0 -8px; }
+    }
+
+    @keyframes lineTravel {
+      from { transform: translateX(0); }
+      to { transform: translateX(-115%); }
+    }
+
+    @keyframes crosshairPulse {
+      0%, 100% { opacity: .35; }
+      50% { opacity: .9; }
+    }
+
+    /* Tablet */
+
+    @media (max-width: 1000px) {
+      .hero-layout {
+        gap: 30px;
+      }
+
+      .hero h1 {
+        font-size: clamp(30px, 4.2vw, 43px);
+      }
+
+      .hero-photo {
+        height: 385px;
+      }
+
+      .story-layout {
+        gap: 45px;
+      }
+
+      .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .approach-layout {
+        gap: 32px;
+      }
+
+      .approach-image {
+        min-height: 420px;
+      }
+
+      .cta-layout {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .cta-actions {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+    }
+
+    /* Mobile */
+
+    @media (max-width: 700px) {
+      .about-page .container {
+        width: calc(100% - 32px);
+      }
+
+      .section-padding {
+        padding-block: 62px;
+      }
+
+      .hero-layout {
+        grid-template-columns: 1fr;
+        gap: 35px;
+        padding-block: 49px 45px;
+      }
+
+      .hero h1 {
+        font-size: clamp(30px, 8vw, 41px);
+        line-height: 1.75;
+      }
+
+      .hero-text {
+        font-size: 13px;
+        line-height: 2.25;
+      }
+
+      .hero-buttons {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-top: 23px;
+      }
+
+      .hero-buttons .btn {
+        width: 100%;
+      }
+
+      .hero-photo-wrap {
+        width: min(100%, 460px);
+        margin-inline: auto;
+        padding: 8px;
+      }
+
+      .hero-photo {
+        height: 340px;
+      }
+
+      .floating-note-top {
+        top: 62px;
+        right: -1px;
+      }
+
+      .floating-note-bottom {
+        bottom: 60px;
+        left: -1px;
+      }
+
+      .floating-note {
+        min-width: 160px;
+      }
+
+      .hero-counter {
+        left: 9px;
+        top: 22px;
+      }
+
+      .hero-bottom-inner {
+        gap: 10px;
+        padding-block: 15px;
+        font-size: 9px;
+      }
+
+      .story-layout {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+
+      .story-side h2 {
+        font-size: 28px;
+      }
+
+      .story-content {
+        padding-top: 0;
+      }
+
+      .story-content .story-lead {
+        font-size: 15px;
+      }
+
+      .story-content p {
+        font-size: 12px;
+      }
+
+      .wide-photo-section {
+        padding-inline: 10px;
+      }
+
+      .wide-photo {
+        min-height: 420px;
+        border-radius: 13px;
+      }
+
+      .wide-photo-content {
+        width: calc(100% - 36px);
+        padding-block: 60px;
+      }
+
+      .wide-photo h2 {
+        font-size: 32px;
+      }
+
+      .wide-photo-content p {
+        font-size: 12px;
+      }
+
+      .wide-vertical-label {
+        left: 12px;
+        bottom: 15px;
+      }
+
+      .section-heading {
+        align-items: flex-start;
+        margin-bottom: 25px;
+      }
+
+      .section-heading h2,
+      .approach-heading h2,
+      .values-heading h2 {
+        font-size: 25px;
+      }
+
+      .section-heading p,
+      .approach-heading > p,
+      .values-heading > p {
+        font-size: 12px;
+      }
+
+      .all-products-link {
+        display: none;
+      }
+
+      .product-grid {
+        gap: 11px;
+      }
+
+      .product-image {
+        height: 145px;
+      }
+
+      .product-info {
+        padding: 14px 12px 12px;
+      }
+
+      .product-title-row h3 {
+        font-size: 14px;
+      }
+
+      .product-info > p {
+        min-height: 44px;
+        font-size: 10px;
+      }
+
+      .product-bottom-note {
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 15px;
+      }
+
+      .product-bottom-note p {
+        flex-basis: calc(100% - 55px);
+      }
+
+      .product-bottom-note > a {
+        margin-right: 48px;
+      }
+
+      .approach-heading {
+        margin-bottom: 25px;
+      }
+
+      .approach-layout {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .approach-image {
+        min-height: 300px;
+      }
+
+      .step {
+        grid-template-columns: 43px minmax(0, 1fr);
+        gap: 12px;
+        padding-block: 19px;
+      }
+
+      .step-index {
+        width: 39px;
+        height: 39px;
+      }
+
+      .step h3 {
+        font-size: 14px;
+      }
+
+      .step p {
+        font-size: 11px;
+      }
+
+      .steps-button {
+        align-self: stretch;
+        margin-top: 20px;
+      }
+
+      .values-heading {
+        margin-bottom: 28px;
+        text-align: right;
+      }
+
+      .values-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .value-card {
+        min-height: 0;
+        padding: 23px 19px;
+      }
+
+      .value-card h3 {
+        font-size: 15px;
+      }
+
+      .value-card p {
+        font-size: 11px;
+      }
+
+      .cta-layout {
+        gap: 25px;
+        padding-block: 48px;
+      }
+
+      .cta-copy h2 {
+        font-size: 26px;
+      }
+
+      .cta-copy p {
+        font-size: 12px;
+      }
+
+      .cta-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+        width: 100%;
+      }
+
+      .cta-actions .btn {
+        width: 100%;
+      }
+
+      .cta-brand {
+        left: 0;
+        bottom: -25px;
+        font-size: 120px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .about-page .container {
+        width: calc(100% - 24px);
+      }
+
+      .hero h1 {
+        font-size: 29px;
+      }
+
+      .hero-photo {
+        height: 305px;
+      }
+
+      .floating-note {
+        min-width: 148px;
+        padding: 9px;
+      }
+
+      .floating-note strong {
+        font-size: 11px;
+      }
+
+      .product-grid {
+        gap: 8px;
+      }
+
+      .product-image {
+        height: 125px;
+      }
+
+      .product-info {
+        padding-inline: 10px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .about-page *,
+      .about-page *::before,
+      .about-page *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+      }
+
+      .about-page .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+
+  <script>
+    const setupAboutPage = () => {
+      const elements = document.querySelectorAll('.about-page .reveal');
+
+      if (!('IntersectionObserver' in window)) {
+        elements.forEach((element) => {
+          element.classList.add('is-visible');
+        });
+        return;
+      }
+
+      const observer = new IntersectionObserver(
+        (entries, currentObserver) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              currentObserver.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.12,
+          rootMargin: '0px 0px -25px 0px',
+        }
+      );
+
+      elements.forEach((element) => observer.observe(element));
+    };
+
+    setupAboutPage();
+  </script>
 </BaseLayout>
