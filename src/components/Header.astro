@@ -2368,6 +2368,312 @@ updateMegaMenu(
     </ul>
 </nav>
   </div>
+   
+<style is:global>
+/* =========================================
+   ASIN STEEL — Industrial Blue Theme
+   ========================================= */
+
+/* هدر اصلی */
+header.sticky {
+  background: rgba(255, 255, 255, 0.96) !important;
+  border-color: #dce5ef !important;
+  color: #24364b;
+  box-shadow: 0 6px 24px rgba(23, 54, 93, 0.08) !important;
+}
+
+.dark header.sticky {
+  background: rgba(15, 23, 42, 0.96) !important;
+  border-color: rgba(100, 116, 139, 0.3) !important;
+  color: #e2e8f0;
+}
+
+/* نوار بازار */
+#market-top-bar {
+  background: linear-gradient(110deg, #17365d, #24558a) !important;
+  color: #fff !important;
+}
+
+.dark #market-top-bar {
+  background: linear-gradient(110deg, #0b1729, #17365d) !important;
+}
+
+/* رنگ اصلی برند: سرمه‌ای و آبی فولادی */
+header [class~="bg-primary-600"],
+header [class~="bg-primary-500"] {
+  background-color: #244f7d !important;
+}
+
+header [class~="text-primary-600"],
+header [class~="text-primary-500"],
+header [class~="text-primary-400"] {
+  color: #244f7d !important;
+}
+
+header [class~="border-primary-500"] {
+  border-color: #527ba5 !important;
+}
+
+header [class~="hover:bg-primary-50"]:hover {
+  background-color: #edf4fa !important;
+}
+
+header [class~="hover:text-primary-200"]:hover {
+  color: #dbeafe !important;
+}
+
+.dark header [class~="bg-primary-600"],
+.dark header [class~="bg-primary-500"] {
+  background-color: #315f91 !important;
+}
+
+.dark header [class~="text-primary-600"],
+.dark header [class~="text-primary-500"],
+.dark header [class~="text-primary-400"] {
+  color: #93c5fd !important;
+}
+
+.dark header [class~="hover:bg-primary-50"]:hover {
+  background-color: #1e293b !important;
+}
+
+/* جست‌وجو */
+header input[type="search"] {
+  border-color: #d6e0eb;
+  background-color: #f8fafc;
+  color: #1e293b;
+}
+
+header input[type="search"]:focus {
+  border-color: #527ba5 !important;
+  box-shadow: 0 0 0 4px rgba(82, 123, 165, 0.14) !important;
+}
+
+.dark header input[type="search"] {
+  border-color: #334155;
+  background-color: #1e293b;
+  color: #f1f5f9;
+}
+
+/* دکمه پیش‌فاکتور */
+#open-proforma {
+  background: #edf4fa !important;
+  color: #17365d !important;
+  border-color: #d3e0ed !important;
+}
+
+#open-proforma:hover {
+  background: #dceaf7 !important;
+  border-color: #527ba5 !important;
+}
+
+#open-proforma .text-slate-200 {
+  color: #17365d !important;
+}
+
+.dark #open-proforma {
+  background: #1e293b !important;
+  color: #93c5fd !important;
+  border-color: #334155 !important;
+}
+
+.dark #open-proforma .text-slate-200 {
+  color: #e2e8f0 !important;
+}
+
+/* آیکون‌ها و دکمه‌های هدر */
+header button:hover,
+header a:hover {
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+header button:hover:not(#open-proforma),
+header a:hover:not([href*="/deals"]) {
+  outline-color: #dce8f4;
+}
+
+/* زیرمنوی محصولات */
+header .mega-menu-item,
+header .mega-type-item,
+header .mega-option,
+header .mega-detail-link,
+header .mega-detail-item {
+  color: #40546b;
+}
+
+header .mega-menu-item:hover,
+header .mega-type-item:hover,
+header .mega-option:hover,
+header .mega-detail-link:hover,
+header .mega-detail-item:hover,
+header .mega-menu-item.active,
+header .mega-type-item.active,
+header .mega-option.active {
+  background: #eaf2fa !important;
+  color: #17365d !important;
+}
+
+.dark header .mega-menu-item,
+.dark header .mega-type-item,
+.dark header .mega-option,
+.dark header .mega-detail-link,
+.dark header .mega-detail-item {
+  color: #cbd5e1;
+}
+
+.dark header .mega-menu-item:hover,
+.dark header .mega-type-item:hover,
+.dark header .mega-option:hover,
+.dark header .mega-detail-link:hover,
+.dark header .mega-detail-item:hover,
+.dark header .mega-menu-item.active,
+.dark header .mega-type-item.active,
+.dark header .mega-option.active {
+  background: #26374d !important;
+  color: #93c5fd !important;
+}
+
+/* منوها و پنجره‌های کشویی */
+header [class*="bg-white"] {
+  --asin-menu-border: #dce5ef;
+}
+
+header [class*="border-gray-200"] {
+  border-color: #dce5ef;
+}
+
+.dark header [class*="border-gray-200"] {
+  border-color: #334155;
+}
+
+/* لینک تخفیف؛ قرمز باقی می‌ماند تا متمایز باشد */
+header a[href*="/deals"] {
+  color: #b91c1c;
+}
+
+.dark header a[href*="/deals"] {
+  color: #f87171;
+}
+
+/* بازار: رنگ‌های تغییر قیمت */
+#market-top-bar .text-emerald-200 {
+  color: #a7f3d0 !important;
+}
+
+#market-top-bar .text-red-200 {
+  color: #fecaca !important;
+}
+</style>
+
+
+
+
+
+
+
+
+<style is:global>
+/* ASIN STEEL — Framed Navigation */
+
+
+header.sticky {
+  background: rgba(255, 255, 255, 0.98) !important;
+  border-bottom: 2px solid #c5d6e8 !important;
+  box-shadow: 0 5px 16px rgba(23, 54, 93, 0.10) !important;
+  position: relative;
+  z-index: 100;
+}
+
+.dark header.sticky {
+  border-bottom: 2px solid #334b68 !important;
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.25) !important;
+}
+
+
+/* قاب گزینه‌های منو */
+header nav a {
+  border: 1px solid #dce6f1 !important;
+  border-radius: 10px !important;
+  padding: 9px 14px !important;
+  margin: 0 3px !important;
+  color: #243b53 !important;
+  background: #ffffff !important;
+  transition: all 0.22s ease !important;
+}
+
+/* افکت هاور */
+header nav a:hover {
+  background: #edf4fb !important;
+  border-color: #527ba5 !important;
+  color: #17365d !important;
+  box-shadow: 0 3px 10px rgba(23, 54, 93, 0.10);
+  transform: translateY(-1px);
+}
+
+/* نوار بالای بازار */
+#market-top-bar {
+  background: linear-gradient(110deg, #102b4c, #24558a) !important;
+  color: #ffffff !important;
+}
+
+/* قاب جست‌وجو */
+header input[type="search"] {
+  border: 1px solid #d4e0ed !important;
+  border-radius: 12px !important;
+  background: #f7faff !important;
+}
+
+header input[type="search"]:focus {
+  border-color: #527ba5 !important;
+  box-shadow: 0 0 0 3px rgba(82, 123, 165, 0.14) !important;
+  outline: none !important;
+}
+
+/* دکمه‌های آیکون */
+header button {
+  transition: all 0.2s ease;
+}
+
+header button:hover {
+  border-color: #9bb8d6;
+}
+
+/* حالت تاریک */
+.dark header.sticky {
+  background: rgba(15, 23, 42, 0.97) !important;
+  border-color: #334155 !important;
+}
+
+.dark header nav a {
+  background: #172438 !important;
+  border-color: #334155 !important;
+  color: #e2e8f0 !important;
+}
+
+.dark header nav a:hover {
+  background: #263b55 !important;
+  border-color: #6b91bd !important;
+  color: #bfdbfe !important;
+}
+
+.dark header input[type="search"] {
+  background: #172438 !important;
+  border-color: #334155 !important;
+  color: #f1f5f9 !important;
+}
+
+/* نمایش مناسب در موبایل */
+@media (max-width: 768px) {
+  header nav a {
+    margin: 3px !important;
+    padding: 8px 11px !important;
+  }
+}
+</style>
+
+
+
+
 </header>
 
 <script>

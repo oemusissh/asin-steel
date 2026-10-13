@@ -1,0 +1,1418 @@
+
+---
+import { getActiveProducts } from "../data/products";
+
+const base = import.meta.env.BASE_URL;
+const priceList = `${base}products`;
+const contact = `${base}contact`;
+
+const products = getActiveProducts();
+const railProducts = [...products, ...products];
+
+const brand = {
+  nameFa: "آسین استیل",
+  nameEn: "ASIN STILL",
+  logo: `${base}logo.svg`,
+  phone: "۰۲۱-۱۲۳۴۵۶۷۸",
+  phoneLink: "tel:+982112345678",
+  instagram: "https://instagram.com/asinstill",
+  telegram: "https://t.me/asinstill",
+};
+
+
+
+
+const heroSlides = [
+  {
+    src: "/asin-steel/images/hero-steel.png",
+    alt: "مقاطع فولادی در فضای صنعتی",
+    label: "STEEL INDUSTRY",
+  },
+  {
+    src: "/asin-steel/images/hero-steel-2.jpg",
+    alt: "ورق‌ها و کلاف‌های فولادی",
+    label: "STEEL SHEETS",
+  },
+  {
+    src: "/asin-steel/images/hero-steel-3.jpg",
+    alt: "تیرآهن و مقاطع فولادی در انبار",
+    label: "STEEL PROFILES",
+  },
+];
+
+;
+
+---
+
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css"
+/>
+
+<main class="as" dir="rtl">
+
+  <!-- لوگو -->
+  <div class="as-logo">
+    <img
+      src={brand.logo}
+      alt={brand.nameFa}
+      onerror="this.style.display='none'"
+    />
+    <div>
+      <strong>{brand.nameFa}</strong>
+      <span>{brand.nameEn}</span>
+    </div>
+  </div>
+
+  <!-- معرفی -->
+  <section class="as-intro">
+
+    <div class="as-intro-text">
+      <span class="as-tag">تأمین و بازرگانی مقاطع فولادی</span>
+
+      <h1>
+        پایه‌های <em>محکم</em>
+        برای سازه‌های ماندگار
+      </h1>
+
+      <p>
+        از انتخاب مقطع مناسب تا تحویل در محل پروژه، همراه شما هستیم.
+        کیفیت تضمینی، ارسال سریع به سراسر ایران.
+      </p>
+
+      <div class="as-actions">
+        <a href={priceList} class="as-btn as-btn-primary">
+          مشاهده محصولات
+          <svg
+            viewBox="0 0 24 24"
+            width="15"
+            height="15"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            aria-hidden="true"
+          >
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+        </a>
+
+        <a href={contact} class="as-btn as-btn-ghost">
+          استعلام قیمت
+        </a>
+      </div>
+
+      
+<div class="as-contact-panel">
+  <a class="as-contact-phone" href={brand.phoneLink}>
+    <span class="as-contact-icon as-phone-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24">
+        <path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 11.2 19a19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.2-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.8 2.1Z"/>
+      </svg>
+    </span>
+    <span class="as-phone-content">
+      <span class="as-contact-caption">برای مشاوره و استعلام قیمت</span>
+      <strong>{brand.phone}</strong>
+    </span>
+    <span class="as-phone-arrow" aria-hidden="true">←</span>
+  </a>
+
+  <div class="as-contact-socials">
+    <a
+      class="as-social-link as-instagram"
+      href={brand.instagram}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="صفحه اینستاگرام آسین استیل"
+    >
+      <span class="as-social-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24">
+          <rect x="3" y="3" width="18" height="18" rx="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+        </svg>
+      </span>
+      <span>
+        <strong>اینستاگرام</strong>
+        <small>ما را دنبال کنید</small>
+      </span>
+      <span class="as-social-arrow" aria-hidden="true">↗</span>
+    </a>
+
+    <a
+      class="as-social-link as-telegram"
+      href={brand.telegram}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="کانال تلگرام آسین استیل"
+    >
+      <span class="as-social-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24">
+          <path d="m21.5 3.5-3.2 17c-.2 1.2-.9 1.5-1.9.9l-5.3-3.9-2.6 2.5c-.3.3-.6.6-1.2.6l.4-5.4 9.8-8.9c.4-.4-.1-.6-.6-.2L4.8 13.7-.4 12c-1.1-.4-1.1-1.1.2-1.6L20 2.9c.9-.3 1.7.2 1.5.6Z" transform="translate(2 0) scale(.9)"/>
+        </svg>
+      </span>
+      <span>
+        <strong>تلگرام</strong>
+        <small>ارتباط با آسین استیل</small>
+      </span>
+      <span class="as-social-arrow" aria-hidden="true">↗</span>
+    </a>
+  </div>
+</div>
+
+    </div>
+
+    <!-- اسلایدر تصاویر هیرو -->
+    <div
+      class="as-intro-photo"
+      data-hero-slider
+      aria-label="تصاویر مقاطع فولادی"
+      tabindex="0"
+    >
+      <div class="as-slides">
+        {heroSlides.map((slide, index) => (
+          <img
+            src={slide.src}
+            alt={slide.alt}
+            class:list={["as-hero-slide", index === 0 && "is-active"]}
+            data-slide-index={index}
+            loading={index === 0 ? "eager" : "lazy"}
+            fetchpriority={index === 0 ? "high" : "auto"}
+            decoding="async"
+          />
+        ))}
+      </div>
+
+      <div class="as-photo-shade"></div>
+
+      <div class="as-photo-overlay">
+        <span class="as-photo-label" data-slide-label>
+          {heroSlides[0].label}
+        </span>
+      </div>
+
+      <!-- کنترل‌های اسلایدر -->
+      <div class="as-slider-controls">
+
+        <button
+          type="button"
+          class="as-slider-arrow"
+          data-slider-prev
+          aria-label="تصویر قبلی"
+          title="تصویر قبلی"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m15 18-6-6 6-6" />
+          </svg>
+        </button>
+
+        <div class="as-slider-dots" aria-label="انتخاب تصویر">
+          {heroSlides.map((slide, index) => (
+            <button
+              type="button"
+              class:list={[
+                "as-slider-dot",
+                index === 0 && "is-active",
+              ]}
+              data-slide-to={index}
+              aria-label={`نمایش تصویر ${index + 1}`}
+              aria-pressed={index === 0 ? "true" : "false"}
+            ></button>
+          ))}
+        </div>
+
+        <button
+          type="button"
+          class="as-slider-arrow"
+          data-slider-next
+          aria-label="تصویر بعدی"
+          title="تصویر بعدی"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m9 18 6-6-6-6" />
+          </svg>
+        </button>
+
+      </div>
+
+      <span class="as-slider-counter" aria-hidden="true">
+        <span data-slider-current>01</span>
+        <span class="as-counter-divider">/</span>
+        <span>{String(heroSlides.length).padStart(2, "0")}</span>
+      </span>
+    </div>
+
+  </section>
+
+  <!-- ریل محصولات -->
+  <section class="as-rail-section">
+    <div class="as-rail-head">
+      <h2>محصولات ما</h2>
+      <a href={priceList}>مشاهده همه ←</a>
+    </div>
+
+    <div class="as-rail-window">
+      <div class="as-rail-track">
+        {railProducts.map((p, i) => (
+          <a
+            href={`${base}product/${p.id}`}
+            class="as-rail-card"
+            tabindex={i >= products.length ? -1 : 0}
+          >
+            <div class="as-card-img">
+              {p.image && (
+                <img
+                  src={p.image}
+                  alt={p.name}
+                  loading="lazy"
+                  onerror="this.style.display='none'"
+                />
+              )}
+            </div>
+
+            <div class="as-card-body">
+              <h3>{p.name}</h3>
+
+              {p.factory && (
+                <span class="as-card-size">{p.factory}</span>
+              )}
+
+              {p.specifications && p.specifications.length > 0 && (
+                <div class="as-card-specs">
+                  {p.specifications.slice(0, 2).map((spec) => (
+                    <span class="as-card-spec">
+                      {spec.label}: {spec.value}
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              <div class="as-card-price">
+                <span class="as-price-value">استعلام قیمت</span>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<style>
+  .as,
+  .as * {
+    font-family: "Vazirmatn", "Tahoma", sans-serif;
+    box-sizing: border-box;
+  }
+
+  .as {
+    isolation: isolate;
+    position: relative;
+    width: 100%;
+    min-width: 0;
+
+    --bg: #f1f3f7;
+    --surface: #fff;
+    --ink: #0f1a2b;
+    --ink-soft: #4a5568;
+    --muted: #8b95a5;
+    --line: #e2e7ef;
+    --blue: #1e3a8a;
+    --blue-light: #2d4dab;
+    --blue-soft: #e8eef9;
+    --blue-glow: rgba(30, 58, 138, 0.25);
+
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 18px clamp(18px, 3vw, 40px) 24px;
+    background: var(--bg);
+    color: var(--ink);
+    overflow: hidden;
+    gap: 16px;
+  }
+
+  .as a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* لوگو */
+  .as-logo {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .as-logo img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    border-radius: 12px;
+    background: var(--surface);
+    padding: 6px;
+    box-shadow: 0 1px 3px rgba(15, 26, 43, 0.06);
+  }
+
+  .as-logo strong {
+    display: block;
+    font-size: 16px;
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+
+  .as-logo span {
+    display: block;
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    color: var(--muted);
+    direction: ltr;
+    font-weight: 700;
+    margin-top: 1px;
+  }
+
+  /* معرفی */
+  .as-intro {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: clamp(20px, 3vw, 48px);
+    align-items: center;
+    min-height: 340px;
+  }
+
+  .as-intro-text {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+  }
+
+  .as-tag {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    padding: 7px 14px;
+    border-radius: 999px;
+    background: var(--blue-soft);
+    color: var(--blue);
+    font-size: 11px;
+    font-weight: 800;
+  }
+
+  .as-intro-text h1 {
+    margin: 0;
+    font-size: clamp(28px, 3.4vw, 48px);
+    font-weight: 900;
+    line-height: 1.3;
+    letter-spacing: -1.5px;
+    color: var(--ink);
+  }
+
+  .as-intro-text h1 em {
+    font-style: normal;
+    color: var(--blue);
+    position: relative;
+    display: inline-block;
+  }
+
+  .as-intro-text h1 em::after {
+    content: "";
+    position: absolute;
+    bottom: 5px;
+    right: -3px;
+    left: -3px;
+    height: 8px;
+    background: var(--blue-soft);
+    z-index: -1;
+    border-radius: 4px;
+  }
+
+  .as-intro-text p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 2;
+    color: var(--ink-soft);
+    max-width: 460px;
+  }
+
+  .as-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 4px;
+  }
+
+  .as-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 24px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 800;
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .as-btn-primary {
+    background: var(--blue);
+    color: #fff !important;
+  }
+
+  .as-btn-primary:hover {
+    background: var(--blue-light);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px -8px var(--blue-glow);
+  }
+
+  .as-btn-primary:hover svg {
+    transform: translateX(-3px);
+  }
+
+  .as-btn-primary svg {
+    transition: transform 0.3s ease;
+  }
+
+  .as-btn-ghost {
+    background: var(--surface);
+    color: var(--ink);
+    border: 1px solid var(--line);
+  }
+
+  .as-btn-ghost:hover {
+    border-color: var(--blue);
+    color: var(--blue);
+    transform: translateY(-2px);
+  }
+
+  .as-contact {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 6px;
+  }
+
+  .as-contact a {
+    color: var(--ink-soft);
+    font-weight: 700;
+    transition: color 0.2s ease;
+  }
+
+  .as-contact a:hover {
+    color: var(--blue);
+  }
+
+  /* قاب اسلایدر */
+  .as-intro-photo {
+    position: relative;
+    isolation: isolate;
+    height: 100%;
+    max-height: 400px;
+    min-height: 300px;
+    border-radius: 24px;
+    overflow: hidden;
+    background: linear-gradient(
+      135deg,
+      var(--blue-soft) 0%,
+      #d4dff3 100%
+    );
+  }
+
+  .as-slides {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: #d4dff3;
+  }
+
+  .as-intro-photo img.as-hero-slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.015);
+    transition:
+      opacity 900ms ease,
+      transform 6s ease,
+      visibility 900ms ease;
+    will-change: opacity;
+  }
+
+  .as-intro-photo img.as-hero-slide.is-active {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+    z-index: 1;
+  }
+
+  .as-intro-photo:hover img.as-hero-slide.is-active {
+    transform: scale(1.035);
+  }
+
+  .as-photo-shade {
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      rgba(8, 20, 43, 0.04) 35%,
+      rgba(8, 20, 43, 0.32) 100%
+    );
+  }
+
+  .as-intro-photo.as-photo-fallback {
+    background: linear-gradient(
+      135deg,
+      var(--blue-soft) 0%,
+      #d4dff3 100%
+    );
+  }
+
+  .as-intro-photo.as-photo-fallback::before {
+    content: "＋";
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-size: 46px;
+    font-weight: 300;
+    color: var(--blue);
+    opacity: 0.5;
+  }
+
+  .as-intro-photo.as-photo-fallback::after {
+    content: "جایگاه تصویر صنعتی";
+    position: absolute;
+    z-index: 3;
+    top: 58%;
+    right: 0;
+    left: 0;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--blue);
+    opacity: 0.7;
+  }
+
+  .as-photo-overlay {
+    position: absolute;
+    z-index: 3;
+    bottom: 16px;
+    right: 16px;
+    padding: 8px 13px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    pointer-events: none;
+  }
+
+  .as-photo-label {
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 2.5px;
+    color: var(--blue);
+    direction: ltr;
+  }
+
+  /* دکمه‌ها و نشانگرها */
+  .as-slider-controls {
+    position: absolute;
+    z-index: 4;
+    left: 16px;
+    bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    direction: ltr;
+  }
+
+  .as-slider-arrow {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 50%;
+    color: #fff;
+    background: rgba(10, 25, 50, 0.42);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    cursor: pointer;
+    transition:
+      background 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .as-slider-arrow svg {
+    width: 17px;
+    height: 17px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .as-slider-arrow:hover {
+    background: var(--blue);
+    transform: scale(1.06);
+  }
+
+  .as-slider-arrow:focus-visible,
+  .as-slider-dot:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
+  }
+
+  .as-slider-dots {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .as-slider-dot {
+    width: 7px;
+    height: 7px;
+    padding: 0;
+    border: 0;
+    border-radius: 99px;
+    background: rgba(255, 255, 255, 0.62);
+    cursor: pointer;
+    transition:
+      width 0.3s ease,
+      background 0.3s ease;
+  }
+
+  .as-slider-dot.is-active {
+    width: 22px;
+    background: #fff;
+  }
+
+  .as-slider-counter {
+    position: absolute;
+    z-index: 4;
+    top: 16px;
+    left: 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    direction: ltr;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+    pointer-events: none;
+  }
+
+  .as-counter-divider {
+    opacity: 0.6;
+  }
+
+  /* ریل محصولات */
+  .as-rail-section {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .as-rail-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 0 4px;
+  }
+
+  .as-rail-head h2 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 900;
+    letter-spacing: -0.4px;
+    color: var(--ink);
+  }
+
+  .as-rail-head a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--blue);
+    transition: gap 0.2s ease;
+  }
+
+  .as-rail-head a:hover {
+    gap: 10px;
+  }
+
+  .as-rail-window {
+    overflow: hidden;
+    direction: ltr;
+    mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      #000 4%,
+      #000 96%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      #000 4%,
+      #000 96%,
+      transparent 100%
+    );
+    padding: 6px 0;
+  }
+
+  .as-rail-track {
+    display: flex;
+    gap: 12px;
+    width: max-content;
+    animation: as-scroll 45s linear infinite;
+  }
+
+  .as-rail-window:hover .as-rail-track,
+  .as-rail-window:focus-within .as-rail-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes as-scroll {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* کارت محصولات */
+  .as-rail-card {
+    flex: 0 0 210px;
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border-radius: 16px;
+    border: 1px solid var(--line);
+    overflow: hidden;
+    direction: rtl;
+    position: relative;
+    transition:
+      transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+      border-color 0.35s ease,
+      box-shadow 0.35s ease;
+    cursor: pointer;
+  }
+
+  .as-rail-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--blue);
+    box-shadow: 0 16px 30px -14px var(--blue-glow);
+  }
+
+  .as-card-img {
+    height: 130px;
+    background: linear-gradient(
+      145deg,
+      var(--blue-soft) 0%,
+      #d4dff3 100%
+    );
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .as-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .as-rail-card:hover .as-card-img img {
+    transform: scale(1.08);
+  }
+
+  .as-card-body {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+  }
+
+  .as-card-body h3 {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 900;
+    color: var(--ink);
+    letter-spacing: -0.3px;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 40px;
+  }
+
+  .as-card-size {
+    font-size: 10px;
+    color: var(--muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .as-card-specs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 4px;
+  }
+
+  .as-card-spec {
+    font-size: 9px;
+    padding: 3px 7px;
+    border-radius: 6px;
+    background: var(--blue-soft);
+    color: var(--blue);
+    font-weight: 700;
+  }
+
+  .as-card-price {
+    margin-top: auto;
+    padding-top: 10px;
+    border-top: 1px dashed var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .as-price-value {
+    font-size: 13px;
+    font-weight: 900;
+    color: var(--blue);
+    letter-spacing: -0.3px;
+  }
+
+  /* تبلت */
+  @media (max-width: 900px) {
+    .as-intro {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+
+    .as-intro-photo {
+      height: 260px;
+      max-height: 300px;
+      min-height: 220px;
+    }
+
+    .as-rail-card {
+      flex-basis: 185px;
+    }
+  }
+
+  /* موبایل */
+  @media (max-width: 620px) {
+    .as {
+      padding: 14px;
+      gap: 12px;
+    }
+
+    .as-intro {
+      gap: 18px;
+    }
+
+    .as-intro-text {
+      gap: 13px;
+    }
+
+    .as-intro-text h1 {
+      font-size: clamp(27px, 7vw, 36px);
+      letter-spacing: -0.8px;
+    }
+
+    .as-intro-text p {
+      font-size: 13px;
+    }
+
+    .as-intro-photo {
+      display: block;
+      height: 210px;
+      min-height: 210px;
+      max-height: 240px;
+      border-radius: 18px;
+    }
+
+    .as-photo-overlay {
+      right: 10px;
+      bottom: 12px;
+      padding: 7px 10px;
+    }
+
+    .as-slider-controls {
+      left: 10px;
+      bottom: 10px;
+      gap: 6px;
+    }
+
+    .as-slider-arrow {
+      width: 30px;
+      height: 30px;
+    }
+
+    .as-slider-dot {
+      width: 6px;
+      height: 6px;
+    }
+
+    .as-slider-dot.is-active {
+      width: 17px;
+    }
+
+    .as-slider-counter {
+      top: 12px;
+      left: 12px;
+      font-size: 10px;
+    }
+
+    .as-contact {
+      font-size: 11px;
+      flex-wrap: wrap;
+    }
+
+    .as-rail-card {
+      flex-basis: 170px;
+    }
+
+    .as-card-img {
+      height: 100px;
+    }
+
+    .as-card-body h3 {
+      font-size: 12px;
+      min-height: 36px;
+    }
+  }
+
+  /* کاهش حرکت برای کاربران دارای این تنظیم */
+  @media (prefers-reduced-motion: reduce) {
+    .as-rail-track {
+      animation: none;
+    }
+
+    .as-rail-card,
+    .as-btn,
+    .as-intro-photo img,
+    .as-card-img img,
+    .as-slider-arrow,
+    .as-slider-dot {
+      transition: none !important;
+    }
+  }
+
+  
+/* پنل اطلاعات تماس */
+.as-contact-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 460px;
+  margin-top: 8px;
+}
+
+.as-contact-phone {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 15px 17px;
+  border: 1px solid #cbd8eb;
+  border-radius: 17px;
+  background: linear-gradient(135deg, #fff 0%, #edf3fc 100%);
+  box-shadow: 0 7px 22px rgba(20, 48, 91, 0.07);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.as-contact-phone:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(30, 58, 138, 0.13);
+}
+
+.as-contact-icon {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  color: #fff;
+  background: #1e3a8a;
+}
+
+.as-contact-icon svg {
+  width: 23px;
+  height: 23px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.as-phone-content {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.as-contact-caption {
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.as-phone-content strong {
+  direction: ltr;
+  text-align: right;
+  color: #142b50;
+  font-size: clamp(19px, 2vw, 24px);
+  font-weight: 900;
+  letter-spacing: .3px;
+  white-space: nowrap;
+}
+
+.as-phone-arrow {
+  color: #1e3a8a;
+  font-size: 23px;
+  transition: transform .2s ease;
+}
+
+.as-contact-phone:hover .as-phone-arrow {
+  transform: translateX(-4px);
+}
+
+/* شبکه‌های اجتماعی */
+.as-contact-socials {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.as-social-link {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  padding: 11px;
+  border: 1px solid #e0e6ef;
+  border-radius: 15px;
+  background: #fff;
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+
+.as-social-link:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 9px 20px rgba(15, 26, 43, .08);
+}
+
+.as-social-icon {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 39px;
+  height: 39px;
+  border-radius: 12px;
+}
+
+.as-social-icon svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.as-instagram .as-social-icon {
+  color: #b52d76;
+  background: #fce7f3;
+}
+
+.as-telegram .as-social-icon {
+  color: #087eb8;
+  background: #e0f2fe;
+}
+
+.as-social-link > span:nth-child(2) {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.as-social-link strong {
+  color: #172b49;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.as-social-link small {
+  color: #778398;
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+.as-social-arrow {
+  align-self: flex-start;
+  color: #8492a8;
+  font-size: 15px;
+}
+
+.as-instagram:hover {
+  border-color: #e8a5ca;
+}
+
+.as-telegram:hover {
+  border-color: #91cdef;
+}
+
+@media (max-width: 620px) {
+  .as-contact-panel {
+    max-width: 100%;
+  }
+
+  .as-contact-phone {
+    padding: 13px;
+  }
+
+  .as-contact-icon {
+    width: 43px;
+    height: 43px;
+  }
+
+  .as-phone-content strong {
+    font-size: 19px;
+  }
+
+  .as-social-link {
+    gap: 7px;
+    padding: 9px;
+  }
+
+  .as-social-icon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .as-social-link strong {
+    font-size: 11px;
+  }
+
+  .as-social-link small {
+    font-size: 8px;
+  }
+}
+
+
+
+</style>
+
+<script>
+  const slider = document.querySelector("[data-hero-slider]");
+
+  if (slider && !slider.hasAttribute("data-slider-ready")) {
+    slider.setAttribute("data-slider-ready", "true");
+
+    const slides = Array.from(
+      slider.querySelectorAll("[data-slide-index]")
+    );
+
+    const dots = Array.from(
+      slider.querySelectorAll("[data-slide-to]")
+    );
+
+    const label = slider.querySelector("[data-slide-label]");
+    const counter = slider.querySelector("[data-slider-current]");
+    const previousButton = slider.querySelector("[data-slider-prev]");
+    const nextButton = slider.querySelector("[data-slider-next]");
+
+    const labels = [
+      "STEEL INDUSTRY",
+      "STEEL SHEETS",
+      "STEEL PROFILES",
+    ];
+
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    );
+
+    let currentIndex = 0;
+    let timer = null;
+    let touchStartX = 0;
+
+    const intervalDuration = 6000;
+
+    function showSlide(index) {
+      if (!slides.length) return;
+
+      currentIndex = (index + slides.length) % slides.length;
+
+      slides.forEach((slide, i) => {
+        const active = i === currentIndex;
+
+        slide.classList.toggle("is-active", active);
+        slide.setAttribute("aria-hidden", active ? "false" : "true");
+      });
+
+      dots.forEach((dot, i) => {
+        const active = i === currentIndex;
+
+        dot.classList.toggle("is-active", active);
+        dot.setAttribute("aria-pressed", active ? "true" : "false");
+      });
+
+      if (label) {
+        label.textContent = labels[currentIndex] || "ASIN STILL";
+      }
+
+      if (counter) {
+        counter.textContent = String(currentIndex + 1).padStart(2, "0");
+      }
+    }
+
+    function stopAutoPlay() {
+      if (timer !== null) {
+        window.clearInterval(timer);
+        timer = null;
+      }
+    }
+
+    function startAutoPlay() {
+      stopAutoPlay();
+
+      if (reduceMotion.matches || slides.length < 2) return;
+
+      timer = window.setInterval(() => {
+        showSlide(currentIndex + 1);
+      }, intervalDuration);
+    }
+
+    function goToSlide(index) {
+      showSlide(index);
+      startAutoPlay();
+    }
+
+    previousButton?.addEventListener("click", () => {
+      goToSlide(currentIndex - 1);
+    });
+
+    nextButton?.addEventListener("click", () => {
+      goToSlide(currentIndex + 1);
+    });
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener("click", () => {
+        goToSlide(index);
+      });
+    });
+
+    // توقف موقت هنگام قرار گرفتن نشانگر ماوس روی تصویر
+    slider.addEventListener("mouseenter", stopAutoPlay);
+    slider.addEventListener("mouseleave", startAutoPlay);
+
+    // با ورود صفحه‌کلید به اسلایدر، حرکت خودکار متوقف می‌شود
+    slider.addEventListener("focusin", stopAutoPlay);
+    slider.addEventListener("focusout", (event) => {
+      if (!slider.contains(event.relatedTarget)) {
+        startAutoPlay();
+      }
+    });
+
+    // پشتیبانی از کشیدن انگشت روی تصویر در موبایل
+    slider.addEventListener(
+      "touchstart",
+      (event) => {
+        touchStartX = event.changedTouches[0]?.clientX ?? 0;
+      },
+      { passive: true }
+    );
+
+    slider.addEventListener(
+      "touchend",
+      (event) => {
+        const touchEndX = event.changedTouches[0]?.clientX ?? 0;
+        const difference = touchEndX - touchStartX;
+
+        if (Math.abs(difference) < 45) return;
+
+        // در چیدمان RTL، کشیدن به چپ تصویر بعدی را نمایش می‌دهد
+        goToSlide(currentIndex + (difference < 0 ? 1 : -1));
+      },
+      { passive: true }
+    );
+
+    // اگر کاربر حرکت را کاهش داده باشد، پخش خودکار غیرفعال می‌شود
+    reduceMotion.addEventListener?.("change", startAutoPlay);
+
+    // اگر تب مرورگر مخفی شود، زمان‌سنج متوقف می‌شود
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        stopAutoPlay();
+      } else if (!slider.matches(":hover") && !slider.contains(document.activeElement)) {
+        startAutoPlay();
+      }
+    });
+
+    // اگر یکی از تصاویر بارگذاری نشد، تصویر خراب حذف می‌شود
+    slides.forEach((slide) => {
+      slide.addEventListener("error", () => {
+        slide.classList.remove("is-active");
+        slide.style.display = "none";
+
+        const visibleSlides = slides.filter(
+          (item) => item.style.display !== "none"
+        );
+
+        if (visibleSlides.length === 0) {
+          slider.classList.add("as-photo-fallback");
+        } else {
+          slider.classList.remove("as-photo-fallback");
+        }
+
+        if (slides[currentIndex] === slide && visibleSlides.length > 0) {
+          const nextAvailableIndex = slides.findIndex(
+            (item) => item.style.display !== "none"
+          );
+
+          showSlide(nextAvailableIndex);
+        }
+      });
+    });
+
+    showSlide(0);
+    startAutoPlay();
+  }
+</script>

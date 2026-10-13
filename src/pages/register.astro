@@ -205,7 +205,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <!-- Login Link -->
         <p class="text-center text-sm text-gray-600 dark:text-gray-400 mt-6">
           Already have an account? 
-          <a href={`${import.meta.env.BASE_URL}login`} class="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-semibold">
+          <a href={`${import.meta.env.BASE_URL}account/signin/`} class="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-semibold">
             Sign in
           </a>
         </p>
@@ -223,105 +223,139 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </section>
 
-  <script>
-    // Toggle Password Visibility
-    const togglePassword = document.getElementById('toggle-password');
-    const passwordInput = document.getElementById('password');
-    const eyeIcon = document.getElementById('eye-icon');
+    <script>
+    import { supabase } from "../lib/supabase";
 
-    togglePassword?.addEventListener('click', () => {
-      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-      passwordInput.setAttribute('type', type);
-      
-      // Toggle icon
-      if (type === 'text') {
-        eyeIcon.innerHTML = `
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
-        `;
+    const togglePassword = document.getElementById("toggle-password");
+    const passwordInput = document.getElementById("password");
+    const eyeIcon = document.getElementById("eye-icon");
+    const registerForm = document.getElementById("register-form");
+
+    function showAuthMessage(message, type = "error") {
+      let messageElement = document.getElementById("auth-message");
+
+      if (!messageElement) {
+        messageElement = document.createElement("div");
+        messageElement.id = "auth-message";
+        messageElement.setAttribute("role", "status");
+        messageElement.className = "mb-4 rounded-lg border px-4 py-3 text-sm";
+        registerForm?.insertBefore(messageElement, registerForm.querySelector('button[type="submit"]'));
+      }
+
+      messageElement.textContent = message;
+      messageElement.classList.remove(
+        "border-red-300", "bg-red-50", "text-red-700",
+        "border-green-300", "bg-green-50", "text-green-700"
+      );
+
+      if (type === "success") {
+        messageElement.classList.add("border-green-300", "bg-green-50", "text-green-700");
       } else {
-        eyeIcon.innerHTML = `
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-        `;
+        messageElement.classList.add("border-red-300", "bg-red-50", "text-red-700");
+      }
+    }
+
+    togglePassword?.addEventListener("click", () => {
+      if (!passwordInput || !eyeIcon) return;
+
+      const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+      passwordInput.setAttribute("type", type);
+
+      eyeIcon.innerHTML = type === "text"
+        ? `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59" />`
+        : `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5a9.99 9.99 0 019.542 7c-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />`;
+    });
+
+    const confirmPasswordInput = document.getElementById("confirm-password");
+    confirmPasswordInput?.addEventListener("input", () => {
+      if (confirmPasswordInput.value && passwordInput?.value !== confirmPasswordInput.value) {
+        confirmPasswordInput.setCustomValidity("Passwords do not match.");
+      } else {
+        confirmPasswordInput.setCustomValidity("");
       }
     });
 
-    // Form Validation & Submission
-    const registerForm = document.getElementById('register-form');
-    
-    registerForm?.addEventListener('submit', (e) => {
-      e.preventDefault();
-      
-      const fullname = document.getElementById('fullname').value;
-      const email = document.getElementById('email').value;
-      const phone = document.getElementById('phone').value;
-      const password = document.getElementById('password').value;
-      const confirmPassword = document.getElementById('confirm-password').value;
-      const terms = document.getElementById('terms').checked;
-      const newsletter = document.getElementById('newsletter').checked;
-      
-      // Validate passwords match
+    registerForm?.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const fullname = document.getElementById("fullname")?.value.trim() ?? "";
+      const email = document.getElementById("email")?.value.trim() ?? "";
+      const phone = document.getElementById("phone")?.value.trim() ?? "";
+      const password = passwordInput?.value ?? "";
+      const confirmPassword = confirmPasswordInput?.value ?? "";
+      const terms = document.getElementById("terms")?.checked ?? false;
+      const submitButton = registerForm.querySelector('button[type="submit"]');
+
+      if (!submitButton) return;
+
+      if (password.length < 8) {
+        showAuthMessage("Password must be at least 8 characters long.");
+        return;
+      }
+
       if (password !== confirmPassword) {
-        alert('Passwords do not match!');
+        showAuthMessage("Passwords do not match.");
         return;
       }
-      
-      // Validate terms
+
       if (!terms) {
-        alert('You must agree to the Terms of Service and Privacy Policy');
+        showAuthMessage("You must agree to the Terms of Service and Privacy Policy.");
         return;
       }
-      
-      // Simulate registration process
-      const submitBtn = registerForm.querySelector('button[type="submit"]');
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = `
-        <svg class="w-5 h-5 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-        </svg>
-        <span>Creating Account...</span>
-      `;
-      
-      setTimeout(() => {
-        // Store user data
-        const newUser = {
-  fullname,
-  email,
-  phone,
-  newsletter,
-  password
-};
 
-const users = JSON.parse(localStorage.getItem('users') || '[]');
+      const originalButtonHtml = submitButton.innerHTML;
+      submitButton.disabled = true;
+      submitButton.innerHTML = '<span>Creating Account...</span>';
 
-const existingUser = users.find(
-  user => user.email.toLowerCase() === email.toLowerCase()
-);
+      try {
+        const baseUrl = import.meta.env.BASE_URL.endsWith("/")
+          ? import.meta.env.BASE_URL
+          : `${import.meta.env.BASE_URL}/`;
+        const emailRedirectTo = `${window.location.origin}${baseUrl}account/signin/`;
 
-if (existingUser) {
-  alert('An account with this email already exists.');
-  submitBtn.disabled = false;
-  submitBtn.innerHTML = '<span>Create Account</span>';
-  return;
-}
+        const { data, error } = await supabase.auth.signUp({
+          email,
+          password,
+          options: {
+            emailRedirectTo,
+            data: {
+              full_name: fullname,
+              phone,
+              newsletter: document.getElementById("newsletter")?.checked ?? false,
+            },
+          },
+        });
 
-users.push(newUser);
+        if (error) {
+          console.error("Registration error:", error);
+          showAuthMessage(
+            error.message.toLowerCase().includes("already registered") ||
+            error.message.toLowerCase().includes("already been registered")
+              ? "An account with this email may already exist. Try signing in instead."
+              : error.message
+          );
+          return;
+        }
 
-localStorage.setItem('users', JSON.stringify(users));
-
-localStorage.setItem('user', JSON.stringify({
-  fullname,
-  email,
-  phone,
-  newsletter,
-  loggedIn: true
-}));
-
-window.location.href = `${import.meta.env.BASE_URL}/account`;
-        
-        // Redirect to account page
-        window.location.href = `${import.meta.env.BASE_URL}/account`;
-      }, 1500);
+        if (data.session) {
+          showAuthMessage("Account created successfully. Redirecting to your account...", "success");
+          window.setTimeout(() => {
+            window.location.assign(`${baseUrl}account/`);
+          }, 1000);
+        } else {
+          showAuthMessage(
+            "Registration started. Check your email and click the confirmation link before signing in.",
+            "success"
+          );
+          registerForm.reset();
+        }
+      } catch (error) {
+        console.error("Registration error:", error);
+        showAuthMessage("Could not connect to the authentication service. Check your connection and try again.");
+      } finally {
+        submitButton.disabled = false;
+        submitButton.innerHTML = originalButtonHtml;
+      }
     });
   </script>
 </BaseLayout>

@@ -1,0 +1,519 @@
+
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const base = import.meta.env.BASE_URL;
+
+const stats = [
+  { title: "کل محصولات", value: "۹", detail: "محصول ثبت‌شده", icon: "package", tone: "blue" },
+  { title: "سفارش‌های امروز", value: "۱۲", detail: "درخواست ثبت‌شده", icon: "shopping-bag", tone: "green" },
+  { title: "مشتریان", value: "۱۲۸", detail: "حساب مشتریان", icon: "users", tone: "purple" },
+  { title: "نیازمند پیگیری", value: "۴", detail: "درخواست بررسی‌نشده", icon: "clock", tone: "orange" },
+];
+
+const recentOrders = [
+  { id: "AS-1024", customer: "شرکت ساختمانی نمونه", product: "تیرآهن ۱۶", date: "امروز، ۱۰:۲۵", status: "در انتظار بررسی", tone: "pending" },
+  { id: "AS-1023", customer: "علی رضایی", product: "میلگرد ۱۴", date: "امروز، ۰۹:۴۰", status: "در حال پیگیری", tone: "progress" },
+  { id: "AS-1022", customer: "پروژه عمرانی پارس", product: "ورق سیاه", date: "دیروز، ۱۶:۱۵", status: "تکمیل‌شده", tone: "done" },
+];
+
+const quickLinks = [
+  { title: "افزودن محصول", description: "ثبت مقطع فولادی جدید", icon: "package-plus", href: `${base}admin/products` },
+  { title: "بررسی سفارش‌ها", description: "پیگیری درخواست‌های خرید", icon: "clipboard-list", href: `${base}admin/orders` },
+  { title: "مدیریت مشتریان", description: "مشاهده اطلاعات مشتریان", icon: "users", href: `${base}admin/customers` },
+];
+---
+
+<BaseLayout title="پنل مدیریت | ASIN STILL">
+  <main class="admin-page" dir="rtl">
+    <aside class="sidebar" id="admin-sidebar">
+      <a class="brand" href={`${base}admin/`}>
+        <span class="brand-mark">
+          <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <path d="M7 31V9h7l12 14V9h7v22h-7L14 17v14H7Z" fill="currentColor"/>
+          </svg>
+        </span>
+        <span class="brand-copy">
+          <strong>ASIN STILL</strong>
+          <small>مدیریت فروشگاه</small>
+        </span>
+      </a>
+
+      <div class="sidebar-label">منوی اصلی</div>
+
+      <nav class="side-nav" aria-label="منوی مدیریت">
+        <a class="nav-link active" href={`${base}admin/`} aria-current="page">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg>
+          <span>داشبورد</span>
+        </a>
+        <a class="nav-link" href={`${base}admin/products`}>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5M3 16l9 5 9-5"/></svg>
+          <span>مدیریت محصولات</span>
+        </a>
+        <a class="nav-link" href={`${base}admin/orders`}>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 1.9-1.4L22 8H6"/><circle cx="10" cy="21" r="1"/><circle cx="18" cy="21" r="1"/></svg>
+          <span>سفارش‌ها</span>
+          <span class="nav-count">۴</span>
+        </a>
+        <a class="nav-link" href={`${base}admin/customers`}>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="4"/><path d="M20 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg>
+          <span>مشتریان</span>
+        </a>
+        <a class="nav-link" href={`${base}Price-list`}>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          <span>لیست قیمت سایت</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-label secondary-label">دسترسی سریع</div>
+      <a class="nav-link" href={`${base}`}>
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7h-6v7H4a1 1 0 0 1-1-1V10Z"/></svg>
+        <span>مشاهده وب‌سایت</span>
+        <svg class="external-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9"/><path d="M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6"/></svg>
+      </a>
+
+      <div class="sidebar-bottom">
+        <div class="support-card">
+          <span class="support-icon">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+          </span>
+          <strong>به راهنمایی نیاز داری؟</strong>
+          <p>بخش‌های مختلف پنل را از منوی سمت راست مدیریت کن.</p>
+        </div>
+        <div class="sidebar-version">ASIN STILL <span>نسخه آزمایشی پنل</span></div>
+      </div>
+    </aside>
+
+    <section class="main-area">
+      <header class="topbar">
+        <div class="topbar-right">
+          <button class="mobile-menu" id="menu-toggle" aria-label="باز کردن منو" aria-expanded="false">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+          <div class="breadcrumb"><span>مدیریت</span><span class="crumb-separator">/</span><strong>داشبورد</strong></div>
+        </div>
+        <div class="topbar-left">
+          <span class="today-date" id="today-date">پنل مدیریت</span>
+          <button class="icon-button" id="notification-button" aria-label="اعلان‌ها">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></svg>
+            <span class="notification-dot"></span>
+          </button>
+          <div class="admin-profile">
+            <div class="avatar">A</div>
+            <div class="profile-copy"><strong>مدیر فروشگاه</strong><small>مدیر سیستم</small></div>
+            <svg class="profile-chevron" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg>
+          </div>
+        </div>
+      </header>
+
+      <div class="dashboard-content">
+        <section class="welcome-row">
+          <div>
+            <div class="eyebrow"><span></span> مرکز مدیریت آسین استیل</div>
+            <h1>داشبورد مدیریت</h1>
+            <p>وضعیت فروشگاه و درخواست‌های خرید را از اینجا بررسی کن.</p>
+          </div>
+          <a class="primary-button" href={`${base}admin/products`}>
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+            افزودن محصول
+          </a>
+        </section>
+
+        <section class="stats-grid" aria-label="آمار فروشگاه">
+          {stats.map((stat) => (
+            <article class="stat-card">
+              <div class="stat-top">
+                <span class={`stat-icon ${stat.tone}`}>
+                  {stat.icon === "package" && <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5M3 16l9 5 9-5"/></svg>}
+                  {stat.icon === "shopping-bag" && <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 8h14l1 13H4L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>}
+                  {stat.icon === "users" && <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="4"/><path d="M20 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg>}
+                  {stat.icon === "clock" && <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>}
+                </span>
+                <button class="more-button" aria-label={`جزئیات ${stat.title}`}>•••</button>
+              </div>
+              <p class="stat-title">{stat.title}</p>
+              <div class="stat-value">{stat.value}</div>
+              <div class="stat-footer"><span class="stat-indicator"></span>{stat.detail}</div>
+            </article>
+          ))}
+        </section>
+
+        <section class="middle-grid">
+          <article class="panel chart-panel">
+            <div class="panel-heading">
+              <div>
+                <h2>نمای کلی فروش</h2>
+                <p>مروری بر عملکرد هفتگی فروشگاه</p>
+              </div>
+              <span class="demo-label">داده نمونه</span>
+            </div>
+            <div class="chart-summary">
+              <div><strong>۱۲۸</strong><span>درخواست این هفته</span></div>
+              <span class="chart-legend"><i></i> درخواست‌های خرید</span>
+            </div>
+            <div class="chart-wrap">
+              <div class="y-labels"><span>۱۶۰</span><span>۱۲۰</span><span>۸۰</span><span>۴۰</span><span>۰</span></div>
+              <div class="chart-plot">
+                <div class="grid-lines"><i></i><i></i><i></i><i></i><i></i></div>
+                <svg class="line-chart" viewBox="0 0 600 190" preserveAspectRatio="none" role="img" aria-label="نمودار نمونه درخواست‌های خرید در طول هفته">
+                  <defs>
+                    <linearGradient id="chart-fill" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#4269A5" stop-opacity=".22"/>
+                      <stop offset="100%" stop-color="#4269A5" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <path d="M0 145 C35 140 45 115 85 123 S135 150 170 105 S230 98 255 110 S310 65 340 82 S390 112 425 62 S485 72 510 48 S560 38 600 20 L600 190 L0 190 Z" fill="url(#chart-fill)"/>
+                  <path d="M0 145 C35 140 45 115 85 123 S135 150 170 105 S230 98 255 110 S310 65 340 82 S390 112 425 62 S485 72 510 48 S560 38 600 20" fill="none" stroke="#4269A5" stroke-width="3" vector-effect="non-scaling-stroke" stroke-linecap="round"/>
+                  <circle cx="425" cy="62" r="5" fill="#fff" stroke="#4269A5" stroke-width="3" vector-effect="non-scaling-stroke"/>
+                </svg>
+              </div>
+            </div>
+            <div class="chart-days"><span>شنبه</span><span>یکشنبه</span><span>دوشنبه</span><span>سه‌شنبه</span><span>چهارشنبه</span><span>پنجشنبه</span><span>جمعه</span></div>
+            <p class="chart-note">این نمودار نمایشی است و هنوز به اطلاعات واقعی فروش متصل نیست.</p>
+          </article>
+
+          <article class="panel inventory-panel">
+            <div class="panel-heading">
+              <div>
+                <h2>وضعیت محصولات</h2>
+                <p>نمای کلی کاتالوگ فروشگاه</p>
+              </div>
+              <a class="text-link" href={`${base}admin/products`}>مشاهده <span>←</span></a>
+            </div>
+            <div class="inventory-total"><strong>۹</strong><span>محصول نمونه</span></div>
+            <div class="inventory-bar"><span></span><span></span><span></span></div>
+            <div class="inventory-row"><span><i class="dot dot-blue"></i> قابل عرضه</span><strong>۷</strong></div>
+            <div class="inventory-row"><span><i class="dot dot-orange"></i> نیازمند استعلام</span><strong>۲</strong></div>
+            <div class="inventory-row"><span><i class="dot dot-gray"></i> ناموجود</span><strong>۰</strong></div>
+            <a class="outline-button" href={`${base}admin/products`}>مدیریت کاتالوگ محصولات</a>
+          </article>
+        </section>
+
+        <section class="panel orders-panel">
+          <div class="panel-heading orders-heading">
+            <div>
+              <h2>آخرین درخواست‌های خرید</h2>
+              <p>آخرین فعالیت‌های ثبت‌شده در فروشگاه</p>
+            </div>
+            <a class="text-link" href={`${base}admin/orders`}>مشاهده همه <span>←</span></a>
+          </div>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr><th>شماره درخواست</th><th>مشتری</th><th>محصول</th><th>زمان ثبت</th><th>وضعیت</th><th>جزئیات</th></tr>
+              </thead>
+              <tbody>
+                {recentOrders.map((order) => (
+                  <tr>
+                    <td class="order-id">{order.id}</td>
+                    <td>{order.customer}</td>
+                    <td>{order.product}</td>
+                    <td class="muted-cell">{order.date}</td>
+                    <td><span class={`status ${order.tone}`}>{order.status}</span></td>
+                    <td><a class="row-action" href={`${base}admin/orders`} aria-label={`مشاهده ${order.id}`}>←</a></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div class="mobile-orders">
+            {recentOrders.map((order) => (
+              <div class="mobile-order">
+                <div class="mobile-order-top"><strong>{order.id}</strong><span class={`status ${order.tone}`}>{order.status}</span></div>
+                <div class="mobile-order-customer">{order.customer}</div>
+                <div class="mobile-order-bottom"><span>{order.product}</span><span>{order.date}</span></div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section class="quick-section">
+          <div class="section-title"><h2>دسترسی سریع</h2><p>کارهای پرکاربرد مدیریت فروشگاه</p></div>
+          <div class="quick-grid">
+            {quickLinks.map((link) => (
+              <a class="quick-card" href={link.href}>
+                <span class="quick-icon">
+                  {link.icon === "package-plus" && <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5M3 16l9 5 9-5M19 3v6M16 6h6"/></svg>}
+                  {link.icon === "clipboard-list" && <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4.5h6a1.5 1.5 0 0 0-3-1.5 1.5 1.5 0 0 0-3 1.5ZM9 11h6M9 15h6"/></svg>}
+                  {link.icon === "users" && <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="4"/><path d="M20 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg>}
+                </span>
+                <span class="quick-copy"><strong>{link.title}</strong><small>{link.description}</small></span>
+                <span class="quick-arrow">←</span>
+              </a>
+            ))}
+          </div>
+        </section>
+
+        <footer class="dashboard-footer">
+          <span>© آسین استیل — پنل مدیریت</span>
+          <span>نسخه اولیه طراحی · داده‌ها نمایشی هستند</span>
+        </footer>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  :global(html) { scroll-behavior: smooth; }
+  .admin-page {
+    --navy: #152847;
+    --navy-dark: #10203b;
+    --blue: #4269a5;
+    --text: #1c2a3e;
+    --muted: #8490a1;
+    --line: #e8edf3;
+    --surface: #fff;
+    --background: #f5f7fb;
+    display: flex;
+    min-height: 100vh;
+    background: var(--background);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .admin-page * { box-sizing: border-box; }
+  .admin-page a { color: inherit; text-decoration: none; }
+  .sidebar {
+    width: 255px;
+    flex: 0 0 255px;
+    min-height: 100vh;
+    padding: 25px 17px 18px;
+    background: var(--navy-dark);
+    color: #d7e0ef;
+    display: flex;
+    flex-direction: column;
+  }
+  .brand { display: flex; align-items: center; gap: 11px; padding: 0 7px 28px; }
+  .brand-mark { width: 43px; height: 43px; display: grid; place-items: center; color: #172c4c; background: #fff; border-radius: 12px; }
+  .brand-mark svg { width: 29px; height: 29px; }
+  .brand-copy { display: flex; flex-direction: column; gap: 1px; }
+  .brand-copy strong { color: white; font-size: 16px; letter-spacing: .7px; line-height: 1.5; }
+  .brand-copy small { color: #9eacc2; font-size: 11px; }
+  .sidebar-label { color: #8191aa; font-size: 11px; padding: 12px 12px 9px; }
+  .secondary-label { margin-top: 19px; }
+  .side-nav { display: grid; gap: 5px; }
+  .nav-link { min-height: 45px; display: flex; align-items: center; gap: 12px; padding: 10px 12px; color: #bac7d9 !important; border-radius: 9px; font-size: 13px; transition: background .2s, color .2s; }
+  .nav-link:hover { background: #1d3355; color: #fff !important; }
+  .nav-link.active { background: #2c4367; color: #fff !important; box-shadow: inset -3px 0 #91b4ec; }
+  .nav-link svg { width: 19px; height: 19px; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+  .nav-count { margin-right: auto; min-width: 22px; text-align: center; padding: 0 5px; border-radius: 6px; background: #344c70; color: white; font-size: 11px; }
+  .external-icon { margin-right: auto; width: 15px !important; height: 15px !important; }
+  .sidebar-bottom { margin-top: auto; }
+  .support-card { margin: 25px 2px 18px; padding: 15px 13px; border: 1px solid #2c405f; border-radius: 12px; background: #172b49; }
+  .support-icon { width: 31px; height: 31px; display: grid; place-items: center; border-radius: 9px; background: #293f61; color: #dbe8fb; margin-bottom: 10px; }
+  .support-icon svg { width: 19px; height: 19px; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; }
+  .support-card strong { color: #f5f8fc; font-size: 12px; }
+  .support-card p { color: #9eacc2; font-size: 11px; line-height: 1.9; margin: 5px 0 0; }
+  .sidebar-version { display: flex; justify-content: space-between; align-items: center; gap: 6px; padding: 13px 5px 0; border-top: 1px solid #293b58; font-size: 10px; color: #d0daea; }
+  .sidebar-version span { color: #8292ab; }
+  .main-area { min-width: 0; flex: 1; }
+  .topbar { min-height: 76px; padding: 0 31px; display: flex; align-items: center; justify-content: space-between; gap: 18px; background: #fff; border-bottom: 1px solid var(--line); }
+  .topbar-right, .topbar-left { display: flex; align-items: center; gap: 18px; }
+  .breadcrumb { display: flex; align-items: center; gap: 10px; font-size: 12px; color: #8b96a6; }
+  .breadcrumb strong { color: #25354d; font-weight: 700; }
+  .crumb-separator { color: #c3cad4; }
+  .today-date { color: #8b96a6; font-size: 11px; }
+  .icon-button, .mobile-menu { position: relative; display: grid; place-items: center; width: 38px; height: 38px; border: 1px solid #e8edf3; border-radius: 10px; background: #fff; color: #596a80; cursor: pointer; }
+  .icon-button svg, .mobile-menu svg { width: 18px; height: 18px; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  .notification-dot { position: absolute; top: 8px; right: 8px; width: 6px; height: 6px; background: #d65c5c; border: 1px solid #fff; border-radius: 50%; }
+  .admin-profile { display: flex; align-items: center; gap: 10px; padding-right: 17px; border-right: 1px solid var(--line); }
+  .avatar { width: 38px; height: 38px; display: grid; place-items: center; background: #e6edf8; color: #24436f; border-radius: 12px; font-weight: 800; }
+  .profile-copy { display: flex; flex-direction: column; }
+  .profile-copy strong { font-size: 12px; color: #26374f; }
+  .profile-copy small { font-size: 10px; color: #8c97a6; }
+  .profile-chevron { width: 15px; height: 15px; stroke: #8b96a6; stroke-width: 1.7; }
+  .mobile-menu { display: none; }
+  .dashboard-content { max-width: 1550px; margin: 0 auto; padding: 31px; }
+  .welcome-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 26px; }
+  .eyebrow { display: flex; align-items: center; gap: 8px; color: #6f8098; font-size: 11px; margin-bottom: 5px; }
+  .eyebrow span { width: 7px; height: 7px; background: #557eb7; border-radius: 50%; }
+  .welcome-row h1 { color: #172943; font-size: clamp(22px, 2vw, 29px); font-weight: 800; letter-spacing: -.5px; margin: 0; }
+  .welcome-row p { color: #8994a4; font-size: 12px; margin: 5px 0 0; }
+  .primary-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 42px; padding: 0 17px; border-radius: 9px; background: var(--navy); color: #fff !important; font-size: 12px; font-weight: 600; box-shadow: 0 4px 10px #15284716; transition: background .2s, transform .2s; white-space: nowrap; }
+  .primary-button:hover { background: #274570; transform: translateY(-1px); }
+  .primary-button svg { width: 17px; height: 17px; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 17px; }
+  .stat-card, .panel { background: var(--surface); border: 1px solid #e9edf3; border-radius: 13px; box-shadow: 0 3px 13px #17294304; }
+  .stat-card { padding: 19px 19px 17px; min-width: 0; }
+  .stat-top { display: flex; align-items: center; justify-content: space-between; }
+  .stat-icon { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 12px; }
+  .stat-icon svg { width: 21px; height: 21px; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  .stat-icon.blue { background: #edf3fc; color: #4269a5; }
+  .stat-icon.green { background: #e9f7f0; color: #2c9a6a; }
+  .stat-icon.purple { background: #f1edfc; color: #8064c8; }
+  .stat-icon.orange { background: #fff3e7; color: #d38a35; }
+  .more-button { border: 0; background: transparent; color: #a6b0bd; font-size: 16px; cursor: pointer; letter-spacing: 1px; }
+  .stat-title { margin: 17px 0 0; color: #748197; font-size: 12px; }
+  .stat-value { color: #1a2c45; font-size: 29px; font-weight: 800; line-height: 1.5; margin-top: 1px; }
+  .stat-footer { display: flex; align-items: center; gap: 7px; margin-top: 7px; color: #909bad; font-size: 10px; }
+  .stat-indicator { width: 6px; height: 6px; border-radius: 50%; background: #8ea5c7; }
+  .middle-grid { display: grid; grid-template-columns: minmax(0, 1.8fr) minmax(270px, 1fr); gap: 17px; margin-top: 19px; }
+  .panel { padding: 21px; min-width: 0; }
+  .panel-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+  .panel-heading h2, .section-title h2 { margin: 0; color: #1d2d44; font-size: 14px; font-weight: 800; }
+  .panel-heading p, .section-title p { margin: 4px 0 0; color: #929cac; font-size: 10px; }
+  .demo-label { display: inline-block; padding: 4px 9px; background: #f2f5f9; color: #748197; border-radius: 6px; font-size: 10px; white-space: nowrap; }
+  .chart-summary { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; margin-top: 24px; }
+  .chart-summary > div { display: flex; align-items: baseline; gap: 8px; }
+  .chart-summary strong { color: #1c2f4c; font-size: 26px; }
+  .chart-summary > div span { color: #929cac; font-size: 10px; }
+  .chart-legend { display: flex; align-items: center; gap: 7px; color: #8490a1; font-size: 10px; }
+  .chart-legend i { width: 7px; height: 7px; background: #4269a5; border-radius: 50%; }
+  .chart-wrap { display: flex; gap: 12px; height: 176px; margin-top: 16px; }
+  .y-labels { display: flex; flex-direction: column; justify-content: space-between; padding: 0 0 0; color: #a2acba; font-size: 9px; }
+  .chart-plot { flex: 1; min-width: 0; position: relative; }
+  .grid-lines { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between; }
+  .grid-lines i { display: block; border-top: 1px dashed #e9edf3; }
+  .line-chart { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .chart-days { display: flex; justify-content: space-between; gap: 3px; padding-right: 26px; color: #929cac; font-size: 9px; margin-top: 10px; }
+  .chart-note { border-top: 1px solid #f0f2f6; padding-top: 11px; margin: 15px 0 0; color: #a1aab8; font-size: 10px; }
+  .text-link { display: inline-flex; align-items: center; gap: 6px; color: #4269a5 !important; font-size: 11px; font-weight: 700; white-space: nowrap; }
+  .text-link span { font-size: 15px; transition: transform .2s; }
+  .text-link:hover span { transform: translateX(-3px); }
+  .inventory-total { display: flex; align-items: baseline; gap: 9px; margin: 27px 0 16px; }
+  .inventory-total strong { font-size: 30px; color: #1c2e47; }
+  .inventory-total span { color: #929cac; font-size: 11px; }
+  .inventory-bar { display: flex; gap: 4px; height: 8px; margin-bottom: 21px; }
+  .inventory-bar span { border-radius: 5px; }
+  .inventory-bar span:nth-child(1) { width: 77.7%; background: #4269a5; }
+  .inventory-bar span:nth-child(2) { width: 22.3%; background: #e5a55d; }
+  .inventory-bar span:nth-child(3) { width: 0%; background: #cfd6e0; }
+  .inventory-row { display: flex; align-items: center; justify-content: space-between; padding: 11px 0; border-bottom: 1px solid #f0f2f6; color: #6f7c90; font-size: 11px; }
+  .inventory-row:last-of-type { border-bottom: 0; }
+  .inventory-row > span { display: flex; align-items: center; gap: 9px; }
+  .inventory-row strong { color: #2c3b50; font-size: 12px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .dot-blue { background: #4269a5; }
+  .dot-orange { background: #e5a55d; }
+  .dot-gray { background: #cfd6e0; }
+  .outline-button { min-height: 39px; display: flex; align-items: center; justify-content: center; margin-top: 18px; border: 1px solid #dce4ef; border-radius: 8px; color: #354d70 !important; font-size: 11px; font-weight: 700; transition: background .2s; }
+  .outline-button:hover { background: #f4f7fb; }
+  .orders-panel { margin-top: 19px; padding-bottom: 9px; }
+  .orders-heading { align-items: center; margin-bottom: 17px; }
+  .table-scroll { overflow-x: auto; }
+  .admin-page table { width: 100%; border-collapse: collapse; text-align: right; white-space: nowrap; }
+  .admin-page th { padding: 13px 12px; background: #f7f9fc; color: #8994a5; font-size: 10px; font-weight: 600; }
+  .admin-page th:first-child { border-radius: 0 7px 7px 0; }
+  .admin-page th:last-child { border-radius: 7px 0 0 7px; }
+  .admin-page td { padding: 15px 12px; border-bottom: 1px solid #f0f2f6; color: #46556a; font-size: 11px; }
+  .admin-page tbody tr:last-child td { border-bottom: 0; }
+  .order-id { color: #345988 !important; font-weight: 800; }
+  .muted-cell { color: #8e99a9 !important; }
+  .status { display: inline-flex; align-items: center; gap: 6px; padding: 5px 9px; border-radius: 6px; font-size: 10px; }
+  .status::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+  .status.pending { background: #fff5e7; color: #bf8333; }
+  .status.progress { background: #edf3fc; color: #4269a5; }
+  .status.done { background: #eaf7f0; color: #338e68; }
+  .row-action { display: grid; place-items: center; width: 27px; height: 27px; border: 1px solid #e8edf3; border-radius: 7px; color: #71829a !important; font-size: 15px; }
+  .row-action:hover { color: #345988 !important; background: #f4f7fb; }
+  .mobile-orders { display: none; }
+  .quick-section { margin-top: 26px; }
+  .section-title { margin-bottom: 15px; }
+  .quick-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+  .quick-card { display: flex; align-items: center; gap: 12px; padding: 17px; min-width: 0; border: 1px solid #e9edf3; background: #fff; border-radius: 12px; transition: transform .2s, box-shadow .2s, border-color .2s; }
+  .quick-card:hover { transform: translateY(-2px); border-color: #d6e0ef; box-shadow: 0 8px 20px #17294308; }
+  .quick-icon { width: 41px; height: 41px; display: grid; place-items: center; flex-shrink: 0; border-radius: 11px; color: #4269a5; background: #edf3fc; }
+  .quick-icon svg { width: 21px; height: 21px; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  .quick-copy { display: flex; flex-direction: column; min-width: 0; gap: 3px; }
+  .quick-copy strong { font-size: 11px; color: #2b3b52; }
+  .quick-copy small { color: #909bad; font-size: 10px; line-height: 1.7; }
+  .quick-arrow { margin-right: auto; color: #94a0b1; font-size: 16px; transition: transform .2s; }
+  .quick-card:hover .quick-arrow { transform: translateX(-3px); }
+  .dashboard-footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-top: 30px; padding: 17px 0 5px; border-top: 1px solid #e6ebf2; color: #929cac; font-size: 10px; }
+  @media (min-width: 1500px) { .dashboard-content { padding: 38px 40px; } }
+  @media (max-width: 1150px) {
+    .sidebar { width: 225px; flex-basis: 225px; }
+    .dashboard-content { padding: 25px 21px; }
+    .topbar { padding: 0 21px; }
+    .stats-grid { gap: 11px; }
+    .stat-card { padding: 15px; }
+    .middle-grid { grid-template-columns: minmax(0, 1.5fr) minmax(240px, 1fr); gap: 12px; }
+    .panel { padding: 17px; }
+    .quick-grid { gap: 10px; }
+    .quick-card { padding: 13px; }
+  }
+  @media (max-width: 900px) {
+    .sidebar { width: 205px; flex-basis: 205px; padding-inline: 12px; }
+    .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .middle-grid { grid-template-columns: 1fr; }
+    .quick-grid { grid-template-columns: 1fr; }
+    .quick-card { padding: 14px 16px; }
+  }
+  @media (max-width: 650px) {
+    .admin-page { display: block; }
+    .sidebar { position: fixed; z-index: 20; top: 0; bottom: 0; right: 0; width: min(285px, 84vw); min-height: 0; height: 100dvh; overflow-y: auto; transform: translateX(105%); transition: transform .25s ease; box-shadow: -12px 0 35px #0b193333; }
+    .sidebar.open { transform: translateX(0); }
+    .topbar { min-height: 65px; padding: 0 14px; }
+    .topbar-right, .topbar-left { gap: 10px; }
+    .mobile-menu { display: grid; width: 35px; height: 35px; }
+    .today-date { display: none; }
+    .admin-profile { padding-right: 10px; gap: 7px; }
+    .profile-copy, .profile-chevron { display: none; }
+    .avatar { width: 34px; height: 34px; }
+    .dashboard-content { padding: 23px 14px; }
+    .welcome-row { align-items: flex-start; flex-direction: column; gap: 14px; margin-bottom: 20px; }
+    .welcome-row h1 { font-size: 23px; }
+    .welcome-row p { font-size: 11px; }
+    .primary-button { min-height: 40px; }
+    .stats-grid { gap: 10px; }
+    .stat-card { padding: 13px; border-radius: 11px; }
+    .stat-icon { width: 36px; height: 36px; border-radius: 10px; }
+    .stat-icon svg { width: 18px; height: 18px; }
+    .stat-title { margin-top: 13px; font-size: 11px; }
+    .stat-value { font-size: 25px; }
+    .stat-footer { font-size: 9px; }
+    .panel { padding: 15px; border-radius: 11px; }
+    .chart-summary { margin-top: 20px; }
+    .chart-summary strong { font-size: 23px; }
+    .chart-summary > div span, .chart-legend { font-size: 9px; }
+    .chart-wrap { height: 155px; }
+    .chart-days { font-size: 8px; padding-right: 23px; }
+    .orders-panel { padding-bottom: 5px; }
+    .table-scroll { display: none; }
+    .mobile-orders { display: grid; }
+    .mobile-order { padding: 14px 0; border-bottom: 1px solid #edf0f5; }
+    .mobile-order:last-child { border-bottom: 0; }
+    .mobile-order-top, .mobile-order-bottom { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+    .mobile-order-top strong { color: #345988; font-size: 11px; }
+    .mobile-order-customer { margin: 8px 0; color: #43536a; font-size: 11px; }
+    .mobile-order-bottom { color: #8b96a6; font-size: 10px; }
+    .quick-section { margin-top: 23px; }
+    .dashboard-footer { font-size: 9px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .admin-page *, .admin-page *::before, .admin-page *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+  }
+</style>
+
+<script>
+  const dateElement = document.getElementById("today-date");
+  if (dateElement) {
+    dateElement.textContent = new Intl.DateTimeFormat("fa-IR", {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }).format(new Date());
+  }
+
+  const menuToggle = document.getElementById("menu-toggle");
+  const sidebar = document.getElementById("admin-sidebar");
+
+  menuToggle?.addEventListener("click", () => {
+    const isOpen = sidebar?.classList.toggle("open") ?? false;
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
+  });
+
+  document.addEventListener("click", (event) => {
+    if (
+      window.innerWidth <= 650 &&
+      sidebar?.classList.contains("open") &&
+      !sidebar.contains(event.target as Node) &&
+      !menuToggle?.contains(event.target as Node)
+    ) {
+      sidebar.classList.remove("open");
+      menuToggle?.setAttribute("aria-expanded", "false");
+    }
+  });
+</script>

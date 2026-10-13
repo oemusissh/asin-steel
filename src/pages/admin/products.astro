@@ -1,0 +1,594 @@
+
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const base = import.meta.env.BASE_URL;
+
+const demoProducts = [
+  {
+    id: 1,
+    name: "میلگرد آجدار ۱۴",
+    category: "rebar",
+    categoryName: "میلگرد",
+    factory: "ذوب آهن اصفهان",
+    price: 32400,
+    priceOnRequest: false,
+    inventory: "available",
+    active: true,
+  },
+  {
+    id: 2,
+    name: "تیرآهن ۱۶",
+    category: "beam",
+    categoryName: "تیرآهن",
+    factory: "ذوب آهن اصفهان",
+    price: 38500,
+    priceOnRequest: false,
+    inventory: "available",
+    active: true,
+  },
+  {
+    id: 3,
+    name: "ورق سیاه فولادی",
+    category: "sheet",
+    categoryName: "ورق",
+    factory: "فولاد مبارکه",
+    price: 0,
+    priceOnRequest: true,
+    inventory: "inquire",
+    active: true,
+  },
+];
+---
+
+<BaseLayout title="مدیریت محصولات | پنل مدیریت ASIN STILL">
+  <main class="admin-shell" dir="rtl">
+    <aside class="sidebar">
+      <a class="brand" href={`${base}admin/`}>
+        <span class="brand-mark">A</span>
+        <span>ASIN <b>STILL</b><small>پنل مدیریت</small></span>
+      </a>
+
+      <nav>
+        <a href={`${base}admin/`}>▦ <span>داشبورد</span></a>
+        <a class="selected" href={`${base}admin/products`}>▤ <span>مدیریت محصولات</span></a>
+        <a href={`${base}admin/orders`}>▣ <span>سفارش‌ها</span></a>
+        <a href={`${base}admin/customers`}>♙ <span>مشتریان</span></a>
+        <a href={`${base}Price-list`}>↗ <span>لیست قیمت سایت</span></a>
+      </nav>
+
+      <a class="back-link" href={base}>← بازگشت به سایت</a>
+    </aside>
+
+    <section class="workspace">
+      <header class="topbar">
+        <div>
+          <span class="eyebrow">مدیریت فروشگاه</span>
+          <h1>مدیریت محصولات</h1>
+          <p>محصولات فروشگاه را مشاهده و مدیریت کن.</p>
+        </div>
+        <span class="admin-chip"><span></span> پنل مدیریت</span>
+      </header>
+
+      <section class="toolbar">
+        <div class="search-wrap">
+          <span>⌕</span>
+          <input id="search" type="search" placeholder="جست‌وجوی نام محصول یا کارخانه..." />
+        </div>
+        <button id="add-product" class="primary">＋ افزودن محصول</button>
+      </section>
+
+      <section class="stats">
+        <article class="stat-card">
+          <span>کل محصولات</span>
+          <strong id="total-count">۰</strong>
+          <small>تمام محصولات ثبت‌شده</small>
+        </article>
+        <article class="stat-card">
+          <span>محصولات فعال</span>
+          <strong id="active-count">۰</strong>
+          <small>قابل نمایش در فروشگاه</small>
+        </article>
+        <article class="stat-card">
+          <span>استعلام قیمت</span>
+          <strong id="quote-count">۰</strong>
+          <small>قیمت نیازمند استعلام</small>
+        </article>
+        <article class="stat-card">
+          <span>ناموجود</span>
+          <strong id="unavailable-count">۰</strong>
+          <small>وضعیت موجودی محصول</small>
+        </article>
+      </section>
+
+      <section class="table-card">
+        <div class="table-heading">
+          <div>
+            <h2>فهرست محصولات</h2>
+            <p>برای تغییر مشخصات، گزینه ویرایش را انتخاب کن.</p>
+          </div>
+          <span id="result-count" class="result-count">۰ محصول</span>
+        </div>
+
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>محصول</th>
+                <th>دسته‌بندی</th>
+                <th>کارخانه</th>
+                <th>قیمت هر کیلو (تومان)</th>
+                <th>موجودی</th>
+                <th>وضعیت</th>
+                <th>عملیات</th>
+              </tr>
+            </thead>
+            <tbody id="products-body"></tbody>
+          </table>
+        </div>
+
+        <div id="empty-state" class="empty-state" hidden>
+          <span>▤</span>
+          <strong>محصولی پیدا نشد</strong>
+          <p>عبارت جست‌وجو را تغییر بده یا محصول جدیدی اضافه کن.</p>
+        </div>
+      </section>
+
+      <p class="notice">
+        توجه: این نسخه آزمایشی است. تغییرات فعلاً در حافظه مرورگر همین دستگاه ذخیره می‌شوند
+        و هنوز به فهرست محصولات عمومی سایت یا پایگاه داده متصل نیستند.
+      </p>
+    </section>
+  </main>
+
+  <div id="product-modal" class="modal" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <section class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <header class="modal-header">
+        <div>
+          <span class="eyebrow">اطلاعات فروشگاه</span>
+          <h2 id="modal-title">افزودن محصول</h2>
+        </div>
+        <button type="button" id="close-modal" class="icon-button" aria-label="بستن">×</button>
+      </header>
+
+      <form id="product-form">
+        <input id="product-id" type="hidden" />
+
+        <label>
+          نام محصول
+          <input id="product-name" required maxlength="100" placeholder="مثلاً میلگرد آجدار ۱۸" />
+        </label>
+
+        <div class="form-grid">
+          <label>
+            دسته‌بندی
+            <select id="product-category" required>
+              <option value="rebar">میلگرد</option>
+              <option value="beam">تیرآهن</option>
+              <option value="sheet">ورق</option>
+              <option value="profile">پروفیل</option>
+              <option value="angle">نبشی و ناودانی</option>
+              <option value="pipe">لوله</option>
+              <option value="other">سایر</option>
+            </select>
+          </label>
+
+          <label>
+            کارخانه
+            <input id="product-factory" required maxlength="100" placeholder="نام کارخانه" />
+          </label>
+        </div>
+
+        <label>
+          نحوه نمایش قیمت
+          <select id="product-price-mode">
+            <option value="fixed">نمایش قیمت عددی</option>
+            <option value="quote">استعلام قیمت</option>
+          </select>
+        </label>
+
+        <label id="price-field">
+          قیمت هر کیلو به تومان
+          <input id="product-price" type="number" min="0" step="1" placeholder="مثلاً ۳۲۴۰۰" />
+        </label>
+
+        <label>
+          وضعیت موجودی
+          <select id="product-inventory">
+            <option value="available">موجود</option>
+            <option value="unavailable">ناموجود</option>
+            <option value="inquire">استعلام موجودی</option>
+          </select>
+        </label>
+
+        <label class="check-row">
+          <input id="product-active" type="checkbox" checked />
+          محصول فعال باشد
+        </label>
+
+        <div class="form-actions">
+          <button type="button" id="cancel-modal" class="secondary">انصراف</button>
+          <button type="submit" class="primary">ذخیره محصول</button>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script define:vars={{ demoProducts }}>
+    const STORAGE_KEY = "asin-admin-products-v1";
+    const categoryNames = {
+      rebar: "میلگرد",
+      beam: "تیرآهن",
+      sheet: "ورق",
+      profile: "پروفیل",
+      angle: "نبشی و ناودانی",
+      pipe: "لوله",
+      other: "سایر",
+    };
+
+    const inventoryNames = {
+      available: "موجود",
+      unavailable: "ناموجود",
+      inquire: "استعلام موجودی",
+    };
+
+    const inventoryClasses = {
+      available: "green",
+      unavailable: "red",
+      inquire: "amber",
+    };
+
+    const $ = (id) => document.getElementById(id);
+    const modal = $("product-modal");
+    const form = $("product-form");
+    const body = $("products-body");
+    let products = [];
+
+    function loadProducts() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        products = saved ? JSON.parse(saved) : demoProducts;
+        if (!Array.isArray(products)) products = demoProducts;
+      } catch {
+        products = demoProducts;
+      }
+      saveProducts();
+      render();
+    }
+
+    function saveProducts() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
+    }
+
+    function formatNumber(value) {
+      return Number(value || 0).toLocaleString("fa-IR");
+    }
+
+    function priceText(product) {
+      return product.priceOnRequest
+        ? "استعلام قیمت"
+        : `${formatNumber(product.price)} تومان`;
+    }
+
+    function render() {
+      const query = $("search").value.trim().toLocaleLowerCase("fa");
+      const filtered = products.filter((product) =>
+        `${product.name} ${product.factory} ${product.categoryName}`
+          .toLocaleLowerCase("fa")
+          .includes(query)
+      );
+
+      $("total-count").textContent = formatNumber(products.length);
+      $("active-count").textContent = formatNumber(products.filter(p => p.active).length);
+      $("quote-count").textContent = formatNumber(products.filter(p => p.priceOnRequest).length);
+      $("unavailable-count").textContent = formatNumber(products.filter(p => p.inventory === "unavailable").length);
+      $("result-count").textContent = `${formatNumber(filtered.length)} محصول`;
+      $("empty-state").hidden = filtered.length > 0;
+
+      body.innerHTML = filtered.map(product => `
+        <tr>
+          <td>
+            <div class="product-name">
+              <span class="product-icon">▤</span>
+              <div><strong>${escapeHTML(product.name)}</strong><small>شناسه: ${formatNumber(product.id)}</small></div>
+            </div>
+          </td>
+          <td>${escapeHTML(product.categoryName || categoryNames[product.category] || "سایر")}</td>
+          <td>${escapeHTML(product.factory || "—")}</td>
+          <td class="${product.priceOnRequest ? "quote-price" : "price"}">${escapeHTML(priceText(product))}</td>
+          <td><span class="status ${inventoryClasses[product.inventory] || "amber"}">${inventoryNames[product.inventory] || "استعلام موجودی"}</span></td>
+          <td><button class="toggle ${product.active ? "on" : ""}" data-toggle="${product.id}" aria-label="تغییر وضعیت فعال محصول">${product.active ? "فعال" : "غیرفعال"}</button></td>
+          <td>
+            <div class="actions">
+              <button class="edit-button" data-edit="${product.id}">ویرایش</button>
+              <button class="delete-button" data-delete="${product.id}">حذف</button>
+            </div>
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    function escapeHTML(value) {
+      return String(value ?? "").replace(/[&<>"']/g, char => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      })[char]);
+    }
+
+    function showToast(message) {
+      const toast = $("toast");
+      toast.textContent = message;
+      toast.classList.add("visible");
+      window.setTimeout(() => toast.classList.remove("visible"), 2600);
+    }
+
+    function updatePriceField() {
+      const isQuote = $("product-price-mode").value === "quote";
+      $("price-field").hidden = isQuote;
+      $("product-price").required = !isQuote;
+    }
+
+    function openModal(product = null) {
+      form.reset();
+      $("product-id").value = product?.id ?? "";
+      $("modal-title").textContent = product ? "ویرایش محصول" : "افزودن محصول";
+      $("product-name").value = product?.name ?? "";
+      $("product-category").value = product?.category ?? "rebar";
+      $("product-factory").value = product?.factory ?? "";
+      $("product-price-mode").value = product?.priceOnRequest ? "quote" : "fixed";
+      $("product-price").value = product?.price ?? "";
+      $("product-inventory").value = product?.inventory ?? "available";
+      $("product-active").checked = product?.active ?? true;
+      updatePriceField();
+      modal.hidden = false;
+      document.body.classList.add("modal-open");
+      $("product-name").focus();
+    }
+
+    function closeModal() {
+      modal.hidden = true;
+      document.body.classList.remove("modal-open");
+    }
+
+    $("add-product").addEventListener("click", () => openModal());
+    $("close-modal").addEventListener("click", closeModal);
+    $("cancel-modal").addEventListener("click", closeModal);
+    modal.querySelectorAll("[data-close]").forEach(el => el.addEventListener("click", closeModal));
+    $("search").addEventListener("input", render);
+    $("product-price-mode").addEventListener("change", updatePriceField);
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && !modal.hidden) closeModal();
+    });
+
+    body.addEventListener("click", event => {
+      const editButton = event.target.closest("[data-edit]");
+      const deleteButton = event.target.closest("[data-delete]");
+      const toggleButton = event.target.closest("[data-toggle]");
+
+      if (editButton) {
+        const product = products.find(p => String(p.id) === editButton.dataset.edit);
+        if (product) openModal(product);
+      }
+
+      if (deleteButton) {
+        const product = products.find(p => String(p.id) === deleteButton.dataset.delete);
+        if (!product) return;
+        if (confirm(`محصول «${product.name}» حذف شود؟`)) {
+          products = products.filter(p => p.id !== product.id);
+          saveProducts();
+          render();
+          showToast("محصول حذف شد.");
+        }
+      }
+
+      if (toggleButton) {
+        const product = products.find(p => String(p.id) === toggleButton.dataset.toggle);
+        if (!product) return;
+        product.active = !product.active;
+        saveProducts();
+        render();
+        showToast(product.active ? "محصول فعال شد." : "محصول غیرفعال شد.");
+      }
+    });
+
+    form.addEventListener("submit", event => {
+      event.preventDefault();
+
+      const idValue = $("product-id").value;
+      const priceOnRequest = $("product-price-mode").value === "quote";
+      const category = $("product-category").value;
+      const parsedPrice = Number($("product-price").value || 0);
+
+      if (!priceOnRequest && (!Number.isFinite(parsedPrice) || parsedPrice < 0)) {
+        showToast("قیمت واردشده معتبر نیست.");
+        return;
+      }
+
+      const data = {
+        id: idValue ? Number(idValue) : Date.now(),
+        name: $("product-name").value.trim(),
+        category,
+        categoryName: categoryNames[category] || "سایر",
+        factory: $("product-factory").value.trim(),
+        price: priceOnRequest ? 0 : parsedPrice,
+        priceOnRequest,
+        inventory: $("product-inventory").value,
+        active: $("product-active").checked,
+      };
+
+      if (!data.name || !data.factory) {
+        showToast("نام محصول و کارخانه را وارد کن.");
+        return;
+      }
+
+      if (idValue) {
+        products = products.map(p => p.id === Number(idValue) ? data : p);
+      } else {
+        products.unshift(data);
+      }
+
+      saveProducts();
+      render();
+      closeModal();
+      showToast(idValue ? "تغییرات ذخیره شد." : "محصول جدید اضافه شد.");
+    });
+
+    loadProducts();
+  </script>
+
+  <style>
+    :global(body) {
+      margin: 0;
+      background: #f3f6fb;
+      color: #17243b;
+      font-family: Vazirmatn, Tahoma, sans-serif;
+    }
+
+    :global(body.modal-open) { overflow: hidden; }
+
+    .admin-shell {
+      --navy: #101d35;
+      --blue: #315ee8;
+      --muted: #7b879b;
+      display: flex;
+      min-height: 100vh;
+      background: #f3f6fb;
+    }
+
+    .sidebar {
+      width: 245px;
+      flex: 0 0 245px;
+      background: var(--navy);
+      color: #fff;
+      padding: 26px 16px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: .5px;
+    }
+
+    .brand b { color: #8caaff; }
+    .brand small { display: block; margin-top: 4px; color: #aebbd2; font-size: 11px; font-weight: 400; letter-spacing: 0; }
+    .brand-mark { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 13px; background: #315ee8; font-size: 24px; }
+
+    nav { display: grid; gap: 8px; }
+    nav a { display: flex; gap: 12px; align-items: center; color: #b9c5d9; text-decoration: none; padding: 13px 14px; border-radius: 10px; font-size: 13px; }
+    nav a:hover, nav a.selected { color: white; background: #263b60; }
+    nav a.selected { box-shadow: inset -3px 0 #7e9cff; }
+    .back-link { margin-top: auto; padding: 13px; color: #c1cce0; text-decoration: none; font-size: 12px; }
+
+    .workspace { flex: 1; min-width: 0; padding: 32px; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; gap: 20px; margin-bottom: 28px; }
+    .eyebrow { color: #4770e9; font-size: 11px; font-weight: 800; }
+    h1 { margin: 8px 0; font-size: 27px; }
+    .topbar p, .table-heading p { margin: 0; color: var(--muted); font-size: 13px; }
+    .admin-chip { white-space: nowrap; display: flex; align-items: center; gap: 8px; background: white; border: 1px solid #e5eaf2; border-radius: 30px; padding: 10px 14px; font-size: 12px; }
+    .admin-chip span { width: 7px; height: 7px; background: #22b981; border-radius: 50%; }
+
+    .toolbar { display: flex; gap: 12px; margin-bottom: 20px; }
+    .search-wrap { flex: 1; display: flex; align-items: center; gap: 10px; background: white; border: 1px solid #e1e7f0; border-radius: 11px; padding: 0 14px; color: #78869e; }
+    .search-wrap span { font-size: 25px; }
+    .search-wrap input { width: 100%; border: 0; outline: 0; background: transparent; padding: 14px 0; font: inherit; font-size: 12px; }
+    button { font: inherit; cursor: pointer; }
+    .primary { border: 0; border-radius: 10px; padding: 12px 18px; background: var(--blue); color: white; font-size: 12px; font-weight: 700; white-space: nowrap; }
+    .primary:hover { background: #244bcb; }
+
+    .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-bottom: 22px; }
+    .stat-card { padding: 20px; background: white; border: 1px solid #e6ebf3; border-radius: 14px; }
+    .stat-card span, .stat-card small { display: block; color: #7d899e; font-size: 12px; }
+    .stat-card strong { display: block; margin: 13px 0 8px; font-size: 27px; color: #192a47; }
+    .stat-card small { font-size: 10px; }
+
+    .table-card { background: white; border: 1px solid #e4eaf3; border-radius: 15px; overflow: hidden; }
+    .table-heading { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 22px; }
+    .table-heading h2 { margin: 0 0 8px; font-size: 17px; }
+    .result-count { color: #61708a; font-size: 11px; background: #f1f4fa; border-radius: 20px; padding: 8px 12px; white-space: nowrap; }
+    .table-scroll { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; min-width: 920px; text-align: right; }
+    th { background: #f8faff; color: #77849b; font-size: 11px; font-weight: 600; white-space: nowrap; }
+    th, td { padding: 16px 14px; border-top: 1px solid #edf0f6; }
+    td { font-size: 11px; color: #526078; white-space: nowrap; }
+    .product-name { display: flex; align-items: center; gap: 10px; }
+    .product-name strong, .product-name small { display: block; }
+    .product-name strong { color: #24334e; font-size: 12px; }
+    .product-name small { margin-top: 5px; color: #8995a8; font-size: 10px; }
+    .product-icon { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 9px; color: #4269db; background: #edf2ff; font-size: 18px; }
+    .price { color: #253653; font-weight: 700; }
+    .quote-price { color: #a56b16; font-weight: 700; }
+    .status { display: inline-block; border-radius: 20px; padding: 6px 9px; font-size: 10px; }
+    .green { color: #13845b; background: #e8f8f0; }
+    .red { color: #c13b4c; background: #fff0f1; }
+    .amber { color: #9c6a12; background: #fff5df; }
+    .toggle { min-width: 62px; border: 1px solid #e4e8ef; background: #f5f6f9; color: #7e8797; padding: 7px 9px; border-radius: 8px; font-size: 10px; }
+    .toggle.on { background: #e8f8f0; border-color: #c5eedb; color: #13845b; }
+    .actions { display: flex; gap: 7px; }
+    .edit-button, .delete-button { background: transparent; border: 1px solid #e4e8ef; padding: 7px 9px; border-radius: 7px; font-size: 10px; }
+    .edit-button { color: #315ee8; }
+    .delete-button { color: #c13b4c; }
+    .empty-state { padding: 45px 20px; text-align: center; }
+    .empty-state span { display: block; color: #9caed1; font-size: 34px; }
+    .empty-state strong { display: block; margin: 10px 0; }
+    .empty-state p { color: var(--muted); font-size: 12px; }
+    .notice { margin-top: 16px; padding: 14px 16px; border-radius: 10px; background: #fff7e6; color: #8b661c; font-size: 11px; line-height: 2; }
+
+    .modal[hidden] { display: none; }
+    .modal { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 16px; }
+    .modal-backdrop { position: absolute; inset: 0; background: #0b1730a8; }
+    .modal-panel { position: relative; width: min(100%, 540px); max-height: 90vh; overflow-y: auto; box-sizing: border-box; background: white; border-radius: 18px; padding: 25px; box-shadow: 0 24px 90px #08152b40; }
+    .modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; }
+    .modal-header h2 { margin: 8px 0 0; font-size: 21px; }
+    .icon-button { border: 0; background: #f0f3f8; color: #5b6880; border-radius: 9px; width: 35px; height: 35px; font-size: 25px; }
+    form { display: grid; gap: 15px; }
+    form label { display: grid; gap: 8px; color: #34435c; font-size: 12px; font-weight: 700; }
+    form input:not([type="checkbox"]), form select { width: 100%; box-sizing: border-box; min-width: 0; border: 1px solid #dce3ee; border-radius: 9px; background: white; padding: 12px; font: inherit; font-size: 12px; outline: none; }
+    form input:focus, form select:focus { border-color: #6687ef; box-shadow: 0 0 0 3px #315ee817; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .check-row { display: flex; align-items: center; gap: 10px; }
+    .check-row input { width: 16px; height: 16px; accent-color: #315ee8; }
+    .form-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 7px; }
+    .secondary { border: 1px solid #dfe5ef; background: white; border-radius: 10px; padding: 12px 18px; color: #58677f; font-size: 12px; }
+    .toast { position: fixed; bottom: 22px; left: 22px; z-index: 1200; background: #13223d; color: white; border-radius: 10px; padding: 13px 18px; font-size: 12px; opacity: 0; transform: translateY(10px); pointer-events: none; transition: .2s; }
+    .toast.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 1100px) {
+      .sidebar { width: 205px; flex-basis: 205px; }
+      .workspace { padding: 24px; }
+      .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 720px) {
+      .admin-shell { display: block; }
+      .sidebar { width: 100%; padding: 15px; gap: 15px; }
+      .brand { font-size: 16px; }
+      nav { display: flex; overflow-x: auto; gap: 5px; }
+      nav a { flex: 0 0 auto; padding: 10px; }
+      .back-link { display: none; }
+      .workspace { padding: 18px 12px; }
+      .topbar { align-items: flex-start; }
+      h1 { font-size: 22px; }
+      .admin-chip { font-size: 10px; }
+      .toolbar { flex-direction: column; }
+      .search-wrap { flex: auto; }
+      .stats { gap: 9px; }
+      .stat-card { padding: 14px; }
+      .stat-card strong { font-size: 23px; }
+      .table-heading { padding: 17px 14px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .modal-panel { padding: 20px 16px; }
+    }
+  </style>
+</BaseLayout>

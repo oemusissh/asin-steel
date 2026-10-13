@@ -3,8 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ProductCard from '../components/ProductCard.astro';
 import RecentlyViewed from '../components/RecentlyViewed.astro';
 import AdvancedSteelCalculator from "../components/AdvancedSteelCalculator.astro";
-
-
+import HomeLuxuryHero from "../components/HomeLuxuryHero.astro";
 
 const featuredProducts = [
   {
@@ -1127,893 +1126,31 @@ const featuredProducts = [
 </script>
 
 
+
 <!-- =========================================================
-     ASIN STILL — STEEL MARKET HERO
+     ASIN STILL — ISOLATED HERO SECTION
 ========================================================= -->
 
-<section
-  class="relative overflow-hidden bg-slate-950 text-white"
-  dir="rtl"
->
-  <!-- =========================
-       BACKGROUND
-  ========================== -->
-
-  <div class="absolute inset-0">
-    <div
-      class="absolute right-[-180px] top-[-120px] h-[520px] w-[520px] rounded-full bg-blue-600/10 blur-[130px]"
-    ></div>
-
-    <div
-      class="absolute bottom-[-180px] left-[-140px] h-[480px] w-[480px] rounded-full bg-blue-900/15 blur-[120px]"
-    ></div>
-
-    <div
-      class="absolute inset-0 opacity-[0.035]"
-      style="
-        background-image:
-          linear-gradient(rgba(255,255,255,.7) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255,255,255,.7) 1px, transparent 1px);
-        background-size: 64px 64px;
-      "
-    ></div>
-  </div>
-
-
-  <!-- =========================
-       MAIN CONTAINER
-  ========================== -->
-
-  <div
-    class="relative z-10 w-full px-5 pt-14 pb-20 sm:px-10 sm:pt-16 sm:pb-24 lg:px-16 xl:px-24 2xl:px-32"
-  >
-
-    <div
-      class="mx-auto max-w-[1500px]"
-    >
-
-      <div
-        class="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16"
-      >
-
-        <!-- =================================================
-             RIGHT — MAIN CONTENT
-        ================================================== -->
-
-        <div class="max-w-3xl">
-
-          <!-- Small Label -->
-
-          <div
-            class="mb-6 inline-flex items-center gap-3 rounded-full border border-blue-400/20 bg-blue-500/[0.07] px-4 py-2"
-          >
-
-            <span
-              class="relative flex h-2.5 w-2.5"
-            >
-              <span
-                class="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-60"
-              ></span>
-
-              <span
-                class="relative inline-flex h-2.5 w-2.5 rounded-full bg-blue-400"
-              ></span>
-            </span>
-
-            <span
-              class="text-xs font-bold text-blue-300 sm:text-sm"
-            >
-              تأمین و فروش مقاطع فولادی
-            </span>
-
-          </div>
-
-
-          <!-- =========================
-               MAIN HEADING
-          ========================== -->
-
-          <h1
-            class="max-w-[760px] text-3xl font-black leading-[1.3] tracking-tight sm:text-4xl md:text-5xl lg:text-[54px] xl:text-[60px]"
-          >
-
-            قیمت، تأمین و خرید
-
-            <span class="block text-blue-400">
-              مقاطع فولادی
-            </span>
-
-            <span class="block text-white">
-              از یک مرجع مطمئن
-            </span>
-
-          </h1>
-
-
-          <!-- Description -->
-
-          <p
-            class="mt-7 max-w-2xl text-sm leading-8 text-slate-400 sm:text-base sm:leading-9 lg:text-lg"
-          >
-            تأمین انواع میلگرد، تیرآهن، ورق، نبشی، ناودانی، قوطی و سایر
-            مقاطع فولادی از تولیدکنندگان معتبر؛ با امکان استعلام قیمت،
-            محاسبه وزن و دریافت پیش‌فاکتور.
-          </p>
-
-
-          <!-- =========================
-               CTA BUTTONS
-          ========================== -->
-
-          <div
-            class="mt-9 flex flex-col gap-3 sm:flex-row"
-          >
-
-            <!-- Main CTA -->
-
-            <a
-              href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/contact`}
-              class="group inline-flex min-h-[54px] items-center justify-center gap-3 rounded-xl bg-blue-600 px-7 text-sm font-bold text-white shadow-lg shadow-blue-600/20 transition-all duration-300 hover:-translate-y-1 hover:bg-blue-500 hover:shadow-blue-500/30 sm:text-base"
-            >
-
-              <svg
-                class="h-5 w-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.8"
-                  d="M8 7h8M8 11h5M5 3h10l4 4v14H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"
-                />
-              </svg>
-
-              <span>
-                استعلام قیمت
-              </span>
-
-              <svg
-                class="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M15 19l-7-7 7-7"
-                />
-              </svg>
-
-            </a>
-
-
-            <!-- Calculator CTA -->
-
-            <a
-              href="#steel-calculator"
-              class="inline-flex min-h-[54px] items-center justify-center gap-3 rounded-xl border border-slate-700 bg-slate-900/70 px-7 text-sm font-bold text-slate-200 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-blue-500/40 hover:bg-slate-800 sm:text-base"
-            >
-
-              <svg
-                class="h-5 w-5 text-blue-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
-                <rect
-                  x="5"
-                  y="3"
-                  width="14"
-                  height="18"
-                  rx="2"
-                  stroke-width="1.8"
-                />
-
-                <path
-                  stroke-linecap="round"
-                  stroke-width="1.8"
-                  d="M8 7h8M8 11h1M12 11h1M16 11h1M8 15h1M12 15h1M16 15h1"
-                />
-              </svg>
-
-              <span>
-                محاسبه وزن و هزینه
-              </span>
-
-            </a>
-
-          </div>
-
-
-          <!-- =========================
-               QUICK STATS
-          ========================== -->
-
-          <div
-            class="mt-10 grid max-w-2xl grid-cols-3 border-y border-slate-800/80 py-5"
-          >
-
-            <div class="px-3 text-right first:pr-0">
-
-              <div
-                class="text-lg font-black text-white sm:text-2xl"
-              >
-                100+
-              </div>
-
-              <div
-                class="mt-1 text-[11px] text-slate-500 sm:text-xs"
-              >
-                نوع محصول
-              </div>
-
-            </div>
-
-
-            <div
-              class="border-x border-slate-800/80 px-3 text-right"
-            >
-
-              <div
-                class="text-lg font-black text-white sm:text-2xl"
-              >
-                24/7
-              </div>
-
-              <div
-                class="mt-1 text-[11px] text-slate-500 sm:text-xs"
-              >
-                پاسخ‌گویی
-              </div>
-
-            </div>
-
-
-            <div class="px-3 text-right last:pl-0">
-
-              <div
-                class="text-lg font-black text-white sm:text-2xl"
-              >
-                سراسر کشور
-              </div>
-
-              <div
-                class="mt-1 text-[11px] text-slate-500 sm:text-xs"
-              >
-                امکان تأمین و ارسال
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <!-- =================================================
-             LEFT — STEEL PRODUCTS PANEL
-        ================================================== -->
-
-        <div
-          class="relative"
-        >
-
-          <!-- Main Panel -->
-
-          <div
-            class="relative overflow-hidden rounded-[30px] border border-slate-800 bg-slate-900/75 p-5 shadow-2xl shadow-black/30 backdrop-blur-xl sm:p-6"
-          >
-
-            <!-- Panel Glow -->
-
-            <div
-              class="absolute right-[-100px] top-[-100px] h-64 w-64 rounded-full bg-blue-500/10 blur-[90px]"
-            ></div>
-
-
-            <!-- Panel Header -->
-
-            <div
-              class="relative z-10 mb-5 flex items-center justify-between"
-            >
-
-              <div>
-
-                <div
-                  class="text-[11px] font-bold tracking-[0.18em] text-blue-400"
-                >
-                  ASIN STEEL
-                </div>
-
-                <h2
-                  class="mt-1 text-lg font-black text-white sm:text-xl"
-                >
-                  دسته‌بندی مقاطع فولادی
-                </h2>
-
-              </div>
-
-
-              <div
-                class="flex h-10 w-10 items-center justify-center rounded-xl border border-blue-400/20 bg-blue-500/10 text-blue-400"
-              >
-
-                <svg
-                  class="h-5 w-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.7"
-                    d="M4 7h16M4 12h16M4 17h16"
-                  />
-                </svg>
-
-              </div>
-
-            </div>
-
-
-            <!-- =========================
-                 PRODUCTS
-            ========================== -->
-
-            <div
-              class="relative z-10 grid grid-cols-2 gap-3"
-            >
-
-              <!-- Rebar -->
-
-              <a
-                href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/products`}
-                class="group rounded-2xl border border-slate-800 bg-slate-950/70 p-4 transition-all duration-300 hover:-translate-y-1 hover:border-blue-500/40 hover:bg-slate-900"
-              >
-
-                <div
-                  class="flex items-start justify-between"
-                >
-
-                  <div
-                    class="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-500/10 text-blue-400"
-                  >
-
-                    <svg
-                      class="h-6 w-6"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-width="2"
-                        d="M5 19L19 5M8 19L19 8M5 16L16 5"
-                      />
-                    </svg>
-
-                  </div>
-
-                  <svg
-                    class="h-4 w-4 text-slate-600 transition-all group-hover:-translate-x-1 group-hover:text-blue-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.8"
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-
-                </div>
-
-                <div class="mt-4">
-
-                  <h3
-                    class="font-bold text-white"
-                  >
-                    میلگرد
-                  </h3>
-
-                  <p
-                    class="mt-1 text-xs leading-6 text-slate-500"
-                  >
-                    ساده و آجدار
-                  </p>
-
-                </div>
-
-              </a>
-
-
-              <!-- Beam -->
-
-              <a
-                href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/products`}
-                class="group rounded-2xl border border-slate-800 bg-slate-950/70 p-4 transition-all duration-300 hover:-translate-y-1 hover:border-blue-500/40 hover:bg-slate-900"
-              >
-
-                <div
-                  class="flex items-start justify-between"
-                >
-
-                  <div
-                    class="flex h-11 w-11 items-center justify-center rounded-xl bg-slate-500/10 text-slate-300"
-                  >
-
-                    <svg
-                      class="h-6 w-6"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="1.7"
-                        d="M5 5h14M5 19h14M8 5v14M16 5v14"
-                      />
-                    </svg>
-
-                  </div>
-
-                  <svg
-                    class="h-4 w-4 text-slate-600 transition-all group-hover:-translate-x-1 group-hover:text-blue-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.8"
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-
-                </div>
-
-                <div class="mt-4">
-
-                  <h3
-                    class="font-bold text-white"
-                  >
-                    تیرآهن
-                  </h3>
-
-                  <p
-                    class="mt-1 text-xs leading-6 text-slate-500"
-                  >
-                    IPE، IPB و INP
-                  </p>
-
-                </div>
-
-              </a>
-
-
-              <!-- Sheet -->
-
-              <a
-                href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/products`}
-                class="group rounded-2xl border border-slate-800 bg-slate-950/70 p-4 transition-all duration-300 hover:-translate-y-1 hover:border-blue-500/40 hover:bg-slate-900"
-              >
-
-                <div
-                  class="flex items-start justify-between"
-                >
-
-                  <div
-                    class="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-500/10 text-blue-400"
-                  >
-
-                    <svg
-                      class="h-6 w-6"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <rect
-                        x="4"
-                        y="6"
-                        width="16"
-                        height="12"
-                        rx="1"
-                        stroke-width="1.7"
-                      />
-
-                      <path
-                        stroke-linecap="round"
-                        stroke-width="1.7"
-                        d="M7 9h10M7 12h10M7 15h10"
-                      />
-                    </svg>
-
-                  </div>
-
-                  <svg
-                    class="h-4 w-4 text-slate-600 transition-all group-hover:-translate-x-1 group-hover:text-blue-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.8"
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-
-                </div>
-
-                <div class="mt-4">
-
-                  <h3
-                    class="font-bold text-white"
-                  >
-                    ورق
-                  </h3>
-
-                  <p
-                    class="mt-1 text-xs leading-6 text-slate-500"
-                  >
-                    سیاه، روغنی و گالوانیزه
-                  </p>
-
-                </div>
-
-              </a>
-
-
-              <!-- Angle / Channel -->
-
-              <a
-                href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/products`}
-                class="group rounded-2xl border border-slate-800 bg-slate-950/70 p-4 transition-all duration-300 hover:-translate-y-1 hover:border-blue-500/40 hover:bg-slate-900"
-              >
-
-                <div
-                  class="flex items-start justify-between"
-                >
-
-                  <div
-                    class="flex h-11 w-11 items-center justify-center rounded-xl bg-slate-500/10 text-slate-300"
-                  >
-
-                    <svg
-                      class="h-6 w-6"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M6 5v14M6 18h12M6 12h8"
-                      />
-                    </svg>
-
-                  </div>
-
-                  <svg
-                    class="h-4 w-4 text-slate-600 transition-all group-hover:-translate-x-1 group-hover:text-blue-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.8"
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-
-                </div>
-
-                <div class="mt-4">
-
-                  <h3
-                    class="font-bold text-white"
-                  >
-                    نبشی و ناودانی
-                  </h3>
-
-                  <p
-                    class="mt-1 text-xs leading-6 text-slate-500"
-                  >
-                    ساختمانی و صنعتی
-                  </p>
-
-                </div>
-
-              </a>
-
-
-              <!-- Box / Tube -->
-
-              <a
-                href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/products`}
-                class="group rounded-2xl border border-slate-800 bg-slate-950/70 p-4 transition-all duration-300 hover:-translate-y-1 hover:border-blue-500/40 hover:bg-slate-900"
-              >
-
-                <div
-                  class="flex items-start justify-between"
-                >
-
-                  <div
-                    class="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-500/10 text-blue-400"
-                  >
-
-                    <svg
-                      class="h-6 w-6"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <rect
-                        x="5"
-                        y="5"
-                        width="14"
-                        height="14"
-                        rx="1"
-                        stroke-width="1.8"
-                      />
-
-                      <rect
-                        x="9"
-                        y="9"
-                        width="6"
-                        height="6"
-                        rx="0.5"
-                        stroke-width="1.5"
-                      />
-                    </svg>
-
-                  </div>
-
-                  <svg
-                    class="h-4 w-4 text-slate-600 transition-all group-hover:-translate-x-1 group-hover:text-blue-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.8"
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-
-                </div>
-
-                <div class="mt-4">
-
-                  <h3
-                    class="font-bold text-white"
-                  >
-                    قوطی و پروفیل
-                  </h3>
-
-                  <p
-                    class="mt-1 text-xs leading-6 text-slate-500"
-                  >
-                    سبک و سنگین
-                  </p>
-
-                </div>
-
-              </a>
-
-
-              <!-- Pipe -->
-
-              <a
-                href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/products`}
-                class="group rounded-2xl border border-slate-800 bg-slate-950/70 p-4 transition-all duration-300 hover:-translate-y-1 hover:border-blue-500/40 hover:bg-slate-900"
-              >
-
-                <div
-                  class="flex items-start justify-between"
-                >
-
-                  <div
-                    class="flex h-11 w-11 items-center justify-center rounded-xl bg-slate-500/10 text-slate-300"
-                  >
-
-                    <svg
-                      class="h-6 w-6"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <circle
-                        cx="12"
-                        cy="12"
-                        r="7"
-                        stroke-width="1.8"
-                      />
-
-                      <circle
-                        cx="12"
-                        cy="12"
-                        r="3"
-                        stroke-width="1.5"
-                      />
-                    </svg>
-
-                  </div>
-
-                  <svg
-                    class="h-4 w-4 text-slate-600 transition-all group-hover:-translate-x-1 group-hover:text-blue-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.8"
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-
-                </div>
-
-                <div class="mt-4">
-
-                  <h3
-                    class="font-bold text-white"
-                  >
-                    لوله
-                  </h3>
-
-                  <p
-                    class="mt-1 text-xs leading-6 text-slate-500"
-                  >
-                    صنعتی و ساختمانی
-                  </p>
-
-                </div>
-
-              </a>
-
-            </div>
-
-
-            <!-- =========================
-                 BOTTOM PRICE STRIP
-            ========================== -->
-
-            <div
-              class="relative z-10 mt-4 flex items-center justify-between rounded-2xl border border-blue-400/10 bg-blue-500/[0.06] px-4 py-3"
-            >
-
-              <div
-                class="flex items-center gap-2"
-              >
-
-                <span
-                  class="flex h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.6)]"
-                ></span>
-
-                <span
-                  class="text-xs text-slate-400"
-                >
-                  آماده استعلام و خرید
-                </span>
-
-              </div>
-
-              <span
-                class="text-xs font-bold text-blue-300"
-              >
-                قیمت روز
-              </span>
-
-            </div>
-
-          </div>
-
-
-          <!-- =========================
-               FLOATING TRUST BADGE
-          ========================== -->
-
-          <div
-            class="absolute -bottom-5 -left-4 hidden rounded-2xl border border-slate-700 bg-slate-900/95 px-5 py-4 shadow-xl backdrop-blur-xl sm:block"
-          >
-
-            <div
-              class="flex items-center gap-3"
-            >
-
-              <div
-                class="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-400"
-              >
-
-                <svg
-                  class="h-5 w-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.8"
-                    d="M12 3l7 3v5c0 4.5-2.8 8.2-7 10-4.2-1.8-7-5.5-7-10V6l7-3Z"
-                  />
-
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.8"
-                    d="m9 12 2 2 4-4"
-                  />
-                </svg>
-
-              </div>
-
-              <div>
-
-                <div
-                  class="text-[10px] text-slate-500"
-                >
-                  خرید مطمئن
-                </div>
-
-                <div
-                  class="mt-1 text-sm font-bold text-white"
-                >
-                  تأمین قابل اعتماد
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- =========================
-       BOTTOM FADE
-  ========================== -->
-
-  <div
-    class="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-slate-950 to-transparent pointer-events-none"
-  ></div>
-
-</section>
+<div id="asin-home-hero">
+  <HomeLuxuryHero />
+</div>
+
+
+
+<div class="asin-steel-divider" aria-hidden="true">
+  <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+    <path
+      d="M0 43 C180 85 300 8 490 40 S790 83 970 39 S1260 12 1440 42 L1440 100 L0 100 Z"
+      fill="#020617"
+    />
+    <path
+      d="M0 43 C180 85 300 8 490 40 S790 83 970 39 S1260 12 1440 42"
+      fill="none"
+      stroke="#9bb8d8"
+      stroke-width="2"
+    />
+  </svg>
+</div>
 
 
 
@@ -2022,7 +1159,8 @@ const featuredProducts = [
 ========================================================= -->
 
 <section
-  class="relative z-20 -mt-10 w-full bg-slate-950 px-5 pb-10 sm:px-10 lg:px-16 xl:px-24 2xl:px-32"
+  id="asin-trust-section"
+  class="relative z-10 w-full bg-slate-950 px-5 pt-8 pb-10 sm:px-10 lg:px-16 xl:px-24 2xl:px-32"
   dir="rtl"
 >
   <div class="mx-auto max-w-[1500px]">
@@ -2236,6 +1374,7 @@ const featuredProducts = [
 
   </div>
 </section>
+
 
 <!-- Value Proposition with Animated Icons and Enhanced Hover -->
 <section class="w-full px-5 py-16 sm:px-10 lg:px-16 xl:px-24 2xl:px-32">
@@ -2618,3 +1757,115 @@ const featuredProducts = [
   <RecentlyViewed />
 
 </BaseLayout>
+
+
+
+
+<style is:global>
+  /* جداکننده‌ی موجی ASIN STEEL */
+  #asin-trust-section {
+    position: relative;
+    isolation: isolate;
+    border-top: 1px solid rgba(148, 187, 226, 0.25);
+  }
+
+  #asin-trust-section::before {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    right: 0;
+    top: -76px;
+    height: 76px;
+    pointer-events: none;
+    background: #020617;
+    clip-path: polygon(
+      0 65%,
+      12% 48%,
+      25% 56%,
+      38% 78%,
+      52% 72%,
+      66% 42%,
+      80% 34%,
+      91% 49%,
+      100% 38%,
+      100% 100%,
+      0 100%
+    );
+  }
+
+  #asin-trust-section::after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    top: -80px;
+    height: 76px;
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      rgba(148, 187, 226, 0.05),
+      rgba(96, 165, 250, 0.4)
+    );
+    clip-path: polygon(
+      0 63%,
+      12% 46%,
+      25% 54%,
+      38% 76%,
+      52% 70%,
+      66% 40%,
+      80% 32%,
+      91% 47%,
+      100% 36%,
+      100% 44%,
+      91% 55%,
+      80% 40%,
+      66% 48%,
+      52% 78%,
+      38% 84%,
+      25% 62%,
+      12% 54%,
+      0 71%
+    );
+  }
+
+  @media (max-width: 640px) {
+    #asin-trust-section::before {
+      top: -48px;
+      height: 48px;
+    }
+
+    #asin-trust-section::after {
+      top: -51px;
+      height: 48px;
+    }
+  }
+
+
+  
+.asin-steel-divider {
+  width: 100%;
+  height: 70px;
+  margin: 0;
+  overflow: hidden;
+  background: #f1f3f7;
+  line-height: 0;
+  pointer-events: none;
+}
+
+.asin-steel-divider svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 640px) {
+  .asin-steel-divider {
+    height: 42px;
+  }
+}
+
+</style>
+
+

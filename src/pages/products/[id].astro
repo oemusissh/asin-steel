@@ -1,646 +1,2084 @@
+
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import ProductCard from '../../components/ProductCard.astro';
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getActiveProducts } from "../../data/products";
 
 export function getStaticPaths() {
-  return Array.from({ length: 12 }, (_, i) => ({
-    params: { id: `prod-${i + 1}` }
+  return getActiveProducts().map((product) => ({
+    params: { id: product.id },
+    props: { product },
   }));
 }
 
-// Mock product data
-const productId = Astro.params.id;
+const { product } = Astro.props;
+const p = product as any;
+const base = import.meta.env.BASE_URL;
 
-const products = [
-  {
-    id: 'prod-1',
-    name: 'تیرآهن',
-    price: 0,
-    images: [
-      'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=800&fit=crop'
+const allProducts = getActiveProducts();
+const relatedProducts = allProducts
+  .filter((item) => item.id !== p.id && item.category === p.category)
+  .slice(0, 3);
+
+const descriptions: Record<string, {
+  intro: string;
+  paragraphs: string[];
+  applications: string[];
+  considerations: string[];
+  sourceTitle: string;
+  sourceUrl: string;
+}> = {
+  "rebar-14-a3": {
+    intro: "میلگرد آجدار یکی از مقاطع فولادی پرکاربرد در ساخت سازه‌های بتن‌آرمه است. این محصول با ایجاد پیوند مناسب میان فولاد و بتن، به تحمل نیروهای کششی در اعضای سازه کمک می‌کند.",
+    paragraphs: [
+      "بتن در برابر فشار عملکرد مناسبی دارد، اما مقاومت کششی آن به‌مراتب محدودتر است. به همین دلیل، در طراحی بسیاری از اعضای بتنی از فولاد تقویتی استفاده می‌شود. میلگرد درون بتن قرار می‌گیرد و با انتقال نیرو میان فولاد و بتن، در رفتار سازه تحت بارگذاری نقش مهمی ایفا می‌کند.",
+      "آج‌های سطح میلگرد برای افزایش درگیری مکانیکی با بتن طراحی شده‌اند. عملکرد این اتصال به عوامل مختلفی از جمله شکل و فاصله آج‌ها، مشخصات بتن، طول مهاری، پوشش بتن و جزئیات اجرایی وابسته است.",
+      "میلگرد قطر ۱۴ ممکن است در بخش‌های مختلف پروژه‌های ساختمانی به کار رود؛ اما انتخاب آن باید بر اساس نقشه‌های سازه، محاسبات مهندسی و ضوابط اجرایی انجام شود. قطر به‌تنهایی معیار کافی برای تعیین مناسب‌بودن یک میلگرد نیست.",
+      "در زمان خرید، توجه به قطر واقعی، وزن، گرید فولاد، استاندارد تولید، وضعیت سطح و مدارک کنترل کیفیت اهمیت دارد. همچنین شرایط حمل‌ونقل و نگهداری باید به‌گونه‌ای باشد که آلودگی یا خوردگی نامناسب به محصول آسیب نزند."
     ],
-    rating: 5,
-    reviews: 0,
-    inStock: true,
-    sku: 'ASIN-BEAM-01',
-    category: 'تیرآهن',
-    brand: 'ASIN STEEL',
-    description: 'انواع تیرآهن مناسب برای پروژه‌های ساختمانی و عمرانی.',
-    features: [
-      'مناسب پروژه‌های ساختمانی و عمرانی',
-      'قابل تأمین در ابعاد و مشخصات مختلف',
-      'امکان استعلام قیمت و موجودی',
-      'مناسب برای خرید پروژه‌ای'
+    applications: [
+      "اجرای اعضای بتن‌آرمه مطابق نقشه‌های سازه",
+      "استفاده در تیرها، ستون‌ها، دال‌ها و فونداسیون، در صورت تأیید طراحی",
+      "تأمین فولاد تقویتی پروژه‌های ساختمانی و عمرانی"
     ],
-    specifications: {
-      'نوع محصول': 'تیرآهن',
-      'برند': 'ASIN STEEL',
-      'وضعیت': 'قابل استعلام',
-      'کاربرد': 'ساختمانی و عمرانی'
-    }
+    considerations: [
+      "گرید و استاندارد باید با مشخصات فنی پروژه مطابقت داشته باشد.",
+      "مقدار مصرف و محل نصب را نقشه سازه تعیین می‌کند.",
+      "وزن و مشخصات محموله هنگام تحویل بررسی شود."
+    ],
+    sourceTitle: "Rebar — Wikipedia",
+    sourceUrl: "https://en.wikipedia.org/wiki/Rebar"
   },
-  {
-    id: 'prod-2',
-    name: 'میلگرد',
-    price: 0,
-    images: [
-      'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=800&h=800&fit=crop'
+
+  "rebar-16-a3": {
+    intro: "میلگرد آجدار قطر ۱۶ از مقاطع مورد استفاده در سازه‌های بتن‌آرمه است. این محصول به‌عنوان فولاد تقویتی در کنار بتن کار می‌کند و انتخاب آن به الزامات طراحی و شرایط پروژه بستگی دارد.",
+    paragraphs: [
+      "در بتن‌آرمه، بتن و فولاد نقش‌های مکمل دارند. بتن بخش عمده‌ای از نیروهای فشاری را تحمل می‌کند و میلگردها برای مشارکت در تحمل نیروهای کششی و کنترل رفتار عضو سازه‌ای به کار می‌روند. میزان مشارکت هر جزء به طراحی، آرایش آرماتورها و کیفیت اجرای سازه وابسته است.",
+      "سطح آجدار میلگرد به ایجاد اتصال میان فولاد و بتن کمک می‌کند. این اتصال برای انتقال نیرو ضروری است؛ به همین دلیل طول مهاری، وصله‌ها، فاصله میلگردها و پوشش بتن باید طبق نقشه‌ها و مقررات مربوط اجرا شوند.",
+      "قطر ۱۶ میلی‌متر فقط یکی از مشخصات محصول است. برای ارزیابی یک محموله باید گرید، استاندارد، تلرانس ابعادی، وزن و مدارک کیفیت نیز بررسی شوند. نام تجاری یا قطر به‌تنهایی تضمین‌کننده عملکرد سازه‌ای نیست.",
+      "پیش از سفارش، بهتر است مقدار موردنیاز بر اساس فهرستوفر و نقشه‌های مصوب مشخص شود. این کار به برآورد دقیق‌تر تناژ، مدیریت پرت و برنامه‌ریزی حمل کمک می‌کند."
     ],
-    rating: 5,
-    reviews: 0,
-    inStock: true,
-    sku: 'ASIN-REBAR-01',
-    category: 'میلگرد',
-    brand: 'ASIN STEEL',
-    description: 'انواع میلگرد برای استفاده در پروژه‌های ساختمانی و عمرانی.',
-    features: [
-      'مناسب پروژه‌های ساختمانی',
-      'قابل تأمین در سایزهای مختلف',
-      'امکان استعلام قیمت و موجودی',
-      'مناسب خرید پروژه‌ای'
+    applications: [
+      "تأمین آرماتور پروژه‌های ساختمانی",
+      "استفاده در اعضای بتن‌آرمه بر اساس نقشه اجرایی",
+      "خرید پروژه‌ای و تأمین تناژ موردنیاز پیمانکاران"
     ],
-    specifications: {
-      'نوع محصول': 'میلگرد',
-      'برند': 'ASIN STEEL',
-      'وضعیت': 'قابل استعلام',
-      'کاربرد': 'ساختمانی و عمرانی'
-    }
+    considerations: [
+      "گرید محصول را از روی مشخصات فنی و مدارک معتبر بررسی کنید.",
+      "طول شاخه، وزن و تعداد بسته‌ها باید با سفارش مطابقت داشته باشد.",
+      "برش، خم‌کاری و نصب باید مطابق دستورالعمل فنی پروژه انجام شود."
+    ],
+    sourceTitle: "Rebar — Wikipedia",
+    sourceUrl: "https://en.wikipedia.org/wiki/Rebar"
   },
-  {
-    id: 'prod-3',
-    name: 'ورق فولادی',
-    price: 0,
-    images: [
-      'https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=800&h=800&fit=crop'
+
+  "rebar-18-a3": {
+    intro: "میلگرد آجدار قطر ۱۸، یکی از گزینه‌های فولاد تقویتی در پروژه‌های بتن‌آرمه است. این مقطع در کنار بتن و بر اساس محاسبات سازه‌ای، به تأمین مقاومت موردنیاز اعضای بتنی کمک می‌کند.",
+    paragraphs: [
+      "بتن‌آرمه از ترکیب بتن و فولاد تقویتی تشکیل می‌شود. از آنجا که بتن به‌تنهایی در تحمل کشش محدودیت دارد، میلگردها در محل‌های تعیین‌شده توسط طراح قرار می‌گیرند تا نیروها در عضو سازه‌ای به شکل مناسبی منتقل شوند.",
+      "آج‌های روی سطح میلگرد باعث افزایش درگیری با بتن می‌شوند. با این حال، عملکرد مناسب تنها به شکل آج وابسته نیست و کیفیت بتن، طول مهاری، فاصله‌گذاری، پوشش بتن، شرایط محیطی و اجرای صحیح نیز اهمیت دارند.",
+      "میلگرد قطر ۱۸ ممکن است در کاربردهای گوناگون ساختمانی و عمرانی استفاده شود؛ اما نمی‌توان تنها با توجه به قطر آن، محل مصرف یا میزان مقاومت عضو را تعیین کرد. انتخاب نهایی باید مطابق نقشه‌های مصوب و استانداردهای مربوط باشد.",
+      "برای خرید مطمئن، اطلاعاتی مانند گرید، کارخانه تولیدکننده، استاندارد، وزن، طول شاخه و نتایج آزمون‌های مرتبط را بررسی کنید. در پروژه‌های حساس، مدارک کنترل کیفیت و قابلیت ردیابی محموله اهمیت ویژه‌ای دارند."
     ],
-    rating: 5,
-    reviews: 0,
-    inStock: true,
-    sku: 'ASIN-SHEET-01',
-    category: 'ورق فولادی',
-    brand: 'ASIN STEEL',
-    description: 'تأمین انواع ورق فولادی برای کاربردهای صنعتی، ساختمانی و عمرانی.',
-    features: [
-      'قابل تأمین در ضخامت‌های مختلف',
-      'مناسب کاربردهای صنعتی و ساختمانی',
-      'امکان بررسی مشخصات فنی',
-      'قابل استعلام قیمت و موجودی'
+    applications: [
+      "تأمین فولاد تقویتی برای اعضای بتن‌آرمه",
+      "پروژه‌های ساختمانی و عمرانی طبق نقشه‌های مهندسی",
+      "خرید تناژی برای پیمانکاران و مجریان پروژه"
     ],
-    specifications: {
-      'نوع محصول': 'ورق فولادی',
-      'برند': 'ASIN STEEL',
-      'وضعیت': 'قابل استعلام',
-      'کاربرد': 'صنعتی و ساختمانی'
-    }
+    considerations: [
+      "قطر میلگرد به‌تنهایی برای انتخاب فنی کافی نیست.",
+      "مشخصات محصول باید با نقشه و استاندارد پروژه تطبیق داشته باشد.",
+      "از تغییر گرید یا جایگزینی میلگرد بدون تأیید مهندس طراح خودداری شود."
+    ],
+    sourceTitle: "Rebar — Wikipedia",
+    sourceUrl: "https://en.wikipedia.org/wiki/Rebar"
   },
-  {
-    id: 'prod-4',
-    name: 'پروفیل',
-    price: 0,
-    images: [
-      'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&h=800&fit=crop'
+
+  "beam-ipe-14": {
+    intro: "تیرآهن IPE از مقاطع فولادی با شکل ظاهری I است که در ساخت اسکلت‌های فلزی و اجزای باربر ساختمان کاربرد دارد. هندسه این مقطع، توزیع مؤثری از فولاد را در برابر خمش فراهم می‌کند.",
+    paragraphs: [
+      "مقاطع I شکل از یک جان میانی و دو بال تشکیل شده‌اند. جان و بال‌ها در کنار یکدیگر در تحمل نیروهای داخلی عضو نقش دارند. به همین دلیل، تیرآهن در طراحی سازه‌ها برای کاربردهایی مانند تیر و، در صورت مناسب‌بودن شرایط طراحی، برخی اعضای دیگر مورد استفاده قرار می‌گیرد.",
+      "انتخاب تیرآهن تنها بر اساس ارتفاع اسمی آن انجام نمی‌شود. مشخصات هندسی مقطع، ممان اینرسی، مدول مقطع، مقاومت مصالح، طول دهانه، نوع تکیه‌گاه، مهاربندی جانبی و بارهای وارد بر عضو در محاسبات اهمیت دارند.",
+      "تیرآهن IPE معمولاً به مقاطعی با ابعاد استاندارد و بال‌های تقریباً موازی اشاره دارد. با این حال، تطبیق محصول تحویلی با استاندارد و جدول ابعادی موردنیاز پروژه ضروری است؛ زیرا نام‌گذاری‌های مشابه لزوماً به معنی یکسان‌بودن تمام مشخصات نیستند.",
+      "در زمان تأمین، ارتفاع مقطع، وزن واحد طول، طول شاخه، کارخانه سازنده و مدارک کیفیت را بررسی کنید. برای برآورد تناژ نیز بهتر است از وزن مرجع معتبر و مشخصات واقعی محموله استفاده شود."
     ],
-    rating: 5,
-    reviews: 0,
-    inStock: true,
-    sku: 'ASIN-PROFILE-01',
-    category: 'پروفیل',
-    brand: 'ASIN STEEL',
-    description: 'انواع پروفیل و مقاطع فلزی برای پروژه‌های مختلف.',
-    features: [
-      'تنوع در ابعاد و مقاطع',
-      'مناسب پروژه‌های ساختمانی',
-      'مناسب کاربردهای صنعتی',
-      'امکان استعلام و تأمین پروژه‌ای'
+    applications: [
+      "استفاده به‌عنوان تیر در سازه‌های فولادی",
+      "ساخت برخی قاب‌ها و اجزای باربر بر اساس طراحی",
+      "پروژه‌های ساختمانی و صنعتی با نیاز به مقاطع نوردشده"
     ],
-    specifications: {
-      'نوع محصول': 'پروفیل',
-      'برند': 'ASIN STEEL',
-      'وضعیت': 'قابل استعلام',
-      'کاربرد': 'ساختمانی و صنعتی'
-    }
+    considerations: [
+      "انتخاب سایز باید بر اساس محاسبات سازه‌ای باشد.",
+      "ابعاد، وزن و استاندارد مقطع هنگام خرید کنترل شود.",
+      "خوردگی، کمانش و شرایط مهاربندی در طراحی و اجرا اهمیت دارند."
+    ],
+    sourceTitle: "Structural steel — Wikipedia",
+    sourceUrl: "https://en.wikipedia.org/wiki/Structural_steel"
   },
-  {
-    id: 'prod-5',
-    name: 'نبشی و ناودانی',
-    price: 0,
-    images: [
-      'https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=800&h=800&fit=crop'
+
+  "beam-ipe-16": {
+    intro: "تیرآهن IPE سایز ۱۶ یک مقطع فولادی نوردشده با هندسه I شکل است. این گروه از مقاطع در پروژه‌های ساختمانی و صنعتی برای ایجاد اعضای باربر و چارچوب‌های فولادی به کار می‌رود.",
+    paragraphs: [
+      "ویژگی مهم مقاطع I شکل، قرارگرفتن بخش قابل‌توجهی از فولاد در بال‌ها و اتصال آن‌ها از طریق جان میانی است. این هندسه می‌تواند در برابر خمش حول محور قوی مقطع کارآمد باشد؛ اما رفتار واقعی عضو به شرایط بارگذاری، تکیه‌گاه‌ها و مهاربندی نیز وابسته است.",
+      "در طراحی یک تیر، عواملی مانند خیز، ارتعاش، تنش خمشی، برش، کمانش موضعی و کمانش پیچشی جانبی بررسی می‌شوند. بنابراین، انتخاب سایز ۱۶ یا هر سایز دیگر باید با محاسبات مهندسی انجام شود و از روی یک قاعده عمومی قابل تعیین نیست.",
+      "تیرآهن‌های دارای نام‌گذاری مشابه ممکن است در استانداردها یا ابعاد واقعی تفاوت داشته باشند. برای اطمینان از تطبیق محصول با سفارش، جدول ابعادی استاندارد، وزن واحد طول و مشخصات کارخانه باید بررسی شوند.",
+      "برای خرید پروژه‌ای، تعداد شاخه‌ها، طول موردنیاز، تناژ، شرایط تخلیه و حمل و مدارک کنترل کیفیت را از قبل مشخص کنید. این اطلاعات به مدیریت هزینه و کاهش خطای تحویل کمک می‌کنند."
     ],
-    rating: 5,
-    reviews: 0,
-    inStock: true,
-    sku: 'ASIN-ANGLE-01',
-    category: 'نبشی و ناودانی',
-    brand: 'ASIN STEEL',
-    description: 'تأمین انواع نبشی و ناودانی برای کاربردهای ساختمانی و صنعتی.',
-    features: [
-      'مناسب سازه‌های فلزی',
-      'قابل تأمین در ابعاد مختلف',
-      'مناسب پروژه‌های ساختمانی و صنعتی',
-      'امکان استعلام قیمت'
+    applications: [
+      "ساخت تیرهای فولادی طبق نقشه‌های مصوب",
+      "تأمین مقاطع برای قاب‌ها و سازه‌های صنعتی",
+      "پروژه‌های عمرانی و ساختمانی متناسب با محاسبات طراحی"
     ],
-    specifications: {
-      'نوع محصول': 'نبشی و ناودانی',
-      'برند': 'ASIN STEEL',
-      'وضعیت': 'قابل استعلام',
-      'کاربرد': 'ساختمانی و صنعتی'
-    }
+    considerations: [
+      "سایز و نوع مقطع باید با نقشه‌های سازه تطبیق داشته باشد.",
+      "وزن نظری و وزن واقعی محموله ممکن است نیاز به بررسی داشته باشند.",
+      "شرایط انبارش و جابه‌جایی برای جلوگیری از آسیب اهمیت دارد."
+    ],
+    sourceTitle: "I-beam — Wikipedia",
+    sourceUrl: "https://en.wikipedia.org/wiki/I-beam"
   },
-  {
-    id: 'prod-6',
-    name: 'قوطی و لوله',
-    price: 0,
-    images: [
-      'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=800&fit=crop'
+
+  "sheet-black-2": {
+    intro: "ورق سیاه به ورق فولادی تولیدشده با فرایند نورد گرم گفته می‌شود. این محصول در ساخت قطعات فلزی، تجهیزات صنعتی، سازه‌ها و بسیاری از کاربردهای تولیدی مورد استفاده قرار می‌گیرد.",
+    paragraphs: [
+      "در فرایند نورد گرم، فولاد در دمای بالا از میان غلتک‌ها عبور می‌کند تا به ضخامت و ابعاد موردنظر برسد. شرایط تولید و خنک‌کاری بر ویژگی‌های نهایی محصول اثر می‌گذارند؛ از این رو، مشخصات ورق باید با استاندارد و گرید سفارش تطبیق داده شود.",
+      "سطح ورق نورد گرم معمولاً نسبت به ورق نورد سرد ظاهر متفاوتی دارد و ممکن است پوسته اکسیدی حاصل از فرایند گرم روی آن دیده شود. میزان آماده‌سازی سطح موردنیاز به کاربرد نهایی، روش پوشش‌دهی و الزامات ساخت بستگی دارد.",
+      "ورق سیاه در ضخامت‌ها و ابعاد مختلف عرضه می‌شود. انتخاب ضخامت فقط بر اساس کاربرد عمومی کافی نیست و باید با بارگذاری، روش ساخت، الزامات جوشکاری و استاندارد قطعه نهایی هماهنگ باشد.",
+      "در خرید ورق، ضخامت، عرض، طول، گرید فولاد، تلرانس ابعادی، وضعیت سطح و وزن محموله را بررسی کنید. برای سفارش‌های صنعتی، گواهی کیفیت و قابلیت ردیابی محصول نیز می‌تواند بخشی از الزامات تأمین باشد."
     ],
-    rating: 5,
-    reviews: 0,
-    inStock: true,
-    sku: 'ASIN-TUBE-01',
-    category: 'قوطی و لوله',
-    brand: 'ASIN STEEL',
-    description: 'انواع قوطی و لوله فلزی برای کاربردهای ساختمانی و صنعتی.',
-    features: [
-      'تنوع در ابعاد',
-      'مناسب سازه‌های فلزی',
-      'مناسب کاربردهای صنعتی',
-      'امکان استعلام موجودی و قیمت'
+    applications: [
+      "ساخت قطعات و تجهیزات فلزی",
+      "تولید سازه‌ها، شاسی‌ها و اجزای صنعتی",
+      "برش‌کاری و ساخت قطعات مطابق نقشه تولید"
     ],
-    specifications: {
-      'نوع محصول': 'قوطی و لوله',
-      'برند': 'ASIN STEEL',
-      'وضعیت': 'قابل استعلام',
-      'کاربرد': 'ساختمانی و صنعتی'
-    }
+    considerations: [
+      "ضخامت و گرید باید متناسب با کاربرد انتخاب شود.",
+      "کیفیت سطح و تلرانس ابعادی را متناسب با روش ساخت بررسی کنید.",
+      "برای کاربردهای در معرض رطوبت، حفاظت سطحی مناسب را در نظر بگیرید."
+    ],
+    sourceTitle: "Hot rolling — Wikipedia",
+    sourceUrl: "https://en.wikipedia.org/wiki/Rolling_(metalworking)"
   },
-  {
-    id: 'prod-7',
-    name: 'شمش فولادی',
-    price: 0,
-    images: [
-      'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=800&h=800&fit=crop'
+
+  "sheet-galvanized-1-5": {
+    intro: "ورق گالوانیزه، ورق فولادی دارای پوشش روی است که با هدف افزایش مقاومت در برابر خوردگی تولید می‌شود. این پوشش در بسیاری از کاربردهای ساختمانی و صنعتی، از تماس مستقیم فولاد با محیط خورنده جلوگیری می‌کند.",
+    paragraphs: [
+      "یکی از روش‌های رایج گالوانیزه‌کردن، غوطه‌وری ورق یا قطعه فولادی در روی مذاب است. روش‌های دیگر نیز وجود دارند و نوع فرایند، ضخامت پوشش و مشخصات محصول باید از روی استاندارد یا مدارک تولیدکننده بررسی شوند.",
+      "پوشش روی نقش مانع محافظ را ایفا می‌کند و در شرایط مشخص، در صورت آسیب‌دیدن موضعی پوشش نیز می‌تواند تا حدی از فولاد زیرین محافظت کند. با این حال، طول عمر محصول به محیط نصب، رطوبت، آلودگی، شرایط تماس با مواد دیگر و کیفیت پوشش بستگی دارد.",
+      "ورق گالوانیزه در کاربردهایی استفاده می‌شود که حفاظت در برابر خوردگی اهمیت دارد. ضخامت ورق پایه، جرم یا ضخامت پوشش، کیفیت سطح و قابلیت شکل‌دهی از مشخصاتی هستند که باید با نیاز پروژه هماهنگ شوند.",
+      "هنگام خرید، فقط به ظاهر براق ورق اکتفا نکنید. مشخصات پوشش، ضخامت پایه، استاندارد تولید، ابعاد و شرایط نگهداری را بررسی کنید. عملیات برش، جوشکاری و شکل‌دهی نیز باید با رعایت دستورالعمل‌های ایمنی و فنی انجام شود."
     ],
-    rating: 5,
-    reviews: 0,
-    inStock: true,
-    sku: 'ASIN-BILLET-01',
-    category: 'شمش فولادی',
-    brand: 'ASIN STEEL',
-    description: 'تأمین شمش فولادی برای کاربردهای صنعتی و تولید مقاطع فلزی.',
-    features: [
-      'مناسب صنایع فولادی',
-      'مناسب تولید مقاطع',
-      'قابل تأمین برای پروژه‌ها',
-      'امکان استعلام مشخصات و قیمت'
+    applications: [
+      "ساخت برخی پوشش‌ها و قطعات ساختمانی",
+      "تولید کانال‌ها، محفظه‌ها و قطعات فلزی متناسب با مشخصات محصول",
+      "کاربردهای صنعتی که حفاظت سطحی در آن‌ها اهمیت دارد"
     ],
-    specifications: {
-      'نوع محصول': 'شمش فولادی',
-      'برند': 'ASIN STEEL',
-      'وضعیت': 'قابل استعلام',
-      'کاربرد': 'صنعتی'
-    }
+    considerations: [
+      "ضخامت ورق و مشخصات پوشش روی را جداگانه بررسی کنید.",
+      "مناسب‌بودن محصول برای محیط نهایی باید ارزیابی شود.",
+      "در عملیات گرم مانند جوشکاری، کنترل خطرات ناشی از دود روی ضروری است."
+    ],
+    sourceTitle: "Galvanization — Wikipedia",
+    sourceUrl: "https://en.wikipedia.org/wiki/Galvanization"
   },
-  {
-    id: 'prod-8',
-    name: 'محصولات آلیاژی',
-    price: 0,
-    images: [
-      'https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=800&h=800&fit=crop'
+
+  "profile-box-40-40-2": {
+    intro: "پروفیل قوطی فولادی با سطح مقطع بسته، معمولاً به شکل مربع یا مستطیل تولید می‌شود. این هندسه در ساخت قاب‌ها، شاسی‌ها و سازه‌های سبک و صنعتی کاربرد دارد.",
+    paragraphs: [
+      "مقاطع توخالی مربعی و مستطیلی به دلیل داشتن سطح مقطع بسته، می‌توانند در برابر پیچش عملکرد مناسبی داشته باشند. رفتار سازه‌ای آن‌ها به ابعاد بیرونی، ضخامت جداره، خواص مکانیکی فولاد، طول عضو و نحوه اتصال وابسته است.",
+      "قوطی فولادی معمولاً از شکل‌دهی ورق و اتصال لبه‌ها تولید می‌شود. جزئیات فرایند ساخت، نوع درز، تلرانس ابعادی و استاندارد محصول بسته به روش تولید و رده محصول متفاوت است.",
+      "ابعاد ۴۰ در ۴۰ میلی‌متر و ضخامت اسمی ۲ میلی‌متر، در صورت تأیید مشخصات محموله، به معرفی اندازه محصول کمک می‌کنند؛ اما برای طراحی عضو باید خواص مقطع و مشخصات مکانیکی واقعی نیز در نظر گرفته شوند.",
+      "پیش از خرید، ابعاد بیرونی، ضخامت، راستایی، کیفیت جوش یا درز، طول شاخه و وضعیت سطح را بررسی کنید. در کاربردهای سازه‌ای، انتخاب مقطع باید بر اساس محاسبات و استاندارد مربوط صورت گیرد."
     ],
-    rating: 5,
-    reviews: 0,
-    inStock: true,
-    sku: 'ASIN-ALLOY-01',
-    category: 'محصولات آلیاژی',
-    brand: 'ASIN STEEL',
-    description: 'تأمین محصولات فلزی و آلیاژی برای کاربردهای تخصصی.',
-    features: [
-      'مناسب کاربردهای تخصصی',
-      'قابل بررسی بر اساس مشخصات فنی',
-      'مناسب صنایع مختلف',
-      'امکان استعلام و تأمین'
+    applications: [
+      "ساخت قاب‌ها و شاسی‌های فلزی",
+      "تولید پایه‌ها و چارچوب‌های صنعتی",
+      "ساخت قطعات و سازه‌های سبک با طراحی مناسب"
     ],
-    specifications: {
-      'نوع محصول': 'محصولات آلیاژی',
-      'برند': 'ASIN STEEL',
-      'وضعیت': 'قابل استعلام',
-      'کاربرد': 'صنعتی'
-    }
+    considerations: [
+      "ضخامت واقعی و ابعاد مقطع را کنترل کنید.",
+      "کیفیت درز و راستایی پروفیل در ساخت اهمیت دارد.",
+      "برای کاربرد باربر، تأیید مهندس طراح ضروری است."
+    ],
+    sourceTitle: "Hollow structural section — Wikipedia",
+    sourceUrl: "https://en.wikipedia.org/wiki/Hollow_structural_section"
   },
-  {
-    id: 'prod-9',
-    name: 'مقاطع فولادی',
-    price: 0,
-    images: [
-      'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&h=800&fit=crop'
+
+  "angle-50-50-5": {
+    intro: "نبشی فولادی، مقطعی با دو بال متصل به یکدیگر است که معمولاً زاویه‌ای نزدیک به ۹۰ درجه دارند. این مقطع در اتصالات، قاب‌ها، مهاربندی‌ها و ساخت قطعات فلزی مورد استفاده قرار می‌گیرد.",
+    paragraphs: [
+      "نبشی‌ها می‌توانند در آرایش‌های مختلف، به‌صورت تکی یا در ترکیب با مقاطع دیگر به کار روند. عملکرد آن‌ها به طول عضو، نحوه اتصال، جهت بارگذاری، شرایط تکیه‌گاهی و ویژگی‌های فولاد وابسته است.",
+      "نبشی با بال‌های مساوی، در دو جهت ابعاد بال یکسانی دارد؛ در حالی که در نوع بال نامساوی، اندازه دو بال متفاوت است. اندازه بال، ضخامت و طول شاخه از مشخصات مهم برای شناسایی و سفارش محصول محسوب می‌شوند.",
+      "نبشی ممکن است برای اتصال اجزای فولادی یا ساخت بخش‌هایی از قاب و تجهیزات استفاده شود. با این حال، ظرفیت باربری را نمی‌توان فقط از روی اندازه بال‌ها تعیین کرد؛ لاغری عضو، کمانش، خروج از مرکزیت و جزئیات اتصال نیز در طراحی مؤثرند.",
+      "در زمان خرید، ابعاد بال‌ها، ضخامت، طول، وزن و استاندارد محصول را با سفارش تطبیق دهید. برای کاربردهای سازه‌ای، انتخاب و جزئیات اتصال باید مطابق محاسبات مهندسی و نقشه‌های مصوب باشد."
     ],
-    rating: 5,
-    reviews: 0,
-    inStock: true,
-    sku: 'ASIN-SECTION-01',
-    category: 'مقاطع فولادی',
-    brand: 'ASIN STEEL',
-    description: 'انواع مقاطع فولادی مورد استفاده در پروژه‌های مختلف.',
-    features: [
-      'تنوع در مقاطع',
-      'مناسب پروژه‌های ساختمانی',
-      'مناسب کاربردهای صنعتی',
-      'امکان استعلام مشخصات'
+    applications: [
+      "ساخت اتصالات و قاب‌های فولادی",
+      "تولید پایه‌ها و مهاربندی‌های متناسب با طراحی",
+      "ساخت قطعات و تجهیزات فلزی"
     ],
-    specifications: {
-      'نوع محصول': 'مقاطع فولادی',
-      'برند': 'ASIN STEEL',
-      'وضعیت': 'قابل استعلام',
-      'کاربرد': 'ساختمانی و صنعتی'
-    }
-  },
-  {
-    id: 'prod-10',
-    name: 'محصولات آهنی',
-    price: 0,
-    images: [
-      'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=800&fit=crop'
+    considerations: [
+      "بال مساوی یا نامساوی بودن مقطع را بررسی کنید.",
+      "ضخامت و ابعاد واقعی باید با سفارش هماهنگ باشند.",
+      "ظرفیت باربری و نوع اتصال باید مهندسی بررسی شوند."
     ],
-    rating: 5,
-    reviews: 0,
-    inStock: true,
-    sku: 'ASIN-IRON-01',
-    category: 'محصولات آهنی',
-    brand: 'ASIN STEEL',
-    description: 'تأمین انواع محصولات آهنی و مقاطع فلزی برای پروژه‌های مختلف.',
-    features: [
-      'تنوع محصولات آهنی',
-      'مناسب پروژه‌های مختلف',
-      'امکان استعلام قیمت',
-      'تأمین متناسب با نیاز پروژه'
-    ],
-    specifications: {
-      'نوع محصول': 'محصولات آهنی',
-      'برند': 'ASIN STEEL',
-      'وضعیت': 'قابل استعلام',
-      'کاربرد': 'ساختمانی و صنعتی'
-    }
-  },
-  {
-    id: 'prod-11',
-    name: 'محصولات استیل',
-    price: 0,
-    images: [
-      'https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=800&h=800&fit=crop'
-    ],
-    rating: 5,
-    reviews: 0,
-    inStock: true,
-    sku: 'ASIN-STEEL-01',
-    category: 'محصولات استیل',
-    brand: 'ASIN STEEL',
-    description: 'انواع محصولات استیل برای کاربردهای صنعتی و تخصصی.',
-    features: [
-      'مناسب کاربردهای صنعتی',
-      'قابل بررسی بر اساس گرید و مشخصات',
-      'تنوع محصولات',
-      'امکان استعلام و تأمین'
-    ],
-    specifications: {
-      'نوع محصول': 'محصولات استیل',
-      'برند': 'ASIN STEEL',
-      'وضعیت': 'قابل استعلام',
-      'کاربرد': 'صنعتی'
-    }
-  },
-  {
-    id: 'prod-12',
-    name: 'سایر محصولات فلزی',
-    price: 0,
-    images: [
-      'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&h=800&fit=crop'
-    ],
-    rating: 5,
-    reviews: 0,
-    inStock: true,
-    sku: 'ASIN-METAL-01',
-    category: 'سایر محصولات فلزی',
-    brand: 'ASIN STEEL',
-    description: 'سایر محصولات و مقاطع فلزی قابل تأمین توسط ASIN STEEL.',
-    features: [
-      'تنوع محصولات فلزی',
-      'قابل تأمین بر اساس نیاز پروژه',
-      'امکان بررسی مشخصات فنی',
-      'استعلام قیمت و موجودی'
-    ],
-    specifications: {
-      'نوع محصول': 'محصولات فلزی',
-      'برند': 'ASIN STEEL',
-      'وضعیت': 'قابل استعلام',
-      'کاربرد': 'متنوع'
-    }
+    sourceTitle: "Structural steel — Wikipedia",
+    sourceUrl: "https://en.wikipedia.org/wiki/Structural_steel"
   }
-];
+};
 
-const product = products.find(item => item.id === productId) ?? products[0];
+const genericDescription = {
+  intro: p.description || `${p.name} یکی از مقاطع فولادی قابل تأمین برای پروژه‌های ساختمانی و صنعتی است. انتخاب محصول مناسب به مشخصات فنی، استاندارد موردنیاز و شرایط مصرف بستگی دارد.`,
+  paragraphs: [
+    `برای انتخاب ${p.name}، ابتدا مشخصات فنی موردنیاز پروژه را با ویژگی‌های محصول تطبیق دهید. ابعاد، ضخامت یا قطر، گرید فولاد، استاندارد تولید و کیفیت سطح از مواردی هستند که بسته به نوع مقطع باید بررسی شوند.`,
+    "در سفارش‌های صنعتی، علاوه بر نام محصول، مشخص‌کردن کارخانه تولیدکننده، مقدار موردنیاز، طول یا ابعاد، شرایط تحویل و مدارک کیفیت به کاهش خطا در تأمین کمک می‌کند.",
+    "در کاربردهای باربر و سازه‌ای، انتخاب نهایی باید مطابق نقشه‌های مصوب، استانداردهای مربوط و نظر متخصص واجد صلاحیت انجام شود."
+  ],
+  applications: [
+    "پروژه‌های ساختمانی و صنعتی متناسب با مشخصات محصول",
+    "تأمین مقاطع فولادی برای ساخت و تولید"
+  ],
+  considerations: [
+    "مشخصات فنی و استاندارد محصول را بررسی کنید.",
+    "ابعاد، وزن و مقدار محموله باید با سفارش مطابقت داشته باشد."
+  ],
+  sourceTitle: "Structural steel — Wikipedia",
+  sourceUrl: "https://en.wikipedia.org/wiki/Structural_steel"
+};
 
-const relatedProducts = products
-  .filter(item => item.id !== product.id)
-  .slice(0, 4);
+const description = descriptions[p.id] || genericDescription;
 
+const imageList = Array.isArray(p.images) && p.images.length
+  ? p.images
+  : p.image
+    ? [p.image]
+    : [];
 
+const specifications = Array.isArray(p.specifications)
+  ? p.specifications
+  : [];
+
+const getSpecLabel = (spec: any) =>
+  spec.label || spec.name || spec.title || "مشخصه";
+
+const getSpecValue = (spec: any) =>
+  spec.value ?? spec.description ?? "طبق سفارش";
+
+const formatCategory = (category: string) => {
+  const labels: Record<string, string> = {
+    rebar: "میلگرد",
+    beam: "تیرآهن",
+    sheet: "ورق فولادی",
+    profile: "پروفیل",
+    angle: "نبشی"
+  };
+  return labels[category] || "مقاطع فولادی";
+};
 ---
 
-<BaseLayout title={`${product.name} - ASIN STEEL`}>
-  <div class="container mx-auto px-4 py-8">
-    <!-- Breadcrumb -->
-    <nav class="flex items-center gap-2 text-sm mb-8 animate-fade-in">
-      <a href={import.meta.env.BASE_URL} class="text-gray-600 dark:text-gray-400 hover:text-primary-600">Home</a>
-      <span class="text-gray-400">/</span>
-      <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/products`} class="text-gray-600 dark:text-gray-400 hover:text-primary-600">Products</a>
-      <span class="text-gray-400">/</span>
-      <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/categories/${product.category.toLowerCase()}`} class="text-gray-600 dark:text-gray-400 hover:text-primary-600">{product.category}</a>
-      <span class="text-gray-400">/</span>
-      <span class="text-gray-900 dark:text-white font-semibold">{product.name}</span>
-    </nav>
+<BaseLayout title={`${p.name} | آسین استیل`}>
+  <main class="product-page" dir="rtl">
+    <div class="animated-grid" aria-hidden="true"></div>
+    <div class="page-glow glow-one" aria-hidden="true"></div>
+    <div class="page-glow glow-two" aria-hidden="true"></div>
+    <div class="ambient-light ambient-light-one" aria-hidden="true"></div>
+    <div class="ambient-light ambient-light-two" aria-hidden="true"></div>
 
-    <!-- Product Details -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-      <!-- Images -->
-      <div class="space-y-4 animate-slide-up">
-        <div class="relative aspect-square rounded-2xl overflow-hidden bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-700">
-          <img id="main-image" src={product.images[0]} alt={product.name} class="w-full h-full object-cover" />
-        </div>
-        <div class="grid grid-cols-4 gap-4">
-          {product.images.map((img, i) => (
-            <button
-              data-image={img}
-              class={`aspect-square rounded-lg overflow-hidden border-2 ${i === 0 ? 'border-primary-600' : 'border-gray-200 dark:border-dark-700'} hover:border-primary-600 transition-colors`}
-            >
-              <img src={img} alt={`${product.name} ${i + 1}`} class="w-full h-full object-cover" />
-            </button>
-          ))}
-        </div>
-      </div>
+    <div class="product-container">
+      <nav class="breadcrumbs" aria-label="مسیر صفحه">
+        <a href={base}>صفحه اصلی</a>
+        <span>/</span>
+        <a href={`${base}products/`}>محصولات</a>
+        <span>/</span>
+        <span class="current">{p.name}</span>
+      </nav>
 
-      <!-- Info -->
-      <div class="animate-slide-up" style="animation-delay: 0.1s;">
-        <div class="mb-4">
-          <span class="inline-block px-3 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 rounded-full text-sm font-semibold">
-            {product.category}
-          </span>
-        </div>
-
-        <h1 class="text-4xl font-bold mb-4">{product.name}</h1>
-
-        <!-- Rating -->
-        <div class="flex items-center gap-4 mb-6">
-          <div class="flex items-center gap-1">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <svg
-                class={`w-5 h-5 ${i < Math.floor(product.rating) ? 'text-yellow-400' : 'text-gray-300 dark:text-dark-600'}`}
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-              </svg>
-            ))}
+      <section class="product-hero">
+        <div class="gallery-panel">
+          <div class="gallery-badge">
+            <span class="status-dot"></span>
+            مقطع فولادی
           </div>
-          <span class="text-gray-600 dark:text-gray-400">{product.rating} ({product.reviews} reviews)</span>
-        </div>
 
-        <!-- Price -->
-        <div class="flex items-center gap-4 mb-6">
-          <span class="text-4xl font-bold text-primary-600 dark:text-primary-400">${product.price.toFixed(2)}</span>
-          {product.originalPrice && (
+          {imageList.length > 0 ? (
             <>
-              <span class="text-2xl text-gray-500 dark:text-gray-400 line-through">${product.originalPrice.toFixed(2)}</span>
-              <span class="px-3 py-1 bg-red-600 text-white rounded-full text-sm font-bold">
-                Save {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}%
-              </span>
-            </>
-          )}
-        </div>
-
-        <!-- Stock Status -->
-        <div class="mb-6">
-          {product.inStock ? (
-            <span class="text-green-600 dark:text-green-400 flex items-center gap-2 text-lg font-semibold">
-              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-              </svg>
-              In Stock - Ready to Ship
-            </span>
-          ) : (
-            <span class="text-red-600 dark:text-red-400 text-lg font-semibold">Out of Stock</span>
-          )}
-        </div>
-
-        <!-- Description -->
-        <p class="text-gray-600 dark:text-gray-400 mb-6 text-lg">{product.description}</p>
-
-        <!-- Quantity & Actions -->
-        <div class="flex flex-wrap gap-4 mb-8">
-          <div class="flex items-center gap-2 bg-gray-100 dark:bg-dark-800 rounded-xl p-2">
-            <button id="decrease-qty" class="px-4 py-2 hover:bg-gray-200 dark:hover:bg-dark-700 rounded-lg transition-colors">-</button>
-            <span id="quantity" class="px-6 font-bold text-lg">1</span>
-            <button id="increase-qty" class="px-4 py-2 hover:bg-gray-200 dark:hover:bg-dark-700 rounded-lg transition-colors">+</button>
-          </div>
-          <button
-            id="add-to-cart-btn"
-            class="flex-1 py-4 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-bold transition-all duration-300 hover:shadow-lg transform hover:scale-105"
-          >
-            Add to Cart
-          </button>
-          <button
-            id="wishlist-btn"
-            class="p-4 border-2 border-gray-200 dark:border-dark-700 hover:border-primary-600 dark:hover:border-primary-600 rounded-xl transition-all duration-300"
-          >
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-            </svg>
-          </button>
-        </div>
-
-        <!-- Product Info -->
-        <div class="space-y-4 border-t border-gray-200 dark:border-dark-700 pt-6">
-          <div class="flex items-center gap-3">
-            <span class="text-gray-600 dark:text-gray-400">SKU:</span>
-            <span class="font-semibold">{product.sku}</span>
-          </div>
-          <div class="flex items-center gap-3">
-            <span class="text-gray-600 dark:text-gray-400">Brand:</span>
-            <span class="font-semibold">{product.brand}</span>
-          </div>
-          <div class="flex items-center gap-3">
-            <span class="text-gray-600 dark:text-gray-400">Category:</span>
-            <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/categories/${product.category.toLowerCase()}`} class="font-semibold text-primary-600 dark:text-primary-400 hover:underline">{product.category}</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Tabs -->
-    <div class="mb-16 animate-on-scroll">
-      <div class="border-b border-gray-200 dark:border-dark-700 mb-6">
-        <div class="flex gap-8">
-          <button class="tab-btn active pb-4 border-b-2 border-primary-600 font-semibold" data-tab="description">Description</button>
-          <button class="tab-btn pb-4 border-b-2 border-transparent hover:border-gray-300 dark:hover:border-dark-600 font-semibold transition-colors" data-tab="specifications">Specifications</button>
-          <button class="tab-btn pb-4 border-b-2 border-transparent hover:border-gray-300 dark:hover:border-dark-600 font-semibold transition-colors" data-tab="reviews">Reviews ({product.reviews})</button>
-        </div>
-      </div>
-
-      <div id="description" class="tab-content">
-        <div class="bg-white dark:bg-dark-800 rounded-2xl p-8 border border-gray-200 dark:border-dark-700">
-          <h3 class="text-2xl font-bold mb-4">Product Features</h3>
-          <ul class="space-y-3">
-            {product.features.map(feature => (
-              <li class="flex items-start gap-3">
-                <svg class="w-6 h-6 text-primary-600 dark:text-primary-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                <span class="text-gray-600 dark:text-gray-400">{feature}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-
-      <div id="specifications" class="tab-content hidden">
-        <div class="bg-white dark:bg-dark-800 rounded-2xl p-8 border border-gray-200 dark:border-dark-700">
-          <h3 class="text-2xl font-bold mb-6">Technical Specifications</h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {Object.entries(product.specifications).map(([key, value]) => (
-              <div class="flex justify-between p-4 bg-gray-50 dark:bg-dark-900 rounded-lg">
-                <span class="font-semibold">{key}:</span>
-                <span class="text-gray-600 dark:text-gray-400">{value}</span>
+              <div class="main-image-wrap">
+                <img
+                  id="main-product-image"
+                  src={imageList[0]}
+                  alt={p.name}
+                  class="main-product-image"
+                />
+                <div class="image-watermark">ASIN STILL</div>
               </div>
-            ))}
-          </div>
-        </div>
-      </div>
 
-      <div id="reviews" class="tab-content hidden">
-        <div class="bg-white dark:bg-dark-800 rounded-2xl p-8 border border-gray-200 dark:border-dark-700">
-          <h3 class="text-2xl font-bold mb-6">Customer Reviews</h3>
-          <div class="space-y-6">
-            {[1, 2, 3].map(i => (
-              <div class="border-b border-gray-200 dark:border-dark-700 pb-6 last:border-0">
-                <div class="flex items-center gap-4 mb-3">
-                  <div class="flex items-center gap-1">
-                    {Array.from({ length: 5 }).map(() => (
-                      <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </svg>
-                    ))}
-                  </div>
-                  <span class="font-semibold">John Doe</span>
-                  <span class="text-sm text-gray-500">2 weeks ago</span>
+              {imageList.length > 1 && (
+                <div class="thumbnail-list">
+                  {imageList.map((image: string, index: number) => (
+                    <button
+                      class={`thumbnail ${index === 0 ? "active" : ""}`}
+                      type="button"
+                      data-image={image}
+                      aria-label={`نمایش تصویر ${index + 1}`}
+                    >
+                      <img
+                        src={image}
+                        alt={`${p.name} - تصویر ${index + 1}`}
+                      />
+                    </button>
+                  ))}
                 </div>
-                <p class="text-gray-600 dark:text-gray-400">Excellent quality cement. Used it for my foundation and it set perfectly. Highly recommend!</p>
+              )}
+            </>
+          ) : (
+            <div class="no-image">
+              <span class="no-image-icon">▧</span>
+              <span>تصویر محصول به‌زودی اضافه می‌شود</span>
+              <small>ASIN STILL</small>
+            </div>
+          )}
+
+          <div class="gallery-footer">
+            <span>کیفیت در تأمین</span>
+            <span class="footer-line"></span>
+            <span>اعتماد در معامله</span>
+          </div>
+        </div>
+
+        <div class="product-summary">
+          <div class="eyebrow">
+            <span class="eyebrow-line"></span>
+            معرفی محصول
+          </div>
+
+          <div class="category-pill">{formatCategory(p.category)}</div>
+
+          <h1>{p.name}</h1>
+
+          <p class="product-lead">{description.intro}</p>
+
+          <div class="product-meta">
+            {p.factory && (
+              <div class="meta-item">
+                <span class="meta-icon">▤</span>
+                <div>
+                  <small>کارخانه / برند</small>
+                  <strong>{p.factory}</strong>
+                </div>
+              </div>
+            )}
+
+            {p.unit && (
+              <div class="meta-item">
+                <span class="meta-icon">◫</span>
+                <div>
+                  <small>واحد عرضه</small>
+                  <strong>{p.unit}</strong>
+                </div>
+              </div>
+            )}
+
+            {p.weight && (
+              <div class="meta-item">
+                <span class="meta-icon">⚖</span>
+                <div>
+                  <small>وزن اعلامی</small>
+                  <strong>{p.weight}</strong>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div class="price-panel">
+            <div class="price-panel-icon">↗</div>
+            <div class="price-panel-copy">
+              <strong>استعلام قیمت و موجودی</strong>
+              <span>قیمت نهایی با توجه به مشخصات سفارش و شرایط روز اعلام می‌شود.</span>
+            </div>
+            <span class="price-status">تماس بگیرید</span>
+          </div>
+
+          <div class="hero-actions">
+            <a class="button-primary" href={`${base}contact/`}>
+              درخواست استعلام
+              <span>←</span>
+            </a>
+            <a class="button-secondary" href={`${base}Price-list/`}>
+              مشاهده لیست قیمت
+            </a>
+          </div>
+
+          <div class="trust-line">
+            <span>✓</span>
+            <span>تطبیق مشخصات سفارش پیش از تأمین</span>
+          </div>
+        </div>
+      </section>
+
+      {specifications.length > 0 && (
+        <section class="specifications-section">
+          <div class="section-heading">
+            <div>
+              <span class="section-kicker">PRODUCT SPECIFICATIONS</span>
+              <h2>مشخصات فنی محصول</h2>
+            </div>
+            <span class="heading-mark">01</span>
+          </div>
+
+          <div class="specifications-grid">
+            {specifications.map((spec: any, index: number) => (
+              <div class="spec-card">
+                <span class="spec-index">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span class="spec-label">{getSpecLabel(spec)}</span>
+                <strong class="spec-value">{getSpecValue(spec)}</strong>
+                <span class="spec-accent"></span>
               </div>
             ))}
           </div>
-        </div>
-      </div>
-    </div>
+        </section>
+      )}
 
-    <!-- Related Products -->
-    <section class="animate-on-scroll">
-      <h2 class="text-3xl font-bold mb-8">Related Products</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {relatedProducts.map(p => (
-          <ProductCard {...p} />
-        ))}
-      </div>
-    </section>
-  </div>
+      <section class="description-section">
+        <div class="section-heading">
+          <div>
+            <span class="section-kicker">PRODUCT KNOWLEDGE</span>
+            <h2>راهنمای تخصصی {p.name}</h2>
+            <p class="section-subtitle">
+              آشنایی با ویژگی‌ها، کاربردها و نکات مهم انتخاب محصول
+            </p>
+          </div>
+          <span class="heading-mark">02</span>
+        </div>
+
+        <div class="description-layout">
+          <article class="description-card">
+            <div class="article-topline">
+              <span class="article-icon">✦</span>
+              <span>دانشنامه مقاطع فولادی</span>
+              <span class="article-divider"></span>
+              <span class="reading-time">مطالعه تخصصی</span>
+            </div>
+
+            <div class="description-intro">
+              {description.intro}
+            </div>
+
+            <div class="description-body" id="full-description">
+              {description.paragraphs.map((paragraph: string) => (
+                <p>{paragraph}</p>
+              ))}
+
+              <div class="article-subheading">
+                <span></span>
+                کاربردهای رایج
+              </div>
+
+              <ul class="application-list">
+                {description.applications.map((item: string) => (
+                  <li>
+                    <span class="list-check">✓</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
+              <div class="article-subheading">
+                <span></span>
+                نکات مهم پیش از خرید
+              </div>
+
+              <ul class="consideration-list">
+                {description.considerations.map((item: string) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+
+              <div class="source-box">
+                <div class="source-icon">i</div>
+                <div>
+                  <strong>منبع برای مطالعه بیشتر</strong>
+                  <p>
+                    برای آشنایی عمومی با موضوع این محصول می‌توانید مقاله مرتبط را مطالعه کنید.
+                    اطلاعات نهایی خرید باید با استاندارد و مشخصات فنی محموله تطبیق داده شود.
+                  </p>
+                  <a
+                    href={description.sourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {description.sourceTitle}
+                    <span>↗</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="description-fade" id="description-fade"></div>
+
+            <button
+              class="expand-description"
+              id="toggle-description"
+              type="button"
+              aria-expanded="false"
+              aria-controls="full-description"
+            >
+              <span id="toggle-description-text">مشاهده همه توضیحات</span>
+              <span class="expand-icon" id="toggle-description-icon">⌄</span>
+            </button>
+          </article>
+
+          <aside class="knowledge-sidebar">
+            <div class="sidebar-card sidebar-highlight">
+              <div class="sidebar-symbol">AS</div>
+              <span class="sidebar-kicker">ASIN STILL</span>
+              <h3>انتخاب آگاهانه، خرید مطمئن</h3>
+              <p>
+                پیش از ثبت سفارش، مشخصات محصول و نیاز پروژه خود را بررسی کنید.
+                برای تطبیق مشخصات و دریافت اطلاعات تأمین با ما در ارتباط باشید.
+              </p>
+              <a href={`${base}contact/`}>
+                ارتباط با کارشناسان
+                <span>←</span>
+              </a>
+            </div>
+
+            <div class="sidebar-card">
+              <h3>چک‌لیست سفارش</h3>
+              <ul class="checklist">
+                <li><span>01</span> تعیین نوع و مشخصات مقطع</li>
+                <li><span>02</span> مشخص‌کردن تناژ موردنیاز</li>
+                <li><span>03</span> بررسی کارخانه و استاندارد</li>
+                <li><span>04</span> هماهنگی محل تحویل</li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      {relatedProducts.length > 0 && (
+        <section class="related-section">
+          <div class="section-heading">
+            <div>
+              <span class="section-kicker">YOU MAY ALSO NEED</span>
+              <h2>محصولات مرتبط</h2>
+            </div>
+            <a class="view-all" href={`${base}products/`}>
+              مشاهده همه محصولات <span>←</span>
+            </a>
+          </div>
+
+          <div class="related-grid">
+            {relatedProducts.map((item: any) => (
+              <a class="related-card" href={`${base}product/${item.id}/`}>
+                <div class="related-image">
+                  {item.image ? (
+                    <img src={item.image} alt={item.name} loading="lazy" />
+                  ) : (
+                    <span>AS</span>
+                  )}
+                  <span class="related-arrow">↗</span>
+                </div>
+                <div class="related-info">
+                  <small>{formatCategory(item.category)}</small>
+                  <h3>{item.name}</h3>
+                  <span class="related-link">مشاهده محصول ←</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <section class="final-cta">
+        <div class="cta-pattern"></div>
+        <div class="cta-content">
+          <span class="section-kicker">LET'S BUILD TOGETHER</span>
+          <h2>برای تأمین {p.name} آماده‌اید؟</h2>
+          <p>
+            مشخصات و مقدار موردنیاز خود را اعلام کنید تا برای بررسی سفارش و استعلام قیمت راهنمایی شوید.
+          </p>
+        </div>
+        <a href={`${base}contact/`} class="cta-button">
+          ثبت درخواست استعلام
+          <span>←</span>
+        </a>
+      </section>
+    </div>
+  </main>
 </BaseLayout>
 
-<script define:vars={{ product }}>
-  // Image gallery
-  document.querySelectorAll('[data-image]').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const img = (e.currentTarget as HTMLElement).dataset.image!;
-      document.getElementById('main-image')!.setAttribute('src', img);
-      
-      document.querySelectorAll('[data-image]').forEach(b => b.classList.remove('border-primary-600'));
-      (e.currentTarget as HTMLElement).classList.add('border-primary-600');
+<script>
+  const mainImage = document.getElementById("main-product-image") as HTMLImageElement | null;
+  const thumbnails = document.querySelectorAll<HTMLButtonElement>(".thumbnail");
+
+  thumbnails.forEach((thumbnail) => {
+    thumbnail.addEventListener("click", () => {
+      const image = thumbnail.dataset.image;
+      if (!mainImage || !image) return;
+
+      mainImage.src = image;
+      thumbnails.forEach((item) => item.classList.remove("active"));
+      thumbnail.classList.add("active");
     });
   });
 
-  // Quantity
-  let quantity = 1;
-  document.getElementById('increase-qty')?.addEventListener('click', () => {
-    quantity++;
-    document.getElementById('quantity')!.textContent = quantity.toString();
-  });
-  document.getElementById('decrease-qty')?.addEventListener('click', () => {
-    if (quantity > 1) {
-      quantity--;
-      document.getElementById('quantity')!.textContent = quantity.toString();
-    }
-  });
+  const toggleButton = document.getElementById("toggle-description");
+  const toggleText = document.getElementById("toggle-description-text");
+  const toggleIcon = document.getElementById("toggle-description-icon");
+  const descriptionBody = document.getElementById("full-description");
+  const descriptionFade = document.getElementById("description-fade");
 
-  // Add to cart
-  document.getElementById('add-to-cart-btn')?.addEventListener('click', () => {
-    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    const existingItem = cart.find((item: any) => item.id === product.id);
+  toggleButton?.addEventListener("click", () => {
+    const isExpanded = toggleButton.getAttribute("aria-expanded") === "true";
+    const nextExpanded = !isExpanded;
 
-    if (existingItem) {
-      existingItem.quantity += quantity;
-    } else {
-      cart.push({
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        image: product.images[0],
-        quantity: quantity
-      });
+    toggleButton.setAttribute("aria-expanded", String(nextExpanded));
+    descriptionBody?.classList.toggle("expanded", nextExpanded);
+    descriptionFade?.classList.toggle("hidden", nextExpanded);
+
+    if (toggleText) {
+      toggleText.textContent = nextExpanded
+        ? "بستن توضیحات"
+        : "مشاهده همه توضیحات";
     }
 
-    localStorage.setItem('cart', JSON.stringify(cart));
-    
-    const count = cart.reduce((sum: number, item: any) => sum + item.quantity, 0);
-    document.querySelectorAll('[data-cart-count]').forEach(el => {
-      el.textContent = count.toString();
-    });
-
-    const btn = document.getElementById('add-to-cart-btn')!;
-    btn.textContent = 'Added to Cart!';
-    setTimeout(() => {
-      btn.textContent = 'Add to Cart';
-    }, 2000);
-  });
-
-  // Wishlist
-  document.getElementById('wishlist-btn')?.addEventListener('click', () => {
-    const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
-    const index = wishlist.indexOf(product.id);
-    
-    if (index > -1) {
-      wishlist.splice(index, 1);
-    } else {
-      wishlist.push(product.id);
+    if (toggleIcon) {
+      toggleIcon.textContent = nextExpanded ? "⌃" : "⌄";
     }
-    
-    localStorage.setItem('wishlist', JSON.stringify(wishlist));
-    
-    document.querySelectorAll('[data-wishlist-count]').forEach(el => {
-      el.textContent = wishlist.length.toString();
-    });
-  });
-
-  // Tabs
-  document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const tab = (e.currentTarget as HTMLElement).dataset.tab!;
-      
-      document.querySelectorAll('.tab-btn').forEach(b => {
-        b.classList.remove('active', 'border-primary-600');
-        b.classList.add('border-transparent');
-      });
-      (e.currentTarget as HTMLElement).classList.add('active', 'border-primary-600');
-      (e.currentTarget as HTMLElement).classList.remove('border-transparent');
-      
-      document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
-      document.getElementById(tab)!.classList.remove('hidden');
-    });
   });
 </script>
+
+<style>
+  :global(html) {
+    scroll-behavior: smooth;
+  }
+
+  .product-page {
+    --navy: #102a43;
+    --navy-dark: #071a2a;
+    --navy-deep: #061421;
+    --teal: #19aaa2;
+    --mint: #75e2d4;
+    --steel: #347e9d;
+    --text: #e7f0f7;
+    --muted: #a5bacb;
+    --line: rgba(133, 171, 194, .22);
+
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    min-height: 100vh;
+    padding: 24px 0 70px;
+    color: var(--text);
+    background:
+      radial-gradient(ellipse at 12% 8%, rgba(25, 170, 162, .22), transparent 34%),
+      radial-gradient(ellipse at 88% 35%, rgba(31, 105, 151, .23), transparent 38%),
+      radial-gradient(ellipse at 48% 85%, rgba(12, 72, 103, .25), transparent 42%),
+      linear-gradient(135deg, #061421 0%, #0a2033 45%, #071827 100%);
+  }
+
+  /* شبکه متحرک مهندسی */
+  .animated-grid {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(117, 226, 212, .055) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(117, 226, 212, .055) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, .75) 50%, transparent 100%);
+    animation: grid-drift 28s linear infinite;
+  }
+
+  .product-container {
+    position: relative;
+    z-index: 2;
+    width: min(1180px, calc(100% - 36px));
+    margin: 0 auto;
+  }
+
+  .page-glow,
+  .ambient-light {
+    position: absolute;
+    z-index: 1;
+    pointer-events: none;
+    border-radius: 50%;
+  }
+
+  .page-glow {
+    filter: blur(2px);
+  }
+
+  .glow-one {
+    top: 360px;
+    right: -180px;
+    width: 360px;
+    height: 360px;
+    border: 1px solid rgba(25, 170, 162, .22);
+    box-shadow:
+      0 0 0 35px rgba(25, 170, 162, .035),
+      0 0 0 70px rgba(25, 170, 162, .025);
+    animation: ring-pulse 9s ease-in-out infinite alternate;
+  }
+
+  .glow-two {
+    top: 1200px;
+    left: -220px;
+    width: 430px;
+    height: 430px;
+    border: 1px solid rgba(52, 126, 157, .24);
+    box-shadow: 0 0 0 45px rgba(52, 126, 157, .035);
+    animation: ring-pulse 12s ease-in-out infinite alternate-reverse;
+  }
+
+  .ambient-light {
+    z-index: 0;
+    filter: blur(55px);
+    opacity: .55;
+    will-change: transform;
+  }
+
+  .ambient-light-one {
+    top: 100px;
+    right: -160px;
+    width: 340px;
+    height: 340px;
+    background: rgba(25, 170, 162, .38);
+    animation: ambient-float-one 6s ease-in-out infinite alternate;
+  }
+
+  .ambient-light-two {
+    top: 950px;
+    left: -180px;
+    width: 400px;
+    height: 400px;
+    background: rgba(38, 104, 164, .34);
+    animation: ambient-float-two 8s ease-in-out infinite alternate;
+  }
+
+
+  @keyframes grid-drift {
+    from {
+      background-position: 0 0;
+    }
+    to {
+      background-position: 24px 24px;
+    }
+  }
+
+
+  @keyframes ambient-float-one {
+    from {
+      transform: translate3d(0, 0, 0) scale(.85);
+    }
+    to {
+      transform: translate3d(-100px, 90px, 0) scale(1.2);
+    }
+  }
+
+  @keyframes ambient-float-two {
+    from {
+      transform: translate3d(0, 0, 0) scale(1.15);
+    }
+    to {
+      transform: translate3d(100px, -100px, 0) scale(.85);
+    }
+  }
+
+  @keyframes ring-pulse {
+    from {
+      transform: scale(.92) rotate(0deg);
+      opacity: .35;
+    }
+    to {
+      transform: scale(1.08) rotate(8deg);
+      opacity: .9;
+    }
+  }
+
+  .breadcrumbs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 25px;
+    color: #8ea9bc;
+    font-size: 13px;
+  }
+
+  .breadcrumbs a {
+    color: #b4cbd9;
+    text-decoration: none;
+    transition: color .2s ease;
+  }
+
+  .breadcrumbs a:hover,
+  .breadcrumbs .current {
+    color: var(--mint);
+  }
+
+  .product-hero {
+    display: grid;
+    grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 76px;
+  }
+
+  .gallery-panel {
+    position: relative;
+    min-width: 0;
+    padding: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(117, 174, 199, .25);
+    border-radius: 23px;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(25, 170, 162, .16), transparent 55%),
+      linear-gradient(145deg, rgba(20, 47, 67, .96), rgba(7, 25, 40, .98));
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .22);
+    backdrop-filter: blur(12px);
+  }
+
+  .gallery-badge {
+    position: absolute;
+    top: 28px;
+    right: 28px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    color: #d9f7f3;
+    border: 1px solid rgba(117, 226, 212, .25);
+    border-radius: 30px;
+    background: rgba(7, 26, 42, .85);
+    font-size: 11px;
+    font-weight: 800;
+    backdrop-filter: blur(10px);
+  }
+
+  .status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--mint);
+    box-shadow: 0 0 0 4px rgba(25, 170, 162, .16);
+  }
+
+  .main-image-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 370px;
+    overflow: hidden;
+    border: 1px solid rgba(117, 174, 199, .12);
+    border-radius: 15px;
+    background:
+      radial-gradient(ellipse at 50% 50%, rgba(80, 126, 151, .18), transparent 65%),
+      linear-gradient(135deg, rgba(24, 51, 71, .85), rgba(8, 27, 43, .85)),
+      repeating-linear-gradient(135deg, transparent 0 22px, rgba(117, 226, 212, .025) 22px 23px);
+  }
+
+  .main-product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    mix-blend-mode: screen;
+    transition: transform .5s ease, filter .5s ease;
+  }
+
+  .main-image-wrap:hover .main-product-image {
+    transform: scale(1.045);
+    filter: drop-shadow(0 0 18px rgba(117, 226, 212, .15));
+  }
+
+  .image-watermark {
+    position: absolute;
+    left: 15px;
+    bottom: 12px;
+    color: rgba(199, 225, 239, .22);
+    font-size: 19px;
+    font-weight: 900;
+    letter-spacing: 3px;
+  }
+
+  .thumbnail-list {
+    display: flex;
+    gap: 10px;
+    margin-top: 13px;
+  }
+
+  .thumbnail {
+    width: 65px;
+    height: 58px;
+    padding: 4px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid rgba(117, 174, 199, .25);
+    border-radius: 10px;
+    background: #102b40;
+    transition: border-color .2s ease, background .2s ease, transform .2s ease;
+  }
+
+  .thumbnail.active,
+  .thumbnail:hover {
+    transform: translateY(-2px);
+    border-color: var(--mint);
+    background: #164252;
+  }
+
+  .thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .gallery-footer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 16px;
+    padding: 12px 5px 1px;
+    color: #a3bdcd;
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  .footer-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #3a6278, transparent);
+  }
+
+  .no-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    height: 370px;
+    color: #a5bacb;
+    text-align: center;
+  }
+
+  .no-image-icon {
+    color: var(--mint);
+    font-size: 55px;
+  }
+
+  .no-image small {
+    color: #718da1;
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 4px;
+  }
+
+  .product-summary {
+    min-width: 0;
+  }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 19px;
+    color: var(--mint);
+    font-size: 13px;
+    font-weight: 900;
+  }
+
+  .eyebrow-line {
+    width: 30px;
+    height: 2px;
+    background: var(--mint);
+    box-shadow: 0 0 12px rgba(117, 226, 212, .35);
+  }
+
+  .category-pill {
+    display: inline-flex;
+    padding: 7px 13px;
+    color: #9bf0e4;
+    border: 1px solid rgba(117, 226, 212, .25);
+    border-radius: 7px;
+    background: rgba(25, 170, 162, .1);
+    font-size: 12px;
+    font-weight: 800;
+  }
+
+  .product-summary h1 {
+    margin: 16px 0;
+    color: #edf7fc;
+    font-size: clamp(28px, 3.3vw, 43px);
+    font-weight: 950;
+    line-height: 1.55;
+    letter-spacing: -.7px;
+  }
+
+  .product-lead {
+    margin: 0;
+    color: #b0c5d4;
+    font-size: 15px;
+    line-height: 2.15;
+  }
+
+  .product-meta {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 25px;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+    padding: 13px;
+    border: 1px solid rgba(117, 174, 199, .2);
+    border-radius: 12px;
+    background: linear-gradient(145deg, rgba(21, 49, 69, .95), rgba(10, 31, 47, .96));
+  }
+
+  .meta-icon {
+    display: grid;
+    flex: 0 0 36px;
+    width: 36px;
+    height: 36px;
+    place-items: center;
+    color: var(--mint);
+    border-radius: 10px;
+    background: rgba(25, 170, 162, .13);
+    font-size: 19px;
+  }
+
+  .meta-item div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+  }
+
+  .meta-item small {
+    color: #a9bfce;
+    font-size: 10px;
+  }
+
+  .meta-item strong {
+    overflow-wrap: anywhere;
+    color: #eaf5fb;
+    font-size: 12px;
+  }
+
+  .price-panel {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-top: 22px;
+    padding: 17px;
+    border: 1px solid rgba(117, 226, 212, .24);
+    border-radius: 15px;
+    background:
+      radial-gradient(ellipse at 100% 0%, rgba(25, 170, 162, .17), transparent 55%),
+      linear-gradient(120deg, rgba(16, 62, 73, .92), rgba(12, 42, 59, .96));
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .1);
+  }
+
+  .price-panel-icon {
+    display: grid;
+    flex: 0 0 42px;
+    width: 42px;
+    height: 42px;
+    place-items: center;
+    color: white;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #19aaa2, #287f9c);
+    font-size: 23px;
+    box-shadow: 0 6px 18px rgba(25, 170, 162, .18);
+  }
+
+  .price-panel-copy {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+  }
+
+  .price-panel-copy strong {
+    color: #edfafa;
+    font-size: 13px;
+  }
+
+  .price-panel-copy span {
+    color: #b4d0d9;
+    font-size: 11px;
+    line-height: 1.9;
+  }
+
+  .price-status {
+    flex-shrink: 0;
+    padding: 7px 9px;
+    color: #9bf0e4;
+    border: 1px solid rgba(117, 226, 212, .16);
+    border-radius: 7px;
+    background: rgba(25, 170, 162, .13);
+    font-size: 10px;
+    font-weight: 900;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 11px;
+    margin-top: 20px;
+  }
+
+  .button-primary,
+  .button-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    min-height: 48px;
+    padding: 0 19px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 900;
+    transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+  }
+
+  .button-primary {
+    color: white;
+    background: linear-gradient(120deg, #087e83, #176a91);
+    box-shadow: 0 8px 24px rgba(25, 170, 162, .17);
+  }
+
+  .button-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(25, 170, 162, .25);
+  }
+
+  .button-primary span {
+    color: #b9fff3;
+    font-size: 18px;
+  }
+
+  .button-secondary {
+    color: #e7f5fb;
+    border: 1px solid rgba(117, 174, 199, .32);
+    background: #112e43;
+  }
+
+  .button-secondary:hover {
+    background: #164352;
+    border-color: var(--mint);
+  }
+
+  .trust-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 17px;
+    color: #b5cbd9;
+    font-size: 11px;
+  }
+
+  .trust-line span:first-child {
+    display: grid;
+    width: 18px;
+    height: 18px;
+    place-items: center;
+    color: #9bf0e4;
+    border-radius: 50%;
+    background: rgba(25, 170, 162, .2);
+    font-size: 11px;
+    font-weight: 900;
+  }
+
+  .specifications-section,
+  .description-section,
+  .related-section {
+    margin-top: 74px;
+  }
+
+  .section-heading {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 27px;
+    padding-bottom: 17px;
+  }
+
+  .section-heading::after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 80px;
+    height: 3px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--mint), var(--steel));
+    box-shadow: 0 0 15px rgba(25, 170, 162, .22);
+    content: "";
+  }
+
+  .section-kicker {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--mint);
+    font-size: 10px;
+    font-weight: 950;
+    letter-spacing: 1.5px;
+  }
+
+  .section-heading h2 {
+    margin: 0;
+    color: #edf7fc;
+    font-size: clamp(22px, 2.5vw, 29px);
+    font-weight: 950;
+  }
+
+  .section-subtitle {
+    margin: 8px 0 0;
+    color: #afc3d2;
+    font-size: 13px;
+    line-height: 1.9;
+  }
+
+  .heading-mark {
+    color: rgba(117, 226, 212, .2);
+    font-size: 42px;
+    font-weight: 950;
+    line-height: 1;
+  }
+
+  .specifications-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 15px;
+  }
+
+  .spec-card {
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+    padding: 22px;
+    border: 1px solid rgba(117, 174, 199, .22);
+    border-radius: 14px;
+    background: linear-gradient(145deg, rgba(20, 48, 69, .94), rgba(9, 29, 45, .96));
+    box-shadow: 0 12px 28px rgba(0, 0, 0, .14);
+    transition: border-color .25s ease, transform .25s ease, box-shadow .25s ease;
+  }
+
+  .spec-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(117, 226, 212, .6);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, .22);
+  }
+
+  .spec-index {
+    position: absolute;
+    top: 12px;
+    left: 13px;
+    color: rgba(117, 226, 212, .24);
+    font-size: 22px;
+    font-weight: 950;
+  }
+
+  .spec-label {
+    display: block;
+    margin-bottom: 10px;
+    color: #a9bfce;
+    font-size: 12px;
+  }
+
+  .spec-value {
+    display: block;
+    overflow-wrap: anywhere;
+    color: #edf7fc;
+    font-size: 17px;
+    font-weight: 900;
+  }
+
+  .spec-accent {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--mint));
+    opacity: .75;
+  }
+
+  .description-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: 22px;
+    align-items: start;
+  }
+
+  .description-card {
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+    padding: 28px;
+    border: 1px solid rgba(117, 174, 199, .24);
+    border-radius: 18px;
+    background: linear-gradient(145deg, rgba(17, 43, 63, .97), rgba(8, 27, 43, .98));
+    box-shadow: 0 12px 30px rgba(0, 0, 0, .14);
+  }
+
+  .article-topline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 20px;
+    color: #a8c4d3;
+    font-size: 11px;
+    font-weight: 800;
+  }
+
+  .article-icon {
+    display: grid;
+    width: 29px;
+    height: 29px;
+    place-items: center;
+    color: #06232f;
+    border-radius: 9px;
+    background: linear-gradient(135deg, var(--mint), var(--steel));
+    font-size: 15px;
+  }
+
+  .article-divider {
+    width: 24px;
+    height: 1px;
+    background: rgba(117, 174, 199, .35);
+  }
+
+  .reading-time {
+    color: #8ea9bc;
+    font-weight: 600;
+  }
+
+  .description-intro {
+    margin-bottom: 18px;
+    padding: 17px 18px;
+    color: #d8f7f2;
+    border-right: 3px solid #39c7bc;
+    border-radius: 7px 12px 12px 7px;
+    background: linear-gradient(110deg, rgba(25, 170, 162, .15), rgba(52, 126, 157, .12));
+    font-size: 14px;
+    font-weight: 750;
+    line-height: 2.1;
+  }
+
+  .description-body {
+    position: relative;
+    max-height: 255px;
+    overflow: hidden;
+    transition: max-height .5s ease;
+  }
+
+  .description-body.expanded {
+    max-height: 5000px;
+  }
+
+  .description-body p {
+    margin: 0 0 17px;
+    color: #c0d1de;
+    font-size: 13px;
+    line-height: 2.25;
+    text-align: justify;
+  }
+
+  .article-subheading {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 23px 0 13px;
+    color: #edf7fc;
+    font-size: 15px;
+    font-weight: 900;
+  }
+
+  .article-subheading > span {
+    width: 8px;
+    height: 21px;
+    border-radius: 4px;
+    background: linear-gradient(180deg, var(--mint), var(--steel));
+  }
+
+  .application-list,
+  .consideration-list {
+    display: grid;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .application-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: #c0d1de;
+    font-size: 13px;
+    line-height: 2;
+  }
+
+  .list-check {
+    display: grid;
+    flex: 0 0 21px;
+    width: 21px;
+    height: 21px;
+    margin-top: 3px;
+    place-items: center;
+    color: #9bf0e4;
+    border-radius: 6px;
+    background: rgba(25, 170, 162, .18);
+    font-size: 12px;
+    font-weight: 900;
+  }
+
+  .consideration-list li {
+    position: relative;
+    padding-right: 18px;
+    color: #c0d1de;
+    font-size: 13px;
+    line-height: 2;
+  }
+
+  .consideration-list li::before {
+    position: absolute;
+    top: 11px;
+    right: 1px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--mint);
+    content: "";
+  }
+
+  .source-box {
+    display: flex;
+    gap: 13px;
+    margin-top: 27px;
+    padding: 17px;
+    border: 1px solid rgba(117, 174, 199, .2);
+    border-radius: 12px;
+    background: rgba(4, 19, 31, .62);
+  }
+
+  .source-icon {
+    display: grid;
+    flex: 0 0 30px;
+    width: 30px;
+    height: 30px;
+    place-items: center;
+    color: #092b37;
+    border-radius: 9px;
+    background: var(--mint);
+    font-family: serif;
+    font-weight: 900;
+  }
+
+  .source-box strong {
+    display: block;
+    margin-bottom: 6px;
+    color: #e8f5fb;
+    font-size: 12px;
+  }
+
+  .source-box p {
+    margin: 0 0 9px;
+    color: #afc3d2;
+    font-size: 11px;
+    line-height: 1.9;
+    text-align: right;
+  }
+
+  .source-box a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--mint);
+    font-size: 12px;
+    font-weight: 900;
+    text-decoration: none;
+  }
+
+  .source-box a:hover {
+    color: #fff;
+  }
+
+  .description-fade {
+    position: absolute;
+    z-index: 1;
+    right: 0;
+    bottom: 68px;
+    left: 0;
+    height: 125px;
+    pointer-events: none;
+    background: linear-gradient(180deg, transparent, #0c263a 90%);
+    transition: opacity .25s ease;
+  }
+
+  .description-fade.hidden {
+    opacity: 0;
+  }
+
+  .expand-description {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    min-height: 46px;
+    margin-top: 10px;
+    cursor: pointer;
+    color: #8cf0e2;
+    border: 1px solid rgba(117, 226, 212, .3);
+    border-radius: 10px;
+    background: linear-gradient(100deg, #103b4d, #102d42);
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 900;
+    transition: background .2s ease, border-color .2s ease;
+  }
+
+  .expand-description:hover {
+    border-color: var(--mint);
+    background: #164352;
+  }
+
+  .expand-icon {
+    font-size: 19px;
+    line-height: 1;
+  }
+
+  .knowledge-sidebar {
+    display: grid;
+    gap: 16px;
+  }
+
+  .sidebar-card {
+    padding: 22px;
+    border: 1px solid rgba(117, 174, 199, .22);
+    border-radius: 16px;
+    background: linear-gradient(145deg, #15364c, #0b2235);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .12);
+  }
+
+  .sidebar-highlight {
+    overflow: hidden;
+    color: white;
+    border-color: rgba(117, 226, 212, .22);
+    background:
+      radial-gradient(ellipse at 100% 0%, rgba(25, 170, 162, .25), transparent 47%),
+      linear-gradient(145deg, #102a43, #071a2a);
+  }
+
+  .sidebar-symbol {
+    display: grid;
+    width: 45px;
+    height: 45px;
+    margin-bottom: 18px;
+    place-items: center;
+    color: var(--mint);
+    border: 1px solid rgba(117, 226, 212, .35);
+    border-radius: 12px;
+    background: rgba(117, 226, 212, .09);
+    font-size: 15px;
+    font-weight: 950;
+    letter-spacing: 1px;
+  }
+
+  .sidebar-kicker {
+    color: var(--mint);
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 2px;
+  }
+
+  .sidebar-highlight h3 {
+    margin: 11px 0;
+    color: #f1f7fa;
+    font-size: 18px;
+    line-height: 1.8;
+  }
+
+  .sidebar-highlight p {
+    margin: 0;
+    color: #b7cbd8;
+    font-size: 12px;
+    line-height: 2.15;
+  }
+
+  .sidebar-highlight a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+    padding-top: 15px;
+    color: var(--mint);
+    border-top: 1px solid rgba(255, 255, 255, .13);
+    font-size: 12px;
+    font-weight: 900;
+    text-decoration: none;
+  }
+
+  .sidebar-card:not(.sidebar-highlight) h3 {
+    margin: 0 0 18px;
+    color: #edf7fc;
+    font-size: 15px;
+    font-weight: 950;
+  }
+
+  .checklist {
+    display: grid;
+    gap: 16px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .checklist li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #bfd0dd;
+    font-size: 11px;
+    line-height: 1.8;
+  }
+
+  .checklist li span {
+    display: grid;
+    flex: 0 0 29px;
+    width: 29px;
+    height: 29px;
+    place-items: center;
+    color: #9bf0e4;
+    border-radius: 8px;
+    background: rgba(25, 170, 162, .17);
+    font-size: 10px;
+    font-weight: 950;
+  }
+
+  .related-section {
+    padding: 27px;
+    border: 1px solid rgba(117, 174, 199, .22);
+    border-radius: 21px;
+    background:
+      radial-gradient(ellipse at 100% 0%, rgba(25, 170, 162, .12), transparent 40%),
+      linear-gradient(145deg, rgba(15, 41, 61, .92), rgba(7, 25, 40, .96));
+  }
+
+  .view-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    color: var(--mint);
+    font-size: 12px;
+    font-weight: 900;
+    text-decoration: none;
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 15px;
+  }
+
+  .related-card {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid rgba(117, 174, 199, .23);
+    border-radius: 14px;
+    background: linear-gradient(155deg, #15354b, #0b2235);
+    box-shadow: 0 7px 22px rgba(0, 0, 0, .12);
+    text-decoration: none;
+    transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+  }
+
+  .related-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(117, 226, 212, .7);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, .23);
+  }
+
+  .related-image {
+    position: relative;
+    display: grid;
+    height: 155px;
+    overflow: hidden;
+    place-items: center;
+    background:
+      radial-gradient(ellipse at center, rgba(52, 126, 157, .2), transparent 70%),
+      linear-gradient(145deg, #24465c, #122e43);
+  }
+
+  .related-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    mix-blend-mode: screen;
+    transition: transform .3s ease;
+  }
+
+  .related-card:hover .related-image img {
+    transform: scale(1.06);
+  }
+
+  .related-image > span:first-child {
+    color: #6e9bb1;
+    font-size: 32px;
+    font-weight: 950;
+  }
+
+  .related-arrow {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: grid;
+    width: 29px;
+    height: 29px;
+    place-items: center;
+    color: #d8f7f2;
+    border: 1px solid rgba(117, 174, 199, .25);
+    border-radius: 8px;
+    background: rgba(7, 26, 42, .8);
+  }
+
+  .related-info {
+    padding: 16px;
+  }
+
+  .related-info small {
+    color: var(--mint);
+    font-size: 10px;
+    font-weight: 900;
+  }
+
+  .related-info h3 {
+    margin: 8px 0 14px;
+    color: #edf7fc;
+    font-size: 14px;
+    font-weight: 900;
+    line-height: 1.8;
+  }
+
+  .related-link {
+    color: #75e2d4;
+    font-size: 11px;
+    font-weight: 800;
+  }
+
+  .final-cta {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    margin-top: 75px;
+    padding: 35px;
+    overflow: hidden;
+    border: 1px solid #204b63;
+    border-radius: 20px;
+    background:
+      radial-gradient(ellipse at 95% 0%, rgba(25, 170, 162, .2), transparent 40%),
+      linear-gradient(120deg, #071a2a, #102f47);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, .2);
+  }
+
+  .cta-pattern {
+    position: absolute;
+    top: -90px;
+    left: -35px;
+    width: 250px;
+    height: 250px;
+    border: 1px solid rgba(117, 226, 212, .15);
+    border-radius: 50%;
+    box-shadow:
+      0 0 0 24px rgba(117, 226, 212, .035),
+      0 0 0 48px rgba(117, 226, 212, .025);
+    animation: ring-pulse 10s ease-in-out infinite alternate;
+  }
+
+  .cta-content {
+    position: relative;
+    z-index: 1;
+    max-width: 650px;
+  }
+
+  .cta-content .section-kicker {
+    color: var(--mint);
+  }
+
+  .cta-content h2 {
+    margin: 0 0 9px;
+    color: #f1f7fa;
+    font-size: clamp(20px, 2.4vw, 28px);
+    font-weight: 950;
+    line-height: 1.8;
+  }
+
+  .cta-content p {
+    margin: 0;
+    color: #b8cbd8;
+    font-size: 12px;
+    line-height: 2;
+  }
+
+  .cta-button {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    min-height: 48px;
+    padding: 0 20px;
+    color: #062a35;
+    border-radius: 10px;
+    background: linear-gradient(110deg, #75e2d4, #b2f0e6);
+    font-size: 12px;
+    font-weight: 950;
+    text-decoration: none;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(25, 170, 162, .18);
+  }
+
+  @media (max-width: 950px) {
+    .product-hero {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 25px;
+    }
+
+    .main-image-wrap,
+    .no-image {
+      height: 300px;
+    }
+
+    .description-layout {
+      grid-template-columns: minmax(0, 1fr) 250px;
+      gap: 15px;
+    }
+
+    .specifications-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 720px) {
+    .product-container {
+      width: min(100% - 26px, 600px);
+    }
+
+    .product-page {
+      padding-top: 18px;
+    }
+
+    .product-hero {
+      grid-template-columns: 1fr;
+      gap: 27px;
+      margin-bottom: 55px;
+    }
+
+    .main-image-wrap,
+    .no-image {
+      height: 300px;
+    }
+
+    .product-summary h1 {
+      font-size: 29px;
+    }
+
+    .specifications-section,
+    .description-section,
+    .related-section {
+      margin-top: 55px;
+    }
+
+    .description-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .knowledge-sidebar {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .related-section {
+      padding: 18px 13px;
+      border-radius: 16px;
+    }
+
+    .related-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .related-image {
+      height: 125px;
+    }
+
+    .related-info {
+      padding: 12px;
+    }
+
+    .related-info h3 {
+      font-size: 12px;
+    }
+
+    .final-cta {
+      align-items: flex-start;
+      flex-direction: column;
+      padding: 25px 21px;
+    }
+
+    .cta-button {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 460px) {
+    .product-container {
+      width: calc(100% - 22px);
+    }
+
+    .breadcrumbs {
+      gap: 7px;
+      font-size: 11px;
+    }
+
+    .gallery-panel {
+      padding: 10px;
+      border-radius: 17px;
+    }
+
+    .gallery-badge {
+      top: 19px;
+      right: 19px;
+    }
+
+    .main-image-wrap,
+    .no-image {
+      height: 250px;
+    }
+
+    .product-meta {
+      gap: 8px;
+    }
+
+    .meta-item {
+      padding: 10px 8px;
+    }
+
+    .meta-icon {
+      flex-basis: 30px;
+      width: 30px;
+      height: 30px;
+    }
+
+    .meta-item strong {
+      font-size: 11px;
+    }
+
+    .price-panel {
+      flex-wrap: wrap;
+      padding: 13px;
+    }
+
+    .price-status {
+      margin-right: 54px;
+    }
+
+    .hero-actions {
+      flex-direction: column;
+    }
+
+    .button-primary,
+    .button-secondary {
+      width: 100%;
+    }
+
+    .section-heading h2 {
+      font-size: 21px;
+    }
+
+    .heading-mark {
+      font-size: 32px;
+    }
+
+    .specifications-grid {
+      gap: 9px;
+    }
+
+    .spec-card {
+      padding: 16px 13px;
+    }
+
+    .spec-value {
+      font-size: 14px;
+    }
+
+    .description-card {
+      padding: 19px 15px;
+    }
+
+    .description-intro {
+      padding: 13px;
+      font-size: 12px;
+    }
+
+    .description-body p,
+    .application-list li,
+    .consideration-list li {
+      font-size: 12px;
+    }
+
+    .knowledge-sidebar {
+      grid-template-columns: 1fr;
+    }
+
+    .related-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .related-image {
+      height: 105px;
+    }
+
+    .related-info h3 {
+      min-height: 42px;
+    }
+
+    .view-all {
+      font-size: 10px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .product-page *,
+    .product-page *::before,
+    .product-page *::after {
+      scroll-behavior: auto !important;
+      animation: none !important;
+      transition-duration: .01ms !important;
+    }
+  }
+</style>

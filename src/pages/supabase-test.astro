@@ -1,0 +1,70 @@
+
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="آزمایش اتصال Supabase">
+  <main class="test-container" dir="rtl">
+    <h1>آزمایش اتصال ASIN STILL</h1>
+    <p>وضعیت اتصال به سرویس Supabase:</p>
+    <p id="connection-status">در حال بررسی اتصال...</p>
+  </main>
+</BaseLayout>
+
+<script>
+  const statusElement = document.querySelector("#connection-status");
+
+  async function testSupabaseConnection() {
+    if (!statusElement) return;
+
+    const url = import.meta.env.PUBLIC_SUPABASE_URL;
+    const key = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+
+    if (!url || !key) {
+      statusElement.textContent =
+        "خطا: تنظیمات Supabase پیدا نشد. فایل .env را بررسی کن.";
+      return;
+    }
+
+    try {
+      const response = await fetch(`${url}/auth/v1/settings`, {
+        headers: {
+          apikey: key,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+
+      await response.json();
+
+      statusElement.textContent =
+        "اتصال موفق است. سایت به Supabase دسترسی دارد.";
+    } catch (error) {
+      console.error("Supabase connection error:", error);
+
+      statusElement.textContent =
+        "اتصال ناموفق بود. خطای مرورگر و تنظیمات پروژه را بررسی کن.";
+    }
+  }
+
+  testSupabaseConnection();
+</script>
+
+<style>
+  .test-container {
+    max-width: 800px;
+    margin: 80px auto;
+    padding: 32px 20px;
+    text-align: center;
+  }
+
+  #connection-status {
+    margin-top: 24px;
+    padding: 18px;
+    border: 1px solid #64748b;
+    border-radius: 12px;
+    overflow-wrap: anywhere;
+  }
+</style>

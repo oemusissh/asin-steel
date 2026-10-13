@@ -75,10 +75,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
           <!-- Remember Me & Forgot Password -->
           <div class="flex items-center justify-between">
-            <label class="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" id="remember" class="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500" />
-              <span class="text-sm text-gray-700 dark:text-gray-300">Remember me</span>
-            </label>
+            <span></span>
             <a href={`${import.meta.env.BASE_URL}forgot-password`} class="text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-semibold">
               Forgot password?
             </a>
@@ -157,83 +154,95 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </div>
   </section>
 
-  <script>
-    // Toggle Password Visibility
-    const togglePassword = document.getElementById('toggle-password');
-    const passwordInput = document.getElementById('password');
-    const eyeIcon = document.getElementById('eye-icon');
+    <script>
+    import { supabase } from "../../lib/supabase";
 
-    togglePassword?.addEventListener('click', () => {
-      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-      passwordInput.setAttribute('type', type);
-      
-      // Toggle icon
-      if (type === 'text') {
-        eyeIcon.innerHTML = `
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
-        `;
-      } else {
-        eyeIcon.innerHTML = `
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-        `;
+    const togglePassword = document.getElementById("toggle-password");
+    const passwordInput = document.getElementById("password");
+    const eyeIcon = document.getElementById("eye-icon");
+    const signinForm = document.getElementById("signin-form");
+
+    function showAuthMessage(message, type = "error") {
+      let messageElement = document.getElementById("auth-message");
+
+      if (!messageElement) {
+        messageElement = document.createElement("div");
+        messageElement.id = "auth-message";
+        messageElement.setAttribute("role", "status");
+        messageElement.className = "mb-4 rounded-lg border px-4 py-3 text-sm";
+        signinForm?.insertBefore(messageElement, signinForm.querySelector('button[type="submit"]'));
       }
+
+      messageElement.textContent = message;
+      messageElement.classList.remove(
+        "border-red-300", "bg-red-50", "text-red-700",
+        "border-green-300", "bg-green-50", "text-green-700"
+      );
+
+      if (type === "success") {
+        messageElement.classList.add("border-green-300", "bg-green-50", "text-green-700");
+      } else {
+        messageElement.classList.add("border-red-300", "bg-red-50", "text-red-700");
+      }
+    }
+
+    togglePassword?.addEventListener("click", () => {
+      if (!passwordInput || !eyeIcon) return;
+
+      const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+      passwordInput.setAttribute("type", type);
+
+      eyeIcon.innerHTML = type === "text"
+        ? `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />`
+        : `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5a9.99 9.99 0 019.542 7c-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />`;
     });
 
-    // Form Submission
-    const signinForm = document.getElementById('signin-form');
-    
-    signinForm?.addEventListener('submit', (e) => {
-      e.preventDefault();
-      
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      const remember = document.getElementById('remember').checked;
-      
-      // Simulate sign in process
-      const submitBtn = signinForm.querySelector('button[type="submit"]');
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = `
-        <svg class="w-5 h-5 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-        </svg>
-        <span>Signing In...</span>
-      `;
-      
-      setTimeout(() => {
-  const users = JSON.parse(localStorage.getItem('users') || '[]');
+    signinForm?.addEventListener("submit", async (event) => {
+      event.preventDefault();
 
-  const foundUser = users.find(
-    user =>
-      user.email.toLowerCase() === email.toLowerCase() &&
-      user.password === password
-  );
+      const emailInput = document.getElementById("email");
+      const submitButton = signinForm.querySelector('button[type="submit"]');
+      const email = emailInput?.value.trim() ?? "";
+      const password = passwordInput?.value ?? "";
 
-  if (!foundUser) {
-    alert('Email or password is incorrect.');
+      if (!email || !password || !submitButton) return;
 
-    submitBtn.disabled = false;
-    submitBtn.innerHTML = '<span>Sign In</span>';
+      const originalButtonHtml = submitButton.innerHTML;
+      submitButton.disabled = true;
+      submitButton.innerHTML = '<span>Signing In...</span>';
 
-    return;
-  }
+      try {
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email,
+          password,
+        });
 
-  localStorage.setItem('user', JSON.stringify({
-    fullname: foundUser.fullname,
-    email: foundUser.email,
-    phone: foundUser.phone,
-    newsletter: foundUser.newsletter,
-    loggedIn: true
-  }));
+        if (error) {
+          showAuthMessage(
+            error.message.toLowerCase().includes("email not confirmed")
+              ? "Please confirm your email address using the link we sent you."
+              : "Email or password is incorrect. Please try again."
+          );
+          return;
+        }
 
-  if (remember) {
-    localStorage.setItem('rememberMe', 'true');
-  } else {
-    localStorage.removeItem('rememberMe');
-  }
+        if (!data.user) {
+          showAuthMessage("Sign in could not be completed. Please try again.");
+          return;
+        }
 
-  window.location.href = `${import.meta.env.BASE_URL}/account`;
-      }, 1500);
+        const baseUrl = import.meta.env.BASE_URL.endsWith("/")
+          ? import.meta.env.BASE_URL
+          : `${import.meta.env.BASE_URL}/`;
+
+        window.location.assign(`${baseUrl}account/`);
+      } catch (error) {
+        console.error("Sign-in error:", error);
+        showAuthMessage("Could not connect to the authentication service. Check your connection and try again.");
+      } finally {
+        submitButton.disabled = false;
+        submitButton.innerHTML = originalButtonHtml;
+      }
     });
   </script>
 </BaseLayout>
