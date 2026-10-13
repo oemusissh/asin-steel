@@ -1136,6 +1136,38 @@ const featuredProducts = [
 </div>
 
 
+{/* لینک دسترسی سریع به محاسبه‌گر */}
+<div class="calculator-shortcut-wrap" dir="rtl">
+  <a
+    href="#steel-calculator"
+    class="calculator-shortcut"
+    aria-label="رفتن به محاسبه وزن و هزینه آهن و فولاد"
+  >
+    <span class="calculator-shortcut-icon" aria-hidden="true">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <rect x="5" y="2.5" width="14" height="19" rx="2.5" />
+        <path d="M8 6h8M8 10h2m4 0h2M8 14h2m4 0h2M8 18h2m4 0h2" />
+      </svg>
+    </span>
+
+    <span class="calculator-shortcut-text">
+      <strong>محاسبه وزن و هزینه</strong>
+      <small>وزن تقریبی و هزینه مقاطع فولادی را محاسبه کنید</small>
+    </span>
+
+    <span class="calculator-shortcut-arrow" aria-hidden="true">
+      ←
+    </span>
+  </a>
+</div>
+
 
 <div class="asin-steel-divider" aria-hidden="true">
   <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
@@ -1497,7 +1529,10 @@ const featuredProducts = [
 
 
 <!-- Advanced Steel Calculator -->
-<section class="w-full px-5 py-8 sm:px-10 lg:px-16 xl:px-24 2xl:px-32">
+<section
+  id="steel-calculator"
+  class="w-full px-5 py-8 sm:px-10 lg:px-16 xl:px-24 2xl:px-32 scroll-mt-24"
+>
   <AdvancedSteelCalculator />
 </section>
 
@@ -1863,6 +1898,112 @@ const featuredProducts = [
 @media (max-width: 640px) {
   .asin-steel-divider {
     height: 42px;
+  }
+}
+
+/* دسترسی سریع به محاسبه‌گر فولاد */
+.calculator-shortcut-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 18px 20px;
+  background: #f1f3f7;
+}
+
+.calculator-shortcut {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: min(100%, 620px);
+  padding: 16px 20px;
+  color: #f8fafc;
+  text-decoration: none;
+  background: linear-gradient(120deg, #0f172a, #12365a);
+  border: 1px solid rgba(147, 197, 253, 0.35);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(2, 6, 23, 0.12);
+  transition: transform 0.25s ease, border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.calculator-shortcut:hover {
+  transform: translateY(-3px);
+  border-color: #60a5fa;
+  box-shadow: 0 12px 30px rgba(2, 6, 23, 0.2);
+}
+
+.calculator-shortcut-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  color: #93c5fd;
+  background: rgba(96, 165, 250, 0.12);
+  border-radius: 12px;
+}
+
+.calculator-shortcut-icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.calculator-shortcut-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.calculator-shortcut-text strong {
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.calculator-shortcut-text small {
+  color: #cbd5e1;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.calculator-shortcut-arrow {
+  flex-shrink: 0;
+  color: #93c5fd;
+  font-size: 25px;
+  transition: transform 0.25s ease;
+}
+
+.calculator-shortcut:hover .calculator-shortcut-arrow {
+  transform: translateX(-4px);
+}
+
+@media (max-width: 480px) {
+  .calculator-shortcut-wrap {
+    padding: 14px 12px;
+  }
+
+  .calculator-shortcut {
+    gap: 10px;
+    padding: 13px;
+  }
+
+  .calculator-shortcut-icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  .calculator-shortcut-text strong {
+    font-size: 13px;
+  }
+
+  .calculator-shortcut-text small {
+    font-size: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .calculator-shortcut,
+  .calculator-shortcut-arrow {
+    transition: none;
   }
 }
 
