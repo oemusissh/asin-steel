@@ -1,48 +1,19 @@
 
 ---
+
+
+
+
+
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 const base = import.meta.env.BASE_URL;
 
-const demoProducts = [
-  {
-    id: 1,
-    name: "میلگرد آجدار ۱۴",
-    category: "rebar",
-    categoryName: "میلگرد",
-    factory: "ذوب آهن اصفهان",
-    price: 32400,
-    priceOnRequest: false,
-    inventory: "available",
-    active: true,
-  },
-  {
-    id: 2,
-    name: "تیرآهن ۱۶",
-    category: "beam",
-    categoryName: "تیرآهن",
-    factory: "ذوب آهن اصفهان",
-    price: 38500,
-    priceOnRequest: false,
-    inventory: "available",
-    active: true,
-  },
-  {
-    id: 3,
-    name: "ورق سیاه فولادی",
-    category: "sheet",
-    categoryName: "ورق",
-    factory: "فولاد مبارکه",
-    price: 0,
-    priceOnRequest: true,
-    inventory: "inquire",
-    active: true,
-  },
-];
+
 ---
 
 <BaseLayout title="مدیریت محصولات | پنل مدیریت ASIN STILL">
-  <main class="admin-shell" dir="rtl">
+  <div class="admin-shell" dir="rtl" data-base={base}>
     <aside class="sidebar">
       <a class="brand" href={`${base}admin/`}>
         <span class="brand-mark">A</span>
@@ -64,10 +35,15 @@ const demoProducts = [
       <header class="topbar">
         <div>
           <span class="eyebrow">مدیریت فروشگاه</span>
-          <h1>مدیریت محصولات</h1>
+          <h1>مدیریت محصولات تست</h1>
           <p>محصولات فروشگاه را مشاهده و مدیریت کن.</p>
         </div>
-        <span class="admin-chip"><span></span> پنل مدیریت</span>
+        <div class="admin-actions">
+  <span class="admin-chip"><span></span> پنل مدیریت</span>
+  <button id="admin-sign-out" class="sign-out-button" type="button">
+    خروج از حساب
+  </button>
+</div>
       </header>
 
       <section class="toolbar">
@@ -107,7 +83,12 @@ const demoProducts = [
             <h2>فهرست محصولات</h2>
             <p>برای تغییر مشخصات، گزینه ویرایش را انتخاب کن.</p>
           </div>
-          <span id="result-count" class="result-count">۰ محصول</span>
+          <div class="table-heading-actions">
+            <button id="export-excel" type="button" class="export-excel">
+              ↓ دریافت فایل اکسل
+            </button>
+            <span id="result-count" class="result-count">۰ محصول</span>
+          </div>
         </div>
 
         <div class="table-scroll">
@@ -134,12 +115,11 @@ const demoProducts = [
         </div>
       </section>
 
-      <p class="notice">
-        توجه: این نسخه آزمایشی است. تغییرات فعلاً در حافظه مرورگر همین دستگاه ذخیره می‌شوند
-        و هنوز به فهرست محصولات عمومی سایت یا پایگاه داده متصل نیستند.
+      <p class="notice" id="connection-notice" role="status">
+        در حال بررسی دسترسی مدیر و دریافت محصولات از پایگاه داده...
       </p>
     </section>
-  </main>
+  </div>
 
   <div id="product-modal" class="modal" hidden>
     <div class="modal-backdrop" data-close></div>
@@ -193,6 +173,74 @@ const demoProducts = [
           <input id="product-price" type="number" min="0" step="1" placeholder="مثلاً ۳۲۴۰۰" />
         </label>
 
+        
+<div class="form-grid">
+  <label class="check-row">
+    <input id="product-best-seller" type="checkbox" />
+    محصول پرفروش است
+  </label>
+
+  <label class="check-row">
+    <input id="product-discount-enabled" type="checkbox" />
+    تخفیف برای محصول فعال باشد
+  </label>
+</div>
+
+<label id="old-price-field" hidden>
+  قیمت قبلی هر کیلو به تومان
+  <input
+    id="product-old-price"
+    type="number"
+    min="1"
+    step="1"
+    placeholder="مثلاً ۴۰۰۰۰"
+  />
+  <small>قیمت قبلی باید بیشتر از قیمت فعلی باشد.</small>
+</label>
+
+
+
+        
+<label>
+  توضیحات محصول
+  <textarea
+    id="product-description"
+    rows="4"
+    maxlength="2000"
+    placeholder="توضیحات محصول، کاربرد و شرایط تأمین..."
+  ></textarea>
+</label>
+
+<label>
+  آدرس تصویر اصلی محصول
+  <input
+    id="product-image"
+    type="url"
+    placeholder="https://example.com/product.jpg"
+  />
+</label>
+
+<label>
+  آدرس تصاویر گالری
+  <textarea
+    id="product-gallery"
+    rows="3"
+    placeholder="آدرس هر تصویر را در یک خط وارد کن"
+  ></textarea>
+  <small>هر آدرس تصویر را در یک خط جداگانه وارد کن.</small>
+</label>
+
+<label>
+  مشخصات فنی
+  <textarea
+    id="product-specifications"
+    rows="5"
+    placeholder="نوع محصول: میلگرد آجدار&#10;سایز: ۱۴ میلی‌متر&#10;گرید: A3"
+  ></textarea>
+  <small>هر خط را با قالب «عنوان: مقدار» وارد کن.</small>
+</label>
+
+
         <label>
           وضعیت موجودی
           <select id="product-inventory">
@@ -217,8 +265,10 @@ const demoProducts = [
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-  <script define:vars={{ demoProducts }}>
-    const STORAGE_KEY = "asin-admin-products-v1";
+  <script>
+    import { supabase } from "../../lib/supabase";
+    import * as XLSX from "xlsx";
+
     const categoryNames = {
       rebar: "میلگرد",
       beam: "تیرآهن",
@@ -244,33 +294,98 @@ const demoProducts = [
     const $ = (id) => document.getElementById(id);
     const modal = $("product-modal");
     const form = $("product-form");
-    const body = $("products-body");
-    let products = [];
 
-    function loadProducts() {
-      try {
-        const saved = localStorage.getItem(STORAGE_KEY);
-        products = saved ? JSON.parse(saved) : demoProducts;
-        if (!Array.isArray(products)) products = demoProducts;
-      } catch {
-        products = demoProducts;
-      }
-      saveProducts();
-      render();
+    async function handleAdminSignOut() {
+  const button = $("admin-sign-out");
+
+  if (!window.confirm("از پنل مدیریت خارج می‌شوید؟")) {
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = "در حال خروج...";
+
+  try {
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+      throw error;
     }
 
-    function saveProducts() {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
+    const { data, error: sessionError } =
+      await supabase.auth.getSession();
+
+    if (sessionError) {
+      throw sessionError;
+    }
+
+    if (data.session) {
+      throw new Error("نشست کاربری هنوز فعال است.");
+    }
+
+    goTo("account/signin/");
+  } catch (error) {
+    console.error("Admin sign-out failed:", error);
+    showError("خروج از حساب انجام نشد", error);
+
+    button.disabled = false;
+    button.textContent = "خروج از حساب";
+  }
+}
+
+    const body = $("products-body");
+    const base = document.querySelector(".admin-shell")?.dataset.base || "/";
+    let products = [];
+    let busy = false;
+
+    function goTo(path) {
+      const prefix = base.endsWith("/") ? base : `${base}/`;
+      window.location.href = `${prefix}${path}`;
     }
 
     function formatNumber(value) {
       return Number(value || 0).toLocaleString("fa-IR");
     }
 
+    function normalizeProduct(row) {
+      return {
+        ...row,
+        id: Number(row.id),
+        price: Number(row.price || 0),
+        priceOnRequest: Boolean(row.price_on_request),
+        categoryName: categoryNames[row.category] || "سایر",
+      };
+    }
+
     function priceText(product) {
       return product.priceOnRequest
         ? "استعلام قیمت"
         : `${formatNumber(product.price)} تومان`;
+    }
+
+    function setBusy(value) {
+      busy = value;
+      [$("add-product"), ...form.querySelectorAll("button")].forEach((button) => {
+        if (button) button.disabled = value;
+      });
+    }
+
+    function showToast(message) {
+      const toast = $("toast");
+      toast.textContent = message;
+      toast.classList.add("visible");
+      window.setTimeout(() => toast.classList.remove("visible"), 3000);
+    }
+
+    function showError(prefix, error) {
+      console.error(prefix, error);
+      showToast(`${prefix}${error?.message ? `: ${error.message}` : ""}`);
+    }
+
+    function escapeHTML(value) {
+      return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+      })[char]);
     }
 
     function render() {
@@ -282,70 +397,144 @@ const demoProducts = [
       );
 
       $("total-count").textContent = formatNumber(products.length);
-      $("active-count").textContent = formatNumber(products.filter(p => p.active).length);
-      $("quote-count").textContent = formatNumber(products.filter(p => p.priceOnRequest).length);
-      $("unavailable-count").textContent = formatNumber(products.filter(p => p.inventory === "unavailable").length);
+      $("active-count").textContent = formatNumber(products.filter((p) => p.active).length);
+      $("quote-count").textContent = formatNumber(products.filter((p) => p.priceOnRequest).length);
+      $("unavailable-count").textContent = formatNumber(products.filter((p) => p.inventory === "unavailable").length);
       $("result-count").textContent = `${formatNumber(filtered.length)} محصول`;
       $("empty-state").hidden = filtered.length > 0;
 
-      body.innerHTML = filtered.map(product => `
+      body.innerHTML = filtered.map((product) => `
         <tr>
           <td>
             <div class="product-name">
               <span class="product-icon">▤</span>
-              <div><strong>${escapeHTML(product.name)}</strong><small>شناسه: ${formatNumber(product.id)}</small></div>
+              <div class="product-name-details">
+                
+                <strong>${escapeHTML(product.name)}</strong>
+                <div class="product-badges">
+                  ${product.is_best_seller ? '<span class="product-badge best-seller">★ پرفروش</span>' : ""}
+                  ${product.discount_enabled ? '<span class="product-badge discount">٪ تخفیف‌دار</span>' : ""}
+                </div>
+
+                <small><span>شناسه محصول</span><bdi>${product.id}</bdi></small>
+              </div>
             </div>
           </td>
-          <td>${escapeHTML(product.categoryName || categoryNames[product.category] || "سایر")}</td>
+          <td>${escapeHTML(product.categoryName)}</td>
           <td>${escapeHTML(product.factory || "—")}</td>
           <td class="${product.priceOnRequest ? "quote-price" : "price"}">${escapeHTML(priceText(product))}</td>
           <td><span class="status ${inventoryClasses[product.inventory] || "amber"}">${inventoryNames[product.inventory] || "استعلام موجودی"}</span></td>
           <td><button class="toggle ${product.active ? "on" : ""}" data-toggle="${product.id}" aria-label="تغییر وضعیت فعال محصول">${product.active ? "فعال" : "غیرفعال"}</button></td>
-          <td>
-            <div class="actions">
-              <button class="edit-button" data-edit="${product.id}">ویرایش</button>
-              <button class="delete-button" data-delete="${product.id}">حذف</button>
-            </div>
-          </td>
+          <td><div class="actions"><button class="edit-button" data-edit="${product.id}">ویرایش</button><button class="delete-button" data-delete="${product.id}">حذف</button></div></td>
         </tr>
       `).join("");
     }
 
-    function escapeHTML(value) {
-      return String(value ?? "").replace(/[&<>"']/g, char => ({
-        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
-      })[char]);
+    async function ensureAdmin() {
+      const { data: { user }, error: userError } = await supabase.auth.getUser();
+      if (userError) throw userError;
+      if (!user) {
+        goTo("account/signin/");
+        return false;
+      }
+
+      const { data: profile, error: profileError } = await supabase
+        .from("profiles")
+        .select("role")
+        .eq("id", user.id)
+        .maybeSingle();
+
+      if (profileError) throw profileError;
+      if (profile?.role !== "admin") {
+        showToast("این بخش فقط برای مدیر سایت قابل دسترسی است.");
+        window.setTimeout(() => goTo(""), 1400);
+        return false;
+      }
+      return true;
     }
 
-    function showToast(message) {
-      const toast = $("toast");
-      toast.textContent = message;
-      toast.classList.add("visible");
-      window.setTimeout(() => toast.classList.remove("visible"), 2600);
+    async function loadProducts() {
+      setBusy(true);
+      $("connection-notice").textContent = "در حال دریافت محصولات از Supabase...";
+      try {
+        const allowed = await ensureAdmin();
+        if (!allowed) return;
+
+        
+      const { data, error } = await supabase
+        .from("products")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+        if (error) throw error;
+
+        products = (data || []).map(normalizeProduct);
+        render();
+        $("connection-notice").textContent = "اتصال به پایگاه داده برقرار است؛ تغییرات این صفحه مستقیماً در Supabase ذخیره می‌شوند.";
+      } catch (error) {
+        $("connection-notice").textContent = "دریافت محصولات ناموفق بود. تنظیمات Supabase و مجوزهای جدول products را بررسی کن.";
+        showError("خطا در دریافت محصولات", error);
+      } finally {
+        setBusy(false);
+      }
     }
 
-    function updatePriceField() {
-      const isQuote = $("product-price-mode").value === "quote";
-      $("price-field").hidden = isQuote;
-      $("product-price").required = !isQuote;
-    }
 
-    function openModal(product = null) {
-      form.reset();
-      $("product-id").value = product?.id ?? "";
-      $("modal-title").textContent = product ? "ویرایش محصول" : "افزودن محصول";
-      $("product-name").value = product?.name ?? "";
-      $("product-category").value = product?.category ?? "rebar";
-      $("product-factory").value = product?.factory ?? "";
-      $("product-price-mode").value = product?.priceOnRequest ? "quote" : "fixed";
-      $("product-price").value = product?.price ?? "";
-      $("product-inventory").value = product?.inventory ?? "available";
-      $("product-active").checked = product?.active ?? true;
-      updatePriceField();
-      modal.hidden = false;
-      document.body.classList.add("modal-open");
-      $("product-name").focus();
-    }
+      function updatePriceField() {
+        const isQuote = $("product-price-mode").value === "quote";
+        const discountEnabled = $("product-discount-enabled").checked;
+
+        $("price-field").hidden = isQuote;
+        $("product-price").required = !isQuote;
+
+        $("old-price-field").hidden = isQuote || !discountEnabled;
+        $("product-old-price").required = !isQuote && discountEnabled;
+      }
+
+
+
+function openModal(product = null) {
+  form.reset();
+
+  $("product-id").value = product?.id ?? "";
+  $("modal-title").textContent = product ? "ویرایش محصول" : "افزودن محصول";
+
+  $("product-name").value = product?.name ?? "";
+  $("product-category").value = product?.category ?? "rebar";
+  $("product-factory").value = product?.factory ?? "";
+
+  $("product-price-mode").value = product?.priceOnRequest ? "quote" : "fixed";
+  $("product-price").value = product?.price ?? "";
+
+  
+  $("product-best-seller").checked = product?.is_best_seller ?? false;
+  $("product-discount-enabled").checked = product?.discount_enabled ?? false;
+  $("product-old-price").value = product?.old_price ?? "";
+
+
+  $("product-inventory").value = product?.inventory ?? "available";
+  $("product-active").checked = product?.active ?? true;
+
+  $("product-description").value = product?.description ?? "";
+  $("product-image").value = product?.image ?? "";
+
+  $("product-gallery").value = Array.isArray(product?.gallery)
+    ? product.gallery.join("\n")
+    : "";
+
+  $("product-specifications").value = Array.isArray(product?.specifications)
+    ? product.specifications
+        .map((item) => `${item.label}: ${item.value}`)
+        .join("\n")
+    : "";
+
+  updatePriceField();
+
+  modal.hidden = false;
+  document.body.classList.add("modal-open");
+  $("product-name").focus();
+}
+
 
     function closeModal() {
       modal.hidden = true;
@@ -353,90 +542,314 @@ const demoProducts = [
     }
 
     $("add-product").addEventListener("click", () => openModal());
+    $("admin-sign-out").addEventListener("click", handleAdminSignOut);
     $("close-modal").addEventListener("click", closeModal);
     $("cancel-modal").addEventListener("click", closeModal);
-    modal.querySelectorAll("[data-close]").forEach(el => el.addEventListener("click", closeModal));
+    modal.querySelectorAll("[data-close]").forEach((el) => el.addEventListener("click", closeModal));
     $("search").addEventListener("input", render);
+    $("export-excel").addEventListener("click", exportAllProductsToExcel);
     $("product-price-mode").addEventListener("change", updatePriceField);
+    $("product-discount-enabled").addEventListener("change", updatePriceField);
 
-    document.addEventListener("keydown", event => {
+    document.addEventListener("keydown", (event) => {
       if (event.key === "Escape" && !modal.hidden) closeModal();
     });
 
-    body.addEventListener("click", event => {
+    body.addEventListener("click", async (event) => {
       const editButton = event.target.closest("[data-edit]");
       const deleteButton = event.target.closest("[data-delete]");
       const toggleButton = event.target.closest("[data-toggle]");
 
       if (editButton) {
-        const product = products.find(p => String(p.id) === editButton.dataset.edit);
+        const product = products.find((p) => String(p.id) === editButton.dataset.edit);
         if (product) openModal(product);
+        return;
       }
 
+      if (busy) return;
+
       if (deleteButton) {
-        const product = products.find(p => String(p.id) === deleteButton.dataset.delete);
-        if (!product) return;
-        if (confirm(`محصول «${product.name}» حذف شود؟`)) {
-          products = products.filter(p => p.id !== product.id);
-          saveProducts();
+        const product = products.find((p) => String(p.id) === deleteButton.dataset.delete);
+        if (!product || !confirm(`محصول «${product.name}» حذف شود؟ این کار قابل بازگشت نیست.`)) return;
+        setBusy(true);
+        try {
+          const { error } = await supabase.from("products").delete().eq("id", product.id);
+          if (error) throw error;
+          products = products.filter((p) => p.id !== product.id);
           render();
-          showToast("محصول حذف شد.");
+          showToast("محصول از پایگاه داده حذف شد.");
+        } catch (error) {
+          showError("حذف محصول انجام نشد", error);
+        } finally {
+          setBusy(false);
         }
       }
 
       if (toggleButton) {
-        const product = products.find(p => String(p.id) === toggleButton.dataset.toggle);
+        const product = products.find((p) => String(p.id) === toggleButton.dataset.toggle);
         if (!product) return;
-        product.active = !product.active;
-        saveProducts();
-        render();
-        showToast(product.active ? "محصول فعال شد." : "محصول غیرفعال شد.");
+        setBusy(true);
+        try {
+          const nextActive = !product.active;
+          const { error } = await supabase.from("products")
+            .update({ active: nextActive, updated_at: new Date().toISOString() })
+            .eq("id", product.id);
+          if (error) throw error;
+          product.active = nextActive;
+          render();
+          showToast(nextActive ? "محصول فعال شد." : "محصول غیرفعال شد.");
+        } catch (error) {
+          showError("تغییر وضعیت محصول انجام نشد", error);
+        } finally {
+          setBusy(false);
+        }
       }
     });
 
-    form.addEventListener("submit", event => {
-      event.preventDefault();
+    
+form.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  if (busy) return;
 
-      const idValue = $("product-id").value;
-      const priceOnRequest = $("product-price-mode").value === "quote";
-      const category = $("product-category").value;
-      const parsedPrice = Number($("product-price").value || 0);
+  const idValue = $("product-id").value;
+  const priceOnRequest = $("product-price-mode").value === "quote";
+  const category = $("product-category").value;
+  const parsedPrice = Number($("product-price").value || 0);
+  const name = $("product-name").value.trim();
+  const factory = $("product-factory").value.trim();
 
-      if (!priceOnRequest && (!Number.isFinite(parsedPrice) || parsedPrice < 0)) {
-        showToast("قیمت واردشده معتبر نیست.");
-        return;
-      }
+  if (!priceOnRequest && (!Number.isFinite(parsedPrice) || parsedPrice < 0)) {
+    showToast("قیمت واردشده معتبر نیست.");
+    return;
+  }
+  const discountEnabled = $("product-discount-enabled").checked;
+const oldPrice = Number($("product-old-price").value || 0);
 
-      const data = {
-        id: idValue ? Number(idValue) : Date.now(),
-        name: $("product-name").value.trim(),
-        category,
-        categoryName: categoryNames[category] || "سایر",
-        factory: $("product-factory").value.trim(),
-        price: priceOnRequest ? 0 : parsedPrice,
-        priceOnRequest,
-        inventory: $("product-inventory").value,
-        active: $("product-active").checked,
-      };
+if (
+  !priceOnRequest &&
+  discountEnabled &&
+  (!Number.isFinite(oldPrice) || oldPrice <= parsedPrice)
+) {
+  showToast("قیمت قبلی باید از قیمت فعلی بیشتر باشد.");
+  return;
+}
 
-      if (!data.name || !data.factory) {
-        showToast("نام محصول و کارخانه را وارد کن.");
-        return;
-      }
+  if (!name || !factory) {
+    showToast("نام محصول و کارخانه را وارد کن.");
+    return;
+  }
 
-      if (idValue) {
-        products = products.map(p => p.id === Number(idValue) ? data : p);
-      } else {
-        products.unshift(data);
-      }
+  const description = $("product-description").value.trim();
+  const image = $("product-image").value.trim();
 
-      saveProducts();
-      render();
-      closeModal();
-      showToast(idValue ? "تغییرات ذخیره شد." : "محصول جدید اضافه شد.");
-    });
+  const gallery = $("product-gallery").value
+    .split(/\r?\n/)
+    .map((url) => url.trim())
+    .filter(Boolean);
+
+  const specifications = $("product-specifications").value
+    .split(/\r?\n/)
+    .map((line) => {
+      const separator = line.indexOf(":");
+      if (separator === -1) return null;
+
+      const label = line.slice(0, separator).trim();
+      const value = line.slice(separator + 1).trim();
+
+      return label && value ? { label, value } : null;
+    })
+    .filter(Boolean);
+
+  const slug = idValue
+    ? products.find((p) => String(p.id) === idValue)?.slug || ""
+    : "";
+
+  const payload = {
+    name,
+    category,
+    factory,
+
+    price: priceOnRequest ? 0 : parsedPrice,
+    price_on_request: priceOnRequest,
+
+    is_best_seller: $("product-best-seller").checked,
+
+    discount_enabled:
+      !priceOnRequest &&
+      $("product-discount-enabled").checked,
+
+    old_price:
+      !priceOnRequest && $("product-discount-enabled").checked
+        ? Number($("product-old-price").value)
+        : null,
+
+    inventory: $("product-inventory").value,
+
+    active: $("product-active").checked,
+    description,
+    image,
+    gallery,
+    specifications,
+    updated_at: new Date().toISOString(),
+  };
+
+  if (slug) {
+    payload.slug = slug;
+  }
+
+  setBusy(true);
+
+  try {
+    if (idValue) {
+      const { data, error } = await supabase
+        .from("products")
+        .update(payload)
+        .eq("id", Number(idValue))
+        .select("*")
+        .single();
+
+      if (error) throw error;
+
+      const updated = normalizeProduct(data);
+      products = products.map((p) => p.id === updated.id ? updated : p);
+    } else {
+      const { data, error } = await supabase
+        .from("products")
+        .insert(payload)
+        .select("*")
+        .single();
+
+      if (error) throw error;
+
+      products.unshift(normalizeProduct(data));
+    }
+
+    render();
+    closeModal();
+    showToast(
+      idValue
+        ? "تغییرات محصول در پایگاه داده ذخیره شد."
+        : "محصول جدید در پایگاه داده ثبت شد."
+    );
+  } catch (error) {
+    showError("ذخیره محصول انجام نشد", error);
+  } finally {
+    setBusy(false);
+  }
+});
+
 
     loadProducts();
+
+
+    async function exportAllProductsToExcel() {
+  const button = $("export-excel");
+
+  if (busy) {
+    showToast("لطفاً صبر کن عملیات فعلی تمام شود.");
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = "در حال دریافت محصولات...";
+
+  try {
+    // دریافت تمام محصولات از دیتابیس، مستقل از جست‌وجوی جدول
+    const allRows = [];
+    const pageSize = 1000;
+    let from = 0;
+
+    while (true) {
+      const { data, error } = await supabase
+        .from("products")
+        .select("*")
+        .order("id", { ascending: true })
+        .range(from, from + pageSize - 1);
+
+      if (error) throw error;
+
+      allRows.push(...(data || []));
+
+      if (!data || data.length < pageSize) break;
+
+      from += pageSize;
+    }
+
+    if (allRows.length === 0) {
+      showToast("محصولی برای خروجی گرفتن وجود ندارد.");
+      return;
+    }
+
+    const rows = allRows.map((p) => ({
+      "شناسه": p.id,
+      "نام محصول": p.name ?? "",
+      "دسته‌بندی": categoryNames[p.category] || "سایر",
+      "کد دسته‌بندی": p.category ?? "",
+      "کارخانه": p.factory ?? "",
+      "قیمت هر کیلو (تومان)": p.price_on_request
+        ? "استعلام قیمت"
+        : Number(p.price || 0),
+      "نیازمند استعلام قیمت": p.price_on_request ? "بله" : "خیر",
+      "موجودی": inventoryNames[p.inventory] || "استعلام موجودی",
+      "وضعیت محصول": p.active ? "فعال" : "غیرفعال",
+      "توضیحات": p.description ?? "",
+      "تصویر اصلی": p.image ?? "",
+      "گالری تصاویر": Array.isArray(p.gallery)
+        ? p.gallery.join(" | ")
+        : "",
+      "مشخصات فنی": Array.isArray(p.specifications)
+        ? p.specifications
+            .map((item) => `${item.label}: ${item.value}`)
+            .join(" | ")
+        : "",
+      "شناسه یکتا (Slug)": p.slug ?? "",
+      "تاریخ ایجاد": p.created_at ?? "",
+      "آخرین به‌روزرسانی": p.updated_at ?? "",
+    }));
+
+    const worksheet = XLSX.utils.json_to_sheet(rows);
+
+    worksheet["!cols"] = [
+      { wch: 12 },
+      { wch: 30 },
+      { wch: 20 },
+      { wch: 18 },
+      { wch: 24 },
+      { wch: 24 },
+      { wch: 20 },
+      { wch: 20 },
+      { wch: 16 },
+      { wch: 45 },
+      { wch: 35 },
+      { wch: 45 },
+      { wch: 45 },
+      { wch: 28 },
+      { wch: 24 },
+      { wch: 24 },
+    ];
+
+    worksheet["!autofilter"] = {
+      ref: XLSX.utils.encode_range({
+        s: { r: 0, c: 0 },
+        e: { r: rows.length, c: Object.keys(rows[0]).length - 1 },
+      }),
+    };
+
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "محصولات");
+
+    const date = new Date().toISOString().slice(0, 10);
+    XLSX.writeFile(workbook, `ASIN-STILL-products-${date}.xlsx`);
+
+    showToast(`فایل اکسل ${formatNumber(rows.length)} محصول آماده شد.`);
+  } catch (error) {
+    showError("ساخت فایل اکسل ناموفق بود", error);
+  } finally {
+    button.disabled = false;
+    button.innerHTML = "↓ دریافت فایل اکسل";
+  }
+}
+
   </script>
 
   <style>
@@ -498,6 +911,39 @@ const demoProducts = [
     .topbar p, .table-heading p { margin: 0; color: var(--muted); font-size: 13px; }
     .admin-chip { white-space: nowrap; display: flex; align-items: center; gap: 8px; background: white; border: 1px solid #e5eaf2; border-radius: 30px; padding: 10px 14px; font-size: 12px; }
     .admin-chip span { width: 7px; height: 7px; background: #22b981; border-radius: 50%; }
+    .admin-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sign-out-button {
+  border: 1px solid #f0cfd3;
+  border-radius: 10px;
+  padding: 10px 14px;
+  background: #fff0f1;
+  color: #c13b4c;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.sign-out-button:hover {
+  background: #ffe1e4;
+}
+
+.sign-out-button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+@media (max-width: 720px) {
+  .admin-actions {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+}
 
     .toolbar { display: flex; gap: 12px; margin-bottom: 20px; }
     .search-wrap { flex: 1; display: flex; align-items: center; gap: 10px; background: white; border: 1px solid #e1e7f0; border-radius: 11px; padding: 0 14px; color: #78869e; }
@@ -513,37 +959,317 @@ const demoProducts = [
     .stat-card strong { display: block; margin: 13px 0 8px; font-size: 27px; color: #192a47; }
     .stat-card small { font-size: 10px; }
 
-    .table-card { background: white; border: 1px solid #e4eaf3; border-radius: 15px; overflow: hidden; }
-    .table-heading { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 22px; }
-    .table-heading h2 { margin: 0 0 8px; font-size: 17px; }
-    .result-count { color: #61708a; font-size: 11px; background: #f1f4fa; border-radius: 20px; padding: 8px 12px; white-space: nowrap; }
-    .table-scroll { overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; min-width: 920px; text-align: right; }
-    th { background: #f8faff; color: #77849b; font-size: 11px; font-weight: 600; white-space: nowrap; }
-    th, td { padding: 16px 14px; border-top: 1px solid #edf0f6; }
-    td { font-size: 11px; color: #526078; white-space: nowrap; }
-    .product-name { display: flex; align-items: center; gap: 10px; }
-    .product-name strong, .product-name small { display: block; }
-    .product-name strong { color: #24334e; font-size: 12px; }
-    .product-name small { margin-top: 5px; color: #8995a8; font-size: 10px; }
-    .product-icon { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 9px; color: #4269db; background: #edf2ff; font-size: 18px; }
-    .price { color: #253653; font-weight: 700; }
-    .quote-price { color: #a56b16; font-weight: 700; }
-    .status { display: inline-block; border-radius: 20px; padding: 6px 9px; font-size: 10px; }
-    .green { color: #13845b; background: #e8f8f0; }
-    .red { color: #c13b4c; background: #fff0f1; }
-    .amber { color: #9c6a12; background: #fff5df; }
-    .toggle { min-width: 62px; border: 1px solid #e4e8ef; background: #f5f6f9; color: #7e8797; padding: 7px 9px; border-radius: 8px; font-size: 10px; }
-    .toggle.on { background: #e8f8f0; border-color: #c5eedb; color: #13845b; }
-    .actions { display: flex; gap: 7px; }
-    .edit-button, .delete-button { background: transparent; border: 1px solid #e4e8ef; padding: 7px 9px; border-radius: 7px; font-size: 10px; }
-    .edit-button { color: #315ee8; }
-    .delete-button { color: #c13b4c; }
-    .empty-state { padding: 45px 20px; text-align: center; }
-    .empty-state span { display: block; color: #9caed1; font-size: 34px; }
-    .empty-state strong { display: block; margin: 10px 0; }
-    .empty-state p { color: var(--muted); font-size: 12px; }
-    .notice { margin-top: 16px; padding: 14px 16px; border-radius: 10px; background: #fff7e6; color: #8b661c; font-size: 11px; line-height: 2; }
+
+/* فهرست محصولات - خوانایی بیشتر */
+.table-card {
+  background: #fff;
+  border: 1px solid #d8e1ee;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(24, 45, 80, 0.06);
+}
+
+.table-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding: 24px;
+  background: #fff;
+  border-bottom: 1px solid #e1e8f1;
+}
+
+.table-heading h2 {
+  margin: 0 0 10px;
+  color: #152641;
+  font-size: 21px;
+  font-weight: 800;
+}
+
+.table-heading p {
+  margin: 0;
+  color: #53647c;
+  font-size: 14px;
+  line-height: 2;
+}
+
+.result-count {
+  padding: 10px 15px;
+  border-radius: 9px;
+  background: #eaf1ff;
+  border: 1px solid #d1dfff;
+  color: #1946ae;
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+
+/* جدول محصولات - سفید و طوسی مینیمال */
+.table-scroll {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: visible;
+  scrollbar-width: thin;
+  scrollbar-color: #c8cdd4 #f3f4f6;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+}
+
+.table-scroll table {
+  display: table;
+  width: 100%;
+  min-width: 1000px;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: auto;
+  text-align: right;
+  font-family: "Estedad", "Vazirmatn", Tahoma, sans-serif;
+}
+
+/* سرستون‌ها */
+.table-scroll thead th {
+  padding: 16px 15px;
+  background: #f3f4f6;
+  color: #374151;
+  border-bottom: 1px solid #e1e4e8;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* سلول‌های جدول */
+.table-scroll tbody td {
+  padding: 17px 15px;
+  color: #4b5563;
+  background: #ffffff;
+  border-bottom: 1px solid #eceef1;
+  font-size: 13px;
+  line-height: 1.9;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.table-scroll tbody tr:nth-child(even) td {
+  background: #fafafa;
+}
+
+.table-scroll tbody tr:hover td {
+  background: #f1f3f5;
+}
+
+.table-scroll tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+/* نام محصول */
+.table-scroll .product-name {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-width: 220px;
+}
+
+.table-scroll .product-name strong {
+  display: block;
+  max-width: 280px;
+  color: #111827 !important;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.9;
+  white-space: normal;
+  opacity: 1 !important;
+  visibility: visible !important;
+  text-shadow: none;
+}
+
+.table-scroll .product-name small {
+  display: block;
+  margin-top: 4px;
+  color: #5b6472 !important;
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.table-scroll .product-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 38px;
+  width: 38px;
+  height: 38px;
+  border: 1px solid #e5e7eb;
+  border-radius: 9px;
+  color: #555e6b;
+  background: #f3f4f6;
+  font-size: 19px;
+}
+
+/* قیمت */
+.table-scroll .price {
+  color: #374151;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.table-scroll .quote-price {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 6px;
+  color: #525a66;
+  background: #f0f1f3;
+  border: 1px solid #e2e4e8;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* وضعیت موجودی */
+.table-scroll .status {
+  display: inline-block;
+  padding: 5px 9px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.table-scroll .green {
+  color: #28734b;
+  background: #edf6f0;
+  border-color: #d7e9dd;
+}
+
+.table-scroll .red {
+  color: #a33c46;
+  background: #fbefef;
+  border-color: #f0dada;
+}
+
+.table-scroll .amber {
+  color: #876a30;
+  background: #f8f4e9;
+  border-color: #ece3cc;
+}
+
+/* وضعیت فعال و غیرفعال */
+.table-scroll .toggle {
+  min-width: 72px;
+  padding: 7px 10px;
+  border: 1px solid #e1e4e8;
+  border-radius: 7px;
+  background: #f3f4f6;
+  color: #646b75;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.table-scroll .toggle.on {
+  color: #28734b;
+  background: #edf6f0;
+  border-color: #d7e9dd;
+}
+
+.table-scroll .toggle:hover {
+  border-color: #c5cad2;
+}
+
+/* دکمه‌های عملیات */
+.table-scroll .actions {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.table-scroll .edit-button,
+.table-scroll .delete-button {
+  padding: 8px 11px;
+  border: 1px solid #e1e4e8;
+  border-radius: 7px;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.table-scroll .edit-button {
+  color: #424b57;
+  background: #f5f6f7;
+}
+
+.table-scroll .edit-button:hover {
+  color: #20252d;
+  background: #e9ebee;
+  border-color: #d1d5db;
+}
+
+.table-scroll .delete-button {
+  color: #a33c46;
+  background: #ffffff;
+  border-color: #ead9db;
+}
+
+.table-scroll .delete-button:hover {
+  color: #8f2632;
+  background: #fbefef;
+  border-color: #e7c7cb;
+}
+
+.table-scroll .edit-button:disabled,
+.table-scroll .delete-button:disabled,
+.table-scroll .toggle:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
+
+
+  /* حالت بدون نتیجه */
+  .empty-state {
+  padding: 48px 20px;
+  text-align: center;
+  color: #34445f;
+  }
+
+  .empty-state span {
+  display: block;
+  color: #8ca5d5;
+  font-size: 38px;
+  }
+
+  .empty-state strong {
+  display: block;
+  margin: 12px 0 8px;
+  font-size: 16px;
+  font-weight: 800;
+  }
+
+  .empty-state p {
+  margin: 0;
+  color: #748198;
+  font-size: 13px;
+  line-height: 2;
+  }
+
+  /* پیام اتصال به پایگاه داده */
+  .notice {
+  margin-top: 18px;
+  padding: 15px 18px;
+  border: 1px solid #dce7ff;
+  border-radius: 11px;
+  background: #edf4ff;
+  color: #294c91;
+  font-size: 12px;
+  line-height: 2;
+  }
+
 
     .modal[hidden] { display: none; }
     .modal { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 16px; }
@@ -554,7 +1280,34 @@ const demoProducts = [
     .icon-button { border: 0; background: #f0f3f8; color: #5b6880; border-radius: 9px; width: 35px; height: 35px; font-size: 25px; }
     form { display: grid; gap: 15px; }
     form label { display: grid; gap: 8px; color: #34435c; font-size: 12px; font-weight: 700; }
-    form input:not([type="checkbox"]), form select { width: 100%; box-sizing: border-box; min-width: 0; border: 1px solid #dce3ee; border-radius: 9px; background: white; padding: 12px; font: inherit; font-size: 12px; outline: none; }
+    
+form input:not([type="checkbox"]),
+form select,
+form textarea {
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
+  border: 1px solid #dce3ee;
+  border-radius: 9px;
+  background: white;
+  padding: 12px;
+  font-family: "Estedad", Tahoma, sans-serif;
+  font-size: 12px;
+  outline: none;
+}
+
+form textarea {
+  resize: vertical;
+  line-height: 1.9;
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+  border-color: #6687ef;
+  box-shadow: 0 0 0 3px #315ee817;
+}
+
     form input:focus, form select:focus { border-color: #6687ef; box-shadow: 0 0 0 3px #315ee817; }
     .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .check-row { display: flex; align-items: center; gap: 10px; }
@@ -590,5 +1343,384 @@ const demoProducts = [
       .form-grid { grid-template-columns: 1fr; }
       .modal-panel { padding: 20px 16px; }
     }
+
+
+
+    
+/* دکمه ذخیره محصول: واضح و برجسته */
+#product-form button[type="submit"] {
+  display: block;
+  width: 100%;
+  min-height: 50px;
+  margin-top: 16px;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 10px;
+  background: #1749d1;
+  color: #ffffff;
+  font-family: "Estedad", Tahoma, sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(23, 73, 209, 0.22);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+#product-form button[type="submit"]:hover {
+  background: #1039ac;
+  transform: translateY(-1px);
+}
+
+#product-form button[type="submit"]:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+
+
+
+/* اصلاح وضوح تمام اطلاعات دریافتی از Supabase */
+.table-scroll tbody td,
+.table-scroll tbody td span,
+.table-scroll tbody td div,
+.table-scroll tbody td strong,
+.table-scroll tbody td small {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* متن اصلی اطلاعات محصولات */
+.table-scroll tbody td {
+  color: #303640 !important;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* نام محصول */
+.table-scroll tbody .product-name strong {
+  color: #171b22 !important;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+/* شناسه محصول و اطلاعات فرعی */
+.table-scroll tbody .product-name small {
+  color: #535d6b !important;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* قیمت محصولات */
+.table-scroll tbody td.price {
+  color: #176443 !important;
+  font-weight: 800;
+}
+
+.table-scroll tbody td.quote-price,
+.table-scroll tbody .quote-price {
+  color: #594016 !important;
+  font-weight: 700;
+}
+
+/* نام دسته‌بندی و کارخانه */
+.table-scroll tbody td:nth-child(2),
+.table-scroll tbody td:nth-child(3) {
+  color: #303640 !important;
+  font-weight: 600;
+}
+
+
+/* اصلاح خوانایی اطلاعات محصولات دریافتی از Supabase */
+:global(.admin-shell .table-card .table-scroll tbody td) {
+  color: #374151 !important;
+  -webkit-text-fill-color: #374151 !important;
+  opacity: 1 !important;
+}
+
+:global(.admin-shell .table-card .table-scroll tbody td .product-name strong) {
+  color: #111827 !important;
+  -webkit-text-fill-color: #111827 !important;
+  background: transparent !important;
+  opacity: 1 !important;
+}
+
+:global(.admin-shell .table-card .table-scroll tbody td .product-name small) {
+  color: #6b7280 !important;
+  -webkit-text-fill-color: #6b7280 !important;
+  opacity: 1 !important;
+}
+
+:global(.admin-shell .table-card .table-scroll tbody td .product-icon) {
+  color: #374151 !important;
+  -webkit-text-fill-color: #374151 !important;
+}
+
+
+/* بهبود ظاهر جدول محصولات */
+.table-card {
+  border: 1px solid #e0e7f1;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 4px 18px rgba(30, 50, 85, 0.05);
+}
+
+.table-heading {
+  padding: 20px 22px;
+  border-bottom: 1px solid #e9edf4;
+}
+
+.table-heading h2 {
+  color: #17243b;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.table-heading p {
+  line-height: 1.9;
+}
+
+.result-count {
+  color: #315ee8;
+  background: #edf2ff;
+  font-weight: 700;
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+.table-scroll table {
+  width: 100%;
+  min-width: 920px;
+  border-collapse: separate;
+  border-spacing: 0;
+  text-align: right;
+}
+
+.table-scroll th {
+  padding: 15px 16px;
+  background: #f3f6fc;
+  color: #465570;
+  font-size: 11px;
+  font-weight: 800;
+  border-bottom: 1px solid #e0e7f1;
+  white-space: nowrap;
+}
+
+:global(.admin-shell .table-scroll tbody td) {
+  padding: 14px 16px;
+  color: #374151 !important;
+  -webkit-text-fill-color: #374151 !important;
+  border-bottom: 1px solid #edf0f6;
+  font-size: 12px;
+  vertical-align: middle;
+  line-height: 1.9;
+  transition: background-color 0.15s ease;
+}
+
+:global(.admin-shell .table-scroll tbody tr:nth-child(even)) {
+  background: #fafbfe;
+}
+
+:global(.admin-shell .table-scroll tbody tr:hover td) {
+  background: #f0f5ff;
+}
+
+:global(.admin-shell .product-name) {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+:global(.admin-shell .product-name strong) {
+  color: #17243b !important;
+  -webkit-text-fill-color: #17243b !important;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+:global(.admin-shell .product-name small) {
+  margin-top: 4px;
+  color: #7b879b !important;
+  -webkit-text-fill-color: #7b879b !important;
+  font-size: 10px;
+}
+
+:global(.admin-shell .product-icon) {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: #edf2ff;
+  color: #315ee8 !important;
+  -webkit-text-fill-color: #315ee8 !important;
+}
+
+:global(.admin-shell .table-scroll tbody td.price) {
+  color: #176b4b !important;
+  -webkit-text-fill-color: #176b4b !important;
+  font-weight: 800;
+}
+
+:global(.admin-shell .table-scroll tbody td.quote-price) {
+  color: #95620b !important;
+  -webkit-text-fill-color: #95620b !important;
+  font-weight: 800;
+}
+
+:global(.admin-shell .status) {
+  padding: 6px 11px;
+  border-radius: 7px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+:global(.admin-shell .toggle) {
+  min-width: 68px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-weight: 700;
+}
+
+:global(.admin-shell .actions) {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+:global(.admin-shell .edit-button),
+:global(.admin-shell .delete-button) {
+  padding: 8px 11px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+:global(.admin-shell .edit-button:hover) {
+  background: #edf2ff;
+  border-color: #b6c7ff;
+}
+
+:global(.admin-shell .delete-button:hover) {
+  background: #fff0f1;
+  border-color: #f5bfc5;
+}
+
+@media (max-width: 720px) {
+  .table-heading {
+    padding: 16px 13px;
+  }
+
+  .table-scroll th,
+  :global(.admin-shell .table-scroll tbody td) {
+    padding: 12px 10px;
+  }
+}
+
+
+:global(.admin-shell .product-name-details) {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 7px;
+  min-width: 0;
+}
+
+:global(.admin-shell .product-name-details strong) {
+  display: block;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+:global(.admin-shell .product-name-details small) {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 3px 8px;
+  border: 1px solid #e3e8f0;
+  border-radius: 6px;
+  background: #f6f8fb;
+  color: #64748b !important;
+  font-size: 10px;
+}
+
+:global(.admin-shell .product-name-details small bdi) {
+  direction: ltr;
+  color: #334155;
+  font-weight: 700;
+}
+
+
+.table-heading-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.export-excel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border: 1px solid #b9dfca;
+  border-radius: 9px;
+  background: #edf8f1;
+  color: #176b42;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+  transition: background 0.2s ease;
+}
+
+.export-excel:hover {
+  background: #d9f0e2;
+}
+
+.export-excel:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+
+
+/* نشان‌های پرفروش و تخفیف‌دار */
+:global(.admin-shell .product-badges) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 5px;
+}
+
+:global(.admin-shell .product-badge) {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1.8;
+}
+
+:global(.admin-shell .product-badge.best-seller) {
+  color: #80530a;
+  background: #fff5d8;
+  border: 1px solid #f0dfa5;
+}
+
+:global(.admin-shell .product-badge.discount) {
+  color: #b4233b;
+  background: #fff0f2;
+  border: 1px solid #f5c7cf;
+}
+
+
+
   </style>
 </BaseLayout>

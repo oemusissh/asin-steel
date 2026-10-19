@@ -235,7 +235,23 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           ? import.meta.env.BASE_URL
           : `${import.meta.env.BASE_URL}/`;
 
-        window.location.assign(`${baseUrl}account/`);
+        const { data: profile, error: profileError } = await supabase
+  .from("profiles")
+  .select("role")
+  .eq("id", data.user.id)
+  .maybeSingle();
+
+if (profileError) {
+  console.error("Could not check user role:", profileError);
+  showAuthMessage("بررسی سطح دسترسی ناموفق بود. دوباره تلاش کن.");
+  return;
+}
+
+if (profile?.role === "admin") {
+  window.location.assign(`${baseUrl}admin/products/`);
+} else {
+  window.location.assign(`${baseUrl}account/`);
+}
       } catch (error) {
         console.error("Sign-in error:", error);
         showAuthMessage("Could not connect to the authentication service. Check your connection and try again.");

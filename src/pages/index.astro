@@ -1506,66 +1506,659 @@ const featuredProducts = [
   <AdvancedSteelCalculator />
 </section>
 
-  <!-- Shop by Category with 2-Layer Gradient and Smooth Hover -->
-  <section class="container mx-auto px-4 py-16 bg-gradient-to-b from-transparent via-gray-50/50 to-transparent dark:via-dark-900/50">
-    <div class="text-center mb-12">
-      <h2 class="text-3xl md:text-4xl font-bold mb-4 animate-on-scroll">Shop by Category</h2>
-      <p class="text-gray-600 dark:text-gray-400 animate-on-scroll">Find exactly what you need for your project</p>
-    </div>
-    
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
-      {[
-        { name: 'Cement & Concrete', icon: '🏗️', gradient: 'from-slate-400 via-gray-400 to-slate-500', count: '2,450+ items' },
-        { name: 'Steel & Metal', icon: '⚙️', gradient: 'from-gray-400 via-slate-400 to-gray-500', count: '1,890+ items' },
-        { name: 'Lumber & Wood', icon: '🪵', gradient: 'from-amber-400 via-orange-400 to-amber-500', count: '3,200+ items' },
-        { name: 'Tools', icon: '🔨', gradient: 'from-red-400 via-rose-400 to-red-500', count: '5,600+ items' },
-        { name: 'Electrical', icon: '⚡', gradient: 'from-yellow-400 via-amber-400 to-yellow-500', count: '4,100+ items' },
-        { name: 'Plumbing', icon: '🚰', gradient: 'from-blue-400 via-cyan-400 to-blue-500', count: '2,800+ items' },
-        { name: 'Paint', icon: '🎨', gradient: 'from-purple-400 via-violet-400 to-purple-500', count: '1,500+ items' },
-        { name: 'Roofing', icon: '🏠', gradient: 'from-green-400 via-emerald-400 to-green-500', count: '980+ items' }
-      ].map((cat, i) => (
-        <a 
-          href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/categories/${cat.name.toLowerCase().replace(/\s+/g, '-')}`} 
-          class={`group relative overflow-hidden rounded-3xl p-8 text-white bg-gradient-to-br ${cat.gradient} transition-all duration-500 ease-in-out hover:shadow-2xl hover:scale-[1.03] animate-on-scroll`} 
-          style={`animation-delay: ${i * 0.05}s;`}
-        >
-          <!-- Subtle Neumorphic Effect -->
-          <div class="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
-          
-          <!-- Glow Effect -->
-          <div class="absolute -inset-1 bg-gradient-to-r from-white/50 to-white/30 rounded-3xl blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-500 ease-in-out -z-10"></div>
-          
-          <div class="relative z-10">
-            <div class="text-6xl mb-3 leading-none transform group-hover:scale-110 group-hover:-translate-y-1 transition-all duration-500 ease-in-out drop-shadow-lg animate-float-slow">{cat.icon}</div>
-            <h3 class="font-bold text-lg mb-1 leading-tight drop-shadow-md">{cat.name}</h3>
-            <p class="text-white/80 text-xs font-medium">{cat.count}</p>
-          </div>
-          
-          <!-- Arrow Icon -->
-          <div class="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all duration-500 ease-in-out">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
-          </div>
+<!-- =========================================================
+       ASIN STEEL - دسته‌بندی محصولات (روشن، رنگی، فروشگاهی)
+       عکس‌ها: public/images/categories/<slug>.jpg  (نسبت ۴:۳)
+       اگر عکسی نبود، کارت با گرادیان رنگی و آیکن مقطع نمایش داده می‌شود.
+  ========================================================= -->
+  <section id="asc" dir="rtl" class="asc">
+    <div class="asc-bg" aria-hidden="true"></div>
+
+    <div class="asc-wrap">
+      <header class="asc-head">
+        <div>
+          <span class="asc-tag"><i></i>۸ دسته‌بندی اصلی آهن‌آلات</span>
+          <h2>دسته‌بندی محصولات</h2>
+          <div class="asc-rule"></div>
+          <p>مقطع مورد نیاز پروژه‌تان را انتخاب کنید و قیمت روز را استعلام بگیرید</p>
+        </div>
+        <a class="asc-all" href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/products`}>
+          مشاهده همه محصولات
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M11 17l-5-5m0 0l5-5m-5 5h12" /></svg>
         </a>
-      ))}
+      </header>
+
+      <!-- نوار متحرک -->
+      <div class="asc-ticker" aria-hidden="true">
+        <div class="asc-track">
+          {[0, 1].map(() => (
+            <span>
+              {['قیمت روز آهن‌آلات', 'ارسال به سراسر کشور', 'فاکتور رسمی', 'تضمین اصالت کالا', 'بارگیری از انبار', 'مشاوره رایگان خرید'].map((t, k) => (
+                <><em style={`color:${['#38bdf8', '#fb923c', '#34d399', '#fbbf24'][k % 4]}`}>✦</em>{t}</>
+              ))}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div class="asc-grid">
+        {[
+          { name: 'تیرآهن', en: 'I-BEAM / IPE', slug: 'beam', n: 2450, color: '#2563eb', badge: 'پرفروش', bc: '#f97316', desc: 'IPE، IPB و سایزهای پرکاربرد ساختمانی', icon: '<path pathLength="1" d="M5 4h14M5 20h14M12 4v16"/>' },
+          { name: 'میلگرد', en: 'REBAR', slug: 'rebar', n: 1890, color: '#ea580c', badge: 'پرفروش', bc: '#f97316', desc: 'میلگرد ساده و آجدار در رده‌های A2 و A3', icon: '<circle pathLength="1" cx="12" cy="12" r="7"/><circle pathLength="1" cx="12" cy="12" r="2.5"/>' },
+          { name: 'ناودانی', en: 'CHANNEL / UPN', slug: 'channel', n: 980, color: '#0891b2', badge: '', bc: '', desc: 'ناودانی استاندارد و UPN برای سازه‌ها', icon: '<path pathLength="1" d="M18 4H6v16h12"/>' },
+          { name: 'نبشی', en: 'ANGLE BAR', slug: 'angle', n: 1200, color: '#7c3aed', badge: 'موجود', bc: '#16a34a', desc: 'نبشی بال‌مساوی در سایزهای مختلف', icon: '<path pathLength="1" d="M6 4v16h12"/>' },
+          { name: 'قوطی و پروفیل', en: 'BOX TUBE', slug: 'tube', n: 3200, color: '#e11d48', badge: 'جدید', bc: '#2563eb', desc: 'قوطی و پروفیل ساختمانی و صنعتی', icon: '<rect pathLength="1" x="4.5" y="4.5" width="15" height="15" rx="1.5"/><rect pathLength="1" x="9" y="9" width="6" height="6" rx=".5"/>' },
+          { name: 'ورق فولادی', en: 'STEEL PLATE', slug: 'plate', n: 2800, color: '#d97706', badge: '', bc: '', desc: 'ورق سیاه، گالوانیزه و روغنی', icon: '<path pathLength="1" d="M3 9l9-4.5L21 9l-9 4.5L3 9z"/><path pathLength="1" d="M3 9v4l9 4.5 9-4.5V9"/>' },
+          { name: 'لوله', en: 'STEEL PIPE', slug: 'pipe', n: 1500, color: '#059669', badge: 'موجود', bc: '#16a34a', desc: 'لوله مانیسمان، درزدار و گالوانیزه', icon: '<circle pathLength="1" cx="12" cy="12" r="8"/><circle pathLength="1" cx="12" cy="12" r="4.5"/>' },
+          { name: 'تسمه', en: 'FLAT BAR', slug: 'flat', n: 750, color: '#4f46e5', badge: '', bc: '', desc: 'تسمه فولادی در ضخامت‌های مختلف', icon: '<rect pathLength="1" x="3" y="9" width="18" height="6" rx="1"/>' }
+        ].map((c, i) => (
+          <a
+            class="asc-card"
+            href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/categories/${c.slug}`}
+            style={`--i:${i};--c:${c.color};--b:${c.bc}`}
+            data-i={i}
+          >
+            <div class="asc-media">
+              <svg class="asc-ghost asc-draw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=".55" stroke-linecap="round" stroke-linejoin="round" set:html={c.icon} />
+              <img
+                src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/images/categories/${c.slug}.jpg`}
+                alt={c.name}
+                loading="lazy"
+                decoding="async"
+                onerror="this.remove()"
+              />
+              <div class="asc-wash"></div>
+              <div class="asc-tint"></div>
+              <div class="asc-beam"></div>
+              {c.badge && <span class="asc-badge" style={`background:${c.bc}`}>{c.badge}</span>}
+              <span class="asc-count" data-count={c.n}>{c.n.toLocaleString('fa-IR')}+ محصول</span>
+            </div>
+
+            <div class="asc-body">
+              <div class="asc-ico">
+                <svg class="asc-draw" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" set:html={c.icon} />
+              </div>
+              <h3>{c.name}</h3>
+              <span class="asc-en">{c.en}</span>
+              <p class="asc-desc">{c.desc}</p>
+              <div class="asc-foot">
+                <span class="asc-price"><i></i>قیمت روز</span>
+                <span class="asc-cta">
+                  مشاهده
+                  <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M11 17l-5-5m0 0l5-5m-5 5h12" /></svg>
+                </span>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <!-- نوار استعلام -->
+      <div class="asc-bar">
+        <div>
+          <strong>محصول مورد نظرتان را پیدا نکردید؟</strong>
+          <span>ابعاد و مقدار را بفرستید، قیمت روز را همان لحظه برایتان استعلام می‌کنیم.</span>
+        </div>
+        <a class="asc-bar-btn" href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/contact`}>درخواست استعلام قیمت</a>
+      </div>
     </div>
   </section>
 
-  <!-- Featured Products -->
-  <section class="container mx-auto px-4 py-12">
-    <div class="flex justify-between items-center mb-7">
-      <h2 class="text-3xl font-bold animate-on-scroll">Featured Products</h2>
-      <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/products`} class="text-primary-600 dark:text-primary-400 font-semibold hover:underline animate-on-scroll">
-        View All →
-      </a>
+  <style is:global>
+    .asc{position:relative;isolation:isolate;overflow:hidden;padding:4.5rem 1.25rem;background:#f5f8fc}
+    @media(min-width:640px){.asc{padding:5rem 2.5rem}}
+    @media(min-width:1024px){.asc{padding:5.5rem 4rem}}
+    .asc-wrap{max-width:1400px;margin:0 auto}
+
+    /* پس‌زمینه: شبکه فنی + لکه‌های رنگی شناور */
+    .asc-bg{position:absolute;inset:0;z-index:-1;
+      background-image:linear-gradient(rgba(29,79,145,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(29,79,145,.07) 1px,transparent 1px);
+      background-size:48px 48px;animation:asc-drift 18s linear infinite}
+    .asc-bg::before,.asc-bg::after{content:"";position:absolute;border-radius:50%;filter:blur(40px)}
+    .asc-bg::before{width:520px;height:520px;top:-160px;right:-120px;background:radial-gradient(circle,rgba(56,189,248,.35),transparent 70%);animation:asc-f1 9s ease-in-out infinite alternate}
+    .asc-bg::after{width:460px;height:460px;bottom:-140px;left:-120px;background:radial-gradient(circle,rgba(251,146,60,.28),transparent 70%);animation:asc-f2 11s ease-in-out infinite alternate}
+    @keyframes asc-drift{to{background-position:48px 48px}}
+    @keyframes asc-f1{to{transform:translate(-240px,150px)}}
+    @keyframes asc-f2{to{transform:translate(240px,-120px)}}
+
+    /* هدر */
+    .asc-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1rem;margin-bottom:1.6rem}
+    .asc-tag{display:inline-flex;align-items:center;gap:.6rem;padding:.4rem .9rem;border-radius:999px;background:#fff;border:1px solid #c9d8ec;font-size:.78rem;font-weight:800;color:#1d4f91}
+    .asc-tag i{width:8px;height:8px;border-radius:50%;background:#f97316;animation:asc-ping 1.6s infinite}
+    @keyframes asc-ping{0%{box-shadow:0 0 0 0 rgba(249,115,22,.65)}100%{box-shadow:0 0 0 11px rgba(249,115,22,0)}}
+    .asc-head h2{margin:.9rem 0 .5rem;font-size:clamp(1.8rem,4.2vw,2.8rem);font-weight:900;line-height:1.35;color:#0b1f3a}
+    .asc-rule{height:4px;width:120px;margin-bottom:.8rem;border-radius:99px;background:linear-gradient(90deg,#2563eb,#0891b2,#059669,#d97706,#ea580c,#2563eb);background-size:200% 100%;animation:asc-flow 4s linear infinite}
+    @keyframes asc-flow{to{background-position:-200% 0}}
+    .asc-head p{color:#475569;font-size:.95rem}
+    .asc-all{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.2rem;border-radius:12px;background:#0b1f3a;color:#fff;font-size:.9rem;font-weight:800;text-decoration:none;transition:all .4s}
+    .asc-all svg{transition:transform .4s}
+    .asc-all:hover{background:#2563eb;transform:translateY(-3px);box-shadow:0 14px 24px -12px rgba(37,99,235,.7)}
+    .asc-all:hover svg{transform:translateX(-5px)}
+
+    /* نوار متحرک */
+    .asc-ticker{overflow:hidden;direction:ltr;margin-bottom:1.8rem;border-radius:12px;background:#0b1f3a}
+    .asc-track{display:flex;width:max-content;animation:asc-marq 34s linear infinite}
+    .asc-track span{direction:rtl;padding:.75rem 0;white-space:nowrap;font-size:.85rem;font-weight:700;color:#cfe3fa}
+    .asc-track em{margin:0 1.2rem;font-style:normal}
+    @keyframes asc-marq{to{transform:translateX(-50%)}}
+
+    /* گرید و کارت */
+    .asc-grid{display:grid;gap:1rem;grid-template-columns:repeat(2,1fr)}
+    @media(min-width:900px){.asc-grid{grid-template-columns:repeat(4,1fr);gap:1.3rem}}
+    .asc-card{--mx:50%;--my:50%;position:relative;display:flex;flex-direction:column;overflow:hidden;isolation:isolate;background:#fff;
+      border:1px solid #dde5f0;border-radius:18px;color:#0b1f3a;text-decoration:none;box-shadow:0 2px 10px rgba(11,31,58,.05);
+      transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s,border-color .5s}
+    .asc-card:hover{transform:translateY(-8px);border-color:var(--c);box-shadow:0 28px 46px -22px rgba(11,31,58,.5)}
+    .asc-card::after{content:"";position:absolute;top:0;right:0;z-index:6;height:4px;width:38%;background:var(--c);transition:width .6s cubic-bezier(.2,.8,.2,1)}
+    .asc-card:hover::after{width:100%}
+    .asc-card::before{content:"";position:absolute;inset:0;z-index:5;pointer-events:none;opacity:0;transition:opacity .4s;
+      background:radial-gradient(220px circle at var(--mx) var(--my),rgba(255,255,255,.35),transparent 70%)}
+    .asc-card:hover::before{opacity:1}
+
+    /* ورود با اسکرول */
+    .asc-js .asc-card:not(.in){opacity:0}
+    .asc-js .asc-card.in{animation:asc-in .85s cubic-bezier(.2,.8,.2,1) calc(var(--i)*70ms) backwards}
+    @keyframes asc-in{from{opacity:0;transform:translateY(40px) scale(.96);clip-path:inset(0 0 100% 0)}to{opacity:1;transform:none;clip-path:inset(0)}}
+
+    /* تصویر */
+    .asc-media{position:relative;aspect-ratio:4/3;overflow:hidden;background:linear-gradient(135deg,var(--c),#0b1f3a)}
+    .asc-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+    .asc-card:hover .asc-media img{transform:scale(1.12)}
+    .asc-ghost{position:absolute;inset:16%;width:68%;height:68%;color:#fff;opacity:.22;transition:transform .8s cubic-bezier(.2,.8,.2,1),opacity .5s}
+    .asc-card:hover .asc-ghost{transform:rotate(-8deg) scale(1.1);opacity:.35}
+    .asc-wash{position:absolute;inset:0;background:var(--c);mix-blend-mode:multiply;opacity:.25}
+    .asc-tint{position:absolute;inset:0;background:linear-gradient(to top,rgba(11,31,58,.72),rgba(11,31,58,0) 60%)}
+    .asc-media::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;z-index:3;transform:skewX(-20deg);
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent)}
+    .asc-card:hover .asc-media::after{animation:asc-shine .9s ease}
+    @keyframes asc-shine{to{left:130%}}
+    .asc-beam{position:absolute;left:0;right:0;top:0;height:2px;z-index:3;opacity:0;
+      background:linear-gradient(90deg,transparent,#7dd3fc,#fff,#7dd3fc,transparent);box-shadow:0 0 14px #38bdf8}
+    .asc-card:hover .asc-beam{animation:asc-scan 1.8s ease-in-out infinite}
+    @keyframes asc-scan{0%{top:0;opacity:0}15%,85%{opacity:1}100%{top:100%;opacity:0}}
+    .asc-badge{position:absolute;top:12px;right:12px;z-index:4;padding:.28rem .7rem;border-radius:999px;color:#fff;font-size:.72rem;font-weight:800;box-shadow:0 6px 14px -4px rgba(0,0,0,.35);animation:asc-pop 2.4s ease-in-out infinite}
+    @keyframes asc-pop{50%{transform:scale(1.08)}}
+    .asc-count{position:absolute;top:12px;left:12px;z-index:4;padding:.28rem .65rem;border-radius:999px;background:rgba(255,255,255,.92);font-size:.72rem;font-weight:800;color:#0b1f3a}
+
+    /* بدنه */
+    .asc-body{position:relative;z-index:2;display:flex;flex:1;flex-direction:column;padding:0 1.1rem 1.1rem}
+    .asc-ico{position:relative;z-index:5;display:grid;place-items:center;width:54px;height:54px;margin:-27px 0 .8rem;border-radius:14px;background:#fff;color:var(--c);
+      box-shadow:0 10px 22px -8px rgba(11,31,58,.5);transition:all .5s cubic-bezier(.2,.8,.2,1)}
+    .asc-card:hover .asc-ico{background:var(--c);color:#fff;transform:translateY(-4px) rotate(-6deg)}
+    .asc-body h3{font-size:1.15rem;font-weight:800;line-height:1.5}
+    .asc-en{display:block;direction:ltr;text-align:right;font:600 10.5px ui-monospace,Menlo,monospace;letter-spacing:.2em;color:var(--c)}
+    .asc-desc{margin:.55rem 0 1rem;font-size:.8rem;line-height:1.9;color:#64748b}
+    .asc-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem;margin-top:auto;padding-top:.85rem;border-top:1px dashed #d5deea}
+    .asc-price{display:inline-flex;align-items:center;gap:.4rem;padding:.3rem .65rem;border-radius:999px;background:#ecfdf5;color:#0f766e;font-size:.74rem;font-weight:800}
+    .asc-price i{width:7px;height:7px;border-radius:50%;background:#10b981;animation:asc-ping2 1.6s infinite}
+    @keyframes asc-ping2{0%{box-shadow:0 0 0 0 rgba(16,185,129,.65)}100%{box-shadow:0 0 0 9px rgba(16,185,129,0)}}
+    .asc-cta{display:inline-flex;align-items:center;gap:.35rem;padding:.4rem .8rem;border:1.5px solid var(--c);border-radius:10px;color:var(--c);font-size:.8rem;font-weight:800;transition:all .4s}
+    .asc-cta svg{transition:transform .4s}
+    .asc-card:hover .asc-cta{background:var(--c);color:#fff}
+    .asc-card:hover .asc-cta svg{transform:translateX(-4px)}
+
+    /* رسم شدن خطوط مقطع */
+    .asc-draw *{stroke-dasharray:1;stroke-dashoffset:0}
+    .asc-card.in .asc-draw *{animation:asc-draw 1.2s cubic-bezier(.6,0,.2,1) calc(var(--i)*70ms + 350ms) backwards}
+    .asc-card:hover .asc-draw *{animation:asc-redraw 1.1s cubic-bezier(.6,0,.2,1) both}
+    @keyframes asc-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+    @keyframes asc-redraw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+
+    /* نوار استعلام */
+    .asc-bar{position:relative;overflow:hidden;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;margin-top:2rem;padding:1.4rem 1.6rem;border-radius:18px;
+      background:linear-gradient(120deg,#0b1f3a,#12335f 55%,#1d4f91);color:#fff}
+    .asc-bar::before{content:"";position:absolute;top:0;bottom:0;left:-40%;width:30%;transform:skewX(-20deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.14),transparent);animation:asc-bar 5s ease-in-out infinite}
+    @keyframes asc-bar{to{left:140%}}
+    .asc-bar div{position:relative}
+    .asc-bar strong{display:block;font-size:1.05rem;font-weight:800}
+    .asc-bar span{display:block;margin-top:.25rem;font-size:.85rem;color:#bcd4f1}
+    .asc-bar-btn{position:relative;padding:.8rem 1.5rem;border-radius:12px;background:linear-gradient(135deg,#fb923c,#ea580c);color:#fff;font-weight:800;font-size:.9rem;text-decoration:none;transition:all .4s}
+    .asc-bar-btn:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 14px 26px -10px rgba(234,88,12,.8)}
+
+    @media(prefers-reduced-motion:reduce){
+      .asc *,.asc *::before,.asc *::after{animation:none!important;transition-duration:.01ms!important}
+      .asc-js .asc-card:not(.in){opacity:1}
+    }
+  </style>
+
+  <script>
+    const sec = document.getElementById('asc');
+    if (sec) {
+      sec.classList.add('asc-js');
+
+      const reveal = (card: HTMLElement) => {
+        card.classList.add('in');
+        const el = card.querySelector<HTMLElement>('[data-count]');
+        if (!el) return;
+        const target = Number(el.dataset.count);
+        setTimeout(() => {
+          const t0 = performance.now();
+          const tick = (t: number) => {
+            const r = Math.min((t - t0) / 1400, 1);
+            const v = Math.round(target * (1 - Math.pow(1 - r, 3)));
+            el.textContent = `${v.toLocaleString('fa-IR')}+ محصول`;
+            if (r < 1) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+        }, Number(card.dataset.i) * 70);
+      };
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              reveal(e.target as HTMLElement);
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.15 }
+      );
+
+      sec.querySelectorAll<HTMLElement>('.asc-card').forEach((card) => {
+        io.observe(card);
+        card.addEventListener('pointermove', (e: PointerEvent) => {
+          const r = card.getBoundingClientRect();
+          card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+          card.style.setProperty('--my', `${e.clientY - r.top}px`);
+        });
+      });
+    }
+  </script>
+
+<!-- =========================================================
+       ASIN STEEL - محصولات ویژه (اسلایدر روی باند آبی + موج جداکننده)
+       عکس‌ها: public/images/products/<id>.jpg (بهتر است PNG/JPG با پس‌زمینه سفید یا شفاف)
+       بدون عکس، آیکن مقطع رنگی نمایش داده می‌شود.
+       قیمت‌ها نمونه‌اند؛ price: null یعنی «استعلام قیمت».
+  ========================================================= -->
+  <section id="afp" dir="rtl" class="afp">
+    <div class="afp-bg" aria-hidden="true"></div>
+
+    <!-- موج جداکننده: رنگ پایه موج باید با پس‌زمینه بخش دسته‌بندی (#f5f8fc) یکی باشد -->
+    <div class="afp-wave" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="afp-hub" aria-hidden="true">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path pathLength="1" d="M5 4h14M5 20h14M12 4v16" />
+      </svg>
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-      {featuredProducts.map(product => (
-        <ProductCard {...product} />
-      ))}
+
+    <div class="afp-wrap">
+      <header class="afp-head">
+        <div>
+          <span class="afp-tag"><i></i>منتخب آسین استیل</span>
+          <h2>محصولات ویژه</h2>
+          <div class="afp-rule"></div>
+          <p>پرفروش‌ترین مقاطع فولادی با ارسال به سراسر کشور و فاکتور رسمی</p>
+        </div>
+        <div class="afp-nav">
+          <button type="button" data-dir="prev" aria-label="قبلی">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+          </button>
+          <button type="button" data-dir="next" aria-label="بعدی">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M11 17l-5-5m0 0l5-5m-5 5h12" /></svg>
+          </button>
+        </div>
+      </header>
+
+      <div class="afp-tabs" role="tablist">
+        <button class="on" data-f="all">همه</button>
+        <button data-f="best">پرفروش‌ها</button>
+        <button data-f="sale">تخفیف‌دار</button>
+        <button data-f="stock">موجود در انبار</button>
+      </div>
+
+      <div class="afp-track" draggable="false">
+        <!-- کارت اول: دعوت به کاتالوگ کامل -->
+        <a class="afp-promo" href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/products`} draggable="false">
+          <span class="afp-pc afp-pc1"></span><span class="afp-pc afp-pc2"></span>
+          <div>
+            <small>کاتالوگ کامل</small>
+            <h3>همه مقاطع فولادی در یک نگاه</h3>
+          </div>
+          <div class="afp-pstack" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M5 4h14M5 20h14M12 4v16" /></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="4.5" y="4.5" width="15" height="15" rx="1.5" /><rect x="9" y="9" width="6" height="6" rx=".5" /></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="8" /><circle cx="12" cy="12" r="4.5" /></svg>
+          </div>
+          <span class="afp-pbtn">
+            مشاهده همه محصولات
+            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M11 17l-5-5m0 0l5-5m-5 5h12" /></svg>
+          </span>
+        </a>
+
+        {[
+          { id: 'ipe-18', cat: 'تیرآهن', name: 'تیرآهن IPE 18', specs: ['ST37', 'شاخه ۱۲ متری', 'ساختمانی'], price: 7900000, oldPrice: 8600000, unit: 'شاخه', inStock: true, badge: 'پرفروش', bc: '#f97316', color: '#2563eb', icon: '<path pathLength="1" d="M5 4h14M5 20h14M12 4v16"/>' },
+          { id: 'rebar-16', cat: 'میلگرد', name: 'میلگرد آجدار سایز ۱۶', specs: ['A3', 'شاخه ۱۲ متری', 'آجدار'], price: 1450000, oldPrice: null, unit: 'شاخه', inStock: true, badge: 'پرفروش', bc: '#f97316', color: '#ea580c', icon: '<circle pathLength="1" cx="12" cy="12" r="7"/><circle pathLength="1" cx="12" cy="12" r="2.5"/>' },
+          { id: 'channel-10', cat: 'ناودانی', name: 'ناودانی ۱۰', specs: ['ST37', 'شاخه ۱۲ متری', 'سازه‌ای'], price: null, oldPrice: null, unit: 'شاخه', inStock: true, badge: '', bc: '', color: '#0891b2', icon: '<path pathLength="1" d="M18 4H6v16h12"/>' },
+          { id: 'angle-5', cat: 'نبشی', name: 'نبشی بال‌مساوی ۵', specs: ['ST37', 'شاخه ۶ متری', 'صنعتی'], price: 1980000, oldPrice: 2200000, unit: 'شاخه', inStock: true, badge: '', bc: '', color: '#7c3aed', icon: '<path pathLength="1" d="M6 4v16h12"/>' },
+          { id: 'tube-4040', cat: 'قوطی و پروفیل', name: 'قوطی ۴۰×۴۰', specs: ['ST37', 'شاخه ۶ متری', 'ساختمانی'], price: null, oldPrice: null, unit: 'شاخه', inStock: true, badge: 'جدید', bc: '#2563eb', color: '#e11d48', icon: '<rect pathLength="1" x="4.5" y="4.5" width="15" height="15" rx="1.5"/><rect pathLength="1" x="9" y="9" width="6" height="6" rx=".5"/>' },
+          { id: 'plate-5', cat: 'ورق فولادی', name: 'ورق سیاه ضخامت ۵ میلی‌متر', specs: ['ST37', 'ورق سیاه', 'برش‌کاری'], price: null, oldPrice: null, unit: 'کیلوگرم', inStock: true, badge: '', bc: '', color: '#d97706', icon: '<path pathLength="1" d="M3 9l9-4.5L21 9l-9 4.5L3 9z"/><path pathLength="1" d="M3 9v4l9 4.5 9-4.5V9"/>' },
+          { id: 'pipe-2', cat: 'لوله', name: 'لوله مانیسمان ۲ اینچ', specs: ['ST37', 'بدون درز', 'صنعتی'], price: null, oldPrice: null, unit: 'شاخه', inStock: false, badge: '', bc: '', color: '#059669', icon: '<circle pathLength="1" cx="12" cy="12" r="8"/><circle pathLength="1" cx="12" cy="12" r="4.5"/>' },
+          { id: 'flat-440', cat: 'تسمه', name: 'تسمه فولادی ۴×۴۰', specs: ['ST37', 'شاخه ۶ متری', 'ساختمانی'], price: 620000, oldPrice: null, unit: 'شاخه', inStock: true, badge: '', bc: '', color: '#4f46e5', icon: '<rect pathLength="1" x="3" y="9" width="18" height="6" rx="1"/>' }
+        ].map((p, i) => {
+          const off = p.oldPrice && p.price ? Math.round((1 - p.price / p.oldPrice) * 100) : 0;
+          const tags = [p.badge === 'پرفروش' ? 'best' : '', off ? 'sale' : '', p.inStock ? 'stock' : ''].filter(Boolean).join(' ');
+          return (
+            <a
+              class={`afp-card${p.inStock ? '' : ' oos'}`}
+              href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/products/${p.id}`}
+              style={`--i:${i};--c:${p.color}`}
+              data-tags={tags}
+              draggable="false"
+            >
+              <div class="afp-media">
+                <span class="afp-orb"></span>
+                <svg class="afp-ghost afp-draw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=".7" stroke-linecap="round" stroke-linejoin="round" set:html={p.icon} />
+                <img
+                  src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/images/products/${p.id}.jpg`}
+                  alt={p.name}
+                  loading="lazy"
+                  decoding="async"
+                  draggable="false"
+                  onerror="this.remove()"
+                />
+                <div class="afp-badges">
+                  {p.badge && <span class="afp-bd" style={`background:${p.bc}`}>{p.badge}</span>}
+                  {off > 0 && <span class="afp-off">{off.toLocaleString('fa-IR')}٪ تخفیف</span>}
+                </div>
+                <span class={`afp-stock ${p.inStock ? 'ok' : 'no'}`}><i></i>{p.inStock ? 'موجود در انبار' : 'ناموجود'}</span>
+              </div>
+
+              <div class="afp-body">
+                <span class="afp-cat">{p.cat}</span>
+                <h3>{p.name}</h3>
+                <ul class="afp-specs">
+                  {p.specs.map((s) => <li>{s}</li>)}
+                </ul>
+
+                <div class="afp-pr">
+                  {p.price ? (
+                    <>
+                      {p.oldPrice && <del>{p.oldPrice.toLocaleString('fa-IR')}</del>}
+                      <div><b data-price={p.price}>{p.price.toLocaleString('fa-IR')}</b> <small>تومان / {p.unit}</small></div>
+                    </>
+                  ) : (
+                    <>
+                      <div><b class="afp-inq">استعلام قیمت</b></div>
+                      <small>قیمت روز، بر اساس تناژ</small>
+                    </>
+                  )}
+                </div>
+
+                <span class="afp-cta">
+                  <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h2l2.4 10.2a1 1 0 001 .8h8.2a1 1 0 001-.7L19 8H6M10 19.5h.01M17 19.5h.01" /></svg>
+                  {p.inStock ? (p.price ? 'مشاهده و سفارش' : 'استعلام قیمت') : 'اطلاع از موجودی'}
+                </span>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+
+      <div class="afp-prog"><b></b></div>
     </div>
   </section>
+
+  <style is:global>
+    .afp{position:relative;isolation:isolate;overflow:hidden;padding:9rem 0 4.5rem;color:#fff;
+      background:linear-gradient(135deg,#0b2a57 0%,#1550a8 50%,#2b8be0 100%)}
+    @media(min-width:1024px){.afp{padding-bottom:5.5rem}}
+    .afp-wrap{position:relative;z-index:2;max-width:1400px;margin:0 auto;padding:0 1.25rem}
+    @media(min-width:640px){.afp-wrap{padding:0 2.5rem}}
+    @media(min-width:1024px){.afp-wrap{padding:0 4rem}}
+
+    /* پس‌زمینه */
+    .afp-bg{position:absolute;inset:0;z-index:-1;
+      background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);
+      background-size:48px 48px;animation:afp-drift 18s linear infinite}
+    .afp-bg::before,.afp-bg::after{content:"";position:absolute}
+    .afp-bg::before{width:520px;height:520px;bottom:-200px;left:-120px;border-radius:50%;filter:blur(50px);background:radial-gradient(circle,rgba(251,146,60,.45),transparent 70%);animation:afp-f1 11s ease-in-out infinite alternate}
+    .afp-bg::after{top:0;bottom:0;left:-30%;width:22%;transform:skewX(-20deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.1),transparent);animation:afp-streak 9s ease-in-out infinite}
+    @keyframes afp-drift{to{background-position:48px 48px}}
+    @keyframes afp-f1{to{transform:translate(300px,-120px)}}
+    @keyframes afp-streak{to{left:130%}}
+
+    /* موج جداکننده */
+    .afp-wave{position:absolute;top:-1px;left:0;right:0;height:100px;overflow:hidden;z-index:1;pointer-events:none}
+    .afp-wave i{position:absolute;left:0;right:0;height:80px;background-repeat:repeat-x;background-size:1200px 80px}
+    .afp-wave i:nth-child(1){top:24px;opacity:.55;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 80' preserveAspectRatio='none'%3E%3Cpath fill='%2338bdf8' d='M0 40C150 0 450 80 600 40S1050 80 1200 40V0H0Z'/%3E%3C/svg%3E");animation:afp-w2 22s linear infinite}
+    .afp-wave i:nth-child(2){top:12px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 80' preserveAspectRatio='none'%3E%3Cpath fill='%23bfdcf7' d='M0 40C150 0 450 80 600 40S1050 80 1200 40V0H0Z'/%3E%3C/svg%3E");animation:afp-w1 30s linear infinite}
+    .afp-wave i:nth-child(3){top:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 80' preserveAspectRatio='none'%3E%3Cpath fill='%23f5f8fc' d='M0 40C150 0 450 80 600 40S1050 80 1200 40V0H0Z'/%3E%3C/svg%3E");animation:afp-w1 40s linear infinite}
+    @keyframes afp-w1{to{background-position-x:-1200px}}
+    @keyframes afp-w2{to{background-position-x:1200px}}
+
+    /* نشان مرکزی روی مرز دو بخش */
+    .afp-hub{position:absolute;top:30px;left:50%;z-index:3;display:grid;place-items:center;width:66px;height:66px;margin-left:-33px;border-radius:50%;color:#fff;
+      background:linear-gradient(135deg,#fb923c,#ea580c);box-shadow:0 14px 28px -8px rgba(234,88,12,.85);animation:afp-bob 3s ease-in-out infinite}
+    .afp-hub::before{content:"";position:absolute;inset:-8px;border-radius:50%;border:2px solid rgba(251,146,60,.6);animation:afp-ring 2s ease-out infinite}
+    .afp-hub path{stroke-dasharray:1;animation:afp-loop 3.2s ease-in-out infinite}
+    @keyframes afp-bob{50%{transform:translateY(8px)}}
+    @keyframes afp-ring{0%{transform:scale(.85);opacity:1}100%{transform:scale(1.5);opacity:0}}
+    @keyframes afp-loop{0%{stroke-dashoffset:1}50%,80%{stroke-dashoffset:0}100%{stroke-dashoffset:-1}}
+
+    /* هدر */
+    .afp-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1rem;margin-bottom:1.3rem}
+    .afp-tag{display:inline-flex;align-items:center;gap:.6rem;padding:.4rem .9rem;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);font-size:.78rem;font-weight:800;color:#e0efff;backdrop-filter:blur(6px)}
+    .afp-tag i{width:8px;height:8px;border-radius:50%;background:#fb923c;animation:afp-ping 1.6s infinite}
+    @keyframes afp-ping{0%{box-shadow:0 0 0 0 rgba(251,146,60,.8)}100%{box-shadow:0 0 0 11px rgba(251,146,60,0)}}
+    .afp-head h2{margin:.9rem 0 .5rem;font-size:clamp(1.8rem,4.2vw,2.8rem);font-weight:900;line-height:1.35;color:#fff}
+    .afp-rule{height:4px;width:120px;margin-bottom:.8rem;border-radius:99px;background:linear-gradient(90deg,#fb923c,#fde68a,#34d399,#38bdf8,#fb923c);background-size:200% 100%;animation:afp-flow 4s linear infinite}
+    @keyframes afp-flow{to{background-position:-200% 0}}
+    .afp-head p{color:#cfe3fa;font-size:.95rem}
+    .afp-nav{display:flex;gap:.6rem}
+    .afp-nav button{display:grid;place-items:center;width:46px;height:46px;border:1px solid rgba(255,255,255,.35);border-radius:50%;background:rgba(255,255,255,.12);color:#fff;cursor:pointer;backdrop-filter:blur(6px);transition:all .35s}
+    .afp-nav button:hover{background:#fff;color:#0b2a57;transform:scale(1.1)}
+    .afp-nav button:active{transform:scale(.94)}
+
+    /* تب‌ها */
+    .afp-tabs{display:flex;gap:.5rem;margin-bottom:.6rem;overflow-x:auto;scrollbar-width:none}
+    .afp-tabs::-webkit-scrollbar{display:none}
+    .afp-tabs button{flex-shrink:0;padding:.55rem 1.1rem;border:1.5px solid rgba(255,255,255,.35);border-radius:999px;background:transparent;color:#e0efff;font-size:.85rem;font-weight:800;cursor:pointer;transition:all .35s}
+    .afp-tabs button:hover{background:rgba(255,255,255,.16);transform:translateY(-2px)}
+    .afp-tabs button.on{background:#fff;border-color:#fff;color:#0b2a57;box-shadow:0 10px 22px -10px rgba(0,0,0,.5)}
+
+    /* اسلایدر */
+    .afp-track{display:flex;gap:1.1rem;overflow-x:auto;padding:1.4rem .3rem 2rem;scroll-snap-type:x mandatory;scrollbar-width:none;cursor:grab;user-select:none;-webkit-user-select:none}
+    .afp-track::-webkit-scrollbar{display:none}
+    .afp-track.drag{scroll-snap-type:none;cursor:grabbing}
+    .afp-track>*{flex:0 0 auto;width:clamp(250px,78vw,292px);scroll-snap-align:start}
+    .afp-hide{display:none!important}
+    .afp-prog{height:4px;margin-top:-.4rem;border-radius:99px;background:rgba(255,255,255,.2);overflow:hidden}
+    .afp-prog b{display:block;height:100%;width:100%;border-radius:99px;background:linear-gradient(90deg,#fb923c,#fde68a);transform-origin:right;transform:scaleX(var(--p,.2));transition:transform .2s}
+
+    /* کارت اول */
+    .afp-promo{position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:1.2rem;overflow:hidden;padding:1.6rem;border-radius:22px;color:#fff;text-decoration:none;
+      background:linear-gradient(160deg,#ff9a3c,#ea580c 60%,#c2410c);box-shadow:0 24px 40px -20px rgba(0,0,0,.5);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+    .afp-promo:hover{transform:translateY(-8px)}
+    .afp-pc{position:absolute;border-radius:50%;background:rgba(255,255,255,.13)}
+    .afp-pc1{width:220px;height:220px;top:-70px;left:-70px;animation:afp-spin 14s linear infinite;border:2px dashed rgba(255,255,255,.35);background:none}
+    .afp-pc2{width:160px;height:160px;bottom:-50px;right:-40px}
+    @keyframes afp-spin{to{transform:rotate(360deg)}}
+    .afp-promo>*{position:relative}
+    .afp-promo small{font-size:.78rem;font-weight:800;opacity:.9}
+    .afp-promo h3{margin-top:.5rem;font-size:1.45rem;font-weight:900;line-height:1.6}
+    .afp-pstack{display:flex;justify-content:center;gap:.8rem}
+    .afp-pstack svg{width:54px;height:54px;padding:10px;border-radius:14px;background:rgba(255,255,255,.2);animation:afp-float 2.6s ease-in-out infinite}
+    .afp-pstack svg:nth-child(2){animation-delay:.3s}.afp-pstack svg:nth-child(3){animation-delay:.6s}
+    @keyframes afp-float{50%{transform:translateY(-10px)}}
+    .afp-pbtn{display:flex;align-items:center;justify-content:center;gap:.5rem;padding:.75rem;border-radius:12px;background:#fff;color:#c2410c;font-weight:800;font-size:.9rem;transition:gap .4s}
+    .afp-promo:hover .afp-pbtn{gap:1rem}
+
+    /* کارت محصول */
+    .afp-card{--mx:50%;--my:50%;--rx:0deg;--ry:0deg;position:relative;display:flex;flex-direction:column;overflow:hidden;isolation:isolate;background:#fff;border-radius:22px;color:#0b1f3a;text-decoration:none;
+      box-shadow:0 18px 34px -22px rgba(0,0,0,.55);transform:perspective(900px) rotateX(var(--rx)) rotateY(var(--ry));
+      transition:transform .35s ease-out,box-shadow .5s}
+    .afp-card:hover{box-shadow:0 34px 52px -22px rgba(0,0,0,.65),0 0 0 3px var(--c)}
+    .afp-card::before{content:"";position:absolute;inset:0;z-index:5;pointer-events:none;opacity:0;transition:opacity .4s;
+      background:radial-gradient(240px circle at var(--mx) var(--my),rgba(255,255,255,.45),transparent 70%)}
+    .afp-card:hover::before{opacity:1}
+    .afp-js .afp-card:not(.in){opacity:0}
+    .afp-js .afp-card.in{animation:afp-in .8s cubic-bezier(.2,.8,.2,1) calc(var(--i)*70ms) backwards}
+    @keyframes afp-in{from{opacity:0;transform:translateX(-50px) scale(.95)}to{opacity:1;transform:none}}
+
+    .afp-media{position:relative;aspect-ratio:5/4;overflow:hidden;background:radial-gradient(circle at 50% 40%,#fff,#e4edf9)}
+    .afp-orb{position:absolute;left:19%;top:12%;width:62%;aspect-ratio:1;border-radius:50%;background:var(--c);opacity:.14;transition:transform .7s cubic-bezier(.2,.8,.2,1),opacity .5s}
+    .afp-card:hover .afp-orb{transform:scale(1.3);opacity:.22}
+    .afp-ghost{position:absolute;inset:20%;width:60%;height:60%;color:var(--c);transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+    .afp-card:hover .afp-ghost{transform:rotate(-8deg) scale(1.12)}
+    .afp-media img{position:absolute;inset:0;width:100%;height:100%;padding:.9rem;box-sizing:border-box;object-fit:contain;background:radial-gradient(circle at 50% 40%,#fff,#e4edf9);transition:transform .9s cubic-bezier(.2,.8,.2,1),filter .5s}
+    .afp-card:hover .afp-media img{transform:scale(1.1) rotate(-1.5deg)}
+    .oos .afp-media img{filter:grayscale(1) opacity(.7)}
+    .oos .afp-ghost{color:#94a3b8}
+
+    .afp-badges{position:absolute;top:12px;right:12px;z-index:4;display:flex;flex-direction:column;align-items:flex-start;gap:.4rem}
+    .afp-bd,.afp-off{padding:.28rem .7rem;border-radius:999px;color:#fff;font-size:.72rem;font-weight:800;box-shadow:0 6px 14px -4px rgba(0,0,0,.35)}
+    .afp-off{background:linear-gradient(135deg,#ef4444,#dc2626);animation:afp-pop 2s ease-in-out infinite}
+    @keyframes afp-pop{50%{transform:scale(1.1)}}
+    .afp-stock{position:absolute;bottom:10px;right:12px;z-index:4;display:inline-flex;align-items:center;gap:.4rem;padding:.26rem .65rem;border-radius:999px;background:#fff;box-shadow:0 4px 12px -4px rgba(0,0,0,.25);font-size:.7rem;font-weight:800}
+    .afp-stock i{width:7px;height:7px;border-radius:50%}
+    .afp-stock.ok{color:#047857}.afp-stock.ok i{background:#10b981;animation:afp-ping2 1.6s infinite}
+    .afp-stock.no{color:#b91c1c}.afp-stock.no i{background:#ef4444}
+    @keyframes afp-ping2{0%{box-shadow:0 0 0 0 rgba(16,185,129,.65)}100%{box-shadow:0 0 0 9px rgba(16,185,129,0)}}
+
+    .afp-body{position:relative;z-index:2;display:flex;flex:1;flex-direction:column;padding:1rem 1.1rem 1.1rem}
+    .afp-cat{align-self:flex-start;padding:.2rem .65rem;border-radius:8px;background:color-mix(in srgb,var(--c) 12%,#fff);color:var(--c);font-size:.72rem;font-weight:800}
+    .afp-body h3{margin:.6rem 0;font-size:1.02rem;font-weight:800;line-height:1.7;min-height:3.4em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .afp-specs{display:flex;flex-wrap:wrap;gap:.35rem;margin:0 0 .9rem;padding:0;list-style:none}
+    .afp-specs li{padding:.2rem .55rem;border:1px solid #dbe4f0;border-radius:6px;background:#f8fafc;color:#475569;font-size:.7rem;font-weight:700}
+    .afp-pr{margin-top:auto;padding-top:.8rem;border-top:1px dashed #d5deea}
+    .afp-pr del{display:block;font-size:.75rem;color:#94a3b8}
+    .afp-pr b{font-size:1.15rem;font-weight:900;color:#0b1f3a}
+    .afp-pr small{font-size:.68rem;font-weight:700;color:#64748b}
+    .afp-inq{color:var(--c)!important;font-size:1rem!important}
+    .afp-cta{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:.5rem;margin-top:.8rem;padding:.7rem;border-radius:12px;background:var(--c);color:#fff;font-size:.88rem;font-weight:800;transition:transform .4s,box-shadow .4s}
+    .afp-cta::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:35%;transform:skewX(-20deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent)}
+    .afp-card:hover .afp-cta{transform:translateY(-2px);box-shadow:0 12px 22px -10px var(--c)}
+    .afp-card:hover .afp-cta::after{animation:afp-shine .8s ease}
+    .afp-card:hover .afp-cta svg{animation:afp-cart .6s ease}
+    @keyframes afp-shine{to{left:130%}}
+    @keyframes afp-cart{30%{transform:translateX(-4px) rotate(-12deg)}60%{transform:translateX(3px) rotate(8deg)}}
+
+    .afp-draw *{stroke-dasharray:1;stroke-dashoffset:0}
+    .afp-card.in .afp-draw *{animation:afp-draw 1.2s cubic-bezier(.6,0,.2,1) calc(var(--i)*70ms + 350ms) backwards}
+    .afp-card:hover .afp-draw *{animation:afp-redraw 1.1s cubic-bezier(.6,0,.2,1) both}
+    @keyframes afp-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+    @keyframes afp-redraw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+
+    @media(prefers-reduced-motion:reduce){
+      .afp *,.afp *::before,.afp *::after{animation:none!important;transition-duration:.01ms!important}
+      .afp-js .afp-card:not(.in){opacity:1}
+      .afp-card{transform:none!important}
+    }
+  </style>
+
+  <script>
+    const afp = document.getElementById('afp');
+    if (afp) {
+      afp.classList.add('afp-js');
+      const track = afp.querySelector<HTMLElement>('.afp-track')!;
+      const prog = afp.querySelector<HTMLElement>('.afp-prog')!;
+      const cards = Array.from(afp.querySelectorAll<HTMLElement>('.afp-card'));
+      const fmt = (n: number) => n.toLocaleString('fa-IR');
+
+      const reveal = (card: HTMLElement) => {
+        card.classList.add('in');
+        const el = card.querySelector<HTMLElement>('[data-price]');
+        if (!el) return;
+        const target = Number(el.dataset.price);
+        const t0 = performance.now() + Number(card.style.getPropertyValue('--i')) * 70;
+        const tick = (t: number) => {
+          const r = Math.max(0, Math.min((t - t0) / 1200, 1));
+          el.textContent = fmt(Math.round(target * (1 - Math.pow(1 - r, 3))));
+          if (r < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      };
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              reveal(e.target as HTMLElement);
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.15 }
+      );
+
+      cards.forEach((card) => {
+        io.observe(card);
+        card.addEventListener('pointermove', (e: PointerEvent) => {
+          if (e.pointerType !== 'mouse') return;
+          const r = card.getBoundingClientRect();
+          card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+          card.style.setProperty('--my', `${e.clientY - r.top}px`);
+          card.style.setProperty('--rx', `${(0.5 - (e.clientY - r.top) / r.height) * 7}deg`);
+          card.style.setProperty('--ry', `${((e.clientX - r.left) / r.width - 0.5) * 7}deg`);
+        });
+        card.addEventListener('pointerleave', () => {
+          card.style.setProperty('--rx', '0deg');
+          card.style.setProperty('--ry', '0deg');
+        });
+      });
+
+      /* نوار پیشرفت */
+      const updateProg = () => {
+        const max = track.scrollWidth - track.clientWidth;
+        const p = max > 0 ? Math.min(Math.abs(track.scrollLeft) / max, 1) : 1;
+        prog.style.setProperty('--p', String(0.12 + 0.88 * p));
+      };
+      track.addEventListener('scroll', updateProg, { passive: true });
+      window.addEventListener('resize', updateProg);
+      updateProg();
+
+      /* دکمه‌های قبلی/بعدی (در راست‌به‌چپ: بعدی = به سمت چپ) */
+      afp.querySelectorAll<HTMLButtonElement>('.afp-nav button').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const step = track.clientWidth * 0.8 * (btn.dataset.dir === 'next' ? -1 : 1);
+          track.scrollBy({ left: step, behavior: 'smooth' });
+        });
+      });
+
+      /* کشیدن با موس */
+      let down = false, moved = false, sx = 0, sl = 0;
+      track.addEventListener('pointerdown', (e: PointerEvent) => {
+        if (e.pointerType !== 'mouse') return;
+        down = true; moved = false; sx = e.clientX; sl = track.scrollLeft;
+      });
+      window.addEventListener('pointermove', (e: PointerEvent) => {
+        if (!down) return;
+        const dx = e.clientX - sx;
+        if (Math.abs(dx) > 5) { moved = true; track.classList.add('drag'); }
+        track.scrollLeft = sl - dx;
+      });
+      window.addEventListener('pointerup', () => { down = false; track.classList.remove('drag'); });
+      track.addEventListener('click', (e) => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
+      track.addEventListener('dragstart', (e) => e.preventDefault());
+
+      /* فیلتر */
+      const tabs = afp.querySelectorAll<HTMLButtonElement>('.afp-tabs button');
+      tabs.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          tabs.forEach((b) => b.classList.remove('on'));
+          btn.classList.add('on');
+          const f = btn.dataset.f ?? 'all';
+          let k = 0;
+          cards.forEach((c) => {
+            io.unobserve(c);
+            const show = f === 'all' || (c.dataset.tags ?? '').split(' ').includes(f);
+            c.classList.toggle('afp-hide', !show);
+            if (show) {
+              c.style.setProperty('--i', String(k++));
+              c.classList.remove('in');
+              void c.offsetWidth;
+              reveal(c);
+            }
+          });
+          track.scrollTo({ left: 0, behavior: 'smooth' });
+          updateProg();
+        });
+      });
+    }
+  </script>
+
 
   <!-- Promotional Banner with Countdown -->
   <section class="container mx-auto px-4 py-16">

@@ -1,0 +1,315 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="جزئیات محصول | آسین استیل">
+  <main class="product-page" dir="rtl">
+    <div class="animated-grid" aria-hidden="true"></div>
+    <div class="page-glow glow-one" aria-hidden="true"></div>
+    <div class="page-glow glow-two" aria-hidden="true"></div>
+    <div class="product-container">
+      <nav class="breadcrumbs" aria-label="مسیر صفحه">
+        <a href={base}>صفحه اصلی</a><span>/</span><a href={`${base}products/`}>محصولات</a><span>/</span><span id="breadcrumb-name" class="current">جزئیات محصول</span>
+      </nav>
+      <section id="product-loading" class="loading-panel">در حال دریافت اطلاعات محصول...</section>
+      <section id="product-error" class="loading-panel" hidden>
+        <h1>محصول پیدا نشد</h1><p id="product-error-message">ممکن است محصول حذف شده یا غیرفعال شده باشد.</p>
+        <a class="button-primary" href={`${base}products/`}>بازگشت به محصولات</a>
+      </section>
+      <div id="product-content" hidden>
+        <section class="product-hero">
+          <div class="gallery-panel">
+            <div class="gallery-badge"><span class="status-dot"></span> مقطع فولادی</div>
+            <div id="product-image" class="no-image"><span class="no-image-icon">▧</span><span>تصویر محصول ثبت نشده</span><small>ASIN STEEL</small></div>
+            <div id="product-gallery" class="product-gallery" hidden></div>
+            <div class="gallery-footer"><span>کیفیت در تأمین</span><span class="footer-line"></span><span>اعتماد در معامله</span></div>
+          </div>
+          <div class="product-summary">
+            <div class="eyebrow"><span class="eyebrow-line"></span> معرفی محصول</div>
+            <div id="product-category" class="category-pill">مقاطع فولادی</div>
+            <h1 id="product-name">جزئیات محصول</h1>
+            <p id="product-description" class="product-lead"></p>
+            <div class="product-meta">
+              <div class="meta-item"><span class="meta-icon">▤</span><div><small>کارخانه / برند</small><strong id="product-factory">طبق سفارش</strong></div></div>
+              <div class="meta-item" id="unit-meta" hidden><span class="meta-icon">◫</span><div><small>واحد عرضه</small><strong id="product-unit"></strong></div></div>
+              <div class="meta-item" id="weight-meta" hidden><span class="meta-icon">⚖</span><div><small>وزن اعلامی</small><strong id="product-weight"></strong></div></div>
+            </div>
+            <div class="price-panel"><div class="price-panel-icon">↗</div><div class="price-panel-copy"><strong>استعلام قیمت و موجودی</strong><span id="product-price-description">قیمت نهایی با توجه به مشخصات سفارش و شرایط روز اعلام می‌شود.</span></div><span id="product-price" class="price-status">تماس بگیرید</span></div>
+            <div class="hero-actions"><a class="button-primary" id="inquiry-link" href={`${base}contact/`}>درخواست استعلام <span>←</span></a><a class="button-secondary" href={`${base}Price-list/`}>مشاهده لیست قیمت</a></div>
+            <div class="trust-line"><span>✓</span> تطبیق مشخصات سفارش پیش از تأمین</div>
+          </div>
+        </section>
+
+        <section id="specifications-section" class="content-section specifications-section" hidden>
+          <div class="section-heading"><div><span class="section-kicker">PRODUCT SPECIFICATIONS</span><h2>مشخصات فنی محصول</h2></div><span class="heading-mark">01</span></div>
+          <div id="product-specifications" class="specifications-grid"></div>
+        </section>
+
+        <section class="content-section description-section">
+          <div class="section-heading"><div><span class="section-kicker">PRODUCT KNOWLEDGE</span><h2 id="guide-title">راهنمای تخصصی محصول</h2><p class="section-subtitle">آشنایی با ویژگی‌ها، کاربردها و نکات مهم انتخاب محصول</p></div><span class="heading-mark">02</span></div>
+          <div class="description-layout">
+            <article class="description-card">
+              <div class="article-topline"><span class="article-icon">✦</span><span>دانشنامه مقاطع فولادی</span><span class="article-divider"></span><span class="reading-time">راهنمای خرید</span></div>
+              <div id="description-intro" class="description-intro"></div>
+              <div id="full-description" class="description-body"></div>
+              <div class="description-fade" id="description-fade"></div>
+              <button class="expand-description" id="toggle-description" type="button" aria-expanded="false"><span id="toggle-description-text">مشاهده همه توضیحات</span><span id="toggle-description-icon" class="expand-icon">⌄</span></button>
+              <div class="source-box"><div class="source-icon">i</div><div><strong>نکته مهم هنگام خرید</strong><p>مشخصات نهایی، استاندارد و تناژ موردنیاز را با نیاز پروژه و مدارک معتبر تطبیق دهید. انتخاب مقاطع باربر باید بر اساس نقشه‌های مصوب و نظر متخصص انجام شود.</p></div></div>
+            </article>
+            <aside class="knowledge-sidebar">
+              <div class="sidebar-card sidebar-highlight"><div class="sidebar-symbol">AS</div><span class="sidebar-kicker">ASIN STEEL</span><h3>انتخاب آگاهانه، خرید مطمئن</h3><p>برای بررسی مشخصات سفارش و دریافت قیمت روز، با کارشناسان فروش آسین استیل در ارتباط باشید.</p><a id="sidebar-contact" href={`${base}contact/`}>ارتباط با کارشناسان <span>←</span></a></div>
+              <div class="sidebar-card"><h3>چک‌لیست سفارش</h3><ul class="checklist"><li><span>01</span> تعیین نوع و مشخصات مقطع</li><li><span>02</span> مشخص‌کردن تناژ موردنیاز</li><li><span>03</span> بررسی کارخانه و استاندارد</li><li><span>04</span> هماهنگی محل تحویل</li></ul></div>
+            </aside>
+          </div>
+        </section>
+
+        <section id="related-section" class="content-section related-section" hidden>
+          <div class="section-heading"><div><span class="section-kicker">YOU MAY ALSO NEED</span><h2>محصولات مرتبط</h2></div><a class="view-all" href={`${base}products/`}>مشاهده همه محصولات <span>←</span></a></div>
+          <div id="related-grid" class="related-grid"></div>
+        </section>
+
+        <section class="final-cta"><div class="cta-pattern"></div><div class="cta-content"><span class="section-kicker">LET'S BUILD TOGETHER</span><h2 id="cta-title">برای تأمین این محصول آماده‌اید؟</h2><p>مشخصات و مقدار موردنیاز خود را اعلام کنید تا برای بررسی سفارش و استعلام قیمت راهنمایی شوید.</p></div><a id="cta-link" href={`${base}contact/`} class="cta-button">ثبت درخواست استعلام <span>←</span></a></section>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<script>
+  import { supabase } from "../../lib/supabase";
+
+  const base = import.meta.env.BASE_URL;
+  const byId = (id: string) => document.getElementById(id);
+  const loading = byId("product-loading");
+  const errorBox = byId("product-error");
+  const errorMessage = byId("product-error-message");
+  const content = byId("product-content");
+  const categoryLabels: Record<string, string> = {
+    rebar: "میلگرد", beam: "تیرآهن", sheet: "ورق فولادی", profile: "پروفیل", angle: "نبشی",
+    channel: "ناودانی", pipe: "لوله", wire: "مفتولی", valve: "شیرآلات", fitting: "اتصالات",
+    alloy: "فولاد آلیاژی", equipment: "تجهیزات", other: "مقاطع فولادی"
+  };
+
+  function setText(id: string, value: unknown, fallback = "") {
+    const el = byId(id);
+    if (el) el.textContent = value === null || value === undefined || value === "" ? fallback : String(value);
+  }
+  function showError(message: string) {
+    if (loading) loading.hidden = true;
+    if (content) content.hidden = true;
+    if (errorMessage) errorMessage.textContent = message;
+    if (errorBox) errorBox.hidden = false;
+  }
+  function safeImageUrl(value: unknown): string | null {
+    if (typeof value !== "string" || !value.trim()) return null;
+    const raw = value.trim();
+    if (/^https?:\/\//i.test(raw)) return raw;
+    if (raw.startsWith("/") && !raw.startsWith("//")) return raw;
+    return null;
+  }
+  function normalizeImages(product: any): string[] {
+    const values = [product.image, ...(Array.isArray(product.gallery) ? product.gallery : []), ...(Array.isArray(product.images) ? product.images : [])];
+    return [...new Set(values.map(safeImageUrl).filter((value): value is string => Boolean(value)))];
+  }
+  function priceText(product: any) {
+    const amount = Number(product.price);
+    if (product.price_on_request || product.price === null || product.price === "" || !Number.isFinite(amount) || amount <= 0) return "استعلام قیمت";
+    return `${new Intl.NumberFormat("fa-IR").format(amount)} تومان`;
+  }
+  function renderGallery(images: string[], name: string) {
+    const holder = byId("product-image");
+    const gallery = byId("product-gallery");
+    if (!holder || !gallery) return;
+    const showImage = (url: string) => {
+      holder.replaceChildren();
+      holder.className = "main-image-wrap";
+      const img = document.createElement("img");
+      img.className = "main-product-image"; img.src = url; img.alt = name;
+      img.addEventListener("error", () => { holder.className = "no-image"; holder.replaceChildren(); const msg = document.createElement("span"); msg.textContent = "تصویر محصول در دسترس نیست"; holder.appendChild(msg); }, { once: true });
+      const watermark = document.createElement("span"); watermark.className = "image-watermark"; watermark.textContent = "ASIN STEEL";
+      holder.append(img, watermark);
+      gallery.querySelectorAll<HTMLButtonElement>(".thumbnail").forEach((button) => button.classList.toggle("active", button.dataset.image === url));
+    };
+    gallery.replaceChildren();
+    if (!images.length) {
+      holder.className = "no-image"; holder.replaceChildren();
+      const icon = document.createElement("span"); icon.className = "no-image-icon"; icon.textContent = "▧";
+      const text = document.createElement("span"); text.textContent = "تصویر محصول ثبت نشده";
+      const brand = document.createElement("small"); brand.textContent = "ASIN STEEL";
+      holder.append(icon, text, brand); gallery.hidden = true; return;
+    }
+    showImage(images[0]);
+    if (images.length > 1) {
+      images.forEach((url, index) => {
+        const button = document.createElement("button"); button.type = "button"; button.className = `thumbnail${index === 0 ? " active" : ""}`; button.dataset.image = url; button.setAttribute("aria-label", `نمایش تصویر ${index + 1}`);
+        const img = document.createElement("img"); img.src = url; img.alt = `${name} - تصویر ${index + 1}`; img.loading = "lazy";
+        button.appendChild(img); button.addEventListener("click", () => showImage(url)); gallery.appendChild(button);
+      });
+      gallery.hidden = false;
+    } else gallery.hidden = true;
+  }
+  function renderSpecifications(specs: any[]) {
+    const section = byId("specifications-section"); const grid = byId("product-specifications");
+    if (!section || !grid) return;
+    grid.replaceChildren();
+    const valid = specs.filter((spec) => spec !== null && spec !== undefined && (typeof spec !== "object" || spec.value || spec.description || spec.label || spec.name || spec.title));
+    if (!valid.length) { section.hidden = true; return; }
+    valid.forEach((spec, index) => {
+      const item = typeof spec === "object" ? spec : { value: spec };
+      const card = document.createElement("div"); card.className = "spec-card";
+      const number = document.createElement("span"); number.className = "spec-index"; number.textContent = String(index + 1).padStart(2, "0");
+      const label = document.createElement("span"); label.className = "spec-label"; label.textContent = String(item.label || item.name || item.title || "مشخصه");
+      const value = document.createElement("strong"); value.className = "spec-value"; value.textContent = String(item.value ?? item.description ?? "طبق سفارش");
+      card.append(number, label, value); grid.appendChild(card);
+    });
+    section.hidden = false;
+  }
+  function renderGuide(product: any, category: string, description: string) {
+    setText("description-intro", description);
+    setText("guide-title", `راهنمای تخصصی ${product.name || "محصول"}`);
+    const body = byId("full-description");
+    if (!body) return;
+    body.replaceChildren();
+    const paragraphs: string[] = [
+      `برای انتخاب ${product.name || "این محصول"}، مشخصات فنی موردنیاز پروژه را با ویژگی‌های محموله تطبیق دهید. ابعاد، ضخامت یا قطر، گرید فولاد، استاندارد تولید و کیفیت سطح از مواردی هستند که بسته به نوع مقطع باید بررسی شوند.`,
+      "در سفارش‌های صنعتی، مشخص‌کردن کارخانه تولیدکننده، مقدار موردنیاز، طول یا ابعاد، شرایط تحویل و مدارک کیفیت به کاهش خطا در تأمین کمک می‌کند.",
+      "برای سفارش پروژه‌ای، بهتر است تناژ، محل تحویل و زمان‌بندی موردنیاز پیش از نهایی‌کردن خرید مشخص شود. قیمت و موجودی نیز ممکن است با توجه به شرایط روز بازار تغییر کند."
+    ];
+    paragraphs.forEach((text) => { const p = document.createElement("p"); p.textContent = text; body.appendChild(p); });
+    const makeList = (title: string, items: string[]) => {
+      const heading = document.createElement("div"); heading.className = "article-subheading"; const mark = document.createElement("span"); heading.append(mark, document.createTextNode(title)); body.appendChild(heading);
+      const ul = document.createElement("ul"); ul.className = "application-list";
+      items.forEach((text) => { const li = document.createElement("li"); const check = document.createElement("span"); check.className = "list-check"; check.textContent = "✓"; li.append(check, document.createTextNode(text)); ul.appendChild(li); }); body.appendChild(ul);
+    };
+    const applications: Record<string, string[]> = {
+      rebar: ["تأمین فولاد تقویتی پروژه‌های ساختمانی", "استفاده در اعضای بتن‌آرمه مطابق نقشه سازه", "خرید تناژی برای پیمانکاران و مجریان پروژه"],
+      beam: ["تأمین تیرآهن برای سازه‌های فولادی", "ساخت قاب‌ها و اجزای صنعتی بر اساس طراحی", "تأمین مقاطع نوردشده برای پروژه‌های عمرانی"],
+      sheet: ["ساخت قطعات و تجهیزات فلزی", "تولید سازه‌ها و اجزای صنعتی", "برش‌کاری مطابق نقشه تولید"],
+      profile: ["ساخت قاب‌ها و شاسی‌های فلزی", "تولید پایه‌ها و چارچوب‌های صنعتی", "ساخت سازه‌های سبک با طراحی مناسب"],
+      angle: ["ساخت اتصالات و قاب‌های فولادی", "تولید پایه‌ها و مهاربندی‌ها", "ساخت قطعات و تجهیزات فلزی"]
+    };
+    makeList("کاربردهای رایج", applications[product.category] || [`تأمین ${category} برای پروژه‌های ساختمانی و صنعتی`, "استفاده در ساخت و تولید متناسب با مشخصات محصول"]);
+    makeList("نکات مهم پیش از خرید", ["گرید، استاندارد و مشخصات فنی را بررسی کنید.", "ابعاد، وزن و مقدار محموله را با سفارش تطبیق دهید.", "انتخاب مقاطع باربر را به نقشه مصوب و نظر متخصص بسپارید."]);
+  }
+  function renderRelated(products: any[], current: any) {
+    const section = byId("related-section"); const grid = byId("related-grid");
+    if (!section || !grid) return;
+    grid.replaceChildren();
+    const related = products.filter((item) => String(item.id) !== String(current.id) && item.active !== false && (!current.category || item.category === current.category)).slice(0, 3);
+    if (!related.length) { section.hidden = true; return; }
+    related.forEach((item) => {
+      const link = document.createElement("a"); link.className = "related-card"; link.href = `${base}products/detail/?id=${encodeURIComponent(String(item.id))}`;
+      const imageWrap = document.createElement("div"); imageWrap.className = "related-image";
+      const url = normalizeImages(item)[0];
+      if (url) { const img = document.createElement("img"); img.src = url; img.alt = item.name || "محصول فولادی"; img.loading = "lazy"; imageWrap.appendChild(img); }
+      else { const placeholder = document.createElement("span"); placeholder.textContent = "AS"; imageWrap.appendChild(placeholder); }
+      const arrow = document.createElement("span"); arrow.className = "related-arrow"; arrow.textContent = "↗"; imageWrap.appendChild(arrow);
+      const info = document.createElement("div"); info.className = "related-info";
+      const small = document.createElement("small"); small.textContent = categoryLabels[item.category] || "مقاطع فولادی";
+      const title = document.createElement("h3"); title.textContent = item.name || "محصول فولادی";
+      const action = document.createElement("span"); action.className = "related-link"; action.textContent = "مشاهده محصول ←";
+      info.append(small, title, action); link.append(imageWrap, info); grid.appendChild(link);
+    });
+    section.hidden = false;
+  }
+  function setupDescriptionToggle() {
+    const button = byId("toggle-description"); const body = byId("full-description"); const fade = byId("description-fade");
+    button?.addEventListener("click", () => {
+      const expanded = button.getAttribute("aria-expanded") === "true"; const next = !expanded;
+      button.setAttribute("aria-expanded", String(next)); body?.classList.toggle("expanded", next); fade?.classList.toggle("hidden", next);
+      setText("toggle-description-text", next ? "بستن توضیحات" : "مشاهده همه توضیحات"); setText("toggle-description-icon", next ? "⌃" : "⌄");
+    });
+  }
+  async function loadProduct() {
+    const id = new URLSearchParams(window.location.search).get("id");
+    if (!id || !/^\d+$/.test(id)) { showError("شناسه محصول در آدرس صفحه وجود ندارد یا معتبر نیست."); return; }
+    try {
+      const { data: product, error } = await supabase.from("products").select("*").eq("id", Number(id)).eq("active", true).maybeSingle();
+      if (error) { console.error("Supabase product error:", error); showError("دریافت اطلاعات محصول ناموفق بود. اتصال و دسترسی Supabase را بررسی کنید."); return; }
+      if (!product) { showError("این محصول وجود ندارد یا در حال حاضر غیرفعال است."); return; }
+      const name = product.name || "محصول فولادی";
+      const category = categoryLabels[product.category] || "مقاطع فولادی";
+      const description = product.description || `${name} از محصولات قابل تأمین آسین استیل است. برای اطلاع از قیمت و موجودی روز با کارشناسان فروش تماس بگیرید.`;
+      document.title = `${name} | آسین استیل`;
+      setText("breadcrumb-name", name); setText("product-name", name); setText("product-category", category); setText("product-description", description); setText("product-factory", product.factory, "طبق سفارش");
+      setText("product-unit", product.unit, "طبق سفارش"); setText("product-weight", product.weight, "طبق سفارش");
+      const unitMeta = byId("unit-meta"); if (unitMeta) unitMeta.hidden = !product.unit;
+      const weightMeta = byId("weight-meta"); if (weightMeta) weightMeta.hidden = !product.weight;
+      setText("product-price", priceText(product));
+      setText("product-price-description", product.price_on_request || priceText(product) === "استعلام قیمت" ? "برای دریافت قیمت روز و موجودی با کارشناسان فروش تماس بگیرید." : "قیمت ثبت‌شده ممکن است با توجه به شرایط روز تغییر کند.");
+      setText("cta-title", `برای تأمین ${name} آماده‌اید؟`);
+      const inquiry = `${base}contact/?product=${encodeURIComponent(name)}`;
+      ["inquiry-link", "cta-link", "sidebar-contact"].forEach((id) => { const el = byId(id) as HTMLAnchorElement | null; if (el) el.href = inquiry; });
+      renderGallery(normalizeImages(product), name);
+      renderSpecifications(Array.isArray(product.specifications) ? product.specifications : []);
+      renderGuide(product, category, description);
+      setupDescriptionToggle();
+      const { data: related } = await supabase.from("products").select("id,name,category,image,gallery,active").eq("active", true).limit(40);
+      renderRelated(Array.isArray(related) ? related : [], product);
+      if (loading) loading.hidden = true; if (errorBox) errorBox.hidden = true; if (content) content.hidden = false;
+    } catch (error) {
+      console.error("Unexpected product loading error:", error);
+      showError("خطایی هنگام دریافت اطلاعات محصول رخ داد. صفحه را دوباره بارگذاری کنید.");
+    }
+  }
+  loadProduct();
+</script>
+
+<style>
+  :global(html) { scroll-behavior: smooth; }
+  .product-page, .product-page * { box-sizing: border-box; font-family: "Estedad", sans-serif !important; }
+  .product-page { --navy:#102a43; --navy-dark:#071a2a; --navy-deep:#061421; --teal:#19aaa2; --mint:#75e2d4; --steel:#347e9d; --text:#e7f0f7; --muted:#a5bacb; --line:rgba(133,171,194,.22); position:relative; isolation:isolate; overflow:hidden; min-height:80vh; padding:24px 0 70px; color:var(--text); background:radial-gradient(ellipse at 12% 8%,rgba(25,170,162,.22),transparent 34%),radial-gradient(ellipse at 88% 35%,rgba(31,105,151,.23),transparent 38%),linear-gradient(135deg,#061421 0%,#0a2033 45%,#071827 100%); }
+  .product-container { position:relative; z-index:2; width:min(1180px,calc(100% - 36px)); margin:0 auto; }
+  .animated-grid { position:absolute; inset:0; z-index:0; pointer-events:none; background-image:linear-gradient(rgba(117,226,212,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(117,226,212,.055) 1px,transparent 1px); background-size:48px 48px; mask-image:linear-gradient(to bottom,#000,transparent 95%); animation:grid-drift 28s linear infinite; }
+  .page-glow { position:absolute; z-index:1; pointer-events:none; border:1px solid rgba(25,170,162,.22); border-radius:50%; box-shadow:0 0 0 35px rgba(25,170,162,.035),0 0 0 70px rgba(25,170,162,.025); }
+  .glow-one { top:360px; right:-180px; width:360px; height:360px; animation:ring-pulse 9s ease-in-out infinite alternate; }
+  .glow-two { top:1200px; left:-220px; width:430px; height:430px; border-color:rgba(52,126,157,.24); animation:ring-pulse 12s ease-in-out infinite alternate-reverse; }
+  @keyframes grid-drift { to { background-position:24px 24px; } } @keyframes ring-pulse { from { transform:scale(.92); opacity:.35; } to { transform:scale(1.08) rotate(8deg); opacity:.9; } }
+  .breadcrumbs { display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-bottom:25px; color:#8ea9bc; font-size:13px; }
+  .breadcrumbs a { color:#b4cbd9; text-decoration:none; } .breadcrumbs a:hover,.breadcrumbs .current { color:var(--mint); }
+  .product-hero { display:grid; grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr); gap:32px; align-items:stretch; margin-bottom:55px; }
+  .gallery-panel,.product-hero>.product-summary,.content-section { min-width:0; border:1px solid rgba(117,174,199,.25); border-radius:20px; background:linear-gradient(145deg,rgba(20,47,67,.96),rgba(7,25,40,.98)); box-shadow:0 24px 60px rgba(0,0,0,.16); }
+  .gallery-panel { position:relative; display:flex; flex-direction:column; justify-content:center; min-height:380px; padding:16px; overflow:hidden; background:radial-gradient(ellipse at 50% 0%,rgba(25,170,162,.16),transparent 55%),linear-gradient(145deg,rgba(20,47,67,.96),rgba(7,25,40,.98)); }
+  .gallery-badge { position:absolute; top:28px; right:28px; z-index:2; display:flex; align-items:center; gap:8px; padding:8px 12px; color:#d9f7f3; border:1px solid rgba(117,226,212,.25); border-radius:30px; background:rgba(7,26,42,.85); font-size:11px; font-weight:800; }
+  .status-dot { width:7px; height:7px; border-radius:50%; background:var(--mint); box-shadow:0 0 0 4px rgba(25,170,162,.16); }
+  .main-image-wrap { position:relative; display:flex; align-items:center; justify-content:center; min-height:320px; overflow:hidden; border:1px solid rgba(117,174,199,.12); border-radius:15px; background:radial-gradient(ellipse at 50% 50%,rgba(80,126,151,.18),transparent 65%),linear-gradient(135deg,rgba(24,51,71,.85),rgba(8,27,43,.85)); }
+  .main-product-image { display:block; width:100%; height:320px; object-fit:contain; transition:transform .4s ease; } .main-image-wrap:hover .main-product-image { transform:scale(1.04); }
+  .image-watermark { position:absolute; left:15px; bottom:12px; color:rgba(199,225,239,.25); font-size:18px; font-weight:900; letter-spacing:3px; }
+  .no-image { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; min-height:320px; color:#a5bacb; font-size:13px; text-align:center; }
+  .no-image-icon { display:grid; place-items:center; width:62px; height:62px; border-radius:18px; color:#06232f; background:linear-gradient(135deg,var(--mint),var(--steel)); font-size:28px; }
+  .no-image small { color:#718da1; font-size:13px; font-weight:900; letter-spacing:4px; }
+  .product-gallery { display:flex; flex-wrap:wrap; gap:10px; margin-top:13px; } .thumbnail { width:65px; height:58px; padding:4px; overflow:hidden; cursor:pointer; border:1px solid rgba(117,174,199,.25); border-radius:10px; background:#102b40; } .thumbnail.active,.thumbnail:hover { border-color:var(--mint); background:#164252; } .thumbnail img { width:100%; height:100%; object-fit:contain; }
+  .gallery-footer { display:flex; align-items:center; gap:10px; margin-top:16px; padding:12px 5px 1px; color:#a3bdcd; font-size:11px; font-weight:700; } .footer-line { flex:1; height:1px; background:linear-gradient(90deg,transparent,#3a6278,transparent); }
+  .product-summary { min-width:0; } .product-hero>.product-summary { display:flex; flex-direction:column; align-items:flex-start; gap:15px; padding:clamp(20px,2.5vw,32px); }
+  .eyebrow { display:flex; align-items:center; gap:10px; margin-bottom:2px; color:var(--mint); font-size:13px; font-weight:900; } .eyebrow-line { width:30px; height:2px; background:var(--mint); box-shadow:0 0 12px rgba(117,226,212,.35); }
+  .category-pill { display:inline-flex; padding:7px 13px; color:#9bf0e4; border:1px solid rgba(117,226,212,.25); border-radius:7px; background:rgba(25,170,162,.1); font-size:12px; font-weight:800; }
+  #product-name { margin:0; color:#edf7fc; font-size:clamp(28px,3.3vw,43px); font-weight:950; line-height:1.55; letter-spacing:-.7px; overflow-wrap:anywhere; } .product-lead { margin:0; color:#b0c5d4; font-size:14px; line-height:2.15; }
+  .product-meta { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; width:100%; margin-top:7px; } .meta-item { display:flex; align-items:center; gap:11px; min-width:0; padding:12px; border:1px solid rgba(117,174,199,.2); border-radius:12px; background:linear-gradient(145deg,rgba(21,49,69,.95),rgba(10,31,47,.96)); }
+  .meta-icon { display:grid; flex:0 0 36px; width:36px; height:36px; place-items:center; color:var(--mint); border-radius:10px; background:rgba(25,170,162,.13); font-size:19px; } .meta-item div { display:flex; flex-direction:column; gap:4px; min-width:0; } .meta-item small { color:#a9bfce; font-size:10px; } .meta-item strong { overflow-wrap:anywhere; color:#eaf5fb; font-size:12px; }
+  .price-panel { display:flex; align-items:center; gap:13px; width:100%; margin-top:7px; padding:16px; border:1px solid rgba(117,226,212,.24); border-radius:15px; background:radial-gradient(ellipse at 100% 0%,rgba(25,170,162,.17),transparent 55%),linear-gradient(120deg,rgba(16,62,73,.92),rgba(12,42,59,.96)); }
+  .price-panel-icon { display:grid; flex:0 0 42px; width:42px; height:42px; place-items:center; color:#fff; border-radius:12px; background:linear-gradient(135deg,#19aaa2,#287f9c); font-size:23px; } .price-panel-copy { display:flex; flex:1; flex-direction:column; gap:5px; min-width:0; } .price-panel-copy strong { color:#edfafa; font-size:13px; } .price-panel-copy span { color:#b4d0d9; font-size:11px; line-height:1.9; } .price-status { flex-shrink:0; color:#9bf0e4; font-size:11px; font-weight:900; }
+  .hero-actions { display:flex; flex-wrap:wrap; gap:11px; width:100%; margin-top:3px; } .button-primary,.button-secondary { display:inline-flex; align-items:center; justify-content:center; gap:12px; min-height:46px; padding:0 18px; border-radius:10px; text-decoration:none; font-size:12px; font-weight:900; transition:transform .2s ease,box-shadow .2s ease,background .2s ease; }
+  .button-primary { color:#fff!important; background:linear-gradient(120deg,#087e83,#176a91); box-shadow:0 8px 24px rgba(25,170,162,.17); } .button-primary:hover { transform:translateY(-2px); box-shadow:0 12px 28px rgba(25,170,162,.25); } .button-primary span { color:#b9fff3; font-size:18px; }
+  .button-secondary { color:#e7f5fb!important; border:1px solid rgba(117,174,199,.32); background:#112e43; } .button-secondary:hover { border-color:var(--mint); background:#164352; }
+  .trust-line { display:flex; align-items:center; gap:8px; color:#b5cbd9; font-size:11px; } .trust-line span { display:grid; width:18px; height:18px; place-items:center; color:#9bf0e4; border-radius:50%; background:rgba(25,170,162,.2); font-weight:900; }
+  .content-section { margin-top:28px; padding:clamp(20px,2.5vw,30px); } .section-heading { position:relative; display:flex; align-items:flex-end; justify-content:space-between; gap:20px; margin-bottom:25px; padding-bottom:17px; } .section-heading::after { position:absolute; right:0; bottom:0; width:80px; height:3px; border-radius:4px; background:linear-gradient(90deg,var(--mint),var(--steel)); content:""; }
+  .section-kicker { display:block; margin-bottom:8px; color:var(--mint); font-size:10px; font-weight:950; letter-spacing:1.5px; } .section-heading h2 { margin:0; color:#edf7fc; font-size:clamp(22px,2.5vw,29px); font-weight:950; } .section-subtitle { margin:8px 0 0; color:#afc3d2; font-size:13px; line-height:1.9; } .heading-mark { color:rgba(117,226,212,.2); font-size:42px; font-weight:950; line-height:1; }
+  .specifications-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:13px; } .spec-card { position:relative; display:flex; flex-direction:column; gap:9px; min-width:0; padding:20px; border:1px solid rgba(117,174,199,.22); border-radius:14px; background:linear-gradient(145deg,rgba(20,48,69,.94),rgba(9,29,45,.96)); transition:border-color .2s ease,transform .2s ease; } .spec-card:hover { transform:translateY(-3px); border-color:rgba(117,226,212,.6); } .spec-index { position:absolute; top:12px; left:13px; color:rgba(117,226,212,.24); font-size:20px; font-weight:950; } .spec-label { color:#a9bfce; font-size:12px; } .spec-value { color:#edf7fc; font-size:16px; overflow-wrap:anywhere; }
+  .description-layout { display:grid; grid-template-columns:minmax(0,1fr) 290px; gap:22px; align-items:start; } .description-card { position:relative; min-width:0; padding:25px; overflow:hidden; border:1px solid rgba(117,174,199,.24); border-radius:18px; background:linear-gradient(145deg,rgba(17,43,63,.97),rgba(8,27,43,.98)); }
+  .article-topline { display:flex; flex-wrap:wrap; align-items:center; gap:9px; margin-bottom:20px; color:#a8c4d3; font-size:11px; font-weight:800; } .article-icon { display:grid; width:29px; height:29px; place-items:center; color:#06232f; border-radius:9px; background:linear-gradient(135deg,var(--mint),var(--steel)); } .article-divider { width:24px; height:1px; background:rgba(117,174,199,.35); } .reading-time { color:#8ea9bc; font-weight:600; }
+  .description-intro { margin-bottom:18px; padding:17px 18px; color:#d8f7f2; border-right:3px solid #39c7bc; border-radius:7px 12px 12px 7px; background:linear-gradient(110deg,rgba(25,170,162,.15),rgba(52,126,157,.12)); font-size:14px; font-weight:750; line-height:2.1; }
+  .description-body { position:relative; max-height:260px; overflow:hidden; transition:max-height .45s ease; } .description-body.expanded { max-height:3000px; } .description-body p { margin:0 0 17px; color:#c0d1de; font-size:13px; line-height:2.25; text-align:justify; }
+  .article-subheading { display:flex; align-items:center; gap:9px; margin:23px 0 13px; color:#edf7fc; font-size:15px; font-weight:900; } .article-subheading>span { width:8px; height:21px; border-radius:4px; background:linear-gradient(180deg,var(--mint),var(--steel)); }
+  .application-list { display:grid; gap:10px; margin:0; padding:0; list-style:none; } .application-list li { display:flex; align-items:flex-start; gap:10px; color:#c0d1de; font-size:13px; line-height:2; } .list-check { display:grid; flex:0 0 21px; width:21px; height:21px; margin-top:3px; place-items:center; color:#9bf0e4; border-radius:6px; background:rgba(25,170,162,.18); font-size:12px; font-weight:900; }
+  .description-fade { position:absolute; z-index:1; right:25px; bottom:91px; left:25px; height:100px; pointer-events:none; background:linear-gradient(180deg,transparent,#0c263a 90%); } .description-fade.hidden { opacity:0; } .expand-description { position:relative; z-index:2; display:flex; align-items:center; justify-content:center; gap:12px; width:100%; min-height:44px; margin-top:13px; cursor:pointer; color:#8cf0e2; border:1px solid rgba(117,226,212,.3); border-radius:10px; background:linear-gradient(100deg,#103b4d,#102d42); font:inherit; font-size:12px; font-weight:900; }
+  .source-box { display:flex; gap:13px; margin-top:20px; padding:16px; border:1px solid rgba(117,174,199,.2); border-radius:12px; background:rgba(4,19,31,.62); } .source-icon { display:grid; flex:0 0 30px; width:30px; height:30px; place-items:center; color:#092b37; border-radius:9px; background:var(--mint); font-weight:900; } .source-box strong { color:#e8f5fb; font-size:12px; } .source-box p { margin:7px 0 0; color:#afc3d2; font-size:11px; line-height:1.9; }
+  .knowledge-sidebar { display:grid; gap:15px; } .sidebar-card { padding:21px; border:1px solid rgba(117,174,199,.22); border-radius:16px; background:linear-gradient(145deg,#15364c,#0b2235); } .sidebar-highlight { border-color:rgba(117,226,212,.22); background:radial-gradient(ellipse at 100% 0%,rgba(25,170,162,.25),transparent 47%),linear-gradient(145deg,#102a43,#071a2a); } .sidebar-symbol { display:grid; width:45px; height:45px; margin-bottom:16px; place-items:center; color:var(--mint); border:1px solid rgba(117,226,212,.35); border-radius:12px; background:rgba(117,226,212,.09); font-weight:950; } .sidebar-kicker { color:var(--mint); font-size:10px; font-weight:900; letter-spacing:2px; } .sidebar-highlight h3 { margin:11px 0; color:#f1f7fa; font-size:18px; line-height:1.8; } .sidebar-highlight p { margin:0; color:#b7cbd8; font-size:12px; line-height:2.15; } .sidebar-highlight a { display:flex; justify-content:space-between; gap:10px; margin-top:18px; padding-top:14px; color:var(--mint); border-top:1px solid rgba(255,255,255,.13); font-size:12px; font-weight:900; text-decoration:none; } .sidebar-card:not(.sidebar-highlight) h3 { margin:0 0 17px; color:#edf7fc; font-size:15px; } .checklist { display:grid; gap:14px; margin:0; padding:0; list-style:none; } .checklist li { display:flex; align-items:center; gap:10px; color:#bfd0dd; font-size:11px; line-height:1.8; } .checklist li span { display:grid; flex:0 0 29px; width:29px; height:29px; place-items:center; color:#9bf0e4; border-radius:8px; background:rgba(25,170,162,.17); font-size:10px; font-weight:950; }
+  .related-section { padding:25px; } .view-all { display:inline-flex; align-items:center; gap:8px; flex-shrink:0; color:var(--mint); font-size:12px; font-weight:900; text-decoration:none; } .related-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:15px; } .related-card { min-width:0; overflow:hidden; border:1px solid rgba(117,174,199,.23); border-radius:14px; background:linear-gradient(155deg,#15354b,#0b2235); text-decoration:none; transition:transform .25s ease,border-color .25s ease; } .related-card:hover { transform:translateY(-4px); border-color:rgba(117,226,212,.7); } .related-image { position:relative; display:grid; height:145px; overflow:hidden; place-items:center; background:linear-gradient(145deg,#24465c,#122e43); } .related-image img { width:100%; height:100%; object-fit:contain; } .related-image>span:first-child { color:#6e9bb1; font-size:32px; font-weight:950; } .related-arrow { position:absolute; top:10px; left:10px; display:grid; width:29px; height:29px; place-items:center; color:#d8f7f2; border:1px solid rgba(117,174,199,.25); border-radius:8px; background:rgba(7,26,42,.8); } .related-info { padding:15px; } .related-info small { color:var(--mint); font-size:10px; font-weight:900; } .related-info h3 { margin:8px 0 13px; color:#edf7fc; font-size:14px; line-height:1.8; } .related-link { color:#75e2d4; font-size:11px; font-weight:800; }
+  .final-cta { position:relative; display:flex; align-items:center; justify-content:space-between; gap:25px; margin-top:28px; padding:32px; overflow:hidden; border:1px solid #204b63; border-radius:20px; background:radial-gradient(ellipse at 95% 0%,rgba(25,170,162,.2),transparent 40%),linear-gradient(120deg,#071a2a,#102f47); box-shadow:0 20px 45px rgba(0,0,0,.2); } .cta-pattern { position:absolute; top:-90px; left:-35px; width:250px; height:250px; border:1px solid rgba(117,226,212,.15); border-radius:50%; box-shadow:0 0 0 24px rgba(117,226,212,.035),0 0 0 48px rgba(117,226,212,.025); } .cta-content { position:relative; z-index:1; max-width:650px; } .cta-content h2 { margin:0 0 9px; color:#f1f7fa; font-size:clamp(20px,2.4vw,28px); line-height:1.8; } .cta-content p { margin:0; color:#b8cbd8; font-size:12px; line-height:2; } .cta-button { position:relative; z-index:1; display:inline-flex; flex-shrink:0; align-items:center; justify-content:center; gap:15px; min-height:48px; padding:0 20px; color:#062a35; border-radius:10px; background:linear-gradient(110deg,#75e2d4,#b2f0e6); font-size:12px; font-weight:950; text-decoration:none; }
+  .loading-panel { padding:28px; border:1px solid rgba(117,174,199,.25); border-radius:18px; background:linear-gradient(145deg,#102a43,#071a2a); color:#c0d1de; line-height:2; } .loading-panel h1 { color:#edf7fc; font-size:22px; } .loading-panel p { font-size:13px; }
+  [hidden] { display:none!important; }
+  @media(max-width:950px) { .product-hero { gap:20px; } .main-image-wrap,.no-image { min-height:290px; } .main-product-image { height:290px; } .description-layout { grid-template-columns:minmax(0,1fr) 250px; gap:15px; } .specifications-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+  @media(max-width:720px) { .product-container { width:min(100% - 26px,600px); } .product-page { padding-top:18px; } .product-hero { grid-template-columns:1fr; gap:17px; margin-bottom:38px; } .main-image-wrap,.no-image { min-height:270px; } .main-product-image { height:270px; } .description-layout { grid-template-columns:1fr; } .knowledge-sidebar { grid-template-columns:repeat(2,minmax(0,1fr)); } .related-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; } .related-image { height:125px; } .final-cta { align-items:flex-start; flex-direction:column; padding:25px 21px; } .cta-button { width:100%; } }
+  @media(max-width:460px) { .product-container { width:calc(100% - 22px); } .breadcrumbs { gap:7px; font-size:11px; } .gallery-panel { padding:10px; } .gallery-badge { top:19px; right:19px; } .product-meta { grid-template-columns:1fr; gap:8px; } .price-panel { flex-wrap:wrap; padding:13px; } .price-status { margin-right:54px; } .hero-actions { display:grid; grid-template-columns:1fr; } .button-primary,.button-secondary { width:100%; } .specifications-grid { grid-template-columns:1fr; } .content-section { padding:16px; } .description-card { padding:16px 13px; } .knowledge-sidebar { grid-template-columns:1fr; } .related-section { padding:16px 12px; } .related-image { height:105px; } .related-info { padding:11px; } .related-info h3 { font-size:12px; min-height:42px; } .view-all { font-size:10px; } .heading-mark { font-size:30px; } }
+  @media(prefers-reduced-motion:reduce) { .product-page *,.product-page *::before,.product-page *::after { scroll-behavior:auto!important; animation:none!important; transition:none!important; } }
+</style>

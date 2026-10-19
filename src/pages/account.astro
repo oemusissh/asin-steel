@@ -351,31 +351,50 @@ const addresses = [];
     if (phone) document.documentElement.dataset.accountPhone = phone;
   }
 
-  async function handleSignOut() {
-    if (!window.confirm('از حساب کاربری خارج می‌شوید؟')) return;
+  
+async function handleSignOut() {
+  const confirmed = window.confirm('از حساب کاربری خارج می‌شوید؟');
+  if (!confirmed) return;
 
-    [signOutBtn, signOutBtnMobile].forEach((button) => {
-      if (button) {
-        button.disabled = true;
-        button.textContent = 'در حال خروج...';
-      }
-    });
+  [signOutBtn, signOutBtnMobile].forEach((button) => {
+    if (button) {
+      button.setAttribute('disabled', 'true');
+      button.textContent = 'در حال خروج...';
+    }
+  });
 
+  try {
     const { error } = await supabase.auth.signOut();
 
     if (error) {
-      window.alert('خروج از حساب انجام نشد. لطفاً دوباره تلاش کنید.');
-      [signOutBtn, signOutBtnMobile].forEach((button) => {
-        if (button) {
-          button.disabled = false;
-          button.textContent = 'Sign Out';
-        }
-      });
+      console.error('Supabase sign-out failed:', error);
+      window.alert('خروج ناموفق بود. لطفاً دوباره تلاش کنید.');
       return;
     }
 
-    window.location.replace(homeUrl);
+    const { data, error: sessionError } =
+      await supabase.auth.getSession();
+
+    if (sessionError || data.session) {
+      console.error('Session still exists after sign-out:', sessionError);
+      window.alert('نشست هنوز پاک نشده است. لطفاً کنسول را بررسی کنید.');
+      return;
+    }
+
+    window.location.replace(signInUrl);
+  } catch (error) {
+    console.error('Unexpected sign-out error:', error);
+    window.alert('هنگام خروج خطایی رخ داد. کنسول را بررسی کنید.');
+  } finally {
+    [signOutBtn, signOutBtnMobile].forEach((button) => {
+      if (button) {
+        button.removeAttribute('disabled');
+        button.textContent = 'Sign Out';
+      }
+    });
   }
+}
+
 
   signOutBtn?.addEventListener('click', handleSignOut);
   signOutBtnMobile?.addEventListener('click', handleSignOut);
