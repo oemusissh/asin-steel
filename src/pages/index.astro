@@ -1,91 +1,12 @@
 ---
+
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ProductCard from '../components/ProductCard.astro';
+
 import RecentlyViewed from '../components/RecentlyViewed.astro';
 import AdvancedSteelCalculator from "../components/AdvancedSteelCalculator.astro";
 import HomeLuxuryHero from "../components/HomeLuxuryHero.astro";
 
-const featuredProducts = [
-  {
-    id: '1',
-    name: 'Premium Portland Cement - 50kg Bag',
-    price: 12.99,
-    originalPrice: 15.99,
-    image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=500&h=500&fit=crop',
-    rating: 4.8,
-    reviews: 234,
-    badge: 'Best Seller',
-    inStock: true
-  },
-  {
-    id: '2',
-    name: 'Steel Reinforcement Bars (Rebar) - Grade 60',
-    price: 45.50,
-    image: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=500&h=500&fit=crop',
-    rating: 4.9,
-    reviews: 189,
-    inStock: true
-  },
-  {
-    id: '3',
-    name: 'Premium Pine Lumber 2x4x8',
-    price: 8.99,
-    originalPrice: 11.99,
-    image: 'https://images.unsplash.com/photo-1563453392212-326f5e854473?w=500&h=500&fit=crop',
-    rating: 4.7,
-    reviews: 456,
-    badge: 'Sale',
-    inStock: true
-  },
-  {
-    id: '4',
-    name: 'Professional Power Drill Set',
-    price: 129.99,
-    originalPrice: 179.99,
-    image: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=500&h=500&fit=crop',
-    rating: 4.9,
-    reviews: 678,
-    badge: 'Hot Deal',
-    inStock: true
-  },
-  {
-    id: '5',
-    name: 'Copper Electrical Wire - 100ft Roll',
-    price: 89.99,
-    image: 'https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=500&h=500&fit=crop',
-    rating: 4.6,
-    reviews: 123,
-    inStock: true
-  },
-  {
-    id: '6',
-    name: 'PVC Plumbing Pipe Kit',
-    price: 34.99,
-    image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=500&h=500&fit=crop',
-    rating: 4.5,
-    reviews: 234,
-    inStock: false
-  },
-  {
-    id: '7',
-    name: 'Exterior Paint - Premium Weather Shield',
-    price: 54.99,
-    originalPrice: 69.99,
-    image: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=500&h=500&fit=crop',
-    rating: 4.8,
-    reviews: 345,
-    inStock: true
-  },
-  {
-    id: '8',
-    name: 'Asphalt Roofing Shingles - Bundle',
-    price: 39.99,
-    image: 'https://images.unsplash.com/photo-1632778149955-e80f8ceca2e8?w=500&h=500&fit=crop',
-    rating: 4.7,
-    reviews: 167,
-    inStock: true
-  }
-];
+
 ---
 
 <BaseLayout title="ASIN STEEL - Premium Building Materials">
@@ -1561,7 +1482,7 @@ const featuredProducts = [
             <div class="asc-media">
               <svg class="asc-ghost asc-draw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=".55" stroke-linecap="round" stroke-linejoin="round" set:html={c.icon} />
               <img
-                src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/images/categories/${c.slug}.jpg`}
+                src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/images/categories/${c.slug}.png`}
                 alt={c.name}
                 loading="lazy"
                 decoding="async"
@@ -1772,7 +1693,7 @@ const featuredProducts = [
        بدون عکس، آیکن مقطع رنگی نمایش داده می‌شود.
        قیمت‌ها نمونه‌اند؛ price: null یعنی «استعلام قیمت».
   ========================================================= -->
-  <section id="afp" dir="rtl" class="afp">
+  <section id="afp" dir="rtl" class="afp" data-base={import.meta.env.BASE_URL}>
     <div class="afp-bg" aria-hidden="true"></div>
 
     <!-- موج جداکننده: رنگ پایه موج باید با پس‌زمینه بخش دسته‌بندی (#f5f8fc) یکی باشد -->
@@ -1827,73 +1748,7 @@ const featuredProducts = [
           </span>
         </a>
 
-        {[
-          { id: 'ipe-18', cat: 'تیرآهن', name: 'تیرآهن IPE 18', specs: ['ST37', 'شاخه ۱۲ متری', 'ساختمانی'], price: 7900000, oldPrice: 8600000, unit: 'شاخه', inStock: true, badge: 'پرفروش', bc: '#f97316', color: '#2563eb', icon: '<path pathLength="1" d="M5 4h14M5 20h14M12 4v16"/>' },
-          { id: 'rebar-16', cat: 'میلگرد', name: 'میلگرد آجدار سایز ۱۶', specs: ['A3', 'شاخه ۱۲ متری', 'آجدار'], price: 1450000, oldPrice: null, unit: 'شاخه', inStock: true, badge: 'پرفروش', bc: '#f97316', color: '#ea580c', icon: '<circle pathLength="1" cx="12" cy="12" r="7"/><circle pathLength="1" cx="12" cy="12" r="2.5"/>' },
-          { id: 'channel-10', cat: 'ناودانی', name: 'ناودانی ۱۰', specs: ['ST37', 'شاخه ۱۲ متری', 'سازه‌ای'], price: null, oldPrice: null, unit: 'شاخه', inStock: true, badge: '', bc: '', color: '#0891b2', icon: '<path pathLength="1" d="M18 4H6v16h12"/>' },
-          { id: 'angle-5', cat: 'نبشی', name: 'نبشی بال‌مساوی ۵', specs: ['ST37', 'شاخه ۶ متری', 'صنعتی'], price: 1980000, oldPrice: 2200000, unit: 'شاخه', inStock: true, badge: '', bc: '', color: '#7c3aed', icon: '<path pathLength="1" d="M6 4v16h12"/>' },
-          { id: 'tube-4040', cat: 'قوطی و پروفیل', name: 'قوطی ۴۰×۴۰', specs: ['ST37', 'شاخه ۶ متری', 'ساختمانی'], price: null, oldPrice: null, unit: 'شاخه', inStock: true, badge: 'جدید', bc: '#2563eb', color: '#e11d48', icon: '<rect pathLength="1" x="4.5" y="4.5" width="15" height="15" rx="1.5"/><rect pathLength="1" x="9" y="9" width="6" height="6" rx=".5"/>' },
-          { id: 'plate-5', cat: 'ورق فولادی', name: 'ورق سیاه ضخامت ۵ میلی‌متر', specs: ['ST37', 'ورق سیاه', 'برش‌کاری'], price: null, oldPrice: null, unit: 'کیلوگرم', inStock: true, badge: '', bc: '', color: '#d97706', icon: '<path pathLength="1" d="M3 9l9-4.5L21 9l-9 4.5L3 9z"/><path pathLength="1" d="M3 9v4l9 4.5 9-4.5V9"/>' },
-          { id: 'pipe-2', cat: 'لوله', name: 'لوله مانیسمان ۲ اینچ', specs: ['ST37', 'بدون درز', 'صنعتی'], price: null, oldPrice: null, unit: 'شاخه', inStock: false, badge: '', bc: '', color: '#059669', icon: '<circle pathLength="1" cx="12" cy="12" r="8"/><circle pathLength="1" cx="12" cy="12" r="4.5"/>' },
-          { id: 'flat-440', cat: 'تسمه', name: 'تسمه فولادی ۴×۴۰', specs: ['ST37', 'شاخه ۶ متری', 'ساختمانی'], price: 620000, oldPrice: null, unit: 'شاخه', inStock: true, badge: '', bc: '', color: '#4f46e5', icon: '<rect pathLength="1" x="3" y="9" width="18" height="6" rx="1"/>' }
-        ].map((p, i) => {
-          const off = p.oldPrice && p.price ? Math.round((1 - p.price / p.oldPrice) * 100) : 0;
-          const tags = [p.badge === 'پرفروش' ? 'best' : '', off ? 'sale' : '', p.inStock ? 'stock' : ''].filter(Boolean).join(' ');
-          return (
-            <a
-              class={`afp-card${p.inStock ? '' : ' oos'}`}
-              href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/products/${p.id}`}
-              style={`--i:${i};--c:${p.color}`}
-              data-tags={tags}
-              draggable="false"
-            >
-              <div class="afp-media">
-                <span class="afp-orb"></span>
-                <svg class="afp-ghost afp-draw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=".7" stroke-linecap="round" stroke-linejoin="round" set:html={p.icon} />
-                <img
-                  src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/images/products/${p.id}.jpg`}
-                  alt={p.name}
-                  loading="lazy"
-                  decoding="async"
-                  draggable="false"
-                  onerror="this.remove()"
-                />
-                <div class="afp-badges">
-                  {p.badge && <span class="afp-bd" style={`background:${p.bc}`}>{p.badge}</span>}
-                  {off > 0 && <span class="afp-off">{off.toLocaleString('fa-IR')}٪ تخفیف</span>}
-                </div>
-                <span class={`afp-stock ${p.inStock ? 'ok' : 'no'}`}><i></i>{p.inStock ? 'موجود در انبار' : 'ناموجود'}</span>
-              </div>
-
-              <div class="afp-body">
-                <span class="afp-cat">{p.cat}</span>
-                <h3>{p.name}</h3>
-                <ul class="afp-specs">
-                  {p.specs.map((s) => <li>{s}</li>)}
-                </ul>
-
-                <div class="afp-pr">
-                  {p.price ? (
-                    <>
-                      {p.oldPrice && <del>{p.oldPrice.toLocaleString('fa-IR')}</del>}
-                      <div><b data-price={p.price}>{p.price.toLocaleString('fa-IR')}</b> <small>تومان / {p.unit}</small></div>
-                    </>
-                  ) : (
-                    <>
-                      <div><b class="afp-inq">استعلام قیمت</b></div>
-                      <small>قیمت روز، بر اساس تناژ</small>
-                    </>
-                  )}
-                </div>
-
-                <span class="afp-cta">
-                  <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h2l2.4 10.2a1 1 0 001 .8h8.2a1 1 0 001-.7L19 8H6M10 19.5h.01M17 19.5h.01" /></svg>
-                  {p.inStock ? (p.price ? 'مشاهده و سفارش' : 'استعلام قیمت') : 'اطلاع از موجودی'}
-                </span>
-              </div>
-            </a>
-          );
-        })}
+        <div class="afp-loading" role="status">در حال دریافت محصولات از پایگاه داده...</div>
       </div>
 
       <div class="afp-prog"><b></b></div>
@@ -1904,6 +1759,7 @@ const featuredProducts = [
     .afp{position:relative;isolation:isolate;overflow:hidden;padding:9rem 0 4.5rem;color:#fff;
       background:linear-gradient(135deg,#0b2a57 0%,#1550a8 50%,#2b8be0 100%)}
     @media(min-width:1024px){.afp{padding-bottom:5.5rem}}
+    .afp-loading{flex:0 0 100%;padding:2rem 1rem;text-align:center;color:#fff;font-weight:700}
     .afp-wrap{position:relative;z-index:2;max-width:1400px;margin:0 auto;padding:0 1.25rem}
     @media(min-width:640px){.afp-wrap{padding:0 2.5rem}}
     @media(min-width:1024px){.afp-wrap{padding:0 4rem}}
@@ -2049,13 +1905,89 @@ const featuredProducts = [
   </style>
 
   <script>
+    import { supabase } from '../lib/supabase';
+
     const afp = document.getElementById('afp');
     if (afp) {
       afp.classList.add('afp-js');
       const track = afp.querySelector<HTMLElement>('.afp-track')!;
       const prog = afp.querySelector<HTMLElement>('.afp-prog')!;
-      const cards = Array.from(afp.querySelectorAll<HTMLElement>('.afp-card'));
+      const base = (afp.dataset.base || '/').replace(/\/$/, '');
       const fmt = (n: number) => n.toLocaleString('fa-IR');
+      const escapeHTML = (value: unknown) => String(value ?? '').replace(/[&<>"']/g, (char) => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+      })[char]!);
+
+      const categoryNames: Record<string, string> = {
+        rebar: 'میلگرد', beam: 'تیرآهن', sheet: 'ورق', profile: 'پروفیل',
+        angle: 'نبشی و ناودانی', pipe: 'لوله', other: 'سایر',
+        rebar: 'میلگرد', channel: 'ناودانی',
+      };
+      const categoryIcons: Record<string, string> = {
+        rebar: '<circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.5"/>',
+        beam: '<path d="M5 4h14M5 20h14M12 4v16"/>',
+        sheet: '<path d="M3 9l9-4.5L21 9l-9 4.5L3 9z"/><path d="M3 9v4l9 4.5 9-4.5V9"/>',
+        profile: '<rect x="4.5" y="4.5" width="15" height="15" rx="1.5"/><rect x="9" y="9" width="6" height="6" rx=".5"/>',
+        angle: '<path d="M6 4v16h12"/>',
+        pipe: '<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4.5"/>',
+        other: '<rect x="3" y="9" width="18" height="6" rx="1"/>',
+      };
+
+      const loading = track.querySelector<HTMLElement>('.afp-loading');
+
+      function renderProduct(p: any, index: number) {
+        const category = String(p.category || 'other');
+        const cat = categoryNames[category] || category || 'سایر';
+        const price = Number(p.price || 0);
+        const quote = Boolean(p.price_on_request) || price <= 0;
+        const inventory = String(p.inventory || 'inquire');
+        const inStock = inventory === 'available';
+        const oldPrice = Number(p.old_price || p.original_price || 0);
+        const off = !quote && oldPrice > price ? Math.round((1 - price / oldPrice) * 100) : 0;
+        const badge = p.badge || (p.is_featured ? 'ویژه' : '');
+        const tags = [
+          (p.is_featured || p.best_seller || p.bestseller) ? 'best' : '',
+          off > 0 ? 'sale' : '',
+          inStock ? 'stock' : '',
+        ].filter(Boolean).join(' ');
+        const color = category === 'rebar' ? '#ea580c' : category === 'beam' ? '#2563eb' :
+          category === 'profile' ? '#e11d48' : category === 'pipe' ? '#059669' : '#4f46e5';
+        const image = p.image_url || p.image || p.thumbnail || '';
+        const href = `${base}/products/detail/?id=${encodeURIComponent(String(p.id))}`;
+        const priceMarkup = quote
+          ? '<div><b class="afp-inq">استعلام قیمت</b></div><small>قیمت روز را از کارشناسان فروش بپرسید</small>'
+          : `${oldPrice > price ? `<del>${fmt(oldPrice)}</del>` : ''}<div><b data-price="${price}">${fmt(price)}</b> <small>تومان / کیلوگرم</small></div>`;
+
+        return `
+          <a class="afp-card${inStock ? '' : ' oos'}" href="${href}"
+             style="--i:${index};--c:${color}" data-tags="${tags}" draggable="false">
+            <div class="afp-media">
+              <span class="afp-orb"></span>
+              <svg class="afp-ghost afp-draw" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width=".7" stroke-linecap="round" stroke-linejoin="round">${categoryIcons[category] || categoryIcons.other}</svg>
+              ${image ? `<img src="${escapeHTML(image)}" alt="${escapeHTML(p.name)}" loading="lazy" decoding="async" draggable="false" onerror="this.remove()" />` : ''}
+              <div class="afp-badges">
+                ${badge ? `<span class="afp-bd" style="background:${p.badge_color || '#2563eb'}">${escapeHTML(badge)}</span>` : ''}
+                ${off > 0 ? `<span class="afp-off">${fmt(off)}٪ تخفیف</span>` : ''}
+              </div>
+              <span class="afp-stock ${inStock ? 'ok' : 'no'}"><i></i>${inStock ? 'موجود در انبار' : inventory === 'unavailable' ? 'ناموجود' : 'استعلام موجودی'}</span>
+            </div>
+            <div class="afp-body">
+              <span class="afp-cat">${escapeHTML(cat)}</span>
+              <h3>${escapeHTML(p.name || 'محصول فولادی')}</h3>
+              <ul class="afp-specs">
+                ${p.factory ? `<li>${escapeHTML(p.factory)}</li>` : ''}
+                ${p.unit ? `<li>${escapeHTML(p.unit)}</li>` : ''}
+                ${p.weight ? `<li>وزن ${escapeHTML(p.weight)}</li>` : ''}
+              </ul>
+              <div class="afp-pr">${priceMarkup}</div>
+              <span class="afp-cta">
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h2l2.4 10.2a1 1 0 001 .8h8.2a1 1 0 001-.7L19 8H6M10 19.5h.01M17 19.5h.01" /></svg>
+                ${inStock ? (quote ? 'استعلام قیمت' : 'مشاهده محصول') : 'اطلاع از موجودی'}
+              </span>
+            </div>
+          </a>`;
+      }
 
       const reveal = (card: HTMLElement) => {
         card.classList.add('in');
@@ -2071,91 +2003,116 @@ const featuredProducts = [
         requestAnimationFrame(tick);
       };
 
-      const io = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => {
-            if (e.isIntersecting) {
-              reveal(e.target as HTMLElement);
-              io.unobserve(e.target);
-            }
+      async function loadProducts() {
+        try {
+          const { data, error } = await supabase
+            .from('products')
+            .select('*')
+            .eq('active', true)
+            .order('created_at', { ascending: false })
+            .limit(12);
+          if (error) throw error;
+
+          loading?.remove();
+          if (!data?.length) {
+            track.insertAdjacentHTML('beforeend', '<p class="afp-loading" role="status">فعلاً محصول فعالی برای نمایش ثبت نشده است.</p>');
+            return;
+          }
+          track.insertAdjacentHTML('beforeend', data.map((p, i) => renderProduct(p, i)).join(''));
+
+          const cards = Array.from(afp!.querySelectorAll<HTMLElement>('.afp-card'));
+          const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                reveal(entry.target as HTMLElement);
+                io.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.15 });
+
+          cards.forEach((card) => {
+            io.observe(card);
+            card.addEventListener('pointermove', (e: PointerEvent) => {
+              if (e.pointerType !== 'mouse') return;
+              const r = card.getBoundingClientRect();
+              card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+              card.style.setProperty('--my', `${e.clientY - r.top}px`);
+              card.style.setProperty('--rx', `${(0.5 - (e.clientY - r.top) / r.height) * 7}deg`);
+              card.style.setProperty('--ry', `${((e.clientX - r.left) / r.width - 0.5) * 7}deg`);
+            });
+            card.addEventListener('pointerleave', () => {
+              card.style.setProperty('--rx', '0deg');
+              card.style.setProperty('--ry', '0deg');
+            });
           });
-        },
-        { threshold: 0.15 }
-      );
 
-      cards.forEach((card) => {
-        io.observe(card);
-        card.addEventListener('pointermove', (e: PointerEvent) => {
-          if (e.pointerType !== 'mouse') return;
-          const r = card.getBoundingClientRect();
-          card.style.setProperty('--mx', `${e.clientX - r.left}px`);
-          card.style.setProperty('--my', `${e.clientY - r.top}px`);
-          card.style.setProperty('--rx', `${(0.5 - (e.clientY - r.top) / r.height) * 7}deg`);
-          card.style.setProperty('--ry', `${((e.clientX - r.left) / r.width - 0.5) * 7}deg`);
-        });
-        card.addEventListener('pointerleave', () => {
-          card.style.setProperty('--rx', '0deg');
-          card.style.setProperty('--ry', '0deg');
-        });
-      });
-
-      /* نوار پیشرفت */
-      const updateProg = () => {
-        const max = track.scrollWidth - track.clientWidth;
-        const p = max > 0 ? Math.min(Math.abs(track.scrollLeft) / max, 1) : 1;
-        prog.style.setProperty('--p', String(0.12 + 0.88 * p));
-      };
-      track.addEventListener('scroll', updateProg, { passive: true });
-      window.addEventListener('resize', updateProg);
-      updateProg();
-
-      /* دکمه‌های قبلی/بعدی (در راست‌به‌چپ: بعدی = به سمت چپ) */
-      afp.querySelectorAll<HTMLButtonElement>('.afp-nav button').forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const step = track.clientWidth * 0.8 * (btn.dataset.dir === 'next' ? -1 : 1);
-          track.scrollBy({ left: step, behavior: 'smooth' });
-        });
-      });
-
-      /* کشیدن با موس */
-      let down = false, moved = false, sx = 0, sl = 0;
-      track.addEventListener('pointerdown', (e: PointerEvent) => {
-        if (e.pointerType !== 'mouse') return;
-        down = true; moved = false; sx = e.clientX; sl = track.scrollLeft;
-      });
-      window.addEventListener('pointermove', (e: PointerEvent) => {
-        if (!down) return;
-        const dx = e.clientX - sx;
-        if (Math.abs(dx) > 5) { moved = true; track.classList.add('drag'); }
-        track.scrollLeft = sl - dx;
-      });
-      window.addEventListener('pointerup', () => { down = false; track.classList.remove('drag'); });
-      track.addEventListener('click', (e) => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
-      track.addEventListener('dragstart', (e) => e.preventDefault());
-
-      /* فیلتر */
-      const tabs = afp.querySelectorAll<HTMLButtonElement>('.afp-tabs button');
-      tabs.forEach((btn) => {
-        btn.addEventListener('click', () => {
-          tabs.forEach((b) => b.classList.remove('on'));
-          btn.classList.add('on');
-          const f = btn.dataset.f ?? 'all';
-          let k = 0;
-          cards.forEach((c) => {
-            io.unobserve(c);
-            const show = f === 'all' || (c.dataset.tags ?? '').split(' ').includes(f);
-            c.classList.toggle('afp-hide', !show);
-            if (show) {
-              c.style.setProperty('--i', String(k++));
-              c.classList.remove('in');
-              void c.offsetWidth;
-              reveal(c);
-            }
-          });
-          track.scrollTo({ left: 0, behavior: 'smooth' });
+          const updateProg = () => {
+            const max = track.scrollWidth - track.clientWidth;
+            const p = max > 0 ? Math.min(Math.abs(track.scrollLeft) / max, 1) : 1;
+            prog.style.setProperty('--p', String(0.12 + 0.88 * p));
+          };
+          track.addEventListener('scroll', updateProg, { passive: true });
+          window.addEventListener('resize', updateProg);
           updateProg();
-        });
-      });
+
+          afp!.querySelectorAll<HTMLButtonElement>('.afp-nav button').forEach((btn) => {
+            btn.addEventListener('click', () => {
+              const step = track.clientWidth * 0.8 * (btn.dataset.dir === 'next' ? -1 : 1);
+              track.scrollBy({ left: step, behavior: 'smooth' });
+            });
+          });
+
+          let down = false, moved = false, sx = 0, sl = 0;
+          track.addEventListener('pointerdown', (e: PointerEvent) => {
+            if (e.pointerType !== 'mouse') return;
+            down = true; moved = false; sx = e.clientX; sl = track.scrollLeft;
+          });
+          window.addEventListener('pointermove', (e: PointerEvent) => {
+            if (!down) return;
+            const dx = e.clientX - sx;
+            if (Math.abs(dx) > 5) { moved = true; track.classList.add('drag'); }
+            track.scrollLeft = sl - dx;
+          });
+          window.addEventListener('pointerup', () => { down = false; track.classList.remove('drag'); });
+          track.addEventListener('click', (e) => {
+            if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; }
+          }, true);
+          track.addEventListener('dragstart', (e) => e.preventDefault());
+
+          const tabs = afp!.querySelectorAll<HTMLButtonElement>('.afp-tabs button');
+          tabs.forEach((btn) => {
+            if (btn.dataset.f !== 'all' && !cards.some((card) =>
+              (card.dataset.tags ?? '').split(' ').includes(btn.dataset.f || '')
+            )) btn.hidden = true;
+          });
+          tabs.forEach((btn) => {
+            btn.addEventListener('click', () => {
+              tabs.forEach((b) => b.classList.remove('on'));
+              btn.classList.add('on');
+              const filter = btn.dataset.f ?? 'all';
+              let k = 0;
+              cards.forEach((card) => {
+                io.unobserve(card);
+                const show = filter === 'all' || (card.dataset.tags ?? '').split(' ').includes(filter);
+                card.classList.toggle('afp-hide', !show);
+                if (show) {
+                  card.style.setProperty('--i', String(k++));
+                  card.classList.remove('in');
+                  void card.offsetWidth;
+                  reveal(card);
+                }
+              });
+              track.scrollTo({ left: 0, behavior: 'smooth' });
+              updateProg();
+            });
+          });
+        } catch (error) {
+          console.error('خطا در دریافت محصولات صفحه اصلی از Supabase:', error);
+          loading && (loading.textContent = 'دریافت محصولات ناموفق بود. اتصال Supabase و دسترسی خواندن جدول products را بررسی کنید.');
+        }
+      }
+
+      void loadProducts();
     }
   </script>
 
@@ -2570,6 +2527,7 @@ const featuredProducts = [
   }
 }
 
-</style>
+  
+  </style>
 
 
