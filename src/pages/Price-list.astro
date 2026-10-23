@@ -1,127 +1,17 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-const products = [
-  {
-    name: "میلگرد ۱۴ آجدار A3",
-    category: "rebar",
-    categoryName: "میلگرد",
-    type: "میلگرد آجدار",
-    size: "14",
-    factory: "ذوب آهن اصفهان",
-    unit: "شاخه ۱۲ متری",
-    weight: "۱۴.۵ کیلوگرم",
-    price: 32400,
-    change: "up",
-    delivery: "انبار تهران / کارخانه",
-  },
-  {
-    name: "میلگرد ۱۶ آجدار A3",
-    category: "rebar",
-    categoryName: "میلگرد",
-    type: "میلگرد آجدار",
-    size: "16",
-    factory: "ذوب آهن اصفهان",
-    unit: "شاخه ۱۲ متری",
-    weight: "۱۹ کیلوگرم",
-    price: 32200,
-    change: "same",
-    delivery: "انبار تهران / کارخانه",
-  },
-  {
-    name: "میلگرد ۱۸ آجدار A3",
-    category: "rebar",
-    categoryName: "میلگرد",
-    type: "میلگرد آجدار",
-    size: "18",
-    factory: "فولاد کویر یزد",
-    unit: "شاخه ۱۲ متری",
-    weight: "۲۴ کیلوگرم",
-    price: 31800,
-    change: "down",
-    delivery: "درب کارخانه",
-  },
-  {
-    name: "تیرآهن ۱۴ IPE",
-    category: "beam",
-    categoryName: "تیرآهن",
-    type: "تیرآهن IPE",
-    size: "14",
-    factory: "ذوب آهن اصفهان",
-    unit: "شاخه ۱۲ متری",
-    weight: "۱۵۵ کیلوگرم",
-    price: 37200,
-    change: "same",
-    delivery: "انبار تهران",
-  },
-  {
-    name: "تیرآهن ۱۶ IPE",
-    category: "beam",
-    categoryName: "تیرآهن",
-    type: "تیرآهن IPE",
-    size: "16",
-    factory: "ذوب آهن اصفهان",
-    unit: "شاخه ۱۲ متری",
-    weight: "۱۹۰ کیلوگرم",
-    price: 38500,
-    change: "up",
-    delivery: "انبار تهران",
-  },
-  {
-    name: "ورق سیاه ۲ میل",
-    category: "sheet",
-    categoryName: "ورق",
-    type: "ورق سیاه",
-    size: "2mm",
-    factory: "فولاد مبارکه",
-    unit: "شیت ۱×۲ متر",
-    weight: "۳۱.۴ کیلوگرم",
-    price: 38200,
-    change: "up",
-    delivery: "انبار اصفهان",
-  },
-  {
-    name: "ورق گالوانیزه ۱.۵ میل",
-    category: "sheet",
-    categoryName: "ورق",
-    factory: "فولاد مبارکه",
-    unit: "رول",
-    weight: "۵۰ کیلوگرم",
-    price: 44500,
-    change: "down",
-    delivery: "انبار تهران",
-  },
-  {
-    name: "قوطی ۴۰×۴۰ ضخامت ۲ میل",
-    category: "profile",
-    categoryName: "قوطی و پروفیل",
-    factory: "فولاد فایکو",
-    unit: "شاخه ۶ متری",
-    weight: "۱۴.۸ کیلوگرم",
-    price: 39100,
-    change: "same",
-    delivery: "انبار تهران",
-  },
-  {
-    name: "نبشی ۵×۵×۵",
-    category: "angle",
-    categoryName: "نبشی و ناودانی",
-    factory: "فولاد ناب تبریز",
-    unit: "شاخه ۶ متری",
-    weight: "۲۲.۵ کیلوگرم",
-    price: 35600,
-    change: "up",
-    delivery: "درب کارخانه",
-  },
-];
-
 const categories = [
   { id: "all", title: "همه محصولات" },
   { id: "rebar", title: "میلگرد" },
   { id: "beam", title: "تیرآهن" },
   { id: "sheet", title: "ورق" },
-  { id: "profile", title: "قوطی و پروفیل" },
+  { id: "profile", title: "پروفیل" },
   { id: "angle", title: "نبشی و ناودانی" },
+  { id: "pipe", title: "لوله" },
+  { id: "billet", title: "شمش فولادی" },
+  { id: "alloy", title: "فولاد آلیاژی" },
+  { id: "other", title: "سایر محصولات" },
 ];
 ---
 
@@ -131,23 +21,15 @@ const categories = [
 >
   <main class="price-page" dir="rtl">
 
-    <!-- =========================================
-         HERO
-    ========================================== -->
-
+    <!-- ================= HERO ================= -->
     <section class="price-hero">
-
       <div class="hero-grid"></div>
-
       <div class="hero-glow hero-glow-one"></div>
       <div class="hero-glow hero-glow-two"></div>
-
       <div class="hero-scan"></div>
 
       <div class="container hero-container">
-
         <div class="hero-content">
-
           <div class="hero-badge">
             <span class="pulse-dot"></span>
             <span>مرکز آنلاین قیمت آهن و فولاد</span>
@@ -165,7 +47,6 @@ const categories = [
           </p>
 
           <div class="hero-actions">
-
             <a href="#price-table" class="hero-main-btn">
               مشاهده قیمت‌ها
               <span>↓</span>
@@ -173,257 +54,157 @@ const categories = [
 
             <div class="hero-update">
               <span class="update-dot"></span>
-
               <div>
                 <small>آخرین بروزرسانی</small>
-                <strong>امروز، ۱۲:۳۰</strong>
+                <strong id="lastUpdate">—</strong>
               </div>
             </div>
-
           </div>
 
           <div class="hero-stats">
-
             <div class="hero-stat">
               <strong>+۱۲۰</strong>
               <span>محصول فولادی</span>
             </div>
-
             <div class="stat-line"></div>
-
             <div class="hero-stat">
               <strong>+۳۰</strong>
               <span>کارخانه معتبر</span>
             </div>
-
             <div class="stat-line"></div>
-
             <div class="hero-stat">
               <strong>روزانه</strong>
               <span>بروزرسانی قیمت</span>
             </div>
-
           </div>
-
         </div>
 
-
         <!-- HERO VISUAL -->
-
         <div class="hero-visual">
-
           <div class="visual-orbit orbit-one"></div>
           <div class="visual-orbit orbit-two"></div>
           <div class="visual-orbit orbit-three"></div>
 
           <div class="steel-symbol">
-
             <div class="symbol-lines">
               <span></span>
               <span></span>
               <span></span>
             </div>
-
             <div class="symbol-text">
               <small>ASIN</small>
               <strong>STILL</strong>
             </div>
-
           </div>
 
           <div class="floating-card card-price">
-
-            <span class="mini-label">قیمت بازار</span>
-
+            <span class="mini-label" id="heroName">قیمت بازار</span>
             <strong>
-              ۳۲,۴۰۰
+              <span id="heroPrice">—</span>
               <small>تومان</small>
             </strong>
-
-            <span class="up-small">▲ ۰.۸٪</span>
-
+            <span class="up-small is-same" id="heroTrend"></span>
           </div>
 
           <div class="floating-card card-market">
-
             <span class="market-icon">↗</span>
-
             <div>
               <small>وضعیت بازار</small>
               <strong>فعال</strong>
             </div>
-
           </div>
 
           <div class="visual-cross cross-one"></div>
           <div class="visual-cross cross-two"></div>
-
         </div>
-
       </div>
     </section>
 
-
-    <!-- =========================================
-         MAIN
-    ========================================== -->
-
+    <!-- ================= MAIN ================= -->
     <section class="price-section">
-
       <div class="container">
 
         <!-- FILTERS -->
-
         <div class="filters-card">
-
           <div class="filter-search">
-
             <div class="search-icon">
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <circle cx="11" cy="11" r="7"></circle>
                 <path d="m20 20-3.5-3.5"></path>
               </svg>
             </div>
-
             <input
               id="productSearch"
               type="text"
               placeholder="جستجوی محصول، سایز یا کارخانه..."
             />
-
             <kbd>Ctrl K</kbd>
-
           </div>
-
 
           <div class="factory-filter">
-
             <span class="select-label">انتخاب کارخانه</span>
-
             <select id="factoryFilter">
               <option value="all">همه کارخانه‌ها</option>
-              <option value="ذوب آهن اصفهان">ذوب آهن اصفهان</option>
-              <option value="فولاد مبارکه">فولاد مبارکه</option>
-              <option value="فولاد فایکو">فولاد فایکو</option>
-              <option value="فولاد کویر یزد">فولاد کویر یزد</option>
-              <option value="فولاد ناب تبریز">فولاد ناب تبریز</option>
             </select>
-
             <span class="select-arrow">⌄</span>
-
           </div>
-
         </div>
 
-
         <!-- CATEGORY FILTER -->
-
         <div class="category-wrapper">
-
           <div class="category-title">
             <span class="category-title-line"></span>
             دسته‌بندی محصولات
           </div>
 
           <div class="categories" id="categories">
-
             {categories.map((category, index) => (
               <button
-                class:list={[
-                  "category-btn",
-                  { active: index === 0 },
-                ]}
+                class:list={["category-btn", { active: index === 0 }]}
                 data-category={category.id}
               >
                 {category.title}
-
                 {index === 0 && (
-                  <span class="category-count">
-                    ۹
-                  </span>
+                  <span class="category-count" id="productCount">۰</span>
                 )}
               </button>
             ))}
-
           </div>
-
         </div>
 
-
-        <!-- =========================================
-             TABLE
-        ========================================== -->
-
+        <!-- TABLE -->
         <div class="table-card" id="price-table">
-
           <div class="table-header">
-
             <div class="table-heading">
-
               <div class="heading-icon">
-
-                <svg
-                  width="23"
-                  height="23"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.8"
-                >
+                <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                   <path d="M4 19V5"></path>
                   <path d="M4 19h16"></path>
                   <path d="m7 15 3-4 3 2 5-7"></path>
                 </svg>
-
               </div>
-
               <div>
-
                 <div class="heading-kicker">
                   <span></span>
                   بازار فولاد
                 </div>
-
                 <h2>قیمت روز محصولات</h2>
-
-                <p>
-                  آخرین قیمت‌های ثبت‌شده در بازار
-                </p>
-
+                <p>آخرین قیمت‌های ثبت‌شده در بازار</p>
               </div>
-
             </div>
 
-
             <div class="table-status">
-
               <span class="status-live-dot"></span>
-
               <div>
                 <small>وضعیت</small>
                 <strong>بروزرسانی فعال</strong>
               </div>
-
             </div>
-
           </div>
 
-
-          <!-- TABLE -->
-
           <div class="table-scroll">
-
             <table>
-
               <thead>
-
                 <tr>
                   <th>محصول</th>
                   <th>کارخانه</th>
@@ -433,2799 +214,787 @@ const categories = [
                   <th>محل تحویل</th>
                   <th>عملیات</th>
                 </tr>
-
               </thead>
 
-
               <tbody id="productRows">
-
-                {products.map((product) => (
-
-                  <tr
-                    data-category={product.category}
-                    data-type={product.type || ""}
-                    data-size={product.size || ""}
-                    data-factory={product.factory}
-                    data-name={product.name}
-                  >
-
-                    <!-- PRODUCT -->
-
-                    <td>
-
-                      <div class="product-name">
-
-                        <div class={`product-icon icon-${product.category}`}>
-
-                          {product.category === "rebar" && "میل"}
-                          {product.category === "beam" && "تیر"}
-                          {product.category === "sheet" && "ورق"}
-                          {product.category === "profile" && "پروف"}
-                          {product.category === "angle" && "نبش"}
-
-                        </div>
-
-                        <div class="product-title">
-
-                          <strong>
-                            {product.name}
-                          </strong>
-
-                          <small>
-                            {product.categoryName}
-                          </small>
-
-                        </div>
-
-                      </div>
-
-                    </td>
-
-
-                    <!-- FACTORY -->
-
-                    <td>
-
-                      <div class="factory-name">
-
-                        <span class="factory-logo">
-                          <span></span>
-                        </span>
-
-                        {product.factory}
-
-                      </div>
-
-                    </td>
-
-
-                    <!-- SPECIFICATIONS -->
-
-                    <td>
-
-                      <div class="unit-info">
-
-                        <strong>
-                          {product.unit}
-                        </strong>
-
-                        <span>
-                          وزن تقریبی: {product.weight}
-                        </span>
-
-                      </div>
-
-                    </td>
-
-
-                    <!-- PRICE -->
-
-                    <td>
-
-                      <div class="price-box">
-
-                        <strong>
-                          {product.price.toLocaleString("fa-IR")}
-                        </strong>
-
-                        <span>
-                          تومان
-                        </span>
-
-                      </div>
-
-                    </td>
-
-
-                    <!-- TREND -->
-
-                    <td>
-
-                      {product.change === "up" && (
-                        <span class="trend trend-up">
-                          <span class="trend-arrow">↗</span>
-                          افزایشی
-                        </span>
-                      )}
-
-                      {product.change === "down" && (
-                        <span class="trend trend-down">
-                          <span class="trend-arrow">↘</span>
-                          کاهشی
-                        </span>
-                      )}
-
-                      {product.change === "same" && (
-                        <span class="trend trend-same">
-                          <span class="trend-arrow">→</span>
-                          ثابت
-                        </span>
-                      )}
-
-                    </td>
-
-
-                    <!-- DELIVERY -->
-
-                    <td>
-
-                      <div class="delivery">
-
-                        <span class="delivery-pin">
-                          ●
-                        </span>
-
-                        {product.delivery}
-
-                      </div>
-
-                    </td>
-
-
-                    <!-- ACTION -->
-
-                    <td>
-
-                      <button
-                        class="quote-btn"
-                        data-product={product.name}
-                      >
-
-                        <span>
-                          استعلام قیمت
-                        </span>
-
-                        <b>←</b>
-
-                      </button>
-
-                    </td>
-
-                  </tr>
-
-                ))}
-
+                <tr>
+                  <td colspan="7" style="text-align:center;padding:40px;color:#94a3b8">
+                    در حال دریافت قیمت‌ها...
+                  </td>
+                </tr>
               </tbody>
-
             </table>
-
           </div>
 
-
           <!-- EMPTY -->
-
           <div id="emptyState" class="empty-state hidden">
-
             <div class="empty-icon">
-
-              <svg
-                width="26"
-                height="26"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-              >
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                 <circle cx="11" cy="11" r="7"></circle>
                 <path d="m20 20-3.5-3.5"></path>
               </svg>
-
             </div>
-
-            <h3>
-              محصولی پیدا نشد
-            </h3>
-
-            <p>
-              عبارت جستجو یا فیلتر کارخانه را تغییر دهید.
-            </p>
-
+            <h3>محصولی پیدا نشد</h3>
+            <p>عبارت جستجو یا فیلتر کارخانه را تغییر دهید.</p>
           </div>
-
 
           <!-- TABLE FOOTER -->
-
           <div class="table-footer">
-
             <div class="footer-info">
-
               <span class="footer-live"></span>
-
               قیمت‌ها به صورت دوره‌ای بروزرسانی می‌شوند.
-
             </div>
-
-            <span class="unit-footer">
-              واحد قیمت: تومان / کیلوگرم
-            </span>
-
+            <span class="unit-footer">واحد قیمت: تومان / کیلوگرم</span>
           </div>
-
         </div>
-
 
         <!-- NOTE -->
-
         <div class="price-note">
-
-          <div class="note-icon">
-            !
-          </div>
-
+          <div class="note-icon">!</div>
           <div class="note-content">
-
-            <strong>
-              درباره قیمت‌های نمایش داده شده
-            </strong>
-
+            <strong>درباره قیمت‌های نمایش داده شده</strong>
             <p>
-              قیمت‌های این صفحه در نسخه فعلی جهت نمایش ساختار
-              سامانه هستند. قیمت نهایی پس از استعلام و تأیید
-              واحد فروش اعلام خواهد شد.
+              قیمت نهایی پس از استعلام و تأیید واحد فروش اعلام خواهد شد.
             </p>
-
           </div>
-
         </div>
 
       </div>
-
     </section>
 
-
     <!-- TOAST -->
-
     <div id="quoteToast" class="quote-toast">
-
-      <div class="toast-check">
-        ✓
-      </div>
-
+      <div class="toast-check">✓</div>
       <div class="toast-content">
-
-        <strong>
-          درخواست استعلام ثبت شد
-        </strong>
-
+        <strong>درخواست استعلام ثبت شد</strong>
         <span id="toastProduct"></span>
-
       </div>
-
-      <button
-        class="toast-close"
-        aria-label="بستن"
-      >
-        ×
-      </button>
-
+      <button class="toast-close" aria-label="بستن">×</button>
     </div>
 
   </main>
 
-
   <script>
+    import { supabase } from "../lib/supabase";
 
-    const searchInput =
-      document.getElementById("productSearch");
+    type Spec = { label: string; value: string };
+    type Dir = "up" | "down" | "same";
+    type Product = {
+      id: number | string;
+      name: string;
+      category: string;
+      factory?: string | null;
+      price?: number | string | null;
+      previous_price?: number | string | null; // اختیاری، اگر در جدول باشد استفاده می‌شود
+      price_on_request?: boolean;
+      price_updated_at?: string | null;
+      updated_at?: string | null;
+      delivery?: string | null;
+      type?: string | null;
+      size?: string | null;
+      active?: boolean;
+      specifications?: Spec[] | null;
+    };
+    type Memory = Record<string, { last: number; prev: number | null; at: string | null }>;
 
-    const factoryFilter =
-      document.getElementById("factoryFilter");
+    // ---------- elements ----------
+    const searchInput = document.getElementById("productSearch") as HTMLInputElement;
+    const factoryFilter = document.getElementById("factoryFilter") as HTMLSelectElement;
+    const rowsEl = document.getElementById("productRows") as HTMLElement;
+    const countEl = document.getElementById("productCount");
+    const emptyState = document.getElementById("emptyState");
+    const lastUpdateEl = document.getElementById("lastUpdate");
+    const heroName = document.getElementById("heroName");
+    const heroPrice = document.getElementById("heroPrice");
+    const heroTrend = document.getElementById("heroTrend");
+    const categoryButtons = Array.from(
+      document.querySelectorAll<HTMLButtonElement>(".category-btn")
+    );
 
-    const rows =
-      Array.from(
-        document.querySelectorAll("#productRows tr")
+    const categoryNames: Record<string, string> = {
+      rebar: "میلگرد",
+      beam: "تیرآهن",
+      sheet: "ورق",
+      profile: "پروفیل",
+      angle: "نبشی و ناودانی",
+      pipe: "لوله",
+      billet: "شمش فولادی",
+      alloy: "فولاد آلیاژی",
+      other: "سایر محصولات",
+    };
+
+    const categoryIcons: Record<string, string> = {
+      rebar: "میل",
+      beam: "تیر",
+      sheet: "ورق",
+      profile: "پروف",
+      angle: "نبش",
+      pipe: "لوله",
+      billet: "شمش",
+      alloy: "آلیاژ",
+      other: "سایر",
+    };
+
+    // ---------- URL params ----------
+    const params = new URLSearchParams(window.location.search);
+    let selectedCategory = params.get("category") || "all";
+    const urlType = params.get("type") || "";
+    const urlSize = params.get("size") || "";
+    const urlFactory = params.get("factory") || "";
+
+    let allProducts: Product[] = [];
+
+    // ---------- helpers ----------
+    function escapeHtml(value: unknown): string {
+      return String(value ?? "").replace(/[&<>"']/g, (c) =>
+        ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c] as string)
       );
-
-    const categoryButtons =
-      Array.from(
-        document.querySelectorAll(".category-btn")
-      );
-
-    const count =
-      document.getElementById("productCount");
-
-    const emptyState =
-      document.getElementById("emptyState");
-
-    let selectedCategory = "all";
-    const urlParams =
-  new URLSearchParams(window.location.search);
-
-const urlCategory =
-  urlParams.get("category");
-
-const urlType =
-  urlParams.get("type");
-
-const urlSize =
-  urlParams.get("size");
-
-const urlFactory =
-  urlParams.get("factory");
-
-if (urlCategory) {
-  selectedCategory = urlCategory;
-}
-
-if (urlFactory && factoryFilter) {
-  factoryFilter.value = urlFactory;
-}
-    function updateTable() {
-  const search =
-    searchInput.value
-      .trim()
-      .toLowerCase();
-
-  const factory =
-    factoryFilter.value;
-
-  const type =
-    urlType || "";
-
-  const size =
-    urlSize || "";
-
-  let visible = 0;
-
-  rows.forEach((row) => {
-    const category =
-      row.dataset.category;
-
-    const rowType =
-      row.dataset.type || "";
-
-    const rowSize =
-      row.dataset.size || "";
-
-    const rowFactory =
-      row.dataset.factory;
-
-    const name =
-      row.dataset.name.toLowerCase();
-
-    const categoryMatch =
-      selectedCategory === "all" ||
-      category === selectedCategory;
-
-    const typeMatch =
-      !type ||
-      rowType === type;
-
-    const sizeMatch =
-      !size ||
-      rowSize === size;
-
-    const factoryMatch =
-      factory === "all" ||
-      rowFactory === factory;
-
-    const searchMatch =
-      !search ||
-      name.includes(search) ||
-      rowFactory
-        .toLowerCase()
-        .includes(search);
-
-    const show =
-      categoryMatch &&
-      typeMatch &&
-      sizeMatch &&
-      factoryMatch &&
-      searchMatch;
-
-    row.style.display =
-      show ? "" : "none";
-
-    if (show) {
-      visible++;
     }
-  });
 
-  if (count) {
-    count.textContent =
-      visible.toLocaleString("fa-IR");
-  }
+    // یکسان‌سازی متن برای جستجو و فیلتر (ارقام فارسی/عربی و ی/ک)
+    const norm = (v: unknown) =>
+      String(v ?? "")
+        .trim()
+        .toLowerCase()
+        .replace(/[۰-۹]/g, (d) => String("۰۱۲۳۴۵۶۷۸۹".indexOf(d)))
+        .replace(/[٠-٩]/g, (d) => String("٠١٢٣٤٥٦٧٨٩".indexOf(d)))
+        .replace(/ي/g, "ی")
+        .replace(/ك/g, "ک");
 
-  emptyState.classList.toggle(
-    "hidden",
-    visible !== 0
-  );
-}
+    const fa = (n: number, digits = 0) =>
+      new Intl.NumberFormat("fa-IR", { maximumFractionDigits: digits }).format(n);
 
+    function getSpec(p: Product, labels: string[]): string {
+      const specs = Array.isArray(p.specifications) ? p.specifications : [];
+      const found = specs.find((s) => labels.some((l) => s.label?.includes(l)));
+      return found?.value ?? "";
+    }
 
-    searchInput.addEventListener(
-      "input",
-      updateTable
-    );
+    function hasPrice(p: Product): boolean {
+      const price = Number(p.price);
+      return p.price_on_request !== true && Number.isFinite(price) && price > 0;
+    }
 
+    // ---------- تشخیص افزایش/کاهش قیمت (بدون تغییر در دیتابیس) ----------
+    // آخرین قیمتِ دیده‌شده برای هر محصول در مرورگر ذخیره می‌شود.
+    // هر بار که قیمت جدید از Supabase می‌آید، با قیمت قبلی مقایسه و روند ثبت می‌شود.
+    const MEM_KEY = "asin_price_memory_v1";
 
-    factoryFilter.addEventListener(
-      "change",
-      updateTable
-    );
+    function readMemory(): Memory {
+      try {
+        return JSON.parse(localStorage.getItem(MEM_KEY) || "{}") as Memory;
+      } catch {
+        return {};
+      }
+    }
 
+    function writeMemory() {
+      try {
+        localStorage.setItem(MEM_KEY, JSON.stringify(memory));
+      } catch {
+        /* حافظه مرورگر در دسترس نیست؛ فقط در همین نشست کار می‌کند */
+      }
+    }
 
-    categoryButtons.forEach((button) => {
+    let memory: Memory = readMemory();
+    const changedNow = new Set<string>();
 
-      button.addEventListener(
-        "click",
-        () => {
+    function syncMemory(products: Product[]) {
+      const now = new Date().toISOString();
+      changedNow.clear();
 
-          categoryButtons.forEach((item) => {
-            item.classList.remove("active");
-          });
+      products.forEach((p) => {
+        if (!hasPrice(p)) return;
+        const id = String(p.id);
+        const price = Number(p.price);
+        const saved = memory[id];
 
-          button.classList.add("active");
-
-          selectedCategory =
-            button.dataset.category;
-          if (urlCategory) {
-            const activeButton =
-            categoryButtons.find(
-            (button) =>
-            button.dataset.category === urlCategory
-           );
-
-           if (activeButton) {
-            categoryButtons.forEach((item) => {
-            item.classList.remove("active");
-           });
-
-            activeButton.classList.add("active");
-         }
+        if (!saved) {
+          memory[id] = { last: price, prev: null, at: null };
+        } else if (saved.last !== price) {
+          memory[id] = { last: price, prev: saved.last, at: now };
+          changedNow.add(id);
         }
-
-          updateTable();
-          updateTable();
-
-        }
-      );
-
-    });
-
-    if (urlCategory) {
-  const activeButton =
-    categoryButtons.find(
-      (button) =>
-        button.dataset.category === urlCategory
-    );
-
-  if (activeButton) {
-    categoryButtons.forEach((item) => {
-      item.classList.remove("active");
-    });
-
-    activeButton.classList.add("active");
-  }
-}
-
-
-    const toast =
-      document.getElementById("quoteToast");
-
-    const toastProduct =
-      document.getElementById("toastProduct");
-
-    const toastClose =
-      document.querySelector(".toast-close");
-
-
-    let toastTimer;
-
-
-    document
-      .querySelectorAll(".quote-btn")
-      .forEach((button) => {
-
-        button.addEventListener(
-          "click",
-          () => {
-
-            const product =
-              button.dataset.product;
-
-            toastProduct.textContent =
-              `محصول «${product}»`;
-
-
-            toast.classList.add("show");
-
-
-            clearTimeout(toastTimer);
-
-
-            toastTimer =
-              setTimeout(() => {
-                toast.classList.remove("show");
-              }, 4000);
-
-          }
-        );
-
       });
 
+      writeMemory();
+    }
 
-    toastClose.addEventListener(
-      "click",
-      () => {
-        toast.classList.remove("show");
+    function getTrend(p: Product): { dir: Dir; percent: number } {
+      if (!hasPrice(p)) return { dir: "same", percent: 0 };
+
+      const cur = Number(p.price);
+      let prev = Number(p.previous_price);
+
+      if (!(Number.isFinite(prev) && prev > 0 && prev !== cur)) {
+        const saved = memory[String(p.id)]?.prev;
+        prev = saved == null ? NaN : saved;
       }
-    );
 
+      if (!Number.isFinite(prev) || prev <= 0 || prev === cur) {
+        return { dir: "same", percent: 0 };
+      }
 
-    /* CTRL + K SEARCH */
+      return {
+        dir: cur > prev ? "up" : "down",
+        percent: Math.abs(((cur - prev) / prev) * 100),
+      };
+    }
 
-    document.addEventListener(
-      "keydown",
-      (event) => {
+    function trendHtml(p: Product) {
+      if (!hasPrice(p)) return `<span class="trend trend-same">—</span>`;
 
-        if (
-          (event.ctrlKey || event.metaKey) &&
-          event.key.toLowerCase() === "k"
-        ) {
+      const { dir, percent } = getTrend(p);
+      const pct = percent ? ` <small>${fa(percent, 1)}٪</small>` : "";
 
-          event.preventDefault();
+      if (dir === "up")
+        return `<span class="trend trend-up"><span class="trend-arrow">↗</span>افزایشی${pct}</span>`;
+      if (dir === "down")
+        return `<span class="trend trend-down"><span class="trend-arrow">↘</span>کاهشی${pct}</span>`;
+      return `<span class="trend trend-same"><span class="trend-arrow">→</span>ثابت</span>`;
+    }
 
-          searchInput.focus();
+    function priceHtml(p: Product) {
+      if (!hasPrice(p)) {
+        return `<div class="price-box"><strong style="font-size:14px">استعلام قیمت</strong></div>`;
+      }
+      return `<div class="price-box"><strong>${fa(Number(p.price))}</strong><span>تومان</span></div>`;
+    }
 
+    // ---------- render ----------
+    function renderRows() {
+      rowsEl.innerHTML = allProducts
+        .map((p) => {
+          const name = escapeHtml(p.name);
+          const factory = escapeHtml(p.factory || "—");
+          const unit = escapeHtml(getSpec(p, ["واحد"]) || "—");
+          const weight = getSpec(p, ["وزن"]);
+          const delivery = escapeHtml(p.delivery || getSpec(p, ["تحویل"]) || "—");
+          const type = p.type || getSpec(p, ["نوع"]);
+          const size = p.size || getSpec(p, ["سایز", "اندازه"]);
+          const catName = categoryNames[p.category] || "سایر محصولات";
+          const icon = categoryIcons[p.category] ?? "فول";
+          const search = norm(`${p.name} ${p.factory ?? ""} ${type} ${size} ${catName}`);
+
+          return `
+          <tr
+            data-id="${escapeHtml(p.id)}"
+            data-category="${escapeHtml(p.category)}"
+            data-type="${escapeHtml(type)}"
+            data-size="${escapeHtml(size)}"
+            data-factory="${escapeHtml(p.factory || "")}"
+            data-name="${name}"
+            data-search="${escapeHtml(search)}"
+          >
+            <td>
+              <div class="product-name">
+                <div class="product-icon icon-${escapeHtml(p.category)}">${icon}</div>
+                <div class="product-title">
+                  <strong>${name}</strong>
+                  <small>${escapeHtml(catName)}</small>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="factory-name">
+                <span class="factory-logo"><span></span></span>
+                ${factory}
+              </div>
+            </td>
+            <td>
+              <div class="unit-info">
+                <strong>${unit}</strong>
+                ${weight ? `<span>وزن تقریبی: ${escapeHtml(weight)}</span>` : ""}
+              </div>
+            </td>
+            <td>${priceHtml(p)}</td>
+            <td>${trendHtml(p)}</td>
+            <td>
+              <div class="delivery"><span class="delivery-pin">●</span>${delivery}</div>
+            </td>
+            <td>
+              <button class="quote-btn" data-product="${name}">
+                <span>استعلام قیمت</span><b>←</b>
+              </button>
+            </td>
+          </tr>`;
+        })
+        .join("");
+
+      // چشمک زدن ردیف‌هایی که همین الان قیمتشان تغییر کرده
+      changedNow.forEach((id) => {
+        const p = allProducts.find((x) => String(x.id) === id);
+        const row = rowsEl.querySelector(`tr[data-id="${CSS.escape(id)}"]`);
+        if (!p || !row) return;
+        const { dir } = getTrend(p);
+        if (dir !== "same") row.classList.add(dir === "up" ? "flash-up" : "flash-down");
+      });
+
+      if (countEl) countEl.textContent = fa(allProducts.length);
+      updateTable();
+    }
+
+    function fillFactories() {
+      const factories = Array.from(
+        new Set(allProducts.map((p) => p.factory).filter(Boolean) as string[])
+      );
+      const current = factoryFilter.value !== "all" ? factoryFilter.value : urlFactory || "all";
+      factoryFilter.innerHTML =
+        `<option value="all">همه کارخانه‌ها</option>` +
+        factories
+          .map((f) => `<option value="${escapeHtml(f)}">${escapeHtml(f)}</option>`)
+          .join("");
+      factoryFilter.value = factories.includes(current) ? current : "all";
+    }
+
+    function setLastUpdate() {
+      if (!lastUpdateEl) return;
+
+      const times = allProducts
+        .map((p) => p.price_updated_at || p.updated_at)
+        .filter(Boolean)
+        .map((d) => new Date(d as string).getTime())
+        .filter((t) => Number.isFinite(t));
+
+      const changes = Object.values(memory).map((m) => (m.at ? new Date(m.at).getTime() : 0));
+
+      const t = times.length ? Math.max(...times) : Math.max(0, ...changes) || Date.now();
+
+      lastUpdateEl.textContent = new Intl.DateTimeFormat("fa-IR", {
+        dateStyle: "medium",
+        timeStyle: "short",
+      }).format(new Date(t));
+    }
+
+    function setHero() {
+      if (!heroName || !heroPrice || !heroTrend) return;
+
+      const priced = allProducts.filter(hasPrice);
+      if (!priced.length) return;
+
+      // محصولی که آخرین تغییر قیمت را داشته؛ اگر نبود، اولین محصول
+      const changedAt = (p: Product) => memory[String(p.id)]?.at || "";
+      const pick = [...priced].sort((a, b) => changedAt(b).localeCompare(changedAt(a)))[0];
+      const { dir, percent } = getTrend(pick);
+
+      heroName.textContent = pick.name;
+      heroPrice.textContent = fa(Number(pick.price));
+      heroTrend.className = `up-small is-${dir}`;
+      heroTrend.textContent =
+        dir === "same" ? "● ثابت" : `${dir === "up" ? "▲" : "▼"} ${fa(percent, 1)}٪`;
+    }
+
+    // ---------- filter ----------
+    function updateTable() {
+      const search = norm(searchInput.value);
+      const factory = factoryFilter.value;
+      const type = norm(urlType);
+      const size = norm(urlSize);
+      let visible = 0;
+
+      Array.from(rowsEl.querySelectorAll<HTMLTableRowElement>("tr[data-name]")).forEach(
+        (row) => {
+          const d = row.dataset;
+          const hay = d.search ?? "";
+
+          const typeMatch = !type || norm(d.type) === type || hay.includes(type);
+          const sizeMatch =
+            !size ||
+            norm(d.size) === size ||
+            hay.split(/[\s×x*\-/]+/).includes(size);
+
+          const show =
+            (selectedCategory === "all" || d.category === selectedCategory) &&
+            typeMatch &&
+            sizeMatch &&
+            (factory === "all" || d.factory === factory) &&
+            (!search || hay.includes(search));
+
+          row.style.display = show ? "" : "none";
+          if (show) visible++;
+        }
+      );
+
+      emptyState?.classList.toggle("hidden", visible !== 0);
+    }
+
+    function setActiveCategory(id: string) {
+      selectedCategory = id;
+      categoryButtons.forEach((b) =>
+        b.classList.toggle("active", b.dataset.category === id)
+      );
+    }
+
+    // ---------- load ----------
+    let lastRaw = "";
+    let loading = false;
+
+    async function loadProducts() {
+      if (loading) return;
+      loading = true;
+
+      try {
+        const { data, error } = await supabase
+          .from("products")
+          .select("*")
+          .eq("active", true)
+          .order("category", { ascending: true })
+          .order("name", { ascending: true });
+
+        if (error) {
+          console.error("خطا در دریافت قیمت‌ها:", error);
+          if (!allProducts.length) {
+            rowsEl.innerHTML = `<tr><td colspan="7" style="text-align:center;padding:40px;color:#b91c1c">
+              دریافت قیمت‌ها با خطا مواجه شد. لطفاً کمی بعد دوباره تلاش کنید.</td></tr>`;
+          }
+          return;
         }
 
+        // اگر چیزی تغییر نکرده، دوباره رندر نکن
+        const raw = JSON.stringify(data ?? []);
+        if (raw === lastRaw) return;
+        lastRaw = raw;
+
+        allProducts = (data ?? []) as Product[];
+        syncMemory(allProducts);
+        fillFactories();
+        setLastUpdate();
+        setHero();
+        renderRows();
+      } finally {
+        loading = false;
       }
+    }
+
+    // ---------- events ----------
+    searchInput.addEventListener("input", updateTable);
+    factoryFilter.addEventListener("change", updateTable);
+
+    categoryButtons.forEach((btn) =>
+      btn.addEventListener("click", () => {
+        setActiveCategory(btn.dataset.category || "all");
+        updateTable();
+      })
     );
 
+    // Toast (ردیف‌ها داینامیک هستند، پس از event delegation استفاده شده)
+    const toast = document.getElementById("quoteToast") as HTMLElement;
+    const toastProduct = document.getElementById("toastProduct") as HTMLElement;
+    const toastClose = document.querySelector(".toast-close") as HTMLElement;
+    let toastTimer: number | undefined;
 
-    updateTable();
+    rowsEl.addEventListener("click", (e) => {
+      const btn = (e.target as HTMLElement).closest<HTMLButtonElement>(".quote-btn");
+      if (!btn) return;
+      toastProduct.textContent = `محصول «${btn.dataset.product}»`;
+      toast.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = window.setTimeout(() => toast.classList.remove("show"), 4000);
+    });
 
+    toastClose.addEventListener("click", () => toast.classList.remove("show"));
+
+    document.addEventListener("keydown", (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        searchInput.focus();
+      }
+    });
+
+    // ---------- init ----------
+    setActiveCategory(selectedCategory);
+    loadProducts();
+
+    // بروزرسانی زنده ۱: اگر Realtime فعال باشد، با هر تغییر جدول فوراً بروز می‌شود
+    let realtimeTimer: number | undefined;
+    supabase
+      .channel("price-page-products")
+      .on("postgres_changes", { event: "*", schema: "public", table: "products" }, () => {
+        clearTimeout(realtimeTimer);
+        realtimeTimer = window.setTimeout(loadProducts, 400);
+      })
+      .subscribe();
+
+    // بروزرسانی زنده ۲: اگر Realtime فعال نباشد هم، هر ۳۰ ثانیه خودکار چک می‌شود
+    setInterval(() => {
+      if (!document.hidden) loadProducts();
+    }, 30000);
+
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden) loadProducts();
+    });
   </script>
 
-
+  <!-- =====================================================
+       استایل‌های بخش‌های ثابت صفحه
+  ===================================================== -->
   <style>
-
-    /* =====================================================
-       BASE
-    ===================================================== */
-
-    .price-page {
-      --navy-950: #040b14;
-      --navy-900: #071321;
-      --navy-800: #0b1b2d;
-      --navy-700: #102a43;
-
-      --steel-500: #3b82f6;
-      --steel-400: #60a5fa;
-      --steel-300: #93c5fd;
-
-      --green: #10b981;
-      --red: #ef4444;
-
-      min-height: 100vh;
-      background:
-        linear-gradient(
-          180deg,
-          #f3f6fa 0%,
-          #f8fafc 55%,
-          #f1f5f9 100%
-        );
-
-      color: #0f172a;
-      font-family: inherit;
-      overflow: hidden;
-    }
-
-    .price-page *,
-    .price-page *::before,
-    .price-page *::after {
-      box-sizing: border-box;
-    }
-
-    .container {
-      width: min(1400px, calc(100% - 40px));
-      margin-inline: auto;
-    }
-
-
-    /* =====================================================
-       HERO
-    ===================================================== */
-
-    .price-hero {
-      position: relative;
-      min-height: 520px;
-      overflow: hidden;
-
-      background:
-        radial-gradient(
-          circle at 75% 30%,
-          rgba(37,99,235,.16),
-          transparent 26%
-        ),
-        radial-gradient(
-          circle at 20% 70%,
-          rgba(14,165,233,.08),
-          transparent 28%
-        ),
-        linear-gradient(
-          125deg,
-          #030911 0%,
-          #06111e 45%,
-          #0b1d31 100%
-        );
-
-      color: white;
-    }
-
-
-    .hero-grid {
-      position: absolute;
-      inset: 0;
-
-      background-image:
-        linear-gradient(
-          rgba(148,163,184,.075) 1px,
-          transparent 1px
-        ),
-        linear-gradient(
-          90deg,
-          rgba(148,163,184,.075) 1px,
-          transparent 1px
-        );
-
-      background-size: 52px 52px;
-
-      mask-image:
-        linear-gradient(
-          to left,
-          black,
-          transparent 80%
-        );
-
-      opacity: .8;
-    }
-
-
-    .hero-glow {
-      position: absolute;
-      border-radius: 50%;
-      pointer-events: none;
-      filter: blur(80px);
-    }
-
-    .hero-glow-one {
-      width: 430px;
-      height: 430px;
-      left: -160px;
-      top: -120px;
-      background: rgba(37,99,235,.09);
-    }
-
-    .hero-glow-two {
-      width: 350px;
-      height: 350px;
-      right: 15%;
-      bottom: -220px;
-      background: rgba(14,165,233,.07);
-    }
-
-
-    .hero-scan {
-      position: absolute;
-      width: 100%;
-      height: 1px;
-      top: 38%;
-      left: 0;
-
-      background:
-        linear-gradient(
-          90deg,
-          transparent,
-          rgba(96,165,250,.25),
-          transparent
-        );
-
-      opacity: .6;
-    }
-
-
-    .hero-container {
-      position: relative;
-      min-height: 520px;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-
-    .hero-content {
-      position: relative;
-      z-index: 5;
-
-      width: 650px;
-      padding: 75px 0;
-    }
-
-
-    /* HERO BADGE */
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-
-      padding: 9px 13px;
-
-      border: 1px solid rgba(148,163,184,.2);
-      border-radius: 9px;
-
-      background:
-        linear-gradient(
-          135deg,
-          rgba(30,64,175,.16),
-          rgba(15,23,42,.3)
-        );
-
-      color: #ffffff;
-
-      font-size: 12px;
-      font-weight: 500;
-      line-height: 1.7;
-
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.04),
-        0 10px 35px rgba(0,0,0,.1);
-    }
-
-
-    .pulse-dot {
-      width: 7px;
-      height: 7px;
-
-      border-radius: 50%;
-
-      background: #22c55e;
-
-      box-shadow:
-        0 0 0 4px rgba(34,197,94,.08),
-        0 0 15px rgba(34,197,94,.7);
-    }
-
-
-    .badge-arrow {
-      color: #60a5fa;
-      font-size: 15px;
-    }
-
-
-    /* HERO TITLE */
-
-    .price-hero h1 {
-      margin: 25px 0 0;
-
-      font-size: clamp(42px, 5.3vw, 70px);
-      line-height: 1.25;
-
-      letter-spacing: -.5px;
-
-      font-weight: 800;
-    }
-
-
-    .price-hero h1 span {
-      display: block;
-
-      margin-top: 4px;
-
-      background:
-        linear-gradient(
-          90deg,
-          #fcfbfb 0%,
-          #93c5fd 45%,
-          #60a5fa 100%
-        );
-
-      -webkit-background-clip: text;
-      background-clip: text;
-
-      color: transparent;
-    }
-
-
-    .hero-content > p {
-      max-width: 620px;
-
-      margin: 22px 0 0;
-
-      color: #91a4b9;
-
-      font-size: 15px;
-      font-weight: 400;
-      line-height: 2.1;
-    }
-
-
-    /* HERO ACTIONS */
-
-    .hero-actions {
-      display: flex;
-      align-items: center;
-      gap: 17px;
-
-      margin-top: 31px;
-    }
-
-
-    .hero-main-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 13px;
-
-      height: 48px;
-      padding: 0 21px;
-
-      border: 1px solid rgba(147,197,253,.25);
-      border-radius: 10px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #2563eb,
-          #174ea6
-        );
-
-      color: white;
-
-      font-family: inherit;
-      font-size: 13px;
-      font-weight: 700;
-
-      text-decoration: none;
-
-      box-shadow:
-        0 10px 30px rgba(37,99,235,.22);
-
-      transition: .25s;
-    }
-
-
-    .hero-main-btn span {
-      font-size: 17px;
-      transition: .25s;
-    }
-
-
-    .hero-main-btn:hover {
-      transform: translateY(-2px);
-
-      box-shadow:
-        0 15px 38px rgba(37,99,235,.3);
-    }
-
-
-    .hero-main-btn:hover span {
-      transform: translateY(3px);
-    }
-
-
-    .hero-update {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-
-    .update-dot {
-      width: 8px;
-      height: 8px;
-
-      border-radius: 50%;
-
-      background: #22c55e;
-
-      box-shadow:
-        0 0 13px rgba(34,197,94,.7);
-    }
-
-
-    .hero-update small,
-    .hero-update strong {
-      display: block;
-    }
-
-
-    .hero-update small {
-      color: #64748b;
-      font-size: 10px;
-      line-height: 1.7;
-    }
-
-
-    .hero-update strong {
-      margin-top: 2px;
-      color: #cbd5e1;
-      font-size: 12px;
-      font-weight: 600;
-      line-height: 1.7;
-    }
-
-
-    /* HERO STATS */
-
-    .hero-stats {
-      display: flex;
-      align-items: center;
-
-      margin-top: 45px;
-    }
-
-
-    .hero-stat {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-
-      min-width: 110px;
-    }
-
-
-    .hero-stat strong {
-      color: #e5edf7;
-      font-size: 19px;
-      font-weight: 800;
-      line-height: 1.6;
-    }
-
-
-    .hero-stat span {
-      color: #66788d;
-      font-size: 10px;
-      line-height: 1.7;
-    }
-
-
-    .stat-line {
-      width: 1px;
-      height: 32px;
-      margin: 0 25px;
-
-      background:
-        linear-gradient(
-          to bottom,
-          transparent,
-          #34475d,
-          transparent
-        );
-    }
-
-
-    /* =====================================================
-       HERO VISUAL
-    ===================================================== */
-
-    .hero-visual {
-      position: relative;
-
-      width: 500px;
-      height: 500px;
-
-      flex-shrink: 0;
-    }
-
-
-    .visual-orbit {
-      position: absolute;
-
-      border: 1px solid rgba(96,165,250,.12);
-
-      border-radius: 50%;
-    }
-
-
-    .orbit-one {
-      width: 460px;
-      height: 460px;
-
-      top: 20px;
-      left: 20px;
-    }
-
-
-    .orbit-two {
-      width: 335px;
-      height: 335px;
-
-      top: 82px;
-      left: 82px;
-
-      border-color:
-        rgba(96,165,250,.2);
-    }
-
-
-    .orbit-three {
-      width: 210px;
-      height: 210px;
-
-      top: 144px;
-      left: 144px;
-
-      border-color:
-        rgba(96,165,250,.3);
-
-      box-shadow:
-        0 0 70px rgba(37,99,235,.07);
-    }
-
-
-    .steel-symbol {
-      position: absolute;
-
-      width: 145px;
-      height: 145px;
-
-      top: 177px;
-      left: 177px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border: 1px solid rgba(147,197,253,.32);
-      border-radius: 50%;
-
-      background:
-        radial-gradient(
-          circle,
-          rgba(30,64,175,.16),
-          rgba(4,11,20,.9)
-        );
-
-      box-shadow:
-        0 0 70px rgba(37,99,235,.12),
-        inset 0 0 35px rgba(96,165,250,.04);
-    }
-
-
-    .symbol-lines {
-      position: absolute;
-      inset: 20px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-
-      opacity: .45;
-    }
-
-
-    .symbol-lines span {
-      display: block;
-
-      width: 1px;
-      height: 70px;
-
-      background:
-        linear-gradient(
-          to bottom,
-          transparent,
-          #60a5fa,
-          transparent
-        );
-
-      transform: rotate(38deg);
-    }
-
-
-    .symbol-lines span:nth-child(2) {
-      height: 90px;
-    }
-
-
-    .symbol-text {
-      position: relative;
-      z-index: 2;
-
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-
-    .symbol-text small {
-      color: #94a3b8;
-
-      font-size: 12px;
-      letter-spacing: 3px;
-      line-height: 1.7;
-    }
-
-
-    .symbol-text strong {
-      color: #60a5fa;
-
-      font-size: 22px;
-      font-weight: 800;
-
-      letter-spacing: 4px;
-      line-height: 1.7;
-    }
-
-
-    /* FLOATING CARDS */
-
-    .floating-card {
-      position: absolute;
-
-      display: flex;
-
-      border: 1px solid rgba(148,163,184,.17);
-      border-radius: 11px;
-
-      background:
-        linear-gradient(
-          135deg,
-          rgba(14,29,47,.94),
-          rgba(6,15,26,.9)
-        );
-
-      box-shadow:
-        0 18px 45px rgba(0,0,0,.2),
-        inset 0 1px 0 rgba(255,255,255,.035);
-
-      backdrop-filter: blur(12px);
-    }
-
-
-    .card-price {
-      top: 85px;
-      right: 5px;
-
-      width: 165px;
-
-      flex-direction: column;
-
-      padding: 14px 16px;
-    }
-
-
-    .mini-label {
-      color: #718398;
-
-      font-size: 9px;
-      line-height: 1.7;
-    }
-
-
-    .card-price strong {
-      margin-top: 4px;
-
-      color: #e8f1fb;
-
-      font-size: 20px;
-      font-weight: 800;
-      line-height: 1.7;
-    }
-
-
-    .card-price strong small {
-      color: #718398;
-
-      font-size: 9px;
-      font-weight: 400;
-    }
-
-
-    .up-small {
-      margin-top: 4px;
-
-      color: #34d399;
-
-      font-size: 9px;
-      font-weight: 600;
-    }
-
-
-    .card-market {
-      left: 5px;
-      bottom: 100px;
-
-      align-items: center;
-      gap: 10px;
-
-      padding: 12px 15px;
-    }
-
-
-    .market-icon {
-      width: 32px;
-      height: 32px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 8px;
-
-      background:
-        rgba(16,185,129,.09);
-
-      color: #34d399;
-
-      font-size: 18px;
-    }
-
-
-    .card-market small,
-    .card-market strong {
-      display: block;
-    }
-
-
-    .card-market small {
-      color: #64748b;
-      font-size: 9px;
-    }
-
-
-    .card-market strong {
-      margin-top: 2px;
-
-      color: #dbeafe;
-
-      font-size: 11px;
-      font-weight: 600;
-    }
-
-
-    /* CROSS */
-
-    .visual-cross {
-      position: absolute;
-
-      width: 9px;
-      height: 9px;
-    }
-
-
-    .visual-cross::before,
-    .visual-cross::after {
-      content: "";
-
-      position: absolute;
-
-      background: #60a5fa;
-      opacity: .5;
-    }
-
-
-    .visual-cross::before {
-      width: 1px;
-      height: 9px;
-      left: 4px;
-    }
-
-
-    .visual-cross::after {
-      width: 9px;
-      height: 1px;
-      top: 4px;
-    }
-
-
-    .cross-one {
-      top: 50px;
-      left: 150px;
-    }
-
-
-    .cross-two {
-      right: 90px;
-      bottom: 80px;
-    }
-
-
-    /* =====================================================
-       MAIN
-    ===================================================== */
-
-    .price-section {
-      padding: 65px 0 90px;
-    }
-
-
-    /* =====================================================
-       FILTERS
-    ===================================================== */
-
-    .filters-card {
-      display: grid;
-
-      grid-template-columns:
-        minmax(0, 1fr)
-        290px;
-
-      gap: 10px;
-
-      padding: 9px;
-
-      border: 1px solid #ffffff;
-      border-radius: 16px;
-
-      background:
-        rgba(253, 253, 254, 0.92);
-
-      box-shadow:
-        0 15px 45px rgba(15,23,42,.055);
-    }
-
-
-    .filter-search,
-    .factory-filter {
-      position: relative;
-    }
-
-
-    .filter-search {
-      display: flex;
-      align-items: center;
-    }
-
-
-    .search-icon {
-      position: absolute;
-
-      right: 17px;
-
-      color: #64748b;
-
-      pointer-events: none;
-    }
-
-
-    .filter-search input,
-    .factory-filter select {
-      width: 100%;
-      height: 58px;
-
-      border: 1px solid #e3e8ef;
-      border-radius: 11px;
-
-      outline: none;
-
-      background: #f7f9fb;
-
-      color: #0f172a;
-
-      font-family: inherit;
-
-      font-size: 13px;
-      font-weight: 400;
-
-      transition: .2s;
-    }
-
-
-    .filter-search input {
-      padding:
-        0 53px 0 75px;
-    }
-
-
-    .filter-search input::placeholder {
-      color: #94a3b8;
-    }
-
-
-    .filter-search input:focus,
-    .factory-filter select:focus {
-      border-color: #60a5fa;
-
-      background: white;
-
-      box-shadow:
-        0 0 0 4px rgba(37,99,235,.07);
-    }
-
-
-    kbd {
-      position: absolute;
-
-      left: 13px;
-
-      padding: 3px 7px;
-
-      border: 1px solid #d9e0e8;
-      border-bottom-width: 2px;
-      border-radius: 5px;
-
-      background: white;
-
-      color: #94a3b8;
-
-      font-family: inherit;
-      font-size: 9px;
-    }
-
-
-    .factory-filter select {
-      appearance: none;
-
-      padding: 0 17px 0 42px;
-
-      cursor: pointer;
-    }
-
-
-    .select-label {
-      position: absolute;
-
-      top: 9px;
-      right: 17px;
-
-      color: #94a3b8;
-
-      font-size: 9px;
-
-      pointer-events: none;
-    }
-
-
-    .factory-filter select {
-      padding-top: 12px;
-    }
-
-
-    .select-arrow {
-      position: absolute;
-
-      left: 16px;
-      bottom: 15px;
-
-      color: #64748b;
-
-      font-size: 15px;
-
-      pointer-events: none;
-    }
-
-
-    /* =====================================================
-       CATEGORIES
-    ===================================================== */
-
-    .category-wrapper {
-      padding: 25px 0 17px;
-    }
-
-
-    .category-title {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-
-      margin-bottom: 12px;
-
-      color: #64748b;
-
-      font-size: 11px;
-      font-weight: 600;
-    }
-
-
-    .category-title-line {
-      width: 5px;
-      height: 5px;
-
-      border-radius: 50%;
-
-      background: #2563eb;
-    }
-
-
-    .categories {
-      display: flex;
-      gap: 8px;
-
-      overflow-x: auto;
-
-      scrollbar-width: none;
-    }
-
-
-    .categories::-webkit-scrollbar {
-      display: none;
-    }
-
-
-    .category-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-
-      height: 45px;
-
-      flex-shrink: 0;
-
-      padding: 0 17px;
-
-      border: 1px solid #dfe6ee;
-      border-radius: 9px;
-
-      background: white;
-
-      color: #64748b;
-
-      font-family: inherit;
-
-      font-size: 12px;
-      font-weight: 600;
-
-      cursor: pointer;
-
-      transition: .2s;
-    }
-
-
-    .category-btn:hover {
-      border-color: #9fb2c7;
-
-      color: #102a43;
-
-      transform: translateY(-1px);
-    }
-
-
-    .category-btn.active {
-      border-color: #173b64;
-
-      background:
-        linear-gradient(
-          135deg,
-          #102a43,
-          #173b64
-        );
-
-      color: white;
-
-      box-shadow:
-        0 9px 25px rgba(16,42,67,.16);
-    }
-
-
-    .category-count {
-      min-width: 21px;
-      height: 21px;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 6px;
-
-      background: rgba(255,255,255,.12);
-
-      color: #bfdbfe;
-
-      font-size: 9px;
-    }
-
-
-    /* =====================================================
-       TABLE CARD
-    ===================================================== */
-
-    .table-card {
-      overflow: hidden;
-
-      border: 1px solid #dfe6ef;
-      border-radius: 18px;
-
-      background: white;
-
-      box-shadow:
-        0 20px 60px rgba(15,23,42,.065);
-    }
-
-
-    .table-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      gap: 20px;
-
-      padding: 25px 27px;
-
-      border-bottom: 1px solid #e9eef4;
-
-      background:
-        linear-gradient(
-          180deg,
-          #ffffff,
-          #fbfcfe
-        );
-    }
-
-
-    .table-heading {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-    }
-
-
-    .heading-icon {
-      width: 48px;
-      height: 48px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border: 1px solid #dbe7f5;
-      border-radius: 11px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #eff6ff,
-          #f8fbff
-        );
-
-      color: #2563eb;
-    }
-
-
-    .heading-kicker {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-
-      margin-bottom: 3px;
-
-      color: #2563eb;
-
-      font-size: 10px;
-      font-weight: 700;
-    }
-
-
-    .heading-kicker span {
-      width: 5px;
-      height: 5px;
-
-      border-radius: 50%;
-
-      background: #2563eb;
-    }
-
-
-    .table-header h2 {
-      margin: 0;
-
-      color: #0b1728;
-
-      font-size: 21px;
-      font-weight: 800;
-
-      line-height: 1.7;
-    }
-
-
-    .table-header p {
-      margin: 3px 0 0;
-
-      color: #94a3b8;
-
-      font-size: 11px;
-
-      line-height: 1.7;
-    }
-
-
-    /* STATUS */
-
-    .table-status {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-
-      padding: 9px 13px;
-
-      border: 1px solid #d8eee4;
-      border-radius: 9px;
-
-      background: #f5fcf8;
-    }
-
-
-    .status-live-dot {
-      width: 7px;
-      height: 7px;
-
-      border-radius: 50%;
-
-      background: #10b981;
-
-      box-shadow:
-        0 0 0 4px rgba(16,185,129,.08),
-        0 0 12px rgba(16,185,129,.5);
-    }
-
-
-    .table-status small,
-    .table-status strong {
-      display: block;
-    }
-
-
-    .table-status small {
-      color: #94a3b8;
-      font-size: 8px;
-    }
-
-
-    .table-status strong {
-      margin-top: 2px;
-
-      color: #047857;
-
-      font-size: 10px;
-      font-weight: 600;
-    }
-
-
-    /* =====================================================
-       TABLE
-    ===================================================== */
-
-    .table-scroll {
-      overflow-x: auto;
-    }
-
-
-    table {
-      width: 100%;
-
-      min-width: 1120px;
-
-      border-collapse: collapse;
-
-      text-align: right;
-    }
-
-
-    th {
-      padding: 15px 18px;
-
-      border-bottom: 1px solid #e6ebf1;
-
-      background:
-        linear-gradient(
-          180deg,
-          #f8fafc,
-          #f4f7fa
-        );
-
-      color: #64748b;
-
-      font-size: 12px;
-      font-weight: 700;
-
-      line-height: 1.8;
-
-      white-space: nowrap;
-    }
-
-
-    th:first-child {
-      padding-right: 25px;
-    }
-
-
-    td {
-      position: relative;
-
-      padding: 19px 18px;
-
-      border-bottom: 1px solid #eef2f6;
-
-      font-size: 13px;
-
-      line-height: 1.8;
-
-      vertical-align: middle;
-
-      transition: .2s;
-    }
-
-
-    td:first-child {
-      padding-right: 25px;
-    }
-
-
-    tbody tr {
-      transition: .2s;
-    }
-
-
-    tbody tr:hover {
-      background:
-        linear-gradient(
-          90deg,
-          #ffffff,
-          #f8fbff
-        );
-    }
-
-
-    tbody tr:hover td:first-child::before {
-      content: "";
-
-      position: absolute;
-
-      right: 0;
-      top: 12px;
-      bottom: 12px;
-
-      width: 3px;
-
-      border-radius: 5px;
-
-      background:
-        linear-gradient(
-          to bottom,
-          #2563eb,
-          #60a5fa
-        );
-    }
-
-
-    tbody tr:last-child td {
-      border-bottom: none;
-    }
-
-
-    /* =====================================================
-       PRODUCT
-    ===================================================== */
-
-    .product-name {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-
-      min-width: 250px;
-    }
-
-
-    .product-icon {
-      width: 43px;
-      height: 43px;
-
-      flex-shrink: 0;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border: 1px solid #dce6f1;
-      border-radius: 10px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #f5f8fc,
-          #edf3f9
-        );
-
-      color: #173b64;
-
-      font-size: 8px;
-      font-weight: 800;
-
-      transition: .2s;
-    }
-
-
-    tbody tr:hover .product-icon {
-      border-color: #b8d1ee;
-
-      background: #eff6ff;
-
-      color: #2563eb;
-
-      transform: scale(1.04);
-    }
-
-
-    .product-title strong {
-      display: block;
-
-      margin-bottom: 4px;
-
-      color: #172033;
-
-      font-size: 14px;
-      font-weight: 700;
-
-      line-height: 1.8;
-    }
-
-
-    .product-title small {
-      color: #94a3b8;
-
-      font-size: 10px;
-      font-weight: 400;
-
-      line-height: 1.7;
-    }
-
-
-    /* =====================================================
-       FACTORY
-    ===================================================== */
-
-    .factory-name {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-
-      color: #334155;
-
-      font-size: 12px;
-      font-weight: 500;
-
-      line-height: 1.8;
-
-      white-space: nowrap;
-    }
-
-
-    .factory-logo {
-      width: 25px;
-      height: 25px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border: 1px solid #e0e7ef;
-      border-radius: 7px;
-
-      background: #f8fafc;
-    }
-
-
-    .factory-logo span {
-      width: 7px;
-      height: 7px;
-
-      border: 2px solid #64748b;
-      border-radius: 2px;
-
-      transform: rotate(45deg);
-    }
-
-
-    /* =====================================================
-       SPEC
-    ===================================================== */
-
-    .unit-info {
-      display: flex;
-      flex-direction: column;
-
-      gap: 3px;
-
-      white-space: nowrap;
-    }
-
-
-    .unit-info strong {
-      color: #334155;
-
-      font-size: 12px;
-      font-weight: 600;
-
-      line-height: 1.8;
-    }
-
-
-    .unit-info span {
-      color: #94a3b8;
-
-      font-size: 10px;
-      font-weight: 400;
-
-      line-height: 1.7;
-    }
-
-
-    /* =====================================================
-       PRICE
-    ===================================================== */
-
-    .price-box {
-      display: flex;
-      align-items: baseline;
-
-      gap: 5px;
-
-      white-space: nowrap;
-    }
-
-
-    .price-box strong {
-      color: #0d3155;
-
-      font-size: 19px;
-      font-weight: 800;
-
-      line-height: 1.6;
-
-      letter-spacing: 0;
-    }
-
-
-    .price-box span {
-      color: #94a3b8;
-
-      font-size: 9px;
-      font-weight: 500;
-
-      line-height: 1.7;
-    }
-
-
-    /* =====================================================
-       TREND
-    ===================================================== */
-
-    .trend {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-
-      padding: 7px 10px;
-
-      border-radius: 8px;
-
-      font-size: 10px;
-      font-weight: 700;
-
-      line-height: 1.7;
-
-      white-space: nowrap;
-    }
-
-
-    .trend-arrow {
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-
-    .trend-up {
-      border: 1px solid #fee2e2;
-
-      background:
-        linear-gradient(
-          135deg,
-          #fff5f5,
-          #fff1f2
-        );
-
-      color: #dc2626;
-    }
-
-
-    .trend-down {
-      border: 1px solid #d1fae5;
-
-      background:
-        linear-gradient(
-          135deg,
-          #f2fff9,
-          #ecfdf5
-        );
-
-      color: #059669;
-    }
-
-
-    .trend-same {
-      border: 1px solid #e2e8f0;
-
-      background: #f8fafc;
-
-      color: #64748b;
-    }
-
-
-    /* =====================================================
-       DELIVERY
-    ===================================================== */
-
-    .delivery {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-
-      color: #475569;
-
-      font-size: 11px;
-      font-weight: 500;
-
-      white-space: nowrap;
-    }
-
-
-    .delivery-pin {
-      color: #94a3b8;
-      font-size: 7px;
-    }
-
-
-    /* =====================================================
-       QUOTE BUTTON
-    ===================================================== */
-
-    .quote-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-
-      height: 39px;
-
-      padding: 0 14px;
-
-      border: 1px solid #1d4f80;
-      border-radius: 8px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #102f50,
-          #173f67
-        );
-
-      color: white;
-
-      font-family: inherit;
-
-      font-size: 11px;
-      font-weight: 700;
-
-      line-height: 1.7;
-
-      cursor: pointer;
-
-      white-space: nowrap;
-
-      box-shadow:
-        0 6px 16px rgba(16,42,67,.12);
-
-      transition: .22s;
-    }
-
-
-    .quote-btn b {
-      font-size: 14px;
-      font-weight: 500;
-
-      transition: .22s;
-    }
-
-
-    .quote-btn:hover {
-      border-color: #2563eb;
-
-      background:
-        linear-gradient(
-          135deg,
-          #173f67,
-          #1d4f80
-        );
-
-      transform: translateY(-2px);
-
-      box-shadow:
-        0 10px 23px rgba(16,42,67,.2);
-    }
-
-
-    .quote-btn:hover b {
-      transform: translateX(-4px);
-    }
-
-
-    /* =====================================================
-       TABLE FOOTER
-    ===================================================== */
-
-    .table-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      padding: 13px 22px;
-
-      border-top: 1px solid #edf1f5;
-
-      background: #fafbfd;
-    }
-
-
-    .footer-info {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-
-      color: #94a3b8;
-
-      font-size: 9px;
-    }
-
-
-    .footer-live {
-      width: 5px;
-      height: 5px;
-
-      border-radius: 50%;
-
-      background: #10b981;
-    }
-
-
-    .unit-footer {
-      color: #94a3b8;
-
-      font-size: 9px;
-    }
-
-
-    /* =====================================================
-       EMPTY
-    ===================================================== */
-
-    .empty-state {
-      padding: 80px 20px;
-
-      text-align: center;
-    }
-
-
-    .empty-state.hidden {
-      display: none;
-    }
-
-
-    .empty-icon {
-      width: 60px;
-      height: 60px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      margin: auto;
-
-      border: 1px solid #dfe6ef;
-      border-radius: 50%;
-
-      background: #f8fafc;
-
-      color: #64748b;
-    }
-
-
-    .empty-state h3 {
-      margin: 17px 0 5px;
-
-      color: #1e293b;
-
-      font-size: 17px;
-      font-weight: 700;
-
-      line-height: 1.8;
-    }
-
-
-    .empty-state p {
-      margin: 0;
-
-      color: #94a3b8;
-
-      font-size: 11px;
-
-      line-height: 1.9;
-    }
-
-
-    /* =====================================================
-       NOTE
-    ===================================================== */
-
-    .price-note {
-      display: flex;
-      align-items: flex-start;
-
-      gap: 13px;
-
-      margin-top: 17px;
-
-      padding: 17px 19px;
-
-      border: 1px solid #dfe6ef;
-      border-radius: 13px;
-
-      background:
-        linear-gradient(
-          135deg,
-          rgba(255,255,255,.9),
-          rgba(248,250,252,.95)
-        );
-    }
-
-
-    .note-icon {
-      width: 29px;
-      height: 29px;
-
-      flex-shrink: 0;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border: 1px solid #dce5ef;
-      border-radius: 8px;
-
-      background: #f1f5f9;
-
-      color: #64748b;
-
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-
-    .note-content strong {
-      display: block;
-
-      color: #334155;
-
-      font-size: 11px;
-      font-weight: 700;
-
-      line-height: 1.8;
-    }
-
-
-    .note-content p {
-      margin: 4px 0 0;
-
-      color: #64748b;
-
-      font-size: 10px;
-
-      line-height: 2;
-    }
-
-
-    /* =====================================================
-       TOAST
-    ===================================================== */
-
-    .quote-toast {
-      position: fixed;
-
-      right: 25px;
-      bottom: 25px;
-
-      z-index: 9999;
-
-      display: flex;
-      align-items: center;
-
-      gap: 11px;
-
-      min-width: 310px;
-
-      padding: 13px 14px;
-
-      border: 1px solid rgba(96,165,250,.2);
-      border-radius: 12px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #071321,
-          #0c2035
-        );
-
-      color: white;
-
-      box-shadow:
-        0 20px 60px rgba(0,0,0,.28),
-        0 0 30px rgba(37,99,235,.08);
-
-      transform: translateY(130px);
-      opacity: 0;
-
-      pointer-events: none;
-
-      transition: .3s;
-    }
-
-
-    .quote-toast.show {
-      transform: translateY(0);
-      opacity: 1;
-
-      pointer-events: auto;
-    }
-
-
-    .toast-check {
-      width: 35px;
-      height: 35px;
-
-      flex-shrink: 0;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 9px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #10b981,
-          #059669
-        );
-
-      color: white;
-
-      font-weight: 800;
-    }
-
-
-    .toast-content {
-      flex: 1;
-    }
-
-
-    .toast-content strong,
-    .toast-content span {
-      display: block;
-    }
-
-
-    .toast-content strong {
-      color: #f8fafc;
-
-      font-size: 11px;
-      font-weight: 700;
-
-      line-height: 1.7;
-    }
-
-
-    .toast-content span {
-      margin-top: 2px;
-
-      color: #94a3b8;
-
-      font-size: 9px;
-
-      line-height: 1.7;
-    }
-
-
-    .toast-close {
-      border: none;
-
-      background: transparent;
-
-      color: #64748b;
-
-      font-family: inherit;
-
-      font-size: 20px;
-
-      cursor: pointer;
-
-      transition: .2s;
-    }
-
-
-    .toast-close:hover {
-      color: white;
-    }
-
-
-    /* =====================================================
-       RESPONSIVE
-    ===================================================== */
-
-    @media (max-width: 1100px) {
-
-      .hero-content {
-        width: 590px;
-      }
-
-
-      .hero-visual {
-        width: 400px;
-        height: 400px;
-
-        margin-left: -70px;
-      }
-
-
-      .orbit-one {
-        width: 380px;
-        height: 380px;
-      }
-
-
-      .orbit-two {
-        width: 280px;
-        height: 280px;
-
-        top: 60px;
-        left: 60px;
-      }
-
-
-      .orbit-three {
-        width: 175px;
-        height: 175px;
-
-        top: 112px;
-        left: 112px;
-      }
-
-
-      .steel-symbol {
-        top: 140px;
-        left: 140px;
-      }
-
-
-      .card-price {
-        right: -5px;
-      }
-
-
-      .card-market {
-        left: -5px;
-      }
-
-    }
-
-
-    @media (max-width: 900px) {
-
-      .price-hero {
-        min-height: auto;
-      }
-
-
-      .hero-container {
-        min-height: auto;
-      }
-
-
-      .hero-content {
-        width: 100%;
-        padding: 65px 0;
-      }
-
-
-      .hero-visual {
-        display: none;
-      }
-
-
-      .filters-card {
-        grid-template-columns: 1fr 250px;
-      }
-
-    }
-
-
-    @media (max-width: 720px) {
-
-      .container {
-        width: calc(100% - 24px);
-      }
-
-
-      .price-hero h1 {
-        font-size: 43px;
-      }
-
-
-      .hero-content > p {
-        font-size: 14px;
-      }
-
-
-      .hero-stats {
-        margin-top: 35px;
-      }
-
-
-      .hero-stat {
-        min-width: 85px;
-      }
-
-
-      .hero-stat strong {
-        font-size: 16px;
-      }
-
-
-      .stat-line {
-        margin: 0 13px;
-      }
-
-
-      .filters-card {
-        grid-template-columns: 1fr;
-      }
-
-
-      .factory-filter {
-        height: 58px;
-      }
-
-
-      .table-header {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-
-      .table-status {
-        display: none;
-      }
-
-
-      .price-section {
-        padding-top: 40px;
-      }
-
-    }
-
-
-    @media (max-width: 520px) {
-
-      .container {
-        width: calc(100% - 18px);
-      }
-
-
-      .hero-content {
-        padding: 50px 0;
-      }
-
-
-      .hero-badge {
-        font-size: 10px;
-      }
-
-
-      .price-hero h1 {
-        margin-top: 20px;
-        font-size: 36px;
-      }
-
-
-      .hero-actions {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-
-      .hero-stats {
-        width: 100%;
-        justify-content: space-between;
-      }
-
-
-      .hero-stat {
-        min-width: auto;
-      }
-
-
-      .stat-line {
-        margin: 0 8px;
-      }
-
-
-      .hero-stat strong {
-        font-size: 14px;
-      }
-
-
-      .hero-stat span {
-        font-size: 8px;
-      }
-
-
-      .category-wrapper {
-        padding-top: 20px;
-      }
-
-
-      .table-header {
-        padding: 20px;
-      }
-
-
-      .heading-icon {
-        width: 42px;
-        height: 42px;
-      }
-
-
-      .table-header h2 {
-        font-size: 18px;
-      }
-
-
-      .table-footer {
-        align-items: flex-start;
-        flex-direction: column;
-
-        gap: 7px;
-      }
-
-
-      .price-note {
-        padding: 14px;
-      }
-
-
-      .quote-toast {
-        right: 9px;
-        left: 9px;
-        bottom: 9px;
-
-        min-width: 0;
-      }
-
-    }
-
+    .price-page{min-height:100vh;background:linear-gradient(180deg,#f3f6fa 0%,#f8fafc 55%,#f1f5f9 100%);color:#0f172a;font-family:inherit;overflow:hidden}
+    .container{width:min(1400px,calc(100% - 40px));margin-inline:auto}
+
+    /* ---------- HERO ---------- */
+    .price-hero{position:relative;min-height:520px;overflow:hidden;color:#fff;background:radial-gradient(circle at 75% 30%,rgba(37,99,235,.16),transparent 26%),radial-gradient(circle at 20% 70%,rgba(14,165,233,.08),transparent 28%),linear-gradient(125deg,#030911 0%,#06111e 45%,#0b1d31 100%)}
+    .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(148,163,184,.075) 1px,transparent 1px),linear-gradient(90deg,rgba(148,163,184,.075) 1px,transparent 1px);background-size:52px 52px;mask-image:linear-gradient(to left,black,transparent 80%);opacity:.8}
+    .hero-glow{position:absolute;border-radius:50%;pointer-events:none;filter:blur(80px)}
+    .hero-glow-one{width:430px;height:430px;left:-160px;top:-120px;background:rgba(37,99,235,.09)}
+    .hero-glow-two{width:350px;height:350px;right:15%;bottom:-220px;background:rgba(14,165,233,.07)}
+    .hero-scan{position:absolute;width:100%;height:1px;top:38%;left:0;background:linear-gradient(90deg,transparent,rgba(96,165,250,.25),transparent);opacity:.6}
+    .hero-container{position:relative;min-height:520px;display:flex;align-items:center;justify-content:space-between}
+    .hero-content{position:relative;z-index:5;width:650px;padding:75px 0}
+
+    .hero-badge{display:inline-flex;align-items:center;gap:9px;padding:9px 13px;border:1px solid rgba(148,163,184,.2);border-radius:9px;background:linear-gradient(135deg,rgba(30,64,175,.16),rgba(15,23,42,.3));color:#fff;font-size:12px;font-weight:500;line-height:1.7;box-shadow:inset 0 1px 0 rgba(255,255,255,.04),0 10px 35px rgba(0,0,0,.1)}
+    .pulse-dot{width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 4px rgba(34,197,94,.08),0 0 15px rgba(34,197,94,.7)}
+    .badge-arrow{color:#60a5fa;font-size:15px}
+
+    .price-hero h1{margin:25px 0 0;font-size:clamp(42px,5.3vw,70px);line-height:1.25;letter-spacing:-.5px;font-weight:800}
+    .price-hero h1 span{display:block;margin-top:4px;background:linear-gradient(90deg,#fcfbfb 0%,#93c5fd 45%,#60a5fa 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .hero-content > p{max-width:620px;margin:22px 0 0;color:#91a4b9;font-size:15px;font-weight:400;line-height:2.1}
+
+    .hero-actions{display:flex;align-items:center;gap:17px;margin-top:31px}
+    .hero-main-btn{display:inline-flex;align-items:center;justify-content:center;gap:13px;height:48px;padding:0 21px;border:1px solid rgba(147,197,253,.25);border-radius:10px;background:linear-gradient(135deg,#2563eb,#174ea6);color:#fff;font-family:inherit;font-size:13px;font-weight:700;text-decoration:none;box-shadow:0 10px 30px rgba(37,99,235,.22);transition:.25s}
+    .hero-main-btn span{font-size:17px;transition:.25s}
+    .hero-main-btn:hover{transform:translateY(-2px);box-shadow:0 15px 38px rgba(37,99,235,.3)}
+    .hero-main-btn:hover span{transform:translateY(3px)}
+    .hero-update{display:flex;align-items:center;gap:10px}
+    .update-dot{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 13px rgba(34,197,94,.7)}
+    .hero-update small,.hero-update strong{display:block}
+    .hero-update small{color:#64748b;font-size:10px;line-height:1.7}
+    .hero-update strong{margin-top:2px;color:#cbd5e1;font-size:12px;font-weight:600;line-height:1.7}
+
+    .hero-stats{display:flex;align-items:center;margin-top:45px}
+    .hero-stat{display:flex;flex-direction:column;gap:4px;min-width:110px}
+    .hero-stat strong{color:#e5edf7;font-size:19px;font-weight:800;line-height:1.6}
+    .hero-stat span{color:#66788d;font-size:10px;line-height:1.7}
+    .stat-line{width:1px;height:32px;margin:0 25px;background:linear-gradient(to bottom,transparent,#34475d,transparent)}
+
+    /* ---------- HERO VISUAL ---------- */
+    .hero-visual{position:relative;width:500px;height:500px;flex-shrink:0}
+    .visual-orbit{position:absolute;border:1px solid rgba(96,165,250,.12);border-radius:50%}
+    .orbit-one{width:460px;height:460px;top:20px;left:20px}
+    .orbit-two{width:335px;height:335px;top:82px;left:82px;border-color:rgba(96,165,250,.2)}
+    .orbit-three{width:210px;height:210px;top:144px;left:144px;border-color:rgba(96,165,250,.3);box-shadow:0 0 70px rgba(37,99,235,.07)}
+    .steel-symbol{position:absolute;width:145px;height:145px;top:177px;left:177px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(147,197,253,.32);border-radius:50%;background:radial-gradient(circle,rgba(30,64,175,.16),rgba(4,11,20,.9));box-shadow:0 0 70px rgba(37,99,235,.12),inset 0 0 35px rgba(96,165,250,.04)}
+    .symbol-lines{position:absolute;inset:20px;display:flex;align-items:center;justify-content:center;gap:7px;opacity:.45}
+    .symbol-lines span{display:block;width:1px;height:70px;background:linear-gradient(to bottom,transparent,#60a5fa,transparent);transform:rotate(38deg)}
+    .symbol-lines span:nth-child(2){height:90px}
+    .symbol-text{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center}
+    .symbol-text small{color:#94a3b8;font-size:12px;letter-spacing:3px;line-height:1.7}
+    .symbol-text strong{color:#60a5fa;font-size:22px;font-weight:800;letter-spacing:4px;line-height:1.7}
+
+    .floating-card{position:absolute;display:flex;border:1px solid rgba(148,163,184,.17);border-radius:11px;background:linear-gradient(135deg,rgba(14,29,47,.94),rgba(6,15,26,.9));box-shadow:0 18px 45px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.035);backdrop-filter:blur(12px)}
+    .card-price{top:85px;right:5px;width:165px;flex-direction:column;padding:14px 16px}
+    .mini-label{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#718398;font-size:9px;line-height:1.7}
+    .card-price strong{margin-top:4px;color:#e8f1fb;font-size:20px;font-weight:800;line-height:1.7}
+    .card-price strong small{color:#718398;font-size:9px;font-weight:400}
+    .up-small{margin-top:4px;font-size:9px;font-weight:600}
+    .up-small.is-up{color:#f87171}
+    .up-small.is-down{color:#34d399}
+    .up-small.is-same{color:#94a3b8}
+    .card-market{left:5px;bottom:100px;align-items:center;gap:10px;padding:12px 15px}
+    .market-icon{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:rgba(16,185,129,.09);color:#34d399;font-size:18px}
+    .card-market small,.card-market strong{display:block}
+    .card-market small{color:#64748b;font-size:9px}
+    .card-market strong{margin-top:2px;color:#dbeafe;font-size:11px;font-weight:600}
+
+    .visual-cross{position:absolute;width:9px;height:9px}
+    .visual-cross::before,.visual-cross::after{content:"";position:absolute;background:#60a5fa;opacity:.5}
+    .visual-cross::before{width:1px;height:9px;left:4px}
+    .visual-cross::after{width:9px;height:1px;top:4px}
+    .cross-one{top:50px;left:150px}
+    .cross-two{right:90px;bottom:80px}
+
+    /* ---------- MAIN ---------- */
+    .price-section{padding:65px 0 90px}
+
+    /* ---------- FILTERS ---------- */
+    .filters-card{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:10px;padding:9px;border:1px solid #fff;border-radius:16px;background:rgba(253,253,254,.92);box-shadow:0 15px 45px rgba(15,23,42,.055)}
+    .filter-search,.factory-filter{position:relative}
+    .filter-search{display:flex;align-items:center}
+    .search-icon{position:absolute;right:17px;color:#64748b;pointer-events:none}
+    .filter-search input,.factory-filter select{width:100%;height:58px;border:1px solid #e3e8ef;border-radius:11px;outline:none;background:#f7f9fb;color:#0f172a;font-family:inherit;font-size:13px;font-weight:400;transition:.2s}
+    .filter-search input{padding:0 53px 0 75px}
+    .filter-search input::placeholder{color:#94a3b8}
+    .filter-search input:focus,.factory-filter select:focus{border-color:#60a5fa;background:#fff;box-shadow:0 0 0 4px rgba(37,99,235,.07)}
+    kbd{position:absolute;left:13px;padding:3px 7px;border:1px solid #d9e0e8;border-bottom-width:2px;border-radius:5px;background:#fff;color:#94a3b8;font-family:inherit;font-size:9px}
+    .factory-filter select{appearance:none;padding:12px 17px 0 42px;cursor:pointer}
+    .select-label{position:absolute;top:9px;right:17px;color:#94a3b8;font-size:9px;pointer-events:none}
+    .select-arrow{position:absolute;left:16px;bottom:15px;color:#64748b;font-size:15px;pointer-events:none}
+
+    /* ---------- CATEGORIES ---------- */
+    .category-wrapper{padding:25px 0 17px}
+    .category-title{display:flex;align-items:center;gap:8px;margin-bottom:12px;color:#64748b;font-size:11px;font-weight:600}
+    .category-title-line{width:5px;height:5px;border-radius:50%;background:#2563eb}
+    .categories{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+    .categories::-webkit-scrollbar{display:none}
+    .category-btn{display:inline-flex;align-items:center;gap:8px;height:45px;flex-shrink:0;padding:0 17px;border:1px solid #dfe6ee;border-radius:9px;background:#fff;color:#64748b;font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;transition:.2s}
+    .category-btn:hover{border-color:#9fb2c7;color:#102a43;transform:translateY(-1px)}
+    .category-btn.active{border-color:#173b64;background:linear-gradient(135deg,#102a43,#173b64);color:#fff;box-shadow:0 9px 25px rgba(16,42,67,.16)}
+    .category-count{min-width:21px;height:21px;display:inline-flex;align-items:center;justify-content:center;border-radius:6px;background:rgba(255,255,255,.12);color:#bfdbfe;font-size:9px}
+
+    /* ---------- TABLE CARD ---------- */
+    .table-card{overflow:hidden;border:1px solid #dfe6ef;border-radius:18px;background:#fff;box-shadow:0 20px 60px rgba(15,23,42,.065)}
+    .table-header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:25px 27px;border-bottom:1px solid #e9eef4;background:linear-gradient(180deg,#fff,#fbfcfe)}
+    .table-heading{display:flex;align-items:center;gap:13px}
+    .heading-icon{width:48px;height:48px;display:flex;align-items:center;justify-content:center;border:1px solid #dbe7f5;border-radius:11px;background:linear-gradient(135deg,#eff6ff,#f8fbff);color:#2563eb}
+    .heading-kicker{display:flex;align-items:center;gap:7px;margin-bottom:3px;color:#2563eb;font-size:10px;font-weight:700}
+    .heading-kicker span{width:5px;height:5px;border-radius:50%;background:#2563eb}
+    .table-header h2{margin:0;color:#0b1728;font-size:21px;font-weight:800;line-height:1.7}
+    .table-header p{margin:3px 0 0;color:#94a3b8;font-size:11px;line-height:1.7}
+    .table-status{display:flex;align-items:center;gap:9px;padding:9px 13px;border:1px solid #d8eee4;border-radius:9px;background:#f5fcf8}
+    .status-live-dot{width:7px;height:7px;border-radius:50%;background:#10b981;box-shadow:0 0 0 4px rgba(16,185,129,.08),0 0 12px rgba(16,185,129,.5)}
+    .table-status small,.table-status strong{display:block}
+    .table-status small{color:#94a3b8;font-size:8px}
+    .table-status strong{margin-top:2px;color:#047857;font-size:10px;font-weight:600}
+
+    .table-scroll{overflow-x:auto}
+    table{width:100%;min-width:1120px;border-collapse:collapse;text-align:right}
+    th{padding:15px 18px;border-bottom:1px solid #e6ebf1;background:linear-gradient(180deg,#f8fafc,#f4f7fa);color:#64748b;font-size:12px;font-weight:700;line-height:1.8;white-space:nowrap}
+    th:first-child{padding-right:25px}
+
+    /* ---------- EMPTY ---------- */
+    .empty-state{padding:80px 20px;text-align:center}
+    .empty-state.hidden{display:none}
+    .empty-icon{width:60px;height:60px;display:flex;align-items:center;justify-content:center;margin:auto;border:1px solid #dfe6ef;border-radius:50%;background:#f8fafc;color:#64748b}
+    .empty-state h3{margin:17px 0 5px;color:#1e293b;font-size:17px;font-weight:700;line-height:1.8}
+    .empty-state p{margin:0;color:#94a3b8;font-size:11px;line-height:1.9}
+
+    /* ---------- TABLE FOOTER ---------- */
+    .table-footer{display:flex;align-items:center;justify-content:space-between;padding:13px 22px;border-top:1px solid #edf1f5;background:#fafbfd}
+    .footer-info{display:flex;align-items:center;gap:7px;color:#94a3b8;font-size:9px}
+    .footer-live{width:5px;height:5px;border-radius:50%;background:#10b981}
+    .unit-footer{color:#94a3b8;font-size:9px}
+
+    /* ---------- NOTE ---------- */
+    .price-note{display:flex;align-items:flex-start;gap:13px;margin-top:17px;padding:17px 19px;border:1px solid #dfe6ef;border-radius:13px;background:linear-gradient(135deg,rgba(255,255,255,.9),rgba(248,250,252,.95))}
+    .note-icon{width:29px;height:29px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border:1px solid #dce5ef;border-radius:8px;background:#f1f5f9;color:#64748b;font-size:13px;font-weight:800}
+    .note-content strong{display:block;color:#334155;font-size:11px;font-weight:700;line-height:1.8}
+    .note-content p{margin:4px 0 0;color:#64748b;font-size:10px;line-height:2}
+
+    /* ---------- TOAST ---------- */
+    .quote-toast{position:fixed;right:25px;bottom:25px;z-index:9999;display:flex;align-items:center;gap:11px;min-width:310px;padding:13px 14px;border:1px solid rgba(96,165,250,.2);border-radius:12px;background:linear-gradient(135deg,#071321,#0c2035);color:#fff;box-shadow:0 20px 60px rgba(0,0,0,.28),0 0 30px rgba(37,99,235,.08);transform:translateY(130px);opacity:0;pointer-events:none;transition:.3s}
+    .quote-toast.show{transform:translateY(0);opacity:1;pointer-events:auto}
+    .toast-check{width:35px;height:35px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border-radius:9px;background:linear-gradient(135deg,#10b981,#059669);color:#fff;font-weight:800}
+    .toast-content{flex:1}
+    .toast-content strong,.toast-content span{display:block}
+    .toast-content strong{color:#f8fafc;font-size:11px;font-weight:700;line-height:1.7}
+    .toast-content span{margin-top:2px;color:#94a3b8;font-size:9px;line-height:1.7}
+    .toast-close{border:none;background:transparent;color:#64748b;font-family:inherit;font-size:20px;cursor:pointer;transition:.2s}
+    .toast-close:hover{color:#fff}
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width:1100px){
+      .hero-content{width:590px}
+      .hero-visual{width:400px;height:400px;margin-left:-70px}
+      .orbit-one{width:380px;height:380px}
+      .orbit-two{width:280px;height:280px;top:60px;left:60px}
+      .orbit-three{width:175px;height:175px;top:112px;left:112px}
+      .steel-symbol{top:140px;left:140px}
+      .card-price{right:-5px}
+      .card-market{left:-5px}
+    }
+    @media (max-width:900px){
+      .price-hero{min-height:auto}
+      .hero-container{min-height:auto}
+      .hero-content{width:100%;padding:65px 0}
+      .hero-visual{display:none}
+      .filters-card{grid-template-columns:1fr 250px}
+    }
+    @media (max-width:720px){
+      .container{width:calc(100% - 24px)}
+      .price-hero h1{font-size:43px}
+      .hero-content > p{font-size:14px}
+      .hero-stats{margin-top:35px}
+      .hero-stat{min-width:85px}
+      .hero-stat strong{font-size:16px}
+      .stat-line{margin:0 13px}
+      .filters-card{grid-template-columns:1fr}
+      .factory-filter{height:58px}
+      .table-header{align-items:flex-start;flex-direction:column}
+      .table-status{display:none}
+      .price-section{padding-top:40px}
+    }
+    @media (max-width:520px){
+      .container{width:calc(100% - 18px)}
+      .hero-content{padding:50px 0}
+      .hero-badge{font-size:10px}
+      .price-hero h1{margin-top:20px;font-size:36px}
+      .hero-actions{align-items:flex-start;flex-direction:column}
+      .hero-stats{width:100%;justify-content:space-between}
+      .hero-stat{min-width:auto}
+      .stat-line{margin:0 8px}
+      .hero-stat strong{font-size:14px}
+      .hero-stat span{font-size:8px}
+      .category-wrapper{padding-top:20px}
+      .table-header{padding:20px}
+      .heading-icon{width:42px;height:42px}
+      .table-header h2{font-size:18px}
+      .table-footer{align-items:flex-start;flex-direction:column;gap:7px}
+      .price-note{padding:14px}
+      .quote-toast{right:9px;left:9px;bottom:9px;min-width:0}
+    }
+  </style>
+
+  <!-- =====================================================
+       ردیف‌های جدول با JavaScript ساخته می‌شوند.
+       استایل‌های scoped آستروی به آن‌ها نمی‌رسد، پس این بخش global است
+       و همه‌ی قواعدش با .price-page محدود شده تا به بقیه‌ی سایت سرایت نکند.
+  ===================================================== -->
+  <style is:global>
+    .price-page *,.price-page *::before,.price-page *::after{box-sizing:border-box}
+
+    /* ---------- ROWS ---------- */
+    .price-page td{position:relative;padding:19px 18px;border-bottom:1px solid #eef2f6;font-size:13px;line-height:1.8;vertical-align:middle;transition:.2s}
+    .price-page td:first-child{padding-right:25px}
+    .price-page tbody tr{transition:.2s}
+    .price-page tbody tr:hover{background:linear-gradient(90deg,#fff,#f8fbff)}
+    .price-page tbody tr:hover td:first-child::before{content:"";position:absolute;right:0;top:12px;bottom:12px;width:3px;border-radius:5px;background:linear-gradient(to bottom,#2563eb,#60a5fa)}
+    .price-page tbody tr:last-child td{border-bottom:none}
+
+    /* تغییر لحظه‌ای قیمت */
+    .price-page tbody tr.flash-up{animation:asinFlashUp 2.6s ease}
+    .price-page tbody tr.flash-down{animation:asinFlashDown 2.6s ease}
+    @keyframes asinFlashUp{0%,35%{background:#fff1f2}100%{background:transparent}}
+    @keyframes asinFlashDown{0%,35%{background:#ecfdf5}100%{background:transparent}}
+
+    /* ---------- PRODUCT ---------- */
+    .price-page .product-name{display:flex;align-items:center;gap:12px;min-width:250px}
+    .price-page .product-icon{width:43px;height:43px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border:1px solid #dce6f1;border-radius:10px;background:linear-gradient(135deg,#f5f8fc,#edf3f9);color:#173b64;font-size:8px;font-weight:800;transition:.2s}
+    .price-page tbody tr:hover .product-icon{border-color:#b8d1ee;background:#eff6ff;color:#2563eb;transform:scale(1.04)}
+    .price-page .product-title strong{display:block;margin-bottom:4px;color:#172033;font-size:14px;font-weight:700;line-height:1.8}
+    .price-page .product-title small{color:#94a3b8;font-size:10px;font-weight:400;line-height:1.7}
+
+    /* ---------- FACTORY ---------- */
+    .price-page .factory-name{display:flex;align-items:center;gap:8px;color:#334155;font-size:12px;font-weight:500;line-height:1.8;white-space:nowrap}
+    .price-page .factory-logo{width:25px;height:25px;display:flex;align-items:center;justify-content:center;border:1px solid #e0e7ef;border-radius:7px;background:#f8fafc}
+    .price-page .factory-logo span{width:7px;height:7px;border:2px solid #64748b;border-radius:2px;transform:rotate(45deg)}
+
+    /* ---------- SPEC ---------- */
+    .price-page .unit-info{display:flex;flex-direction:column;gap:3px;white-space:nowrap}
+    .price-page .unit-info strong{color:#334155;font-size:12px;font-weight:600;line-height:1.8}
+    .price-page .unit-info span{color:#94a3b8;font-size:10px;font-weight:400;line-height:1.7}
+
+    /* ---------- PRICE ---------- */
+    .price-page .price-box{display:flex;align-items:baseline;gap:5px;white-space:nowrap}
+    .price-page .price-box strong{color:#0d3155;font-size:19px;font-weight:800;line-height:1.6;letter-spacing:0}
+    .price-page .price-box span{color:#94a3b8;font-size:9px;font-weight:500;line-height:1.7}
+
+    /* ---------- TREND ---------- */
+    .price-page .trend{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border-radius:8px;font-size:10px;font-weight:700;line-height:1.7;white-space:nowrap}
+    .price-page .trend-arrow{font-size:13px;font-weight:800}
+    .price-page .trend small{font-size:9px;font-weight:600;opacity:.85}
+    .price-page .trend-up{border:1px solid #fee2e2;background:linear-gradient(135deg,#fff5f5,#fff1f2);color:#dc2626}
+    .price-page .trend-down{border:1px solid #d1fae5;background:linear-gradient(135deg,#f2fff9,#ecfdf5);color:#059669}
+    .price-page .trend-same{border:1px solid #e2e8f0;background:#f8fafc;color:#64748b}
+
+    /* ---------- DELIVERY ---------- */
+    .price-page .delivery{display:flex;align-items:center;gap:6px;color:#475569;font-size:11px;font-weight:500;white-space:nowrap}
+    .price-page .delivery-pin{color:#94a3b8;font-size:7px}
+
+    /* ---------- QUOTE BUTTON ---------- */
+    .price-page .quote-btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;height:39px;padding:0 14px;border:1px solid #1d4f80;border-radius:8px;background:linear-gradient(135deg,#102f50,#173f67);color:#fff;font-family:inherit;font-size:11px;font-weight:700;line-height:1.7;cursor:pointer;white-space:nowrap;box-shadow:0 6px 16px rgba(16,42,67,.12);transition:.22s}
+    .price-page .quote-btn b{font-size:14px;font-weight:500;transition:.22s}
+    .price-page .quote-btn:hover{border-color:#2563eb;background:linear-gradient(135deg,#173f67,#1d4f80);transform:translateY(-2px);box-shadow:0 10px 23px rgba(16,42,67,.2)}
+    .price-page .quote-btn:hover b{transform:translateX(-4px)}
   </style>
 
 </BaseLayout>

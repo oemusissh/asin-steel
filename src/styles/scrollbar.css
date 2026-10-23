@@ -1,0 +1,124 @@
+/* =========================================================
+   ASIN STEEL: اسکرول‌بار صنعتی
+   ایده: ریل فولادی با خط‌کش مهندسی + دستگیره‌ی ماشین‌کاری‌شده
+   رنگ‌ها: سرمه‌ای فولادی، آبی صنعتی، نارنجی ایمنی (هاور)
+   ========================================================= */
+
+:root {
+  --sb-size: 14px;          /* عرض اسکرول‌بار صفحه */
+  --sb-size-thin: 8px;      /* عرض اسکرول‌بار داخل منوها و لیست‌ها */
+  --sb-track: #e3ecf6;
+  --sb-tick: rgba(15, 53, 98, 0.28);
+  --sb-edge: #0b2a4e;
+  --sb-steel-1: #2f7bde;
+  --sb-steel-2: #0f3562;
+  --sb-ridge: rgba(255, 255, 255, 0.6);
+  --sb-hot-1: #ffb431;
+  --sb-hot-2: #e08a00;
+}
+
+.dark {
+  --sb-track: #0f1b2d;
+  --sb-tick: rgba(147, 197, 253, 0.22);
+  --sb-edge: #060d18;
+  --sb-steel-1: #4b8fe0;
+  --sb-steel-2: #1d4f91;
+}
+
+/* ---------- Chrome / Edge / Safari ---------- */
+
+/* ریل (مسیر): خط‌کش فلزی با تیک‌های ریز */
+::-webkit-scrollbar {
+  width: var(--sb-size-thin);
+  height: var(--sb-size-thin);
+}
+
+html::-webkit-scrollbar {
+  width: var(--sb-size);
+  height: var(--sb-size);
+}
+
+::-webkit-scrollbar-track {
+  background:
+    repeating-linear-gradient(to bottom, var(--sb-tick) 0 1px, transparent 1px 12px) left / 4px 100% no-repeat,
+    var(--sb-track);
+  box-shadow: inset 1px 0 0 rgba(15, 53, 98, 0.12);
+}
+
+::-webkit-scrollbar-track:horizontal {
+  background:
+    repeating-linear-gradient(to right, var(--sb-tick) 0 1px, transparent 1px 12px) top / 100% 4px no-repeat,
+    var(--sb-track);
+}
+
+/* دستگیره: تیر فولادی گرادیانی با خطوط گریپ وسط */
+::-webkit-scrollbar-thumb {
+  min-height: 48px;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  background:
+    repeating-linear-gradient(to bottom, var(--sb-ridge) 0 1.5px, transparent 1.5px 4.5px) center / 6px 22px no-repeat,
+    linear-gradient(90deg, var(--sb-steel-1), var(--sb-steel-2) 55%, var(--sb-edge));
+  background-clip: padding-box;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+  min-width: 48px;
+  min-height: 0;
+  background:
+    repeating-linear-gradient(to right, var(--sb-ridge) 0 1.5px, transparent 1.5px 4.5px) center / 22px 6px no-repeat,
+    linear-gradient(180deg, var(--sb-steel-1), var(--sb-steel-2) 55%, var(--sb-edge));
+  background-clip: padding-box;
+}
+
+/* هاور: فولاد داغ، نارنجی ایمنی */
+::-webkit-scrollbar-thumb:hover {
+  background:
+    repeating-linear-gradient(to bottom, rgba(11, 42, 78, 0.55) 0 1.5px, transparent 1.5px 4.5px) center / 6px 22px no-repeat,
+    linear-gradient(90deg, var(--sb-hot-1), var(--sb-hot-2));
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:horizontal:hover {
+  background:
+    repeating-linear-gradient(to right, rgba(11, 42, 78, 0.55) 0 1.5px, transparent 1.5px 4.5px) center / 22px 6px no-repeat,
+    linear-gradient(180deg, var(--sb-hot-1), var(--sb-hot-2));
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: var(--sb-hot-2);
+  filter: brightness(0.92);
+}
+
+/* حذف دکمه‌های فلش بالا و پایین */
+::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--sb-track);
+}
+
+/* ---------- Firefox ----------
+   نکته‌ی مهم: در کروم نسخه‌ی ۱۲۱ به بالا، اگر scrollbar-color ست شود،
+   استایل‌های webkit بالا نادیده گرفته می‌شود؛ برای همین فقط برای مرورگرهایی
+   که ::-webkit-scrollbar را نمی‌شناسند فعال شده است. */
+@supports not selector(::-webkit-scrollbar) {
+  html {
+    scrollbar-width: auto;
+    scrollbar-color: #1d4f91 #e3ecf6;
+  }
+  .dark html {
+    scrollbar-color: #4b8fe0 #0f1b2d;
+  }
+}
+
+/* اسلایدرهایی که اسکرول‌بار خودشان را پنهان کرده‌اند، دست‌نخورده می‌مانند */
+.afp-track::-webkit-scrollbar,
+.afp-tabs::-webkit-scrollbar {
+  display: none;
+}

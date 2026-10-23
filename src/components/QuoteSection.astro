@@ -1,0 +1,423 @@
+---
+// ───────────────────────────────────────────────
+// تنظیمات قابل ویرایش
+// ───────────────────────────────────────────────
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+// آدرس دریافت فرم (API یا سرویس فرم). تا پر نشود، ارسال انجام نمی‌شود.
+const FORM_ENDPOINT = '';
+
+const phoneDisplay = '۶۶۹۱۵۳۰۷';
+const phoneHref = '02166915307'; // پیش‌شماره تهران فرض شده است؛ در صورت نیاز اصلاح کنید
+
+const steps = [
+  { n: '۱', title: 'درخواست را ثبت کنید', text: 'نوع محصول، مقدار و شماره تماس‌تان را وارد کنید.' },
+  { n: '۲', title: 'قیمت را دریافت کنید', text: 'قیمت پیشنهادی را برایتان ارسال می‌کنیم.' },
+  { n: '۳', title: 'سفارش را نهایی کنید', text: 'پس از تأیید شما، سفارش برای تحویل آماده می‌شود.' },
+];
+
+// مقطع هر محصول
+const products = [
+  { label: 'تیرآهن', d: 'M8 8H40V15H27.5V33H40V40H8V33H20.5V15H8Z' },
+  { label: 'میلگرد', d: 'M24 13a11 11 0 1 0 0 22a11 11 0 1 0 0-22Z M24 5V13 M24 35V43 M5 24H13 M35 24H43' },
+  { label: 'ناودانی', d: 'M10 8H40V16H18V32H40V40H10Z' },
+  { label: 'نبشی', d: 'M10 8H18V32H40V40H10Z' },
+  { label: 'قوطی و پروفیل', d: 'M8 8H40V40H8Z M15 15V33H33V15Z' },
+  { label: 'ورق', d: 'M5 19H43V29H5Z' },
+];
+
+const field =
+  'w-full rounded-md border border-[#C5D2E1] bg-white px-4 py-3 text-[15px] text-[#0F3562] placeholder:text-[#7D8DA3] transition duration-200 hover:border-[#8FA6C2] focus:border-[#0F3562] focus:outline-none focus:ring-4 focus:ring-[#F2A21B]/30 aria-[invalid=true]:border-rose-600 aria-[invalid=true]:ring-4 aria-[invalid=true]:ring-rose-600/15';
+---
+
+<section dir="rtl" data-quote aria-labelledby="quote-title" class="quote-bg py-16 sm:py-20">
+  <div class="container mx-auto px-4">
+    <div class="grid overflow-hidden rounded-3xl border border-[#C5D2E1] bg-white shadow-[0_24px_60px_-36px_rgba(15,53,98,0.35)] lg:grid-cols-[1.2fr_0.8fr]">
+      <!-- فرم -->
+      <div class="p-6 sm:p-10">
+        <div data-form-wrap>
+          <h2 id="quote-title" class="text-2xl font-extrabold leading-[1.7] text-[#0F3562] sm:text-3xl">
+            استعلام قیمت مقاطع فولادی
+          </h2>
+          <p class="mt-1 text-[15px] leading-8 text-[#4A5D78]">
+            نوع و مقدار فولاد مورد نیازتان را بنویسید تا قیمت را برایتان ارسال کنیم.
+          </p>
+
+          <form data-quote-form data-endpoint={FORM_ENDPOINT} method="post" novalidate class="mt-7 space-y-6">
+            <!-- محصولات -->
+            <fieldset aria-describedby="err-product">
+              <legend class="mb-3 text-[15px] font-bold text-[#0F3562]">
+                نوع محصول <span class="font-normal text-[#4A5D78]">(یک یا چند مورد)</span>
+              </legend>
+              <div class="grid grid-cols-2 gap-3 sm:grid-cols-3">
+                {products.map((p, i) => (
+                  <div class="relative">
+                    <input id={`prod-${i}`} type="checkbox" name="product" value={p.label} class="peer sr-only" />
+                    <label
+                      for={`prod-${i}`}
+                      class="chip relative flex min-h-[96px] cursor-pointer flex-col items-center justify-center gap-2 rounded-lg border border-[#C5D2E1] bg-[#F3F6FA] px-3 py-4 text-sm font-bold text-[#0F3562] transition duration-200 hover:border-[#0F3562] hover:bg-white active:scale-[0.97] peer-checked:border-[#0F3562] peer-checked:bg-[#0F3562] peer-checked:text-white peer-checked:[&>.chk]:scale-100 peer-focus-visible:ring-2 peer-focus-visible:ring-[#0F3562] peer-focus-visible:ring-offset-2"
+                    >
+                      <svg class="h-9 w-9" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
+                        <path d={p.d} fill-rule="evenodd" />
+                      </svg>
+                      {p.label}
+                      <span class="chk absolute end-2 top-2 flex h-5 w-5 scale-0 items-center justify-center rounded-full bg-[#F2A21B] text-[#0F3562] transition-transform duration-200 ease-out" aria-hidden="true">
+                        <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+                      </span>
+                    </label>
+                  </div>
+                ))}
+              </div>
+              <p id="err-product" data-error-for="product" class="mt-2 hidden text-sm font-semibold text-rose-700"></p>
+            </fieldset>
+
+            <!-- نام و تلفن -->
+            <div class="grid gap-5 sm:grid-cols-2">
+              <div>
+                <label for="q-name" class="mb-1.5 block text-[15px] font-bold text-[#0F3562]">نام و نام خانوادگی</label>
+                <input id="q-name" name="name" type="text" autocomplete="name" aria-required="true" aria-describedby="err-name" class={field} />
+                <p id="err-name" data-error-for="name" class="mt-1.5 hidden text-sm font-semibold text-rose-700"></p>
+              </div>
+              <div>
+                <label for="q-phone" class="mb-1.5 block text-[15px] font-bold text-[#0F3562]">شماره تماس</label>
+                <input id="q-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" dir="auto" aria-required="true" aria-describedby="err-phone" class={field} />
+                <p id="err-phone" data-error-for="phone" class="mt-1.5 hidden text-sm font-semibold text-rose-700"></p>
+              </div>
+            </div>
+
+            <!-- مقدار و ابعاد -->
+            <div>
+              <label for="q-details" class="mb-1.5 block text-[15px] font-bold text-[#0F3562]">
+                مقدار و ابعاد <span class="font-normal text-[#4A5D78]">(اختیاری)</span>
+              </label>
+              <textarea id="q-details" name="details" rows="3" placeholder="مثلاً ۲ تن میلگرد ۱۴" class={`${field} resize-y`}></textarea>
+            </div>
+
+            <!-- فیلد مخفی ضد اسپم -->
+            <input type="text" name="website" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+
+            <div>
+              <button
+                type="submit"
+                data-submit
+                class="group inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-lg bg-[#F2A21B] px-8 text-[15px] font-extrabold text-[#0F3562] transition duration-200 ease-out hover:bg-[#FFB431] hover:shadow-[0_12px_24px_-12px_rgba(242,162,27,0.9)] active:scale-[0.98] disabled:cursor-wait disabled:opacity-80 sm:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F3562] focus-visible:ring-offset-2"
+              >
+                <span data-submit-label>ارسال درخواست استعلام</span>
+                <svg data-submit-arrow class="h-4 w-4 transition-transform duration-200 ease-out group-hover:-translate-x-1.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M15 18l-6-6 6-6" />
+                </svg>
+                <svg data-submit-spinner class="hidden h-5 w-5 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-opacity="0.3" stroke-width="3" />
+                  <path d="M21 12a9 9 0 0 0-9-9" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+                </svg>
+              </button>
+              <p class="mt-3 text-xs leading-6 text-[#4A5D78]">
+                با ارسال فرم،
+                <a href={`${base}/privacy`} class="rounded-sm font-semibold text-[#0F3562] underline underline-offset-4 hover:text-[#2F7BE0]">حریم خصوصی</a>
+                را می‌پذیرید.
+              </p>
+              <p data-status role="status" aria-live="polite" class="mt-2 hidden text-sm font-semibold text-rose-700"></p>
+            </div>
+          </form>
+        </div>
+
+        <!-- پیام موفقیت -->
+        <div data-success class="hidden py-12 text-center" role="status" tabindex="-1">
+          <svg class="mx-auto h-20 w-20" viewBox="0 0 80 80" fill="none" aria-hidden="true">
+            <circle class="sc-circle" cx="40" cy="40" r="34" stroke="#F2A21B" stroke-width="4" />
+            <path class="sc-tick" d="M25 41l10 10 21-22" stroke="#0F3562" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <h3 class="mt-4 text-xl font-extrabold text-[#0F3562]">درخواست شما ثبت شد</h3>
+          <p class="mx-auto mt-2 max-w-sm text-[15px] leading-8 text-[#4A5D78]">
+            درخواستتان دریافت شد و قیمت برایتان ارسال می‌شود.
+          </p>
+          <button
+            type="button"
+            data-reset
+            class="mt-5 inline-flex min-h-[44px] items-center rounded-lg border border-[#0F3562]/30 px-5 text-[15px] font-bold text-[#0F3562] transition duration-200 hover:bg-[#0F3562] hover:text-white active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F3562] focus-visible:ring-offset-2"
+          >
+            ثبت درخواست جدید
+          </button>
+        </div>
+      </div>
+
+      <!-- مراحل و تماس -->
+      <aside class="side relative flex flex-col justify-between gap-10 overflow-hidden border-t border-[#C5D2E1] bg-[#E3ECF6] p-6 sm:p-10 lg:border-s lg:border-t-0">
+        <!-- مقطع تیرآهن، تزئینی -->
+        <svg class="pointer-events-none absolute -bottom-10 -start-10 h-64 w-64 text-[#0F3562]/[0.06]" viewBox="0 0 48 48" fill="currentColor" aria-hidden="true">
+          <path d="M8 8H40V15H27.5V33H40V40H8V33H20.5V15H8Z" />
+        </svg>
+
+        <div class="relative">
+          <h3 class="text-lg font-extrabold text-[#0F3562]">استعلام چطور انجام می‌شود؟</h3>
+          <ol class="mt-6 space-y-6">
+            {steps.map((s, i) => (
+              <li class="relative ps-14">
+                <span class="absolute start-0 top-0 flex h-10 w-10 items-center justify-center rounded-full border-2 border-[#0F3562] bg-white text-base font-extrabold text-[#0F3562]" aria-hidden="true">
+                  {s.n}
+                </span>
+                {i < steps.length - 1 && (
+                  <span class="tl-line absolute start-[19px] top-11 h-[calc(100%-4px)] w-0.5 origin-top rounded-full bg-[#0F3562]/25" aria-hidden="true"></span>
+                )}
+                <h4 class="text-[15px] font-bold text-[#0F3562]">{s.title}</h4>
+                <p class="mt-1 text-sm leading-7 text-[#3E5170]">{s.text}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        <div class="relative rounded-xl border border-[#C5D2E1] bg-white p-5">
+          <p class="text-sm text-[#4A5D78]">ترجیح می‌دهید تماس بگیرید؟</p>
+          <a
+            href={`tel:${phoneHref}`}
+            class="group mt-1 inline-flex min-h-[44px] items-center gap-3 rounded-md text-2xl font-extrabold text-[#0F3562] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F3562] focus-visible:ring-offset-2"
+          >
+            <span class="flex h-10 w-10 items-center justify-center rounded-full bg-[#F2A21B] text-[#0F3562] transition-transform duration-300 ease-out group-hover:rotate-12">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+              </svg>
+            </span>
+            <bdi>{phoneDisplay}</bdi>
+          </a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* پس‌زمینه روشن با شبکه‌ی نقشه‌ی فنی */
+  .quote-bg {
+    background-color: #eef3f8;
+    background-image:
+      linear-gradient(rgba(15, 53, 98, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(15, 53, 98, 0.06) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  /* لرزش فیلد نامعتبر */
+  .shake {
+    animation: shake 380ms ease-in-out;
+  }
+  @keyframes shake {
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    20% {
+      transform: translateX(-6px);
+    }
+    40% {
+      transform: translateX(6px);
+    }
+    60% {
+      transform: translateX(-4px);
+    }
+    80% {
+      transform: translateX(3px);
+    }
+  }
+
+  /* علامت تیک موفقیت */
+  .sc-circle {
+    stroke-dasharray: 214;
+    stroke-dashoffset: 214;
+    animation: sc-draw 700ms cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  }
+  .sc-tick {
+    stroke-dasharray: 60;
+    stroke-dashoffset: 60;
+    animation: sc-draw 500ms cubic-bezier(0.65, 0, 0.35, 1) 600ms forwards;
+  }
+  @keyframes sc-draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  /* تنها حرکت خودکار: کشیده شدن خط مراحل هنگام ورود به دید */
+  @media (prefers-reduced-motion: no-preference) {
+    .js-reveal .tl-line {
+      transform: scaleY(0);
+    }
+    .js-reveal .is-visible .tl-line {
+      transform: scaleY(1);
+      transition: transform 900ms cubic-bezier(0.65, 0, 0.35, 1) 200ms;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-quote],
+    [data-quote] * {
+      transition: none !important;
+      animation: none !important;
+    }
+    .sc-circle,
+    .sc-tick {
+      stroke-dashoffset: 0 !important;
+    }
+  }
+</style>
+
+<script>
+  const section = document.querySelector<HTMLElement>('[data-quote]');
+
+  if (section) {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // ── ورود انیمیشنی خط مراحل ──
+    const side = section.querySelector<HTMLElement>('.side');
+    if (side && 'IntersectionObserver' in window && !reduceMotion) {
+      section.classList.add('js-reveal');
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+      observer.observe(side);
+    }
+
+    // ── فرم ──
+    const form = section.querySelector<HTMLFormElement>('[data-quote-form]');
+    const wrap = section.querySelector<HTMLElement>('[data-form-wrap]');
+    const success = section.querySelector<HTMLElement>('[data-success]');
+    const status = section.querySelector<HTMLElement>('[data-status]');
+    const submitBtn = section.querySelector<HTMLButtonElement>('[data-submit]');
+    const spinner = section.querySelector<HTMLElement>('[data-submit-spinner]');
+    const arrow = section.querySelector<HTMLElement>('[data-submit-arrow]');
+    const label = section.querySelector<HTMLElement>('[data-submit-label]');
+    const resetBtn = section.querySelector<HTMLButtonElement>('[data-reset]');
+
+    if (form && wrap && success && status && submitBtn && spinner && arrow && label) {
+      const toLatinDigits = (value: string) =>
+        value
+          .replace(/[۰-۹]/g, (d) => String('۰۱۲۳۴۵۶۷۸۹'.indexOf(d)))
+          .replace(/[٠-٩]/g, (d) => String('٠١٢٣٤٥٦٧٨٩'.indexOf(d)));
+
+      const errorEl = (name: string) => form.querySelector<HTMLElement>(`[data-error-for="${name}"]`);
+
+      const showError = (name: string, message: string, input?: HTMLElement | null) => {
+        const el = errorEl(name);
+        if (el) {
+          el.textContent = message;
+          el.classList.remove('hidden');
+        }
+        if (input) {
+          input.setAttribute('aria-invalid', 'true');
+          if (!reduceMotion) {
+            input.classList.remove('shake');
+            void input.offsetWidth;
+            input.classList.add('shake');
+            input.addEventListener('animationend', () => input.classList.remove('shake'), { once: true });
+          }
+        }
+      };
+
+      const clearError = (name: string, input?: HTMLElement | null) => {
+        const el = errorEl(name);
+        if (el) {
+          el.textContent = '';
+          el.classList.add('hidden');
+        }
+        input?.removeAttribute('aria-invalid');
+      };
+
+      const nameInput = form.querySelector<HTMLInputElement>('[name="name"]');
+      const phoneInput = form.querySelector<HTMLInputElement>('[name="phone"]');
+      const productInputs = form.querySelectorAll<HTMLInputElement>('[name="product"]');
+      const honeypot = form.querySelector<HTMLInputElement>('[name="website"]');
+
+      nameInput?.addEventListener('input', () => clearError('name', nameInput));
+      phoneInput?.addEventListener('input', () => clearError('phone', phoneInput));
+      productInputs.forEach((p) => p.addEventListener('change', () => clearError('product')));
+
+      const validate = () => {
+        let firstInvalid: HTMLElement | null = null;
+
+        if (![...productInputs].some((p) => p.checked)) {
+          showError('product', 'حداقل یک نوع محصول را انتخاب کنید.');
+          firstInvalid = firstInvalid ?? productInputs[0];
+        }
+        if (!nameInput || nameInput.value.trim().length < 3) {
+          showError('name', 'نام و نام خانوادگی را وارد کنید.', nameInput);
+          firstInvalid = firstInvalid ?? nameInput;
+        }
+        const phone = toLatinDigits(phoneInput?.value.replace(/[\s-]/g, '') ?? '');
+        if (!/^(0?9\d{9}|0\d{10})$/.test(phone)) {
+          showError('phone', 'شماره تماس معتبر وارد کنید (مثلاً ۰۹۱۲۱۲۳۴۵۶۷).', phoneInput);
+          firstInvalid = firstInvalid ?? phoneInput;
+        }
+        return firstInvalid;
+      };
+
+      const setLoading = (loading: boolean) => {
+        submitBtn.disabled = loading;
+        spinner.classList.toggle('hidden', !loading);
+        arrow.classList.toggle('hidden', loading);
+        label.textContent = loading ? 'در حال ارسال…' : 'ارسال درخواست استعلام';
+      };
+
+      const showStatus = (message: string) => {
+        status.textContent = message;
+        status.classList.remove('hidden');
+      };
+
+      const showSuccess = () => {
+        wrap.classList.add('hidden');
+        success.classList.remove('hidden');
+        success.focus({ preventScroll: true });
+      };
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        status.classList.add('hidden');
+
+        // ربات‌ها فیلد مخفی را پر می‌کنند؛ بی‌صدا نادیده گرفته می‌شود
+        if (honeypot && honeypot.value) {
+          showSuccess();
+          return;
+        }
+
+        const invalid = validate();
+        if (invalid) {
+          invalid.focus();
+          return;
+        }
+
+        const endpoint = form.dataset.endpoint;
+        if (!endpoint) {
+          showStatus('ارسال فرم هنوز به سرور وصل نشده است. آدرس دریافت فرم را در تنظیمات کامپوننت وارد کنید.');
+          return;
+        }
+
+        setLoading(true);
+        try {
+          const response = await fetch(endpoint, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { Accept: 'application/json' },
+          });
+          if (!response.ok) throw new Error('request failed');
+          showSuccess();
+        } catch {
+          showStatus('ارسال انجام نشد. لطفاً دوباره تلاش کنید یا تماس بگیرید.');
+        } finally {
+          setLoading(false);
+        }
+      });
+
+      resetBtn?.addEventListener('click', () => {
+        form.reset();
+        success.classList.add('hidden');
+        wrap.classList.remove('hidden');
+        productInputs[0]?.focus();
+      });
+    }
+  }
+</script>

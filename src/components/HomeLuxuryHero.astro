@@ -13,11 +13,26 @@ const brand = {
   nameFa: "آسین استیل",
   nameEn: "ASIN STILL",
   logo: `${base}logo.svg`,
-  phone: "۰۲۱-۱۲۳۴۵۶۷۸",
-  phoneLink: "tel:+982112345678",
+  phone: "۰۲۱-۶۶۹۱۵۳۰۷",
+  phoneLink: "tel:+02166915307",
   instagram: "https://instagram.com/asinstill",
   telegram: "https://t.me/asinstill",
+  address: "تهران، خیابان جمالزاده، خیابان توحید، بن بست حاج رضایی، پلاک ۱۶",
+  postalCode: "۱۴۱۹۷۱۳۷۴۰",
 };
+
+// نقشه گوگل (بدون نیاز به کلید API)
+// پین نقشه فعلاً از روی نام خیابان‌ها پیدا می‌شود. برای پین دقیقاً روی دفتر:
+// در گوگل مپ روی محل دفتر راست‌کلیک کنید (در موبایل: لمس طولانی)، مختصات را کپی کنید
+// و بین گیومه‌های mapCoords بگذارید. مثال: "35.70123, 51.38456"
+const mapCoords = "";
+const mapQuery = encodeURIComponent(
+  mapCoords.replace(/\s+/g, "") ||
+    "تهران، خیابان جمالزاده، خیابان توحید، بن بست حاج رضایی"
+);
+const mapEmbedUrl = `https://maps.google.com/maps?q=${mapQuery}&hl=fa&z=17&output=embed`;
+const mapOpenUrl = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
+const mapRouteUrl = `https://www.google.com/maps/dir/?api=1&destination=${mapQuery}`;
 
 
 
@@ -156,22 +171,59 @@ const heroSlides = [
   <div class="as-address-card">
     <div class="as-address-map-preview">
       <iframe
-        src="https://www.openstreetmap.org/export/embed.html?bbox=51.35%2C35.65%2C51.45%2C35.72&layer=mapnik"
-        title="پیش‌نمایش نقشه آسین استیل"
+        src={mapEmbedUrl}
+        title="موقعیت آسین استیل روی نقشه گوگل"
         loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        tabindex="-1"
       ></iframe>
+
+      <!-- کل نقشه یک لینک است و گوگل مپ را در تب جدید باز می‌کند -->
+      <a
+        href={mapOpenUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="as-map-hit"
+        aria-label="مشاهده موقعیت آسین استیل در گوگل مپ"
+      >
+        <span class="as-map-hit-badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M7 7h10v10" />
+            <path d="M7 17 17 7" />
+          </svg>
+        </span>
+      </a>
     </div>
 
-    <strong>آدرس شرکت</strong>
-    <p>آدرس دفتر آسین استیل هنوز ثبت نشده است.</p>
+    <div class="as-address-body">
+      <div class="as-address-head">
+        <span class="as-address-pin" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z" />
+            <circle cx="12" cy="10" r="3" />
+          </svg>
+        </span>
+        <strong>آدرس شرکت</strong>
+      </div>
+
+      <address class="as-address-text">{brand.address}</address>
+
+      <div class="as-address-postal">
+        <span>کدپستی</span>
+        <span class="as-address-postal-code" dir="ltr">{brand.postalCode}</span>
+      </div>
+    </div>
 
     <a
-      href="https://www.openstreetmap.org/"
+      href={mapRouteUrl}
       target="_blank"
       rel="noopener noreferrer"
       class="as-address-map"
     >
-      مسیریابی
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <polygon points="3 11 22 2 13 21 11 13 3 11" />
+      </svg>
+      مسیریابی در گوگل مپ
     </a>
   </div>
 </div>
@@ -1304,67 +1356,201 @@ const heroSlides = [
   margin-top: 0;
 }
 
-/* کارت آدرس */
+/* کارت آدرس و نقشه گوگل */
 .as-address-card {
   display: flex;
   flex-direction: column;
   align-self: stretch;
   min-width: 0;
   overflow: hidden;
-  padding-bottom: 12px;
   border: 1px solid #d9e3f1;
-  border-radius: 15px;
+  border-radius: 17px;
   background: #fff;
   box-shadow: 0 7px 22px rgba(20, 48, 91, 0.06);
 }
 
 .as-address-map-preview {
-  height: 125px;
-  flex-shrink: 0;
-  margin-bottom: 12px;
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 96px;
   overflow: hidden;
-  background: #e8eef5;
+  background: linear-gradient(135deg, #e8eef5 0%, #d7e2f1 100%);
 }
 
 .as-address-map-preview iframe {
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
   height: 100%;
   border: 0;
+  pointer-events: none;
 }
 
-.as-address-card > strong,
-.as-address-card > p {
-  margin-right: 12px;
-  margin-left: 12px;
+/* کل نقشه یک لینک است؛ با کلیک، گوگل مپ در تب جدید باز می‌شود */
+.as-map-hit {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(15, 26, 43, 0);
+  transition: background 0.25s ease;
 }
 
-.as-address-card > strong {
+.as-map-hit:hover {
+  background: rgba(15, 26, 43, 0.1);
+}
+
+.as-map-hit:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: -3px;
+}
+
+.as-map-hit-badge {
+  position: absolute;
+  top: 9px;
+  left: 9px;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  color: var(--blue);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 3px 10px rgba(15, 26, 43, 0.2);
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.as-map-hit:hover .as-map-hit-badge {
+  color: #fff;
+  background: var(--blue);
+}
+
+.as-map-hit-badge svg,
+.as-address-pin svg,
+.as-address-map svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.as-map-hit-badge svg {
+  width: 15px;
+  height: 15px;
+  stroke-width: 2.2;
+}
+
+.as-address-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 14px 10px;
+}
+
+.as-address-head {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.as-address-pin {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  color: #fff;
+  background: var(--blue);
+}
+
+.as-address-pin svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+}
+
+.as-address-head strong {
   color: #142b50;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 900;
 }
 
-.as-address-card > p {
-  color: #64748b;
-  font-size: 10px;
+.as-address-text {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 11.5px;
+  font-style: normal;
   line-height: 1.9;
+  text-wrap: balance;
+}
+
+.as-address-postal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 2px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--line);
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.as-address-postal-code {
+  color: #142b50;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.4px;
 }
 
 .as-address-map {
-  margin: auto 12px 0;
-  padding: 9px;
-  border-radius: 9px;
-  background: #1e3a8a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin: 0 14px 14px;
+  padding: 10px 8px;
+  border-radius: 11px;
+  background: var(--blue);
   color: #fff !important;
-  font-size: 11px;
+  font-size: 11.5px;
   font-weight: 800;
-  text-align: center;
-  transition: background 0.2s ease;
+  white-space: nowrap;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.as-address-map svg {
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  stroke-width: 2.2;
+  transition: transform 0.2s ease;
 }
 
 .as-address-map:hover {
-  background: #2d4dab;
+  background: var(--blue-light);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -8px var(--blue-glow);
+}
+
+.as-address-map:hover svg {
+  transform: translate(2px, -2px);
+}
+
+.as-address-map:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .as-map-hit,
+  .as-map-hit-badge,
+  .as-address-map,
+  .as-address-map svg {
+    transition: none !important;
+  }
 }
 
 /* تبلت */
@@ -1399,7 +1585,17 @@ const heroSlides = [
   }
 
   .as-address-map-preview {
-    height: 150px;
+    flex: none;
+    height: 170px;
+    min-height: 0;
+  }
+
+  .as-address-body {
+    padding: 14px 16px 12px;
+  }
+
+  .as-address-map {
+    margin: 0 16px 16px;
   }
 }
 

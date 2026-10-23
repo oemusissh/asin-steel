@@ -1,0 +1,68 @@
+---
+const loginUrl = '/login'; // آدرس صفحه‌ی ورود سایتت
+---
+
+<a id="gf-btn" href={loginUrl} data-login-url={loginUrl}
+   title="استعلام قیمت و پیش‌فاکتور" aria-label="گفتگوی آنلاین">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/>
+  </svg>
+</a>
+
+<style>
+  #gf-btn {
+    position: fixed; left: 20px; bottom: 20px;
+    width: 58px; height: 58px; border-radius: 50%;
+    background: #0d6efd; color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, .25);
+    z-index: 99999; cursor: pointer; text-decoration: none;
+    transition: transform .2s;
+  }
+  #gf-btn:hover { transform: scale(1.08); }
+</style>
+
+<script is:inline>
+  (function () {
+    var btn = document.getElementById('gf-btn');
+    var GOFTINO_ID = '1pMbku';
+
+    // این تابع را با روش لاگین سایتت جایگزین کن
+    function getCurrentUser() {
+      try { return JSON.parse(localStorage.getItem('user')); }
+      catch (e) { return null; }
+    }
+
+    var user = getCurrentUser();
+
+    // مهمان: دکمه می‌ماند ولی کاربر را به صفحه‌ی ورود می‌برد
+    if (!user) {
+      btn.href = btn.dataset.loginUrl + '?redirect=' + encodeURIComponent(location.pathname);
+      return;
+    }
+
+    // کاربر واردشده: لود گفتینو
+    btn.href = '#';
+    var d = document, g = d.createElement('script'),
+        s = 'https://www.goftino.com/widget/' + GOFTINO_ID,
+        l = localStorage.getItem('goftino_' + GOFTINO_ID);
+    g.async = true;
+    g.src = l ? s + '?o=' + l : s;
+    d.head.appendChild(g);
+
+    window.addEventListener('goftino_ready', function () {
+      Goftino.setWidget({ hasIcon: false }); // آیکون پیش‌فرض گفتینو مخفی شود
+      Goftino.setUser({
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        forceUpdate: true
+      });
+    });
+
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (window.Goftino) Goftino.toggle();
+    });
+  })();
+</script>

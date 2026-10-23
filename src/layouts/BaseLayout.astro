@@ -2,6 +2,9 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import ProformaModal from "../components/ProformaModal.astro";
+import '../styles/scrollbar.css';
+import ChatWidget from "../components/ChatWidget.astro";
+
 
 interface Props {
   title: string;
@@ -287,5 +290,6 @@ const { title, description = 'Premium building materials for your construction p
       });
     </script>
     <ProformaModal />
+    <ChatWidget />
   </body>
 </html>

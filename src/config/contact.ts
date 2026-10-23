@@ -19,7 +19,7 @@ export const CONTACT_INFO = {
   // Phone & WhatsApp
   phone: {
     number: '+6281392442358',
-    formatted: '+62 813-9244-2358',
+    formatted: '+021 669-15-307',
     label: 'WhatsApp',
   },
   

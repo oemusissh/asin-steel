@@ -5,7 +5,7 @@ All Rights Reserved.
 Official Contact:
 Email: contact@kantongaplikasi.com
 Technical Support: support@kantongaplikasi.com
-WhatsApp: +62 813-9244-2358
+WhatsApp: +021 669-15-307
 
 ==================================================
 FREE PERSONAL LICENSE
@@ -97,4 +97,4 @@ For technical support:
 support@kantongaplikasi.com
 
 WhatsApp:
-+62 813-9244-2358
++021 669-15-307
