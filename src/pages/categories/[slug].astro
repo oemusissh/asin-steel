@@ -1,0 +1,373 @@
+---
+// صفحهٔ دسته‌بندی: /categories/<slug>   (beam, rebar, channel, angle, tube, plate, pipe, flat)
+// محصولات از جدول products در Supabase خوانده می‌شوند (مثل صفحهٔ /products).
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { categories } from "../../lib/categories";
+import { build3d } from "../../lib/steel3d";
+
+export function getStaticPaths() {
+  return categories.map((cat) => ({ params: { slug: cat.slug }, props: { cat } }));
+}
+
+const { cat } = Astro.props;
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
+const model = build3d(cat.shape);
+---
+
+<BaseLayout title={`${cat.name} | ASIN STILL`}>
+  <main
+    id="cp"
+    dir="rtl"
+    class="cp"
+    style={`--c:${cat.color};--k:${model.k}`}
+    data-base={base}
+    data-db={JSON.stringify(cat.db)}
+    data-icon={cat.icon}
+  >
+    <!-- ===== بالای صفحه ===== -->
+    <section class="cp-hero">
+      <div class="cp-wrap">
+        <nav class="cp-crumb" aria-label="مسیر صفحه">
+          <a href={base}>صفحه اصلی</a><span>/</span><a href={`${base}products`}>محصولات</a><span>/</span><b>{cat.name}</b>
+        </nav>
+
+        <div class="cp-hero-grid">
+          <div class="cp-copy">
+            <span class="cp-en">{cat.en}</span>
+            <h1>{cat.name}</h1>
+            <p>{cat.desc}</p>
+
+            <dl class="cp-facts">
+              {cat.facts.map((x) => (
+                <div><dt>{x.k}</dt><dd>{x.v}</dd></div>
+              ))}
+            </dl>
+
+            <div class="cp-actions">
+              <a class="cp-btn cp-btn-main" href={`${base}contact`}>استعلام قیمت</a>
+              <a class="cp-btn cp-btn-line" href={`${base}products`}>مشاهده همه محصولات</a>
+            </div>
+          </div>
+
+          <!-- مدل سه‌بعدی: آرام می‌چرخد؛ با موس یا لمس جهتش عوض می‌شود -->
+          <div class="cp-stage" aria-hidden="true">
+            <div class="cp-floor"></div>
+            <div class="cp-scene">
+              <div class="cp-spin" set:html={model.html}></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== لیست محصولات ===== -->
+    <section class="cp-list">
+      <div class="cp-wrap">
+
+        <nav class="cp-tabs" aria-label="دسته‌بندی‌ها">
+          {categories.map((c) => (
+            <a href={`${base}categories/${c.slug}`} class:list={['cp-tab', { on: c.slug === cat.slug }]}>{c.name}</a>
+          ))}
+        </nav>
+
+        <header class="cp-lh">
+          <div>
+            <h2>محصولات {cat.name}</h2>
+            <p>تعداد نتایج: <strong id="cp-count">…</strong></p>
+          </div>
+
+          <div class="cp-tools">
+            <input id="cp-q" class="cp-input" type="search" placeholder="جست‌وجوی نام محصول یا کارخانه" autocomplete="off" />
+            <select id="cp-factory" class="cp-input" aria-label="کارخانه">
+              <option value="">همه کارخانه‌ها</option>
+            </select>
+            <button id="cp-reset" type="button" class="cp-reset">پاک کردن</button>
+          </div>
+        </header>
+
+        <div id="cp-grid" class="cp-grid">
+          {Array.from({ length: 6 }).map(() => <div class="cp-sk"></div>)}
+        </div>
+
+        <div id="cp-empty" class="cp-empty" hidden>
+          <strong>محصولی پیدا نشد</strong>
+          <span>عبارت جست‌وجو یا کارخانهٔ انتخاب‌شده را تغییر دهید.</span>
+          <button id="cp-empty-reset" type="button" class="cp-btn cp-btn-line">نمایش همه</button>
+        </div>
+
+        <div class="cp-note">
+          <div>
+            <strong>سایز یا مشخصات مورد نظرتان در لیست نیست؟</strong>
+            <span>ابعاد و مقدار را برایمان بفرستید تا قیمت روز را استعلام کنیم.</span>
+          </div>
+          <a class="cp-btn cp-btn-main" href={`${base}contact`}>ارتباط با کارشناسان</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style is:global>
+  .cp{--bg:#fff;--alt:#f6f8fb;--card:#fff;--line:#e3e8ef;--txt:#1b2433;--mut:#5f6b7c;
+    background:var(--bg);color:var(--txt)}
+  .dark .cp{--bg:#0e1626;--alt:#0a1220;--card:#131d31;--line:#23314b;--txt:#e8eef8;--mut:#93a4bd}
+  .cp-wrap{max-width:1280px;margin:0 auto;padding:0 1.25rem}
+  @media(min-width:1024px){.cp-wrap{padding:0 3rem}}
+
+  /* بالای صفحه */
+  .cp-hero{padding:1.5rem 0 3rem}
+  .cp-crumb{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.8rem;font-size:.82rem;color:var(--mut)}
+  .cp-crumb a{color:inherit;text-decoration:none}
+  .cp-crumb a:hover{color:var(--c)}
+  .cp-crumb b{font-weight:600;color:var(--txt)}
+  .cp-hero-grid{display:grid;gap:2rem;align-items:center}
+  @media(min-width:900px){.cp-hero-grid{grid-template-columns:1fr 1fr;gap:3.5rem}}
+  .cp-en{display:block;direction:ltr;text-align:right;font:600 .75rem ui-monospace,Menlo,monospace;letter-spacing:.16em;color:var(--c)}
+  .cp-copy h1{margin:.5rem 0 .8rem;font-size:clamp(2rem,4.5vw,3rem);font-weight:800;line-height:1.3}
+  .cp-copy p{max-width:32rem;line-height:2;color:var(--mut)}
+  .cp-facts{display:grid;grid-template-columns:repeat(2,1fr);max-width:32rem;margin:1.6rem 0;border-top:1px solid var(--line)}
+  .cp-facts div{padding:.75rem 0;border-bottom:1px solid var(--line)}
+  .cp-facts div:nth-child(odd){padding-inline-end:1rem}
+  .cp-facts dt{font-size:.75rem;color:var(--mut)}
+  .cp-facts dd{margin:.15rem 0 0;font-size:.92rem;font-weight:600}
+  .cp-actions{display:flex;flex-wrap:wrap;gap:.7rem}
+  .cp-btn{display:inline-flex;align-items:center;justify-content:center;padding:.7rem 1.3rem;border-radius:10px;border:1px solid transparent;font:inherit;font-size:.9rem;font-weight:700;text-decoration:none;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+  .cp-btn-main{background:var(--c);color:#fff}
+  .cp-btn-main:hover{filter:brightness(.92)}
+  .cp-btn-line{background:transparent;border-color:var(--line);color:var(--txt)}
+  .cp-btn-line:hover{border-color:var(--c);color:var(--c)}
+
+  /* صحنهٔ سه‌بعدی */
+  .cp-stage{position:relative;display:grid;place-items:center;height:340px;border-radius:20px;background:var(--alt);perspective:1300px;touch-action:pan-y;overflow:hidden}
+  @media(min-width:900px){.cp-stage{height:400px}}
+  .cp-floor{position:absolute;bottom:52px;width:300px;max-width:70%;height:60px;border-radius:50%;background:radial-gradient(ellipse,rgba(27,36,51,.22),transparent 70%)}
+  .cp-scene{transform-style:preserve-3d;transform:rotateX(var(--rx,-20deg)) rotateY(var(--ry,0deg));transition:transform .3s ease-out;scale:calc(var(--k,1)*.62)}
+  @media(min-width:640px){.cp-scene{scale:calc(var(--k,1)*.8)}}
+  @media(min-width:900px){.cp-scene{scale:calc(var(--k,1)*.95)}}
+  .cp-spin{position:relative;width:0;height:0;transform-style:preserve-3d;animation:cp-rot 30s linear infinite}
+  .cp-scene.drag .cp-spin{animation-play-state:paused}
+  @keyframes cp-rot{from{rotate:y 0deg}to{rotate:y 360deg}}
+  .sf,.cf{position:absolute;left:0;top:0}
+  .sf{background:linear-gradient(90deg,hsl(214 18% calc(var(--l) + 10%)),hsl(214 22% calc(var(--l) + 24%)) 50%,hsl(214 18% calc(var(--l) + 10%)))}
+  .cf{background:linear-gradient(135deg,color-mix(in srgb,var(--c) 8%,#f7f9fc),color-mix(in srgb,var(--c) 18%,#c3cfdf))}
+
+  /* لیست */
+  .cp-list{padding:2.2rem 0 4rem;background:var(--alt)}
+  .cp-tabs{display:flex;gap:1.4rem;overflow-x:auto;margin-bottom:1.8rem;border-bottom:1px solid var(--line);scrollbar-width:none}
+  .cp-tabs::-webkit-scrollbar{display:none}
+  .cp-tab{flex:none;padding:.6rem 0;margin-bottom:-1px;border-bottom:2px solid transparent;color:var(--mut);font-size:.9rem;font-weight:600;text-decoration:none;white-space:nowrap}
+  .cp-tab:hover{color:var(--txt)}
+  .cp-tab.on{border-color:var(--c);color:var(--txt)}
+  .cp-lh{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1rem;margin-bottom:1.3rem}
+  .cp-lh h2{margin:0;font-size:1.5rem;font-weight:800}
+  .cp-lh p{margin:.25rem 0 0;font-size:.88rem;color:var(--mut)}
+  .cp-lh strong{color:var(--txt)}
+  .cp-tools{display:flex;flex-wrap:wrap;gap:.6rem;width:100%}
+  @media(min-width:900px){.cp-tools{width:auto}}
+  .cp-input{flex:1;min-width:200px;padding:.6rem .9rem;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--txt);font:inherit;font-size:.88rem}
+  select.cp-input{flex:none;min-width:150px}
+  .cp-input:focus{outline:0;border-color:var(--c)}
+  .cp-reset{padding:.6rem 1rem;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--mut);font:inherit;font-size:.88rem;cursor:pointer}
+  .cp-reset:hover{color:var(--c);border-color:var(--c)}
+
+  .cp-grid{display:grid;gap:1.1rem;grid-template-columns:1fr}
+  @media(min-width:640px){.cp-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(min-width:1024px){.cp-grid{grid-template-columns:repeat(3,1fr)}}
+  .cp-sk{height:330px;border-radius:14px;background:var(--line);opacity:.6;animation:cp-pulse 1.4s ease-in-out infinite}
+  @keyframes cp-pulse{50%{opacity:.3}}
+
+  .cp-card{display:flex;flex-direction:column;overflow:hidden;border-radius:14px;background:var(--card);border:1px solid var(--line);transition:border-color .2s,box-shadow .2s;animation:cp-in .4s ease backwards;animation-delay:calc(var(--i)*40ms)}
+  .cp-card:hover{border-color:color-mix(in srgb,var(--c) 55%,var(--line));box-shadow:0 10px 24px -14px rgba(27,36,51,.35)}
+  @keyframes cp-in{from{opacity:0;transform:translateY(10px)}}
+  .cp-media{position:relative;display:block;aspect-ratio:16/10;overflow:hidden;background:var(--alt)}
+  .cp-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+  .cp-card:hover .cp-media img{transform:scale(1.04)}
+  .cp-noimg{position:absolute;inset:0;display:grid;place-items:center;align-content:center;gap:.3rem;color:var(--mut);font-size:.78rem}
+  .cp-noimg svg{width:64px;height:64px;color:var(--c);opacity:.45}
+  .cp-badges{position:absolute;top:10px;right:10px;display:flex;gap:.4rem}
+  .cp-b{padding:.2rem .6rem;border-radius:6px;background:#fff;font-size:.72rem;font-weight:700;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+  .cp-b.hot{color:#b45309}.cp-b.off{color:#be123c}
+  .cp-body{display:flex;flex:1;flex-direction:column;padding:1rem 1.1rem 1.1rem}
+  .cp-fac{font-size:.76rem;color:var(--mut)}
+  .cp-body h3{margin:.25rem 0 .4rem;font-size:1.02rem;font-weight:700;line-height:1.8}
+  .cp-body h3 a{color:inherit;text-decoration:none}
+  .cp-body h3 a:hover{color:var(--c)}
+  .cp-desc{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:3.4rem;margin:0;font-size:.82rem;line-height:1.9;color:var(--mut)}
+  .cp-specs{margin:.8rem 0 0;padding:.7rem 0 0;border-top:1px solid var(--line);list-style:none;font-size:.78rem;color:var(--mut)}
+  .cp-specs li{display:flex;justify-content:space-between;gap:.5rem;padding:.12rem 0}
+  .cp-specs b{font-weight:600;color:var(--txt)}
+  .cp-foot{display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-top:auto;padding-top:1rem}
+  .cp-foot small{display:block;font-size:.7rem;color:var(--mut)}
+  .cp-price{font-size:.95rem;font-weight:800}
+  .cp-price.off{color:#be123c}
+  .cp-old{margin-inline-start:.4rem;font-size:.72rem;font-weight:400;color:var(--mut);text-decoration:line-through}
+  .cp-go{padding:.45rem .9rem;border-radius:8px;border:1px solid var(--line);color:var(--txt);font-size:.8rem;font-weight:700;text-decoration:none;white-space:nowrap;transition:all .2s}
+  .cp-card:hover .cp-go{background:var(--c);border-color:var(--c);color:#fff}
+
+  .cp-empty{display:grid;gap:.6rem;justify-items:center;padding:3rem 1rem;text-align:center;color:var(--mut);background:var(--card);border:1px dashed var(--line);border-radius:14px}
+  .cp-empty[hidden]{display:none}
+  .cp-empty strong{font-size:1.05rem;color:var(--txt)}
+  .cp-err{grid-column:1/-1;padding:1.3rem;border-radius:12px;background:#fef2f2;border:1px solid #fecaca;color:#b91c1c;text-align:center;font-size:.9rem;line-height:2}
+
+  .cp-note{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;margin-top:2.2rem;padding:1.3rem 1.5rem;border-radius:14px;background:var(--card);border:1px solid var(--line)}
+  .cp-note strong{display:block;font-size:.98rem}
+  .cp-note span{display:block;margin-top:.2rem;font-size:.85rem;color:var(--mut)}
+
+  @media(prefers-reduced-motion:reduce){
+    .cp *,.cp *::before,.cp *::after{animation:none!important;transition-duration:.01ms!important}
+  }
+</style>
+
+<script>
+  import { supabase } from "../../lib/supabase";
+
+  type Product = {
+    id: number | string;
+    name: string;
+    category: string;
+    factory?: string | null;
+    price?: number | string | null;
+    price_on_request?: boolean;
+    is_best_seller?: boolean;
+    discount_enabled?: boolean;
+    old_price?: number | string | null;
+    description?: string | null;
+    image?: string | null;
+    specifications?: { label: string; value: string }[] | null;
+    slug?: string | null;
+  };
+
+  const root = document.getElementById("cp") as HTMLElement;
+  const grid = document.getElementById("cp-grid") as HTMLElement;
+  const countEl = document.getElementById("cp-count") as HTMLElement;
+  const emptyEl = document.getElementById("cp-empty") as HTMLElement;
+  const qEl = document.getElementById("cp-q") as HTMLInputElement;
+  const facEl = document.getElementById("cp-factory") as HTMLSelectElement;
+  const base = root.dataset.base || "/";
+  const dbCats: string[] = JSON.parse(root.dataset.db || "[]");
+  const icon = root.dataset.icon || "";
+
+  const esc = (v: unknown) =>
+    String(v ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c] as string));
+  const fa = (n: number) => new Intl.NumberFormat("fa-IR").format(n);
+
+  /* ---------- چرخش سه‌بعدی با موس / لمس ---------- */
+  const scene = document.querySelector<HTMLElement>(".cp-scene");
+  const stage = document.querySelector<HTMLElement>(".cp-stage");
+  if (scene && stage) {
+    stage.addEventListener("pointermove", (e) => {
+      const r = stage.getBoundingClientRect();
+      const nx = (e.clientX - r.left) / r.width - 0.5;
+      const ny = (e.clientY - r.top) / r.height - 0.5;
+      scene.classList.add("drag");
+      scene.style.setProperty("--ry", `${nx * 60}deg`);
+      scene.style.setProperty("--rx", `${-20 - ny * 30}deg`);
+    });
+    const rest = () => {
+      scene.classList.remove("drag");
+      scene.style.setProperty("--ry", "0deg");
+      scene.style.setProperty("--rx", "-20deg");
+    };
+    stage.addEventListener("pointerleave", rest);
+    stage.addEventListener("pointerup", rest);
+  }
+
+  /* ---------- کارت محصول ---------- */
+  const card = (p: Product, i: number) => {
+    const name = esc(p.name);
+    const factory = esc(p.factory || "کارخانه: برای اطلاع تماس بگیرید");
+    const desc = esc(p.description || "برای دریافت مشخصات بیشتر با کارشناسان آسین استیل تماس بگیرید.");
+    const image = esc(p.image || "");
+    const specs = Array.isArray(p.specifications) ? p.specifications.slice(0, 3) : [];
+
+    const cur = Number(p.price ?? 0);
+    const old = Number(p.old_price ?? 0);
+    const onRequest = p.price_on_request === true || p.price == null || p.price === "" || !Number.isFinite(cur) || cur <= 0;
+    const hasOff = !onRequest && p.discount_enabled === true && Number.isFinite(old) && old > cur;
+
+    const detail = p.slug
+      ? `${base}products/${encodeURIComponent(p.slug)}/`
+      : `${base}products/detail/?id=${encodeURIComponent(String(p.id))}`;
+
+    const priceHtml = onRequest
+      ? `<div class="cp-price">استعلام قیمت</div>`
+      : `<div class="cp-price ${hasOff ? "off" : ""}">${fa(cur)} تومان${hasOff ? `<span class="cp-old">${fa(old)}</span>` : ""}</div>`;
+
+    const badges =
+      (p.is_best_seller === true ? `<span class="cp-b hot">پرفروش</span>` : "") +
+      (hasOff ? `<span class="cp-b off">تخفیف‌دار</span>` : "");
+
+    return `
+      <article class="cp-card" style="--i:${Math.min(i, 12)}">
+        <a class="cp-media" href="${detail}" aria-label="مشاهده مشخصات ${name}">
+          ${image
+            ? `<img src="${image}" alt="${name}" loading="lazy" decoding="async" />`
+            : `<div class="cp-noimg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=".7" stroke-linecap="round" stroke-linejoin="round">${icon}</svg><span>تصویر ثبت نشده</span></div>`}
+          ${badges ? `<div class="cp-badges">${badges}</div>` : ""}
+        </a>
+        <div class="cp-body">
+          <span class="cp-fac">${factory}</span>
+          <h3><a href="${detail}">${name}</a></h3>
+          <p class="cp-desc">${desc}</p>
+          ${specs.length ? `<ul class="cp-specs">${specs.map((s) => `<li><span>${esc(s.label)}</span><b>${esc(s.value)}</b></li>`).join("")}</ul>` : ""}
+          <div class="cp-foot">
+            <div><small>قیمت محصول</small>${priceHtml}</div>
+            <a class="cp-go" href="${detail}">جزئیات محصول</a>
+          </div>
+        </div>
+      </article>`;
+  };
+
+  /* ---------- فیلتر و نمایش ---------- */
+  let all: Product[] = [];
+
+  const render = () => {
+    const q = qEl.value.trim().toLocaleLowerCase();
+    const fac = facEl.value;
+    const list = all.filter(
+      (p) =>
+        (!q || (p.name ?? "").toLocaleLowerCase().includes(q) || (p.factory ?? "").toLocaleLowerCase().includes(q)) &&
+        (!fac || p.factory === fac)
+    );
+    countEl.textContent = fa(list.length);
+    grid.innerHTML = list.map(card).join("");
+    emptyEl.hidden = list.length !== 0;
+  };
+
+  const reset = () => {
+    qEl.value = "";
+    facEl.value = "";
+    render();
+  };
+
+  qEl.addEventListener("input", render);
+  facEl.addEventListener("change", render);
+  document.getElementById("cp-reset")?.addEventListener("click", reset);
+  document.getElementById("cp-empty-reset")?.addEventListener("click", reset);
+
+  /* ---------- دریافت از Supabase ---------- */
+  async function load() {
+    const { data, error } = await supabase
+      .from("products")
+      .select("*")
+      .eq("active", true)
+      .in("category", dbCats)
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error("خطا در دریافت محصولات:", error);
+      countEl.textContent = fa(0);
+      grid.innerHTML = `<div class="cp-err">دریافت محصولات با خطا مواجه شد. لطفاً کمی بعد دوباره تلاش کنید.</div>`;
+      return;
+    }
+
+    all = (data ?? []) as Product[];
+    const factories = Array.from(new Set(all.map((p) => p.factory).filter(Boolean))) as string[];
+    facEl.innerHTML =
+      `<option value="">همه کارخانه‌ها</option>` + factories.map((f) => `<option value="${esc(f)}">${esc(f)}</option>`).join("");
+    render();
+  }
+
+  load();
+</script>

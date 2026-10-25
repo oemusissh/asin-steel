@@ -1,0 +1,29 @@
+name: Update news
+
+on:
+  schedule:
+    - cron: '0 3 * * *'   # هر روز ساعت ۳ بامداد UTC (حدود ۶:۳۰ صبح ایران)
+  workflow_dispatch: {}   # امکان اجرای دستی از تب Actions
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Fetch news
+        run: node scripts/fetch-news.mjs
+      - name: Commit if changed
+        run: |
+          if [ -n "$(git status --porcelain src/data/news.json)" ]; then
+            git config user.name "news-bot"
+            git config user.email "news-bot@users.noreply.github.com"
+            git add src/data/news.json
+            git commit -m "chore: update news"
+            git push
+          fi

@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import NewsList from '../../../../components/NewsList.astro';
+import { getListing } from '../../../../lib/news';
+
+// صفحه‌ی ۱ همان /news/industry است؛ اینجا فقط صفحه‌های ۲ به بعد ساخته می‌شوند
+export function getStaticPaths() {
+  const { pages } = getListing(1);
+  return Array.from({ length: Math.max(pages - 1, 0) }, (_, i) => ({ params: { page: String(i + 2) } }));
+}
+
+const page = Number(Astro.params.page);
+---
+
+<BaseLayout title={`اخبار صنعت فولاد - صفحه ${page.toLocaleString('fa-IR')} | آسین استیل`}>
+  <NewsList page={page} />
+</BaseLayout>

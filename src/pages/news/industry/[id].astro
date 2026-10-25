@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getNews } from '../../../lib/news';
+import { FEEDS } from '../../../data/news-sources.js';
+
+export function getStaticPaths() {
+  return getNews().map((item) => ({ params: { id: item.id }, props: { item } }));
+}
+
+const { item } = Astro.props;
+const hasFull = !!item.content?.length;
+const paras = hasFull ? item.content! : item.excerpt ? [item.excerpt] : [];
+const license = FEEDS.find((f) => f.name === item.source)?.license;
+const dateFmt = new Intl.DateTimeFormat('fa-IR-u-ca-persian', { year: 'numeric', month: 'long', day: 'numeric' });
+const back = import.meta.env.BASE_URL.replace(/\/$/, '') + '/news/industry';
+---
+
+<BaseLayout title={`${item.title} | آسین استیل`}>
+  <Fragment slot="head">
+    <link rel="canonical" href={item.link} />
+    <meta name="description" content={item.excerpt} />
+    {!hasFull && <meta name="robots" content="noindex" />}
+  </Fragment>
+
+  <main class="art">
+    <article class="art__inner">
+      <a class="art__back" href={back}>← همه‌ی اخبار صنعت</a>
+      <h1>{item.title}</h1>
+      <div class="art__meta">
+        <span>{item.source}</span>
+        <span aria-hidden="true">·</span>
+        <time datetime={new Date(item.date).toISOString()}>{dateFmt.format(item.date)}</time>
+      </div>
+
+      {item.image && <img class="art__img" src={item.image} alt="" referrerpolicy="no-referrer" />}
+
+      <div class="art__body">
+        {paras.map((p) => <p>{p}</p>)}
+        {!hasFull && <p class="art__note">متن کامل این خبر فعلاً در دسترس نیست.</p>}
+      </div>
+
+      <p class="art__src">
+        منبع: {item.source}{license && ` — این خبر با مجوز ${license} بازنشر شده است.`}
+      </p>
+    </article>
+  </main>
+</BaseLayout>
+
+<style>
+  .art { width: 100%; min-height: 70vh; padding: 48px 20px 72px; background: #fff; color: #1b2430; direction: rtl; }
+  .art__inner { max-width: 760px; margin: 0 auto; }
+  .art__back { display: inline-block; margin-bottom: 20px; font-size: .9rem; color: #1f4e8c; text-decoration: none; }
+  .art__back:hover { text-decoration: underline; }
+  h1 { margin: 0 0 12px; font-size: 1.6rem; line-height: 2; font-weight: 800; color: #14202e; }
+  .art__meta { display: flex; gap: 8px; font-size: .85rem; color: #7b8592; padding-bottom: 18px; border-bottom: 2px solid #1f4e8c; }
+  .art__meta span:first-child { color: #1f4e8c; font-weight: 600; }
+  .art__img { width: 100%; height: auto; margin: 22px 0 0; border-radius: 4px; }
+  .art__body { margin-top: 22px; }
+  .art__body p { margin: 0 0 18px; font-size: 1.02rem; line-height: 2.2; color: #26303c; }
+  .art__note { color: #7b8592; font-size: .9rem; }
+  .art__src { margin-top: 32px; padding-top: 16px; border-top: 1px solid #e6e9ed; font-size: .85rem; line-height: 2; color: #5d6875; }
+</style>

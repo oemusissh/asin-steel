@@ -1,18 +1,18 @@
+
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
-  site: 'https://oemusissh.github.io',
-  base: '/asin-steel',
+  site: 'https://asinsteel.com',
 
-  devToolbar: {
-    enabled: false
-  },
+  devToolbar: {
+    enabled: false
+  },
 
-  integrations: [tailwind()],
-  output: 'static',
-  compressHTML: true,
-  build: {
-    inlineStylesheets: 'auto'
-  }
+  integrations: [tailwind()],
+  output: 'static',
+  compressHTML: true,
+  build: {
+    inlineStylesheets: 'auto'
+  }
 });

@@ -15,7 +15,11 @@
     "@supabase/supabase-js": "^2.117.3",
     "astro": "^5.17.2",
     "tailwindcss": "^3.4.17",
+    "three": "^0.186.1",
     "typescript": "^5.7.3",
     "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5"
   }
 }

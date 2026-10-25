@@ -41,7 +41,7 @@ const embers = Array.from({ length: 22 }, (_, i) => ({
 <BaseLayout title="تخفیف‌ها و پیشنهادهای ویژه | آسین استیل" description="تخفیف‌های ویژه مقاطع فولادی؛ میلگرد، تیرآهن، ورق و پروفیل با قیمت‌های مناسب از آسین استیل">
   <main dir="rtl" class="bg-white text-gray-900" style="color-scheme: light;">
     <!-- Hero Banner -->
-    <section class="hero-shift relative bg-gradient-to-br from-rose-600 via-red-700 to-red-800 text-white overflow-hidden">
+    <section class="hero-shift relative bg-gradient-to-br from-red-700 via-red-800 to-red-900 text-white overflow-hidden">
       <!-- Subtle Film Grain for Depth (No Repeating Pattern) -->
       <div class="absolute inset-0 opacity-[0.015] mix-blend-overlay">
         <svg class="w-full h-full">
@@ -67,7 +67,7 @@ const embers = Array.from({ length: 22 }, (_, i) => ({
       </div>
 
       <!-- Soft Overlay -->
-      <div class="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-black/10"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-white/5 via-transparent to-black/25"></div>
 
       <div class="container mx-auto px-4 py-16 md:py-20 relative z-10">
         <!-- Breadcrumb -->
@@ -79,7 +79,8 @@ const embers = Array.from({ length: 22 }, (_, i) => ({
           <span class="text-white font-medium">تخفیف‌ها</span>
         </nav>
 
-        <div class="max-w-4xl">
+        <div class="flex items-center gap-10">
+        <div class="max-w-4xl min-w-0 flex-1">
           <!-- Header with Strong Hierarchy -->
           <div class="flex items-start gap-6 mb-6" style="animation: fadeInUp 0.6s ease-in-out 0.1s both;">
             <div class="relative flex-shrink-0">
@@ -99,7 +100,7 @@ const embers = Array.from({ length: 22 }, (_, i) => ({
               </div>
 
               <!-- Dominant Headline -->
-              <h1 class="text-5xl md:text-7xl font-black mb-4 leading-[1.4] tracking-normal">
+              <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black mb-4 leading-[1.4] tracking-normal">
                 تخفیف‌ها و پیشنهادهای ویژه
               </h1>
 
@@ -132,6 +133,10 @@ const embers = Array.from({ length: 22 }, (_, i) => ({
               ))}
             </div>
           )}
+        </div>
+
+        <!-- عکس‌های واقعی محصولات تخفیف‌دار به‌صورت سه‌بعدی (پس از دریافت از Supabase پر می‌شود) -->
+        <div id="hero-visual" class="hv hidden lg:block" aria-hidden="true"></div>
         </div>
       </div>
 
@@ -294,8 +299,8 @@ const embers = Array.from({ length: 22 }, (_, i) => ({
     right: -80px;
     width: 520px;
     height: 520px;
-    background: #fda4af;
-    opacity: 0.6;
+    background: #f87171;
+    opacity: 0.32;
     animation: fx-drift-a 12s ease-in-out infinite alternate;
   }
 
@@ -304,8 +309,8 @@ const embers = Array.from({ length: 22 }, (_, i) => ({
     left: 4%;
     width: 460px;
     height: 460px;
-    background: #f87171;
-    opacity: 0.55;
+    background: #450a0a;
+    opacity: 0.6;
     animation: fx-drift-b 15s ease-in-out infinite alternate;
   }
 
@@ -314,8 +319,8 @@ const embers = Array.from({ length: 22 }, (_, i) => ({
     left: 40%;
     width: 340px;
     height: 340px;
-    background: #ffffff;
-    opacity: 0.22;
+    background: #fca5a5;
+    opacity: 0.14;
     animation: fx-drift-c 11s ease-in-out infinite alternate;
   }
 
@@ -325,7 +330,7 @@ const embers = Array.from({ length: 22 }, (_, i) => ({
     bottom: -20%;
     right: -40%;
     width: 34%;
-    background: linear-gradient(100deg, transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 100%);
+    background: linear-gradient(100deg, transparent 0%, rgba(255, 255, 255, 0.18) 50%, transparent 100%);
     transform: skewX(-18deg);
     opacity: 0;
     animation: fx-sheen 7s ease-in-out infinite;
@@ -458,86 +463,123 @@ const embers = Array.from({ length: 22 }, (_, i) => ({
 </style>
 
 <style is:global>
-  /* ---------- Product card ---------- */
+  /* ---------- 3D product card: a steel plate that follows the cursor ---------- */
+  @keyframes dc-in {
+    from { opacity: 0; transform: perspective(900px) translateY(40px) rotateX(-24deg); }
+    to { opacity: 1; transform: none; }
+  }
+
+  .deal-card {
+    position: relative;
+    height: 100%;
+    perspective: 1100px;
+    transition: none;
+  }
+
+  .deal-card:hover {
+    z-index: 5;
+  }
+
   .dc {
+    --px: 0;
+    --py: 0;
     --dc-navy: #0f172a;
     --dc-blue: #2563eb;
     --dc-sky: #38bdf8;
     --dc-red: #dc2626;
-    --mx: 50%;
-    --my: 50%;
     position: relative;
-    isolation: isolate;
-    display: flex;
-    flex-direction: column;
     height: 100%;
-    overflow: hidden;
-    border: 1px solid #e2e8f0;
-    border-radius: 20px;
-    background: #fff;
-    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
-    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.5s ease, border-color 0.5s ease;
+    transform-style: preserve-3d;
+    transform: rotateX(calc(var(--py) * -16deg)) rotateY(calc(var(--px) * 16deg));
+    transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    will-change: transform;
   }
 
-  /* حاشیه گرادیانی که هنگام هاور ظاهر می‌شود */
-  .dc::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 6;
-    padding: 1.5px;
-    border-radius: inherit;
-    background: linear-gradient(135deg, var(--dc-blue), var(--dc-sky) 50%, var(--dc-blue));
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.5s ease;
+  .dc:hover {
+    transform: translateZ(30px) rotateX(calc(var(--py) * -16deg)) rotateY(calc(var(--px) * 16deg));
   }
 
-  /* نور دنبال‌کننده موس */
+  .dc.is-tilting {
+    transition-duration: 0.18s;
+    transition-timing-function: ease-out;
+  }
+
+  /* ضخامت ورق فولادی: دو لایه پشت کارت که هنگام کج شدن لبه‌اش دیده می‌شود */
+  .dc::before,
   .dc::after {
     content: "";
     position: absolute;
     inset: 0;
-    z-index: 2;
-    background: radial-gradient(280px circle at var(--mx) var(--my), rgba(56, 189, 248, 0.16), transparent 60%);
-    opacity: 0;
+    border-radius: 22px;
     pointer-events: none;
-    transition: opacity 0.4s ease;
   }
 
-  .dc:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 26px 50px -14px rgba(37, 99, 235, 0.32), 0 8px 18px -8px rgba(15, 23, 42, 0.14);
+  .dc::before {
+    background: linear-gradient(150deg, #cbd5e1, #64748b 55%, #334155);
+    transform: translateZ(-7px);
   }
 
-  .dc:hover::before,
+  .dc::after {
+    background: linear-gradient(150deg, #94a3b8, #475569 60%, #1e293b);
+    transform: translateZ(-16px);
+    box-shadow:
+      calc(var(--px) * -30px) calc(18px + var(--py) * -30px) 34px -10px rgba(15, 23, 42, 0.35);
+    transition: box-shadow 0.5s ease;
+  }
+
   .dc:hover::after {
-    opacity: 1;
+    box-shadow:
+      calc(var(--px) * -46px) calc(42px + var(--py) * -42px) 58px -14px rgba(15, 23, 42, 0.5);
   }
 
+  .dc-face {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 10px;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 22px;
+    background: linear-gradient(160deg, #ffffff 0%, #eef2f7 100%);
+    transform-style: preserve-3d;
+  }
+
+  /* قاب تصویر: مثل یک صفحه جدا از کارت بالا می‌آید */
   .dc-media {
     position: relative;
     aspect-ratio: 1 / 1;
-    overflow: hidden;
-    background: #f1f5f9;
+    border-radius: 14px;
+    background: #e2e8f0;
+    box-shadow: 0 8px 16px -10px rgba(15, 23, 42, 0.35);
+    transform-style: preserve-3d;
+    transform: translateZ(12px);
+    transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.7s ease;
   }
 
-  .dc-media::after {
+  .dc:hover .dc-media {
+    transform: translateZ(34px);
+    box-shadow: 0 28px 36px -14px rgba(15, 23, 42, 0.5);
+  }
+
+  .dc-clip {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border-radius: inherit;
+  }
+
+  .dc-clip::after {
     content: "";
     position: absolute;
     inset: auto 0 0 0;
-    z-index: 3;
-    height: 60%;
-    background: linear-gradient(to top, rgba(15, 23, 42, 0.75), transparent);
+    height: 55%;
+    background: linear-gradient(to top, rgba(15, 23, 42, 0.7), transparent);
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.5s ease;
   }
 
-  .dc:hover .dc-media::after {
+  .dc:hover .dc-clip::after {
     opacity: 1;
   }
 
@@ -547,16 +589,17 @@ const embers = Array.from({ length: 22 }, (_, i) => ({
     height: 100%;
   }
 
+  /* پارالاکس: تصویر برخلاف حرکت موس کمی جابه‌جا می‌شود و عمق ایجاد می‌کند */
   .dc-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.6s ease;
+    transform: scale(1.02);
+    transition: transform 0.35s ease-out;
   }
 
   .dc:hover .dc-img {
-    transform: scale(1.09);
-    filter: saturate(1.1) contrast(1.03);
+    transform: translate3d(calc(var(--px) * -18px), calc(var(--py) * -18px), 0) scale(1.16);
   }
 
   .dc-noimg {
@@ -567,11 +610,46 @@ const embers = Array.from({ length: 22 }, (_, i) => ({
     font-size: 13px;
   }
 
+  /* انعکاس نور روی تصویر، دنبال موس */
+  .dc-glare {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      circle at calc(50% + var(--px) * 100%) calc(50% + var(--py) * 100%),
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0) 55%
+    );
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+
+  .dc:hover .dc-glare {
+    opacity: 1;
+  }
+
+  /* براقی ورق: یک نوار نور که با کج شدن کارت روی آن می‌لغزد */
+  .dc-sheen {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(105deg, rgba(255, 255, 255, 0) 35%, rgba(255, 255, 255, 0.55) 50%, rgba(255, 255, 255, 0) 65%);
+    background-size: 300% 100%;
+    background-position: calc(50% + var(--px) * 100%) 0;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateZ(1px);
+    transition: opacity 0.4s ease;
+  }
+
+  .dc:hover .dc-sheen {
+    opacity: 1;
+  }
+
   .dc-off,
   .dc-tag {
     position: absolute;
-    top: 12px;
-    z-index: 4;
+    top: 10px;
     padding: 5px 11px;
     border-radius: 999px;
     color: #fff;
@@ -579,36 +657,41 @@ const embers = Array.from({ length: 22 }, (_, i) => ({
     font-weight: 800;
     line-height: 1.6;
     pointer-events: none;
+    transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.7s ease;
   }
 
   .dc-off {
-    inset-inline-start: 12px;
+    inset-inline-start: 10px;
     background: var(--dc-red);
-    box-shadow: 0 6px 14px -4px rgba(220, 38, 38, 0.55);
-    transition: transform 0.4s ease;
+    box-shadow: 0 6px 12px -6px rgba(220, 38, 38, 0.6);
+    transform: translateZ(18px);
   }
 
   .dc:hover .dc-off {
-    transform: scale(1.07);
+    box-shadow: 0 18px 22px -8px rgba(220, 38, 38, 0.55);
+    transform: translateZ(36px);
   }
 
   .dc-tag {
-    inset-inline-end: 12px;
-    background: rgba(15, 23, 42, 0.7);
-    -webkit-backdrop-filter: blur(6px);
-    backdrop-filter: blur(6px);
+    inset-inline-end: 10px;
+    background: rgba(15, 23, 42, 0.82);
     font-size: 11px;
     font-weight: 700;
+    transform: translateZ(14px);
   }
 
-  /* سه گزینه‌ای که با هاور از پایین تصویر بالا می‌آیند */
+  .dc:hover .dc-tag {
+    transform: translateZ(28px);
+  }
+
+  /* سه گزینه‌ای که با هاور از تصویر بیرون می‌آیند */
   .dc-actions {
     position: absolute;
-    inset-inline: 12px;
-    bottom: 12px;
-    z-index: 5;
+    inset-inline: 10px;
+    bottom: 10px;
     display: flex;
     gap: 8px;
+    transform-style: preserve-3d;
   }
 
   .dc-act {
@@ -619,20 +702,19 @@ const embers = Array.from({ length: 22 }, (_, i) => ({
     justify-content: center;
     gap: 5px;
     padding: 10px 4px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.35);
     border-radius: 14px;
     color: #fff;
-    background: rgba(255, 255, 255, 0.14);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
+    background: rgba(15, 23, 42, 0.8);
+    box-shadow: 0 12px 18px -8px rgba(0, 0, 0, 0.55);
     font: inherit;
     font-size: 11px;
     font-weight: 700;
     text-decoration: none;
     cursor: pointer;
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.45s ease, transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1), background 0.25s ease, color 0.25s ease;
+    transform: translateZ(0) translateY(16px);
+    transition: opacity 0.45s ease, transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), background 0.25s ease, color 0.25s ease;
   }
 
   .dc-act:nth-child(2) { transition-delay: 0.06s; }
@@ -641,7 +723,7 @@ const embers = Array.from({ length: 22 }, (_, i) => ({
   .dc:hover .dc-act,
   .dc:focus-within .dc-act {
     opacity: 1;
-    transform: none;
+    transform: translateZ(40px);
   }
 
   .dc-act:hover {
@@ -673,11 +755,12 @@ const embers = Array.from({ length: 22 }, (_, i) => ({
     display: flex;
     flex: 1;
     flex-direction: column;
-    padding: 18px;
+    padding: 16px 8px 8px;
+    transform-style: preserve-3d;
   }
 
   .dc-meta {
-    margin: 0 0 6px;
+    margin: 0 0 4px;
     color: #64748b;
     font-size: 12px;
     font-weight: 500;
@@ -694,6 +777,11 @@ const embers = Array.from({ length: 22 }, (_, i) => ({
     line-height: 1.9;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
+    transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .dc:hover .dc-title {
+    transform: translateZ(22px);
   }
 
   .dc-title a {
@@ -732,7 +820,12 @@ const embers = Array.from({ length: 22 }, (_, i) => ({
 
   .dc-price {
     margin-top: auto;
-    padding-top: 14px;
+    padding-top: 12px;
+    transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .dc:hover .dc-price {
+    transform: translateZ(30px);
   }
 
   .dc-prices {
@@ -772,7 +865,7 @@ const embers = Array.from({ length: 22 }, (_, i) => ({
     align-items: center;
     justify-content: center;
     gap: 8px;
-    margin-top: 16px;
+    margin-top: 14px;
     padding: 12px 16px;
     overflow: hidden;
     border-radius: 12px;
@@ -781,6 +874,12 @@ const embers = Array.from({ length: 22 }, (_, i) => ({
     font-size: 14px;
     font-weight: 800;
     text-decoration: none;
+    transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.7s ease;
+  }
+
+  .dc:hover .dc-cta {
+    box-shadow: 0 16px 20px -10px rgba(15, 23, 42, 0.6);
+    transform: translateZ(18px);
   }
 
   /* پر شدن دکمه با رنگ آبی از سمت راست */
@@ -813,7 +912,7 @@ const embers = Array.from({ length: 22 }, (_, i) => ({
     transform: translateX(-4px);
   }
 
-  /* در گوشی (بدون موس) دکمه‌های هاور نمایش داده نمی‌شوند */
+  /* در گوشی (بدون موس) فقط ظاهر ساده نمایش داده می‌شود */
   @media (hover: none) {
     .dc-actions {
       display: none;
@@ -822,15 +921,175 @@ const embers = Array.from({ length: 22 }, (_, i) => ({
     .dc:hover {
       transform: none;
     }
+
+    .dc:hover .dc-media {
+      transform: translateZ(12px);
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .dc,
-    .dc * {
-      transition: none !important;
+    .deal-card {
+      animation: none !important;
     }
 
+    .dc,
     .dc:hover {
+      transform: none !important;
+    }
+
+    .dc *,
+    .dc::after {
+      transition: none !important;
+    }
+  }
+</style>
+
+<style is:global>
+  /* ---------- Hero: 3D photos of real discounted products ---------- */
+  .hv {
+    --hx: 0;
+    --hy: 0;
+    position: relative;
+    flex: 0 0 380px;
+    width: 380px;
+    height: 380px;
+    perspective: 1100px;
+  }
+
+  .hv::before {
+    content: "";
+    position: absolute;
+    inset: 8% 6%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.14), transparent 65%);
+    filter: blur(10px);
+  }
+
+  .hv-stage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transform: rotateX(calc(var(--hy) * -12deg)) rotateY(calc(var(--hx) * 16deg));
+    transition: transform 0.35s ease-out;
+  }
+
+  .hv-slot {
+    position: absolute;
+    transform-style: preserve-3d;
+  }
+
+  .hv-s1 {
+    top: 6px;
+    left: 0;
+    width: 190px;
+    transform: translateZ(-60px) rotateY(14deg) rotateZ(-6deg);
+  }
+
+  .hv-s2 {
+    top: 34px;
+    right: 0;
+    width: 190px;
+    transform: translateZ(-20px) rotateY(-14deg) rotateZ(5deg);
+  }
+
+  .hv-s3 {
+    bottom: 0;
+    left: 84px;
+    width: 212px;
+    transform: translateZ(60px) rotateZ(-2deg);
+  }
+
+  .hv-card {
+    position: relative;
+    display: block;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border: 5px solid rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    background: #e2e8f0;
+    box-shadow: 0 30px 40px -18px rgba(0, 0, 0, 0.6), 0 10px 18px -10px rgba(0, 0, 0, 0.4);
+    text-decoration: none;
+    animation: hv-pop 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both, hv-float 7s ease-in-out 1s infinite;
+  }
+
+  .hv-s2 .hv-card {
+    animation-delay: 0.35s, 1.4s;
+    animation-duration: 0.9s, 8s;
+  }
+
+  .hv-s3 .hv-card {
+    animation-delay: 0.5s, 1.8s;
+    animation-duration: 0.9s, 6.5s;
+  }
+
+  .hv-card::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 55%;
+    background: linear-gradient(to top, rgba(15, 23, 42, 0.82), transparent);
+    pointer-events: none;
+  }
+
+  .hv-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+
+  .hv-card:hover .hv-img {
+    transform: scale(1.07);
+  }
+
+  .hv-pill {
+    position: absolute;
+    top: 8px;
+    inset-inline-start: 8px;
+    z-index: 1;
+    padding: 3px 9px;
+    border-radius: 999px;
+    color: #fff;
+    background: #dc2626;
+    box-shadow: 0 6px 12px -6px rgba(0, 0, 0, 0.6);
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1.7;
+  }
+
+  .hv-name {
+    position: absolute;
+    inset-inline: 10px;
+    bottom: 9px;
+    z-index: 1;
+    display: -webkit-box;
+    overflow: hidden;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1.7;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  @keyframes hv-pop {
+    from { opacity: 0; transform: translateY(36px) scale(0.92); }
+    to { opacity: 1; transform: none; }
+  }
+
+  @keyframes hv-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hv-card {
+      animation: none;
+    }
+
+    .hv-stage {
       transform: none;
     }
   }
@@ -1055,53 +1314,60 @@ const embers = Array.from({ length: 22 }, (_, i) => ({
         : "";
 
     return `
-      <div class="deal-card" style="animation: fadeInUp 0.6s ease-in-out ${index * 0.05}s both;">
+      <div class="deal-card" style="animation: dc-in 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) ${index * 0.06}s both;">
         <article class="dc">
-          <div class="dc-media">
-            <a class="dc-img-link" href="${detailUrl}" aria-label="مشاهده مشخصات ${name}">
-              ${
-                image
-                  ? `<img class="dc-img" src="${image}" alt="${name}" loading="lazy" />`
-                  : `<div class="dc-noimg">تصویر محصول ثبت نشده</div>`
-              }
-            </a>
-
-            <span class="dc-off">${faNumber.format(percent)}٪ تخفیف</span>
-            ${tag ? `<span class="dc-tag">${tag}</span>` : ""}
-
-            <div class="dc-actions">
-              <button type="button" class="dc-act" data-fav="${escapeHtml(String(product.id))}" aria-pressed="${favOn}" aria-label="افزودن به علاقه‌مندی‌ها">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
-                <span>علاقه‌مندی</span>
-              </button>
-              <a class="dc-act" href="${detailUrl}" aria-label="مشاهده سریع ${name}">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-                <span>مشاهده سریع</span>
-              </a>
-              <a class="dc-act" href="${base}contact" aria-label="استعلام قیمت ${name}">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 8V5z"/></svg>
-                <span>استعلام قیمت</span>
-              </a>
-            </div>
-          </div>
-
-          <div class="dc-body">
-            <p class="dc-meta">${categoryName}${factory}</p>
-            <h3 class="dc-title"><a href="${detailUrl}">${name}</a></h3>
-            ${ratingHtml}
-
-            <div class="dc-price">
-              <div class="dc-prices">
-                <strong class="dc-now">${faNumber.format(price)} <small>تومان</small></strong>
-                <del class="dc-old">${faNumber.format(oldPrice)} تومان</del>
+          <div class="dc-face">
+            <div class="dc-media">
+              <div class="dc-clip">
+                <a class="dc-img-link" href="${detailUrl}" aria-label="مشاهده مشخصات ${name}">
+                  ${
+                    image
+                      ? `<img class="dc-img" src="${image}" alt="${name}" loading="lazy" />`
+                      : `<div class="dc-noimg">تصویر محصول ثبت نشده</div>`
+                  }
+                </a>
+                <span class="dc-glare"></span>
               </div>
-              <p class="dc-save">صرفه‌جویی ${faNumber.format(oldPrice - price)} تومان</p>
+
+              <span class="dc-off">${faNumber.format(percent)}٪ تخفیف</span>
+              ${tag ? `<span class="dc-tag">${tag}</span>` : ""}
+
+              <div class="dc-actions">
+                <button type="button" class="dc-act" data-fav="${escapeHtml(String(product.id))}" aria-pressed="${favOn}" aria-label="افزودن به علاقه‌مندی‌ها">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                  <span>علاقه‌مندی</span>
+                </button>
+                <a class="dc-act" href="${detailUrl}" aria-label="مشاهده سریع ${name}">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                  <span>مشاهده سریع</span>
+                </a>
+                <a class="dc-act" href="${base}contact" aria-label="استعلام قیمت ${name}">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 8V5z"/></svg>
+                  <span>استعلام قیمت</span>
+                </a>
+              </div>
             </div>
 
-            <a class="dc-cta" href="${detailUrl}">
-              <span>جزئیات محصول</span>
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
-            </a>
+            <div class="dc-body">
+              <p class="dc-meta">${categoryName}${factory}</p>
+              <h3 class="dc-title"><a href="${detailUrl}">${name}</a></h3>
+              ${ratingHtml}
+
+              <div class="dc-price">
+                <div class="dc-prices">
+                  <strong class="dc-now">${faNumber.format(price)} <small>تومان</small></strong>
+                  <del class="dc-old">${faNumber.format(oldPrice)} تومان</del>
+                </div>
+                <p class="dc-save">صرفه‌جویی ${faNumber.format(oldPrice - price)} تومان</p>
+              </div>
+
+              <a class="dc-cta" href="${detailUrl}">
+                <span>جزئیات محصول</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+              </a>
+            </div>
+
+            <span class="dc-sheen"></span>
           </div>
         </article>
       </div>
@@ -1132,6 +1398,7 @@ const embers = Array.from({ length: 22 }, (_, i) => ({
 
     const favs = readFavs();
     grid.innerHTML = deals.map((deal, index) => cardHtml(deal, index, favs)).join("");
+    bindTilt();
     setShowing(`نمایش ${faNumber.format(deals.length)} پیشنهاد ویژه`);
   }
 
@@ -1150,14 +1417,90 @@ const embers = Array.from({ length: 22 }, (_, i) => ({
     button.setAttribute("aria-pressed", String(on));
   });
 
-  // نور ملایمی که زیر موس روی کارت حرکت می‌کند
-  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    grid?.addEventListener("pointermove", (event) => {
-      const card = (event.target as HTMLElement).closest<HTMLElement>(".dc");
-      if (!card) return;
-      const rect = card.getBoundingClientRect();
-      card.style.setProperty("--mx", `${event.clientX - rect.left}px`);
-      card.style.setProperty("--my", `${event.clientY - rect.top}px`);
+  // کج شدن سه‌بعدی کارت به سمت موس (فقط روی دستگاه‌هایی که موس دارند)
+  const canTilt =
+    window.matchMedia("(hover: hover) and (pointer: fine)").matches &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function bindTilt() {
+    if (!canTilt || !grid) return;
+
+    grid.querySelectorAll<HTMLElement>(".dc").forEach((card) => {
+      const host = card.parentElement ?? card; // اندازه‌گیری روی قاب بدون چرخش
+      let frame = 0;
+
+      card.addEventListener("pointerenter", () => card.classList.add("is-tilting"));
+
+      card.addEventListener("pointermove", (event) => {
+        cancelAnimationFrame(frame);
+        frame = requestAnimationFrame(() => {
+          const rect = host.getBoundingClientRect();
+          const px = (event.clientX - rect.left) / rect.width - 0.5;
+          const py = (event.clientY - rect.top) / rect.height - 0.5;
+          card.style.setProperty("--px", px.toFixed(3));
+          card.style.setProperty("--py", py.toFixed(3));
+        });
+      });
+
+      card.addEventListener("pointerleave", () => {
+        cancelAnimationFrame(frame);
+        card.classList.remove("is-tilting");
+        card.style.setProperty("--px", "0");
+        card.style.setProperty("--py", "0");
+      });
+    });
+  }
+
+  /* ---------- Hero: 3D photos of real discounted products ---------- */
+
+  const heroVisual = document.querySelector<HTMLElement>("#hero-visual");
+  const heroSection = document.querySelector<HTMLElement>(".hero-shift");
+
+  function renderHeroVisual(deals: Deal[]) {
+    if (!heroVisual) return;
+
+    const picks = [...deals]
+      .filter((deal) => deal.product.image)
+      .sort((a, b) => b.percent - a.percent)
+      .slice(0, 3);
+
+    if (picks.length === 0) return;
+
+    // بهترین تخفیف جلو، بقیه پشت‌سرش
+    const slots = ["hv-s3", "hv-s2", "hv-s1"];
+
+    const cards = picks
+      .map((deal, i) => {
+        const product = deal.product;
+        const url = product.slug
+          ? `${base}products/${encodeURIComponent(product.slug)}/`
+          : `${base}products/detail/?id=${encodeURIComponent(String(product.id))}`;
+
+        return `
+          <div class="hv-slot ${slots[i]}">
+            <a class="hv-card" href="${url}" tabindex="-1">
+              <img class="hv-img" src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name)}" loading="lazy" />
+              <span class="hv-pill">${faNumber.format(deal.percent)}٪ تخفیف</span>
+              <span class="hv-name">${escapeHtml(product.name)}</span>
+            </a>
+          </div>`;
+      })
+      .reverse()
+      .join("");
+
+    heroVisual.innerHTML = `<div class="hv-stage">${cards}</div>`;
+  }
+
+  if (heroSection && heroVisual && canTilt) {
+    heroSection.addEventListener("pointermove", (event) => {
+      const rect = heroSection.getBoundingClientRect();
+      heroVisual.style.setProperty("--hx", ((event.clientX - rect.left) / rect.width - 0.5).toFixed(3));
+      heroVisual.style.setProperty("--hy", ((event.clientY - rect.top) / rect.height - 0.5).toFixed(3));
+    });
+
+    heroSection.addEventListener("pointerleave", () => {
+      heroVisual.style.setProperty("--hx", "0");
+      heroVisual.style.setProperty("--hy", "0");
     });
   }
 
@@ -1245,6 +1588,7 @@ const embers = Array.from({ length: 22 }, (_, i) => ({
       .filter((deal): deal is Deal => deal !== null);
 
     loaded = true;
+    renderHeroVisual(allDeals);
 
     if (maxDiscountText && allDeals.length > 0) {
       const maxPercent = Math.max(...allDeals.map((deal) => deal.percent));
