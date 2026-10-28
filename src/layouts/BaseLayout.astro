@@ -5,20 +5,27 @@ import ProformaModal from "../components/ProformaModal.astro";
 import '../styles/scrollbar.css';
 import ChatWidget from "../components/ChatWidget.astro";
 
-
 interface Props {
   title: string;
   description?: string;
+  noindex?: boolean;
+  canonical?: string;
 }
 
 const {
   title,
-  description = 'آسین استیل (ASIN STEEL)، تأمین‌کننده مقاطع فولادی؛ استعلام قیمت روز میلگرد، تیرآهن، ورق، پروفیل، نبشی، ناودانی و لوله.'
+  description = 'آسین استیل (ASIN STEEL)، تأمین‌کننده مقاطع فولادی؛ استعلام قیمت روز میلگرد، تیرآهن، ورق، پروفیل، نبشی، ناودانی و لوله.',
+  noindex = false,
+  canonical
 } = Astro.props;
+
+const canonicalUrl = canonical
+  ? new URL(canonical, Astro.site ?? Astro.url.origin).href
+  : new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).href;
 ---
 
 <!doctype html>
-<html lang="fa" class="dark">
+<html lang="fa" dir="rtl" class="dark">
   <head>
 
     <meta charset="UTF-8" />
@@ -27,6 +34,10 @@ const {
     <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+
+    <link rel="canonical" href={canonicalUrl} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <slot name="head" />
 
     <style is:global>
 
@@ -70,9 +81,8 @@ const {
   select {
     font-family: "Estedad", sans-serif !important;
   }
-  </style>
-  </head>
-    <style>
+    </style>
+      <style>
       /* Prevent layout shift */
       html {
         scroll-behavior: smooth;

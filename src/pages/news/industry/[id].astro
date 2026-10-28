@@ -15,12 +15,11 @@ const dateFmt = new Intl.DateTimeFormat('fa-IR-u-ca-persian', { year: 'numeric',
 const back = import.meta.env.BASE_URL.replace(/\/$/, '') + '/news/industry';
 ---
 
-<BaseLayout title={`${item.title} | آسین استیل`}>
-  <Fragment slot="head">
-    <link rel="canonical" href={item.link} />
-    <meta name="description" content={item.excerpt} />
-    {!hasFull && <meta name="robots" content="noindex" />}
-  </Fragment>
+<BaseLayout
+  title={`${item.title} | آسین استیل`}
+  description={item.excerpt || 'آخرین اخبار و تحولات صنعت فولاد ایران و جهان در آسین استیل.'}
+  noindex={!hasFull}
+>
 
   <main class="art">
     <article class="art__inner">
