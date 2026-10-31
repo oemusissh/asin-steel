@@ -1,58 +1,68 @@
+
 ---
 ---
 
 <!--
-  نکته: id="steel-calculator" عمداً از این کامپوننت برداشته شده است.
-  همان id روی section بیرونی در index.astro هست و دو id تکراری باعث تداخل می‌شد.
+  id="steel-calculator" عمداً روی section بیرونی index.astro قرار دارد.
   اسکریپت و استایل این کامپوننت با data-steel-calc کار می‌کنند.
 -->
 <section
   data-steel-calc
   dir="rtl"
-  class="relative w-full overflow-hidden rounded-3xl border border-slate-700/60 bg-slate-950/80 p-4 shadow-2xl shadow-black/20 backdrop-blur-xl sm:p-5 lg:p-6"
+  class="relative w-full overflow-hidden rounded-3xl border border-blue-200 bg-gradient-to-br from-[#E4F0FF] via-[#EFF6FF] to-[#DCEBFA] p-4 shadow-2xl shadow-blue-200/60 sm:p-6 lg:p-7"
 >
   <!-- Decorative Background -->
-  <div class="pointer-events-none absolute -right-32 -top-32 h-72 w-72 rounded-full bg-blue-600/10 blur-3xl"></div>
-  <div class="pointer-events-none absolute -bottom-32 -left-32 h-72 w-72 rounded-full bg-blue-500/5 blur-3xl"></div>
+  <div class="pointer-events-none absolute -right-32 -top-32 h-72 w-72 rounded-full bg-blue-500/10 blur-3xl"></div>
+  <div class="pointer-events-none absolute -bottom-32 -left-32 h-72 w-72 rounded-full bg-sky-400/10 blur-3xl"></div>
 
-  <!-- Header -->
+<!-- Header -->
+<div class="relative z-10 overflow-hidden rounded-2xl bg-gradient-to-l from-[#071B35] via-[#103B68] to-[#087EAA] p-5 text-white shadow-xl shadow-blue-900/20 sm:p-7">
+  <div class="pointer-events-none absolute -left-10 -top-16 h-48 w-48 rounded-full border-[25px] border-white/5"></div>
+  <div class="pointer-events-none absolute bottom-0 left-1/3 h-32 w-32 rounded-full bg-cyan-400/10 blur-2xl"></div>
+
   <div class="relative z-10 max-w-3xl">
-    <div class="mb-3 inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-3 py-1.5 text-xs font-bold text-blue-400">
+    <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-300/30 bg-white/10 px-3 py-1.5 text-xs font-bold text-cyan-100 backdrop-blur">
       <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6M9 11h6M9 15h3m-8 6h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z" />
       </svg>
-      محاسبه آنلاین وزن و قیمت
+      ابزار تخصصی محاسبات فولاد
     </div>
 
     <h2 class="text-xl font-black tracking-tight text-white sm:text-2xl lg:text-3xl">
       محاسبه‌گر پیشرفته وزن و هزینه مقاطع فولادی
     </h2>
 
-    <p class="mt-1 text-xs leading-5 text-slate-400 sm:text-sm">
-      مشخصات مقطع فولادی را وارد کنید تا وزن تقریبی، تناژ و هزینه کل بار
-      به‌صورت لحظه‌ای محاسبه شود.
+    <p class="mt-2 text-xs leading-7 text-blue-100 sm:text-sm">
+      وزن، تناژ و هزینه سفارش خود را با مشخصات دقیق مقطع فولادی محاسبه کنید.
     </p>
+
+    <div class="mt-5 flex flex-wrap gap-2">
+      <span class="rounded-lg border border-white/15 bg-white/10 px-3 py-1.5 text-[10px] font-semibold text-white">محاسبه وزن</span>
+      <span class="rounded-lg border border-white/15 bg-white/10 px-3 py-1.5 text-[10px] font-semibold text-white">برآورد قیمت</span>
+      <span class="rounded-lg border border-white/15 bg-white/10 px-3 py-1.5 text-[10px] font-semibold text-white">پیش‌فاکتور سریع</span>
+    </div>
   </div>
+</div>
 
   <!-- Main Calculator -->
-  <div class="relative z-10 mt-4 grid items-stretch gap-4 lg:grid-cols-12 lg:gap-5">
+  <div class="relative z-10 mt-5 grid items-stretch gap-4 lg:grid-cols-12 lg:gap-5">
     <!-- Form -->
-    <div class="rounded-2xl border border-slate-700/70 bg-slate-900/70 p-5 shadow-xl sm:p-6 lg:col-span-7">
+    <div class="rounded-2xl border border-blue-200 bg-gradient-to-br from-white via-white to-blue-50/80 p-5 shadow-xl shadow-blue-200/40 transition-all duration-300 hover:shadow-blue-300/50 sm:p-6 lg:col-span-7">
       <div class="mb-5 flex items-center gap-3">
-        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-500/10 text-blue-400">
+        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-[#0b1f3a]">
           <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" />
           </svg>
         </div>
         <div>
-          <h3 class="font-bold text-white">مشخصات مقطع</h3>
+          <h3 class="font-bold text-[#0b1f3a]">مشخصات مقطع</h3>
           <p class="mt-0.5 text-xs text-slate-500">نوع محصول و ابعاد را انتخاب کنید</p>
         </div>
       </div>
 
       <!-- Type Selector -->
       <div>
-        <span class="mb-2 block text-xs font-bold text-slate-300">نوع مقطع فولادی را انتخاب کنید:</span>
+        <span class="mb-2 block text-xs font-bold text-slate-700">نوع مقطع فولادی را انتخاب کنید:</span>
 
         <div class="grid grid-cols-3 gap-2 sm:gap-3" role="group" aria-label="نوع مقطع فولادی">
           <button
@@ -60,7 +70,7 @@
             id="calcBtn-rebar"
             data-type="rebar"
             aria-pressed="true"
-            class="calc-type-btn flex flex-col items-center justify-center rounded-xl border border-blue-500/30 bg-blue-600 px-2 py-3 font-bold text-white shadow-lg shadow-blue-600/10 transition-all duration-200 hover:bg-blue-500"
+            class="calc-type-btn flex flex-col items-center justify-center rounded-xl border border-blue-600 bg-blue-600 px-2 py-3 font-bold text-white shadow-md shadow-blue-600/15 transition-all duration-200 hover:bg-blue-700"
           >
             <svg class="mb-1.5 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16M4 12h16M4 17h16" />
@@ -73,7 +83,7 @@
             id="calcBtn-sheet"
             data-type="sheet"
             aria-pressed="false"
-            class="calc-type-btn flex flex-col items-center justify-center rounded-xl border border-slate-700 bg-slate-800/80 px-2 py-3 font-bold text-slate-300 transition-all duration-200 hover:border-slate-600 hover:bg-slate-700"
+            class="calc-type-btn flex flex-col items-center justify-center rounded-xl border border-slate-200 bg-slate-50 px-2 py-3 font-bold text-slate-600 transition-all duration-200 hover:border-blue-300 hover:bg-blue-50"
           >
             <svg class="mb-1.5 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M5 4h14v16H5zM8 8h8M8 12h8M8 16h5" />
@@ -86,7 +96,7 @@
             id="calcBtn-pipe"
             data-type="pipe"
             aria-pressed="false"
-            class="calc-type-btn flex flex-col items-center justify-center rounded-xl border border-slate-700 bg-slate-800/80 px-2 py-3 font-bold text-slate-300 transition-all duration-200 hover:border-slate-600 hover:bg-slate-700"
+            class="calc-type-btn flex flex-col items-center justify-center rounded-xl border border-slate-200 bg-slate-50 px-2 py-3 font-bold text-slate-600 transition-all duration-200 hover:border-blue-300 hover:bg-blue-50"
           >
             <svg class="mb-1.5 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <circle cx="12" cy="12" r="7" stroke-width="1.8"></circle>
@@ -104,23 +114,23 @@
       <p
         id="calcWarning"
         role="alert"
-        class="mt-3 hidden rounded-lg border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-[11px] leading-5 text-amber-300"
+        class="mt-3 hidden rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-[11px] leading-5 text-amber-800"
       ></p>
 
       <!-- Price & Quantity -->
-      <div class="mt-5 border-t border-slate-800 pt-5">
+      <div class="mt-5 border-t border-slate-100 pt-5">
         <div class="mb-3 flex items-center gap-2">
-          <div class="flex h-7 w-7 items-center justify-center rounded-lg bg-slate-800 text-slate-400">
+          <div class="flex h-7 w-7 items-center justify-center rounded-lg bg-slate-100 text-slate-600">
             <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 8c-2.5 0-4 1-4 2.5S9.5 13 12 13s4 1 4 2.5S14.5 18 12 18m0-13v14M19 5H5" />
             </svg>
           </div>
-          <span class="text-xs font-bold text-slate-300">قیمت و تعداد</span>
+          <span class="text-xs font-bold text-slate-700">قیمت و تعداد</span>
         </div>
 
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
-            <label for="calcUnitPrice" class="mb-1.5 block text-xs font-semibold text-slate-400">قیمت پایه هر کیلو</label>
+            <label for="calcUnitPrice" class="mb-1.5 block text-xs font-semibold text-slate-600">قیمت پایه هر کیلو</label>
             <div class="relative">
               <input
                 type="text"
@@ -128,37 +138,37 @@
                 value="32500"
                 inputmode="decimal"
                 autocomplete="off"
-                class="w-full rounded-xl border border-slate-700 bg-slate-950/70 px-3 py-3 pl-16 text-sm font-bold text-blue-400 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10"
+                class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-3 pl-16 text-sm font-bold text-[#0b1f3a] outline-none transition focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/10"
               />
               <span class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[10px] font-medium text-slate-500">تومان / کیلو</span>
             </div>
           </div>
 
           <div>
-            <label for="calcQuantity" class="mb-1.5 block text-xs font-semibold text-slate-400">تعداد شاخه / رول</label>
+            <label for="calcQuantity" class="mb-1.5 block text-xs font-semibold text-slate-600">تعداد شاخه / رول</label>
             <input
               type="text"
               id="calcQuantity"
               value="100"
               inputmode="numeric"
               autocomplete="off"
-              class="w-full rounded-xl border border-slate-700 bg-slate-950/70 px-3 py-3 text-sm font-bold text-white outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10"
+              class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-3 text-sm font-bold text-[#0b1f3a] outline-none transition focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/10"
             />
-            <p class="mt-1 text-[10px] text-slate-600">تعداد مورد نیاز خود را وارد کنید.</p>
+            <p class="mt-1 text-[10px] text-slate-500">تعداد مورد نیاز خود را وارد کنید.</p>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Result Card -->
-    <div class="flex flex-col justify-between rounded-2xl border border-slate-700/70 bg-gradient-to-b from-slate-800/90 to-slate-950/90 p-5 shadow-xl sm:p-6 lg:col-span-5">
+    <div class="relative flex flex-col justify-between overflow-hidden rounded-2xl border border-blue-300 bg-gradient-to-br from-[#071B35] via-[#123F70] to-[#087EAA] p-5 text-white shadow-xl shadow-blue-300/50 sm:p-6 lg:col-span-5">
       <div>
-        <div class="flex items-center justify-between border-b border-slate-700/80 pb-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-4">
           <div>
-            <h3 class="text-lg font-black text-white">نتایج محاسبه</h3>
+            <h3 class="text-lg font-black text-[#0b1f3a]">نتایج محاسبه</h3>
             <p class="mt-1 text-[11px] text-slate-500">نتیجه بر اساس اطلاعات واردشده</p>
           </div>
-          <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-500/10 text-blue-400">
+          <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-[#0b1f3a]">
             <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 19V5m0 14h16M8 16v-5m4 5V7m4 9v-8" />
             </svg>
@@ -166,28 +176,28 @@
         </div>
 
         <div class="mt-5 space-y-4" aria-live="polite">
-          <div class="flex items-center justify-between gap-4 rounded-xl border border-slate-800 bg-slate-950/40 p-3.5">
-            <span class="text-xs text-slate-400">وزن یک شاخه / واحد</span>
-            <span id="resSingleWeight" class="text-sm font-black text-white">—</span>
+          <div class="flex items-center justify-between gap-4 rounded-xl border border-slate-100 bg-slate-50 p-3.5">
+            <span class="text-xs text-slate-600">وزن یک شاخه / واحد</span>
+            <span id="resSingleWeight" class="text-sm font-black text-[#0b1f3a]">—</span>
           </div>
 
-          <div class="flex items-center justify-between gap-4 rounded-xl border border-blue-500/10 bg-blue-500/5 p-3.5">
-            <span class="text-xs text-slate-400">وزن کل بار</span>
-            <span id="resTotalWeight" class="text-lg font-black text-blue-400">—</span>
+          <div class="flex items-center justify-between gap-4 rounded-xl border border-slate-100 bg-slate-50 p-3.5">
+            <span class="text-xs font-semibold text-slate-700">وزن کل بار</span>
+            <span id="resTotalWeight" class="text-lg font-black text-[#0b1f3a]">—</span>
           </div>
 
           <div class="flex items-center justify-between gap-4 px-1">
-            <span class="text-xs text-slate-400">معادل تن</span>
-            <span id="resTonnage" class="text-sm font-bold text-slate-200">—</span>
+            <span class="text-xs text-slate-600">معادل تن</span>
+            <span id="resTonnage" class="text-sm font-bold text-[#0b1f3a]">—</span>
           </div>
 
-          <div class="mt-2 border-t border-slate-700/80 pt-4">
+          <div class="mt-2 border-t border-slate-100 pt-4">
             <div class="flex items-end justify-between gap-4">
               <div>
-                <span class="block text-xs font-semibold text-slate-400">هزینه کل برآوردی</span>
-                <span class="mt-1 block text-[10px] text-slate-600">بدون احتساب مالیات ارزش افزوده</span>
+                <span class="block text-xs font-semibold text-slate-600">هزینه کل برآوردی</span>
+                <span class="mt-1 block text-[10px] text-slate-500">بدون احتساب مالیات ارزش افزوده</span>
               </div>
-              <span id="resTotalPrice" class="text-xl font-black text-blue-400 sm:text-2xl">—</span>
+              <span id="resTotalPrice" class="text-xl font-black text-[#0b1f3a] sm:text-2xl">—</span>
             </div>
           </div>
         </div>
@@ -198,7 +208,7 @@
         <button
           id="addCalculatedToProforma"
           type="button"
-          class="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3.5 text-sm font-black text-white shadow-lg shadow-blue-600/20 transition-all duration-200 hover:bg-blue-500 hover:shadow-blue-500/25 active:scale-[0.98]"
+          class="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-l from-cyan-400 to-sky-500 px-4 py-3.5 text-sm font-black text-[#071B35] shadow-lg shadow-cyan-500/25 transition-all duration-300 hover:-translate-y-0.5 hover:from-cyan-300 hover:to-sky-400 hover:shadow-xl active:scale-[0.98]"
         >
           <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v14M5 12h14" />
@@ -206,7 +216,7 @@
           افزودن این محاسبه به پیش‌فاکتور
         </button>
 
-        <p id="calcStatus" role="status" aria-live="polite" class="mt-2 min-h-[1rem] text-center text-[10px] text-slate-600">
+        <p id="calcStatus" role="status" aria-live="polite" class="mt-2 min-h-[1rem] text-center text-[10px] text-slate-500">
           مشخصات و هزینه محاسبه‌شده به پیش‌فاکتور شما اضافه می‌شود.
         </p>
       </div>
@@ -214,16 +224,16 @@
   </div>
 
   <!-- Simple Help -->
-  <div class="relative z-10 mt-5 flex flex-col gap-3 rounded-2xl border border-slate-800 bg-slate-900/40 p-4 sm:flex-row sm:items-center">
-    <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-slate-800 text-slate-400">
+  <div class="relative z-10 mt-5 flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-4 sm:flex-row sm:items-center">
+    <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-[#0b1f3a]">
       <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 17h.01M12 14a2.5 2.5 0 10-2.5-2.5M12 14v-1" />
         <circle cx="12" cy="12" r="9" stroke-width="1.8"></circle>
       </svg>
     </div>
     <div>
-      <p class="text-xs font-bold text-slate-300">راهنمای محاسبه</p>
-      <p class="mt-1 text-[11px] leading-6 text-slate-500">
+      <p class="text-xs font-bold text-[#0b1f3a]">راهنمای محاسبه</p>
+      <p class="mt-1 text-[11px] leading-6 text-slate-600">
         قیمت هر کیلو و تعداد مورد نیاز را وارد کنید. وزن و هزینه کل
         به‌صورت خودکار محاسبه می‌شود. این محاسبات تخمینی هستند و
         ممکن است با وزن واقعی کارخانه کمی اختلاف داشته باشند.
@@ -254,7 +264,6 @@
     const numberFa = (value: number, maximumFractionDigits = 2) =>
       value.toLocaleString("fa-IR", { maximumFractionDigits, minimumFractionDigits: 0 });
 
-    // ارقام فارسی/عربی، ممیز فارسی و «/» (که در فارسی به‌جای اعشار تایپ می‌شود) پشتیبانی می‌شوند
     const toLatin = (value: string) =>
       value
         .replace(/[۰-۹]/g, (d) => String("۰۱۲۳۴۵۶۷۸۹".indexOf(d)))
@@ -279,7 +288,7 @@
       help: string;
     }) => `
       <div>
-        <label for="${o.id}" class="mb-1.5 block text-xs font-semibold text-slate-300">${o.label}</label>
+        <label for="${o.id}" class="mb-1.5 block text-xs font-semibold text-slate-700">${o.label}</label>
         <div class="relative">
           <input
             type="text"
@@ -287,11 +296,11 @@
             value="${o.value}"
             inputmode="decimal"
             autocomplete="off"
-            class="w-full rounded-xl border border-slate-700 bg-slate-950/70 px-3 py-3 pl-16 text-sm font-bold text-white outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10"
+            class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-3 pl-16 text-sm font-bold text-[#0b1f3a] outline-none transition focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/10"
           />
           <span class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[10px] font-medium text-slate-500">${o.unit}</span>
         </div>
-        <p class="mt-1 text-[10px] leading-5 text-slate-600">${o.help}</p>
+        <p class="mt-1 text-[10px] leading-5 text-slate-500">${o.help}</p>
       </div>`;
 
     const shapeButton = (shape: PipeShape, label: string) => {
@@ -303,8 +312,8 @@
           aria-pressed="${active}"
           class="rounded-lg border px-3 py-2 text-xs font-bold transition-all duration-200 ${
             active
-              ? "border-blue-500/40 bg-blue-600 text-white"
-              : "border-slate-700 bg-slate-800/80 text-slate-300 hover:border-slate-600 hover:bg-slate-700"
+              ? "border-blue-600 bg-blue-600 text-white"
+              : "border-slate-200 bg-slate-50 text-slate-600 hover:border-blue-300 hover:bg-blue-50"
           }"
         >${label}</button>`;
     };
@@ -351,7 +360,7 @@
 
         container.innerHTML = `
           <div>
-            <span class="mb-1.5 block text-xs font-semibold text-slate-300">شکل مقطع</span>
+            <span class="mb-1.5 block text-xs font-semibold text-slate-700">شکل مقطع</span>
             <div class="grid grid-cols-2 gap-2" role="group" aria-label="شکل مقطع">
               ${shapeButton("round", "لوله گرد")}
               ${shapeButton("box", "قوطی / پروفیل")}
@@ -371,13 +380,13 @@
 
         button.classList.toggle("bg-blue-600", active);
         button.classList.toggle("text-white", active);
-        button.classList.toggle("border-blue-500/30", active);
-        button.classList.toggle("shadow-lg", active);
-        button.classList.toggle("shadow-blue-600/10", active);
+        button.classList.toggle("border-blue-600", active);
+        button.classList.toggle("shadow-md", active);
+        button.classList.toggle("shadow-blue-600/15", active);
 
-        button.classList.toggle("bg-slate-800/80", !active);
-        button.classList.toggle("text-slate-300", !active);
-        button.classList.toggle("border-slate-700", !active);
+        button.classList.toggle("bg-slate-50", !active);
+        button.classList.toggle("text-slate-600", !active);
+        button.classList.toggle("border-slate-200", !active);
       });
 
       renderInputs();
@@ -478,8 +487,8 @@
       const el = $("calcStatus");
       if (!el) return;
       el.textContent = message;
-      el.classList.toggle("text-red-400", isError);
-      el.classList.toggle("text-slate-600", !isError);
+      el.classList.toggle("text-red-300", isError);
+      el.classList.toggle("text-blue-100", !isError);
     };
 
     const addCalculatedToProforma = () => {
@@ -550,5 +559,5 @@
   [data-steel-calc] button {
     font-family: Vazirmatn, sans-serif;
   }
-  
+
 </style>
