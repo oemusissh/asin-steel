@@ -11,7 +11,10 @@ export default defineConfig({
 
   integrations: [
     tailwind(),
-    sitemap()
+    sitemap({
+      filter: (page) =>
+      !/\/(account|admin|cart|checkout|wishlist|login|register)(\/|$)/.test(page),
+    }),
   ],
 
   output: 'static',

@@ -911,14 +911,14 @@
 
               <div class="p-3 grid grid-cols-4 gap-2.5">
                 {[
-                  ['beam',    'تیرآهن',        'I-BEAM / IPE',  'IPE، IPB و سایزهای پرکاربرد ساختمانی',   '۲٬۴۵۰+', 'پرفروش', 'categories/beam.png',       '#2563eb'],
-                  ['rebar',   'میلگرد',        'REBAR',         'میلگرد ساده و آجدار در رده‌های A2 و A3', '۱٬۸۹۰+', 'پرفروش', 'categories/rebar.png',             '#ea580c'],
-                  ['channel', 'ناودانی',       'CHANNEL / UPN', 'ناودانی استاندارد و UPN برای سازه‌ها',    '۹۸۰+',   '',       'categories/channel.png', '#0d9488'],
-                  ['angle',   'نبشی',          'ANGLE BAR',     'نبشی بال‌مساوی در سایزهای مختلف',         '۱٬۲۰۰+', 'موجود',  'categories/angle.png',   '#7c3aed'],
-                  ['tube',    'قوطی و پروفیل', 'BOX TUBE',      'قوطی و پروفیل ساختمانی و صنعتی',          '۳٬۲۰۰+', 'جدید',   'categories/tube.png',    '#e11d48'],
-                  ['plate',   'ورق فولادی',    'STEEL PLATE',   'ورق سیاه، گالوانیزه و روغنی',             '۲٬۸۰۰+', '',       'categories/plate.png',   '#0891b2'],
-                  ['pipe',    'لوله',          'STEEL PIPE',    'لوله مانیسمان، درزدار و گالوانیزه',       '۱٬۵۰۰+', 'موجود',  'categories/pipe.png',    '#16a34a'],
-                  ['flat',    'تسمه',          'FLAT BAR',      'تسمه فولادی در ضخامت‌های مختلف',          '۷۵۰+',   '',       'categories/flat.png',    '#ca8a04'],
+                  ['beam',    'تیرآهن',        'I-BEAM / IPE',  'IPE، IPB و سایزهای پرکاربرد ساختمانی',   '۲٬۴۵۰+', 'پرفروش', 'categories/beam.webp',       '#2563eb'],
+                  ['rebar',   'میلگرد',        'REBAR',         'میلگرد ساده و آجدار در رده‌های A2 و A3', '۱٬۸۹۰+', 'پرفروش', 'categories/rebar.webp',             '#ea580c'],
+                  ['channel', 'ناودانی',       'CHANNEL / UPN', 'ناودانی استاندارد و UPN برای سازه‌ها',    '۹۸۰+',   '',       'categories/channel.webp', '#0d9488'],
+                  ['angle',   'نبشی',          'ANGLE BAR',     'نبشی بال‌مساوی در سایزهای مختلف',         '۱٬۲۰۰+', 'موجود',  'categories/angle.webp',   '#7c3aed'],
+                  ['tube',    'قوطی و پروفیل', 'BOX TUBE',      'قوطی و پروفیل ساختمانی و صنعتی',          '۳٬۲۰۰+', 'جدید',   'categories/tube.webp',    '#e11d48'],
+                  ['plate',   'ورق فولادی',    'STEEL PLATE',   'ورق سیاه، گالوانیزه و روغنی',             '۲٬۸۰۰+', '',       'categories/plate.webp',   '#0891b2'],
+                  ['pipe',    'لوله',          'STEEL PIPE',    'لوله مانیسمان، درزدار و گالوانیزه',       '۱٬۵۰۰+', 'موجود',  'categories/pipe.webp',    '#16a34a'],
+                  ['flat',    'تسمه',          'FLAT BAR',      'تسمه فولادی در ضخامت‌های مختلف',          '۷۵۰+',   '',       'categories/flat.webp',    '#ca8a04'],
                 ].map(([slug, name, en, desc, count, badge, img, color]) => (
                   <a
                     href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/categories/${slug}`}
@@ -933,7 +933,10 @@
                       class="cat-tile__bg"
                       src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/images/${img}`}
                       alt={name}
+                      width="400"
+                      height="300"
                       loading="lazy"
+                      decoding="async"
                       onerror="this.remove()"
                     />
                     <span class="cat-tile__shade"></span>

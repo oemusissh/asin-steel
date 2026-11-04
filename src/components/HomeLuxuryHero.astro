@@ -39,17 +39,17 @@ const mapRouteUrl = `https://www.google.com/maps/dir/?api=1&destination=${mapQue
 
 const heroSlides = [
   {
-    src: "/images/hero-steel.png",
+    src: "/images/hero-steel.webp",
     alt: "مقاطع فولادی در فضای صنعتی",
     label: "STEEL INDUSTRY",
   },
   {
-    src: "/images/hero-steel-2.jpg",
+    src: "/images/hero-steel-2.webp",
     alt: "ورق‌ها و کلاف‌های فولادی",
     label: "STEEL SHEETS",
   },
   {
-    src: "/images/hero-steel-3.jpg",
+    src: "/images/hero-steel-3.webp",
     alt: "تیرآهن و مقاطع فولادی در انبار",
     label: "STEEL PROFILES",
   },
@@ -59,10 +59,19 @@ const heroSlides = [
 
 ---
 
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
 <link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css"
+  media="print"
+  onload="this.media='all'"
 />
+<noscript>
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css"
+  />
+</noscript>
 
 <main class="as" dir="rtl">
 
@@ -70,6 +79,8 @@ const heroSlides = [
   <div class="as-logo">
     <img
       src={brand.logo}
+      width="44"
+      height="44"
       alt={brand.nameFa}
       onerror="this.style.display='none'"
     />
@@ -171,7 +182,8 @@ const heroSlides = [
   <div class="as-address-card">
     <div class="as-address-map-preview">
       <iframe
-        src={mapEmbedUrl}
+        data-src={mapEmbedUrl}
+        data-map-iframe
         title="موقعیت آسین استیل روی نقشه گوگل"
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
@@ -245,6 +257,8 @@ const heroSlides = [
             alt={slide.alt}
             class:list={["as-hero-slide", index === 0 && "is-active"]}
             data-slide-index={index}
+            width="1600"
+            height="900"
             loading={index === 0 ? "eager" : "lazy"}
             fetchpriority={index === 0 ? "high" : "auto"}
             decoding="async"
@@ -748,23 +762,33 @@ const heroSlides = [
   .as-slider-dots {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 0;
   }
 
   .as-slider-dot {
-    width: 7px;
-    height: 7px;
+    position: relative;
+    width: 24px;
+    height: 24px;
     padding: 0;
     border: 0;
-    border-radius: 99px;
-    background: rgba(255, 255, 255, 0.62);
+    background: transparent;
     cursor: pointer;
-    transition:
-      width 0.3s ease,
-      background 0.3s ease;
   }
 
-  .as-slider-dot.is-active {
+  .as-slider-dot::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 7px;
+    height: 7px;
+    border-radius: 99px;
+    background: rgba(255, 255, 255, 0.62);
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, background 0.3s ease;
+  }
+
+  .as-slider-dot.is-active::before {
     width: 22px;
     background: #fff;
   }
@@ -1603,6 +1627,23 @@ const heroSlides = [
 </style>
 
 <script>
+
+  (() => {
+    const frame = document.querySelector("iframe[data-map-iframe]");
+    if (!frame) return;
+    let done = false;
+    const load = () => {
+      if (done) return;
+      done = true;
+      const src = frame.getAttribute("data-src");
+      if (src) frame.setAttribute("src", src);
+    };
+    ["pointerdown", "keydown", "touchstart", "scroll"].forEach((ev) =>
+      window.addEventListener(ev, load, { once: true, passive: true })
+    );
+    window.addEventListener("load", () => setTimeout(load, 6000), { once: true });
+  })();
+
   const slider = document.querySelector("[data-hero-slider]");
 
   if (slider && !slider.hasAttribute("data-slider-ready")) {

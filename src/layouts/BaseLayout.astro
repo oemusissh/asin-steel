@@ -10,18 +10,36 @@ interface Props {
   description?: string;
   noindex?: boolean;
   canonical?: string;
+  image?: string;
+  ogType?: 'website' | 'article';
 }
+
+const SITE_NAME = 'آسین استیل';
 
 const {
   title,
   description = 'آسین استیل (ASIN STEEL)، تأمین‌کننده مقاطع فولادی؛ استعلام قیمت روز میلگرد، تیرآهن، ورق، پروفیل، نبشی، ناودانی و لوله.',
   noindex = false,
-  canonical
+  canonical,
+  image = '/og-default.jpg',
+  ogType = 'website',
 } = Astro.props;
 
+const base = Astro.site ?? Astro.url.origin;
 const canonicalUrl = canonical
-  ? new URL(canonical, Astro.site ?? Astro.url.origin).href
-  : new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).href;
+  ? new URL(canonical, base).href
+  : new URL(Astro.url.pathname, base).href;
+const imageUrl = new URL(image, base).href;
+const fullTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
+
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: SITE_NAME,
+  alternateName: 'ASIN STEEL',
+  url: new URL('/', base).href,
+  logo: new URL('/favicon.svg', base).href,
+};
 ---
 
 <!doctype html>
@@ -31,14 +49,25 @@ const canonicalUrl = canonical
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+    <title>{fullTitle}</title>
 
     <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:locale" content="fa_IR" />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} /> 
+    <meta property="og:image" content={imageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+    <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
-    <slot name="head" />
-
+  
     <style is:global>
 
   @font-face {
