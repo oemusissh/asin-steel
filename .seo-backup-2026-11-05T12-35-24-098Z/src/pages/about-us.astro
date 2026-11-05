@@ -1,0 +1,2177 @@
+
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const base = import.meta.env.BASE_URL;
+const url = (path = '') =>
+  `${base.replace(/\/$/, '')}/${path.replace(/^\//, '')}`;
+
+const images = {
+  warehouse: url('images/about/steel-warehouse.jpg'),
+  products: url('images/about/steel-products.jpg'),
+  loading: url('images/about/steel-loading.jpg'),
+  detail: url('images/about/steel-detail.jpg'),
+};
+
+const productTypes = [
+  {
+    number: '01',
+    title: 'میلگرد',
+    english: 'REBAR',
+    description: 'برای پروژه‌های ساختمانی و سازه‌های بتنی',
+    image: images.products,
+    className: 'product-rebar',
+  },
+  {
+    number: '02',
+    title: 'تیرآهن',
+    english: 'STEEL BEAM',
+    description: 'برای اسکلت فلزی و ساخت‌وساز',
+    image: images.detail,
+    className: 'product-beam',
+  },
+  {
+    number: '03',
+    title: 'ورق فولادی',
+    english: 'STEEL SHEET',
+    description: 'برای کاربردهای صنعتی و ساخت قطعات',
+    image: images.warehouse,
+    className: 'product-sheet',
+  },
+  {
+    number: '04',
+    title: 'قوطی و پروفیل',
+    english: 'STEEL PROFILE',
+    description: 'برای چهارچوب‌ها و سازه‌های فلزی',
+    image: images.loading,
+    className: 'product-profile',
+  },
+];
+---
+
+<BaseLayout title="درباره آسین استیل | تأمین مقاطع فولادی">
+  <main class="about-page" dir="rtl">
+
+    <!-- HERO: معرفی شرکت -->
+    <section class="hero">
+      <div class="hero-lines" aria-hidden="true"></div>
+      <div class="hero-orb hero-orb-one"></div>
+      <div class="hero-orb hero-orb-two"></div>
+
+      <div class="container hero-layout">
+        <div class="hero-copy reveal">
+          <div class="hero-tag">
+            <span class="live-dot"></span>
+            درباره مجموعه آسین استیل
+          </div>
+
+          <h1>
+            پشت هر سازه،
+            <span class="hero-highlight">انتخابی مهم</span>
+            برای فولاد وجود دارد.
+          </h1>
+
+          <p class="hero-text">
+            آسین استیل در حوزه فروش مقاطع فولادی فعالیت می‌کند.
+            ما اینجا هستیم تا مسیر پیدا کردن محصول موردنیاز،
+            بررسی مشخصات و استعلام قیمت برای شما ساده‌تر و روشن‌تر باشد.
+          </p>
+
+          <div class="hero-buttons">
+            <a href={url('products')} class="btn btn-main">
+              آشنایی با محصولات
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M19 12H5m7 7-7-7 7-7"/>
+              </svg>
+            </a>
+
+            <a href={url('contact')} class="btn btn-glass">
+              صحبت با کارشناسان
+            </a>
+          </div>
+
+          <div class="hero-footnote">
+            <span class="footnote-icon">✓</span>
+            <span>برای شروع خرید، لازم نیست متخصص فولاد باشید.</span>
+          </div>
+        </div>
+
+        <div class="hero-photo-wrap reveal reveal-late">
+          <div class="hero-photo">
+            <img
+              src={images.warehouse}
+              alt="نمایی از انبار یا محل نگهداری مقاطع فولادی آسین استیل"
+              fetchpriority="high"
+              onerror="this.style.display='none'; this.parentElement.classList.add('image-missing')"
+            />
+
+            <div class="image-placeholder">
+              <span class="placeholder-symbol">AS</span>
+              <strong>تصویر واقعی مجموعه</strong>
+              <span>عکس انبار، محل نگهداری یا مقاطع فولادی</span>
+            </div>
+
+            <div class="photo-shade"></div>
+
+            <div class="photo-top-label">
+              <span class="photo-dot"></span>
+              ASIN STILL
+            </div>
+
+            <div class="photo-bottom-label">
+              <span class="photo-caption-small">STEEL SUPPLY</span>
+              <strong>آسین استیل</strong>
+              <span>تأمین مقاطع فولادی</span>
+            </div>
+
+            <div class="photo-crosshair crosshair-one"></div>
+            <div class="photo-crosshair crosshair-two"></div>
+          </div>
+
+          <div class="floating-note floating-note-top">
+            <span class="floating-note-icon">01</span>
+            <div>
+              <strong>انتخاب محصول</strong>
+              <small>متناسب با نیاز شما</small>
+            </div>
+          </div>
+
+          <div class="floating-note floating-note-bottom">
+            <span class="floating-note-icon accent-icon">02</span>
+            <div>
+              <strong>استعلام قیمت</strong>
+              <small>پیش از ثبت سفارش</small>
+            </div>
+          </div>
+
+          <div class="hero-counter" aria-hidden="true">
+            <span>AS</span>
+            <span class="counter-line"></span>
+            <span>STEEL</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-bottom">
+        <div class="container hero-bottom-inner">
+          <span>مقاطع فولادی</span>
+          <span class="bottom-dot"></span>
+          <span>اطلاعات روشن</span>
+          <span class="bottom-dot"></span>
+          <span>ارتباط مستقیم با مجموعه</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- داستان و معرفی شرکت -->
+    <section class="story section-padding">
+      <div class="container">
+        <div class="story-layout">
+          <div class="story-side reveal">
+            <span class="section-label">داستان ما</span>
+            <h2>
+              فولاد فقط یک محصول نیست؛
+              <span>بخشی از مسیر ساختن است.</span>
+            </h2>
+
+            <div class="story-line">
+              <span></span>
+            </div>
+
+            <p class="story-side-note">
+              از انتخاب یک مقطع تا بررسی شرایط خرید،
+              اطلاعات درست می‌تواند تصمیم‌گیری را ساده‌تر کند.
+            </p>
+          </div>
+
+          <div class="story-content reveal reveal-late">
+            <p class="story-lead">
+              آسین استیل با تمرکز بر فروش مقاطع فولادی،
+              تلاش می‌کند ارتباط میان خریدار و محصول موردنیازش را ساده‌تر کند.
+            </p>
+
+            <p>
+              خرید فولاد ممکن است برای بسیاری از افراد پیچیده به نظر برسد.
+              تنوع محصولات، اندازه‌ها، وزن‌ها و تفاوت قیمت‌ها باعث می‌شود
+              خریدار پیش از سفارش به اطلاعات دقیق‌تری نیاز داشته باشد.
+            </p>
+
+            <p>
+              نگاه ما در آسین استیل این است که مشتری بتواند با شناخت بهتر
+              محصولات، نیاز خود را واضح‌تر بیان کند و پیش از خرید،
+              درباره مشخصات و شرایط سفارش سؤال بپرسد.
+            </p>
+
+            <p>
+              چه برای یک پروژه ساختمانی به دنبال مقطع فولادی باشید،
+              چه برای یک کارگاه یا فعالیت صنعتی، می‌توانید از مسیر محصولات
+              شروع کنید یا مستقیماً با مجموعه در ارتباط باشید.
+            </p>
+
+            <a href={url('contact')} class="story-link">
+              با آسین استیل در ارتباط باشید
+              <span>←</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- تصویر عریض با پیام برند -->
+    <section class="wide-photo-section">
+      <div class="wide-photo">
+        <img
+          src={images.loading}
+          alt="مقاطع فولادی در محل بارگیری یا انبار"
+          loading="lazy"
+          onerror="this.style.display='none'; this.parentElement.classList.add('image-missing')"
+        />
+
+        <div class="image-placeholder">
+          <span class="placeholder-symbol">AS</span>
+          <strong>تصویر بارگیری یا حمل فولاد</strong>
+          <span>یک عکس عریض و واقعی از فعالیت مجموعه</span>
+        </div>
+
+        <div class="wide-photo-overlay"></div>
+
+        <div class="wide-photo-content reveal">
+          <span class="wide-kicker">ASIN STILL / STEEL SUPPLY</span>
+          <h2>
+            انتخاب آگاهانه‌تر،
+            <br />
+            شروع مطمئن‌تر.
+          </h2>
+          <p>
+            قبل از خرید، محصول را بشناسید؛
+            مشخصات را بررسی کنید و بعد تصمیم بگیرید.
+          </p>
+
+          <a href={url('products')} class="btn btn-white">
+            مشاهده محصولات
+            <span>←</span>
+          </a>
+        </div>
+
+        <span class="wide-vertical-label" aria-hidden="true">
+          BUILT ON STEEL
+        </span>
+      </div>
+    </section>
+
+    <!-- معرفی گروه‌های محصول -->
+    <section class="product-section section-padding">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div>
+            <span class="section-label">حوزه فعالیت</span>
+            <h2>با مقاطع فولادی بیشتر آشنا شوید</h2>
+            <p>
+              هر مقطع کاربرد متفاوتی دارد. از اینجا می‌توانید با گروه‌های مختلف
+              محصولات آشنا شوید.
+            </p>
+          </div>
+
+          <a href={url('products')} class="all-products-link">
+            دیدن همه محصولات
+            <span>←</span>
+          </a>
+        </div>
+
+        <div class="product-grid">
+          {productTypes.map((product) => (
+            <a
+              href={url('products')}
+              class={`product-card ${product.className} reveal`}
+              aria-label={`مشاهده محصولات: ${product.title}`}
+            >
+              <div class="product-image">
+                <img
+                  src={product.image}
+                  alt={product.title}
+                  loading="lazy"
+                  onerror="this.style.display='none'; this.parentElement.classList.add('image-missing')"
+                />
+
+                <div class="image-placeholder">
+                  <span class="placeholder-symbol">AS</span>
+                  <strong>{product.title}</strong>
+                  <span>تصویر واقعی این محصول</span>
+                </div>
+
+                <div class="product-image-shade"></div>
+                <span class="product-en">{product.english}</span>
+                <span class="product-number">{product.number}</span>
+              </div>
+
+              <div class="product-info">
+                <div class="product-title-row">
+                  <h3>{product.title}</h3>
+                  <span class="product-arrow">↗</span>
+                </div>
+
+                <p>{product.description}</p>
+
+                <div class="product-footer">
+                  <span>مشاهده محصولات</span>
+                  <span>←</span>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+
+        <div class="product-bottom-note reveal">
+          <span class="note-question">؟</span>
+          <p>
+            نام محصول را نمی‌دانید؟
+            <strong>نیاز پروژه‌تان را برای ما توضیح دهید.</strong>
+          </p>
+          <a href={url('contact')}>دریافت راهنمایی <span>←</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- نحوه همراهی با مشتری -->
+    <section class="approach-section section-padding">
+      <div class="container">
+        <div class="approach-heading reveal">
+          <span class="section-label">همراهی با مشتری</span>
+          <h2>از کجا شروع کنیم؟</h2>
+          <p>
+            مسیر ارتباط و خرید را تا جای ممکن ساده در نظر گرفته‌ایم.
+          </p>
+        </div>
+
+        <div class="approach-layout">
+          <div class="approach-image reveal">
+            <img
+              src={images.detail}
+              alt="نمای نزدیک از سطح و جزئیات مقاطع فولادی"
+              loading="lazy"
+              onerror="this.style.display='none'; this.parentElement.classList.add('image-missing')"
+            />
+
+            <div class="image-placeholder">
+              <span class="placeholder-symbol">AS</span>
+              <strong>نمای نزدیک مقاطع فولادی</strong>
+              <span>تصویر باکیفیت از سطح یا برش فولاد</span>
+            </div>
+
+            <div class="approach-image-overlay"></div>
+            <div class="approach-image-caption">
+              <span>ASIN STILL</span>
+              <strong>شناخت محصول، پیش از خرید</strong>
+            </div>
+          </div>
+
+          <div class="steps-list">
+            <article class="step reveal">
+              <span class="step-index">۱</span>
+              <div>
+                <h3>نیازتان را مشخص کنید</h3>
+                <p>
+                  اگر نوع محصول را می‌دانید، نام آن را در بخش محصولات پیدا کنید.
+                  اگر مطمئن نیستید، می‌توانید نیازتان را با ما مطرح کنید.
+                </p>
+              </div>
+            </article>
+
+            <article class="step reveal">
+              <span class="step-index">۲</span>
+              <div>
+                <h3>مشخصات و قیمت را بپرسید</h3>
+                <p>
+                  پیش از سفارش، درباره اندازه، نوع مقطع، مقدار موردنیاز،
+                  قیمت و شرایط خرید سؤال کنید.
+                </p>
+              </div>
+            </article>
+
+            <article class="step reveal">
+              <span class="step-index">۳</span>
+              <div>
+                <h3>برای سفارش هماهنگ کنید</h3>
+                <p>
+                  پس از بررسی اطلاعات و توافق درباره شرایط،
+                  مراحل ثبت سفارش را با مجموعه پیگیری کنید.
+                </p>
+              </div>
+            </article>
+
+            <a href={url('contact')} class="btn btn-main steps-button">
+              شروع ارتباط با آسین استیل
+              <span>←</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- اصول کاری -->
+    <section class="values-section section-padding">
+      <div class="container">
+        <div class="values-heading reveal">
+          <span class="section-label">نگاه ما به همکاری</span>
+          <h2>در خرید فولاد، چه چیزهایی اهمیت دارد؟</h2>
+          <p>
+            اصولی که می‌خواهیم در ارتباط با مشتریانمان به آن‌ها پایبند باشیم.
+          </p>
+        </div>
+
+        <div class="values-grid">
+          <article class="value-card reveal">
+            <span class="value-number">01</span>
+            <div class="value-icon">
+              <svg viewBox="0 0 48 48" aria-hidden="true">
+                <path d="M8 12h32v25H8z"/>
+                <path d="M15 20h18M15 26h13M15 32h9"/>
+              </svg>
+            </div>
+            <h3>شفافیت اطلاعات</h3>
+            <p>
+              اطلاعات محصول و شرایط سفارش باید تا حد امکان روشن و قابل بررسی باشد.
+            </p>
+          </article>
+
+          <article class="value-card value-card-dark reveal reveal-late">
+            <span class="value-number">02</span>
+            <div class="value-icon">
+              <svg viewBox="0 0 48 48" aria-hidden="true">
+                <path d="M24 7a15 15 0 0 0-9 27v6h18v-6a15 15 0 0 0-9-27z"/>
+                <path d="M18 46h12M19 25l4 4 7-9"/>
+              </svg>
+            </div>
+            <h3>انتخاب آگاهانه</h3>
+            <p>
+              مشتری باید فرصت داشته باشد مشخصات محصول را بشناسد و با نیاز خود
+              مقایسه کند.
+            </p>
+          </article>
+
+          <article class="value-card reveal reveal-late-more">
+            <span class="value-number">03</span>
+            <div class="value-icon">
+              <svg viewBox="0 0 48 48" aria-hidden="true">
+                <path d="M7 11h34v24H27l-9 7v-7H7z"/>
+                <path d="M15 20h18M15 26h12"/>
+              </svg>
+            </div>
+            <h3>ارتباط روشن</h3>
+            <p>
+              اگر درباره محصول یا شرایط خرید سؤالی دارید،
+              امکان مطرح کردن آن با مجموعه اهمیت دارد.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA نهایی -->
+    <section class="contact-cta">
+      <div class="cta-glow"></div>
+      <div class="cta-grid" aria-hidden="true"></div>
+
+      <div class="container cta-layout reveal">
+        <div class="cta-copy">
+          <span class="cta-label">
+            <span class="live-dot"></span>
+            قدم بعدی با شماست
+          </span>
+
+          <h2>
+            برای تأمین فولاد پروژه‌تان
+            <span>از همین‌جا شروع کنید.</span>
+          </h2>
+
+          <p>
+            محصولات را بررسی کنید یا درباره نیازتان با آسین استیل صحبت کنید.
+            برای شروع، فقط کافی است ارتباط بگیرید.
+          </p>
+        </div>
+
+        <div class="cta-actions">
+          <a href={url('products')} class="btn btn-main">
+            مشاهده محصولات
+            <span>←</span>
+          </a>
+
+          <a href={url('contact')} class="btn btn-cta-outline">
+            تماس با آسین استیل
+          </a>
+        </div>
+
+        <div class="cta-brand" aria-hidden="true">
+          AS<span>.</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <style>
+    .about-page {
+      --navy: #102a43;
+      --navy-deep: #091c2e;
+      --navy-light: #183c56;
+      --teal: #19aaa2;
+      --teal-light: #75e2d4;
+      --ink: #263745;
+      --muted: #6d7e8c;
+      --paper: #ffffff;
+      --soft: #f3f6f9;
+      --line: #e0e7ed;
+      direction: rtl;
+      color: var(--ink);
+      font-family: inherit;
+      overflow: clip;
+    }
+
+    .about-page *,
+    .about-page *::before,
+    .about-page *::after {
+      box-sizing: border-box;
+    }
+
+    .about-page a {
+      text-decoration: none;
+    }
+
+    .about-page img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .about-page .container {
+      width: min(1160px, calc(100% - 44px));
+      margin-inline: auto;
+    }
+
+    .section-padding {
+      padding-block: 100px;
+    }
+
+    .section-label {
+      display: inline-block;
+      margin-bottom: 16px;
+      color: #108780;
+      font-size: 12px;
+      font-weight: 850;
+      line-height: 1.8;
+    }
+
+    /* Hero */
+
+    .hero {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      color: white;
+      background: linear-gradient(125deg, #091c2e 0%, #102a43 55%, #1b4057 100%);
+    }
+
+    .hero-lines,
+    .cta-grid {
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      pointer-events: none;
+      opacity: .15;
+      background-image:
+        linear-gradient(rgba(255,255,255,.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.12) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(100deg, transparent, #000);
+    }
+
+    .hero-orb {
+      position: absolute;
+      z-index: -1;
+      width: 320px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      filter: blur(95px);
+      opacity: .19;
+      pointer-events: none;
+      animation: orbMove 10s ease-in-out infinite alternate;
+    }
+
+    .hero-orb-one {
+      top: -120px;
+      right: -130px;
+      background: #19aaa2;
+    }
+
+    .hero-orb-two {
+      bottom: -170px;
+      left: 25%;
+      background: #467ba0;
+      animation-delay: -5s;
+    }
+
+    .hero-layout {
+      display: grid;
+      grid-template-columns: 1.02fr .98fr;
+      align-items: center;
+      gap: 65px;
+      padding-block: 80px 92px;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 14px;
+      margin-bottom: 23px;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 50px;
+      color: #d8e9f1;
+      background: rgba(255,255,255,.05);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .live-dot,
+    .photo-dot {
+      width: 8px;
+      height: 8px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: var(--teal-light);
+      box-shadow: 0 0 0 5px rgba(117,226,212,.12);
+    }
+
+    .hero h1 {
+      max-width: 620px;
+      margin: 0;
+      color: #fff;
+      font-size: clamp(32px, 4vw, 53px);
+      font-weight: 900;
+      line-height: 1.7;
+      letter-spacing: -.6px;
+    }
+
+    .hero-highlight {
+      display: block;
+      color: var(--teal-light);
+    }
+
+    .hero-text {
+      max-width: 560px;
+      margin: 19px 0 0;
+      color: #d1dee8;
+      font-size: 14px;
+      line-height: 2.35;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 29px;
+    }
+
+    .btn {
+      display: inline-flex;
+      min-height: 50px;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px 20px;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.7;
+      text-align: center;
+      transition:
+        transform .25s ease,
+        background .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    .btn svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .btn-main {
+      color: #092d34;
+      background: var(--teal-light);
+      box-shadow: 0 9px 28px rgba(25,170,162,.17);
+    }
+
+    .btn-main:hover {
+      background: #9cece2;
+      box-shadow: 0 13px 30px rgba(25,170,162,.25);
+    }
+
+    .btn-glass {
+      color: white;
+      border-color: rgba(255,255,255,.3);
+      background: rgba(255,255,255,.04);
+    }
+
+    .btn-glass:hover,
+    .btn-cta-outline:hover {
+      background: rgba(255,255,255,.12);
+    }
+
+    .hero-footnote {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 23px;
+      color: #c6d7e2;
+      font-size: 11px;
+      line-height: 2;
+    }
+
+    .footnote-icon {
+      display: grid;
+      place-items: center;
+      width: 20px;
+      height: 20px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      color: var(--teal-light);
+      background: rgba(117,226,212,.12);
+      font-weight: 900;
+    }
+
+    /* Hero photo */
+
+    .hero-photo-wrap {
+      position: relative;
+      min-width: 0;
+      padding: 14px;
+    }
+
+    .hero-photo {
+      position: relative;
+      height: 430px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 20px;
+      background:
+        linear-gradient(145deg, #426278, #122a3e 65%, #0b1b2a);
+      box-shadow: 0 32px 75px rgba(0,0,0,.27);
+    }
+
+    .hero-photo > img,
+    .wide-photo > img,
+    .product-image > img,
+    .approach-image > img {
+      position: absolute;
+      inset: 0;
+      transition: transform .8s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .hero-photo:hover > img,
+    .wide-photo:hover > img {
+      transform: scale(1.045);
+    }
+
+    .photo-shade {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(
+        180deg,
+        rgba(6,21,34,.15),
+        transparent 35%,
+        rgba(6,21,34,.2) 55%,
+        rgba(6,21,34,.92) 100%
+      );
+    }
+
+    .photo-top-label {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 8px;
+      color: white;
+      background: rgba(9,28,46,.5);
+      backdrop-filter: blur(8px);
+      font-size: 10px;
+      font-weight: 850;
+      letter-spacing: 1px;
+    }
+
+    .photo-bottom-label {
+      position: absolute;
+      right: 25px;
+      bottom: 25px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 5px;
+      color: white;
+    }
+
+    .photo-caption-small {
+      color: var(--teal-light);
+      font-size: 10px;
+      font-weight: 850;
+      letter-spacing: 2px;
+    }
+
+    .photo-bottom-label strong {
+      font-size: 28px;
+      font-weight: 900;
+    }
+
+    .photo-bottom-label > span:last-child {
+      color: #d6e1e9;
+      font-size: 12px;
+    }
+
+    .photo-crosshair {
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      border-color: rgba(117,226,212,.8);
+      border-style: solid;
+      opacity: .7;
+      animation: crosshairPulse 4s ease-in-out infinite;
+    }
+
+    .crosshair-one {
+      top: 70px;
+      left: 24px;
+      border-width: 1px 0 0 1px;
+    }
+
+    .crosshair-two {
+      right: 24px;
+      bottom: 105px;
+      border-width: 0 1px 1px 0;
+      animation-delay: -2s;
+    }
+
+    .floating-note {
+      position: absolute;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      min-width: 180px;
+      padding: 12px;
+      border: 1px solid rgba(255,255,255,.55);
+      border-radius: 12px;
+      color: var(--ink);
+      background: white;
+      box-shadow: 0 15px 35px rgba(0,0,0,.2);
+      animation: noteFloat 5s ease-in-out infinite;
+    }
+
+    .floating-note-top {
+      top: 85px;
+      right: -2px;
+    }
+
+    .floating-note-bottom {
+      bottom: 77px;
+      left: -7px;
+      animation-delay: -2.5s;
+    }
+
+    .floating-note-icon {
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      flex: 0 0 auto;
+      border-radius: 9px;
+      color: white;
+      background: var(--navy);
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .accent-icon {
+      color: #09534f;
+      background: #d8f6f0;
+    }
+
+    .floating-note strong,
+    .floating-note small {
+      display: block;
+    }
+
+    .floating-note strong {
+      font-size: 12px;
+    }
+
+    .floating-note small {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .hero-counter {
+      position: absolute;
+      left: 15px;
+      top: 25px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: rgba(255,255,255,.8);
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      transform: rotate(-90deg) translateX(-100%);
+      transform-origin: top left;
+    }
+
+    .hero-counter > span:first-child {
+      color: var(--teal-light);
+    }
+
+    .counter-line {
+      width: 35px;
+      height: 1px;
+      background: rgba(255,255,255,.55);
+    }
+
+    .hero-bottom {
+      border-top: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.1);
+    }
+
+    .hero-bottom-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 18px;
+      padding-block: 18px;
+      color: #d2e0e9;
+      font-size: 11px;
+      font-weight: 750;
+    }
+
+    .bottom-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--teal-light);
+    }
+
+    /* Image placeholders */
+
+    .image-placeholder {
+      position: absolute;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 11px;
+      padding: 25px;
+      color: #e5f0f6;
+      background:
+        radial-gradient(circle at 70% 30%, rgba(25,170,162,.2), transparent 40%),
+        linear-gradient(145deg, #35566d, #102a43 72%);
+      text-align: center;
+    }
+
+    .image-placeholder .placeholder-symbol {
+      display: grid;
+      place-items: center;
+      width: 64px;
+      height: 64px;
+      border: 1px solid rgba(117,226,212,.6);
+      border-radius: 15px;
+      color: var(--teal-light);
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    .image-placeholder strong {
+      font-size: 15px;
+    }
+
+    .image-placeholder > span:last-child {
+      max-width: 260px;
+      color: #c3d4df;
+      font-size: 11px;
+      line-height: 2;
+    }
+
+    .image-missing .image-placeholder {
+      display: flex;
+    }
+
+    /* Story */
+
+    .story {
+      background: white;
+    }
+
+    .story-layout {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      align-items: start;
+      gap: 90px;
+    }
+
+    .story-side {
+      position: relative;
+      padding-top: 4px;
+    }
+
+    .story-side h2 {
+      margin: 0;
+      color: var(--navy);
+      font-size: clamp(26px, 3vw, 39px);
+      font-weight: 900;
+      line-height: 1.9;
+    }
+
+    .story-side h2 span {
+      display: block;
+      color: #168e88;
+    }
+
+    .story-line {
+      width: 100%;
+      max-width: 290px;
+      height: 3px;
+      margin-top: 28px;
+      overflow: hidden;
+      border-radius: 5px;
+      background: #e6eff2;
+    }
+
+    .story-line span {
+      display: block;
+      width: 45%;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--teal);
+      animation: lineTravel 4s ease-in-out infinite alternate;
+    }
+
+    .story-side-note {
+      max-width: 370px;
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 2.2;
+    }
+
+    .story-content {
+      padding-top: 8px;
+    }
+
+    .story-content p {
+      margin: 0 0 17px;
+      color: #687987;
+      font-size: 13px;
+      line-height: 2.45;
+    }
+
+    .story-content .story-lead {
+      margin-bottom: 20px;
+      color: #1d3c51;
+      font-size: 17px;
+      font-weight: 800;
+      line-height: 2.1;
+    }
+
+    .story-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 9px;
+      color: #087d79;
+      font-size: 13px;
+      font-weight: 850;
+    }
+
+    .story-link span {
+      transition: transform .2s ease;
+    }
+
+    .story-link:hover span {
+      transform: translateX(-5px);
+    }
+
+    /* Wide image */
+
+    .wide-photo-section {
+      padding: 0 22px;
+      background: white;
+    }
+
+    .wide-photo {
+      position: relative;
+      isolation: isolate;
+      min-height: 440px;
+      overflow: hidden;
+      border-radius: 18px;
+      color: white;
+      background: linear-gradient(120deg, #102a43, #294f66);
+    }
+
+    .wide-photo-overlay {
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(5,21,35,.85), rgba(5,21,35,.4) 60%, rgba(5,21,35,.12)),
+        linear-gradient(0deg, rgba(5,21,35,.2), transparent);
+    }
+
+    .wide-photo-content {
+      position: relative;
+      z-index: 1;
+      width: min(1160px, calc(100% - 44px));
+      margin-inline: auto;
+      padding-block: 78px;
+    }
+
+    .wide-kicker {
+      display: inline-block;
+      margin-bottom: 15px;
+      color: var(--teal-light);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    .wide-photo h2 {
+      margin: 0;
+      color: white;
+      font-size: clamp(31px, 4vw, 47px);
+      font-weight: 900;
+      line-height: 1.8;
+    }
+
+    .wide-photo-content p {
+      max-width: 470px;
+      margin: 13px 0 25px;
+      color: #d9e4eb;
+      font-size: 13px;
+      line-height: 2.2;
+    }
+
+    .btn-white {
+      color: var(--navy);
+      background: white;
+    }
+
+    .btn-white:hover {
+      background: #e4faf6;
+    }
+
+    .wide-vertical-label {
+      position: absolute;
+      left: 20px;
+      bottom: 25px;
+      color: rgba(255,255,255,.65);
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 3px;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+    }
+
+    /* Product section */
+
+    .product-section {
+      background: var(--soft);
+      border-block: 1px solid #e8eef3;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 25px;
+      margin-bottom: 35px;
+    }
+
+    .section-heading h2,
+    .approach-heading h2,
+    .values-heading h2 {
+      margin: 0;
+      color: var(--navy);
+      font-size: clamp(25px, 3vw, 35px);
+      font-weight: 900;
+      line-height: 1.8;
+    }
+
+    .section-heading p,
+    .approach-heading > p,
+    .values-heading > p {
+      margin: 9px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 2.2;
+    }
+
+    .all-products-link {
+      display: inline-flex;
+      flex: 0 0 auto;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 8px;
+      color: #087d79;
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .all-products-link span {
+      font-size: 19px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .product-card {
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid #e0e7ed;
+      border-radius: 14px;
+      background: white;
+      transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-7px);
+      border-color: #a5d8d2;
+      box-shadow: 0 18px 35px rgba(16,42,67,.1);
+    }
+
+    .product-image {
+      position: relative;
+      height: 190px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #46687d, #102a43);
+    }
+
+    .product-image > img {
+      transition: transform .6s ease;
+    }
+
+    .product-card:hover .product-image > img {
+      transform: scale(1.07);
+    }
+
+    .product-image-shade {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(6,20,32,.08), rgba(6,20,32,.66));
+    }
+
+    .product-en {
+      position: absolute;
+      right: 15px;
+      bottom: 15px;
+      color: white;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1.4px;
+    }
+
+    .product-number {
+      position: absolute;
+      top: 13px;
+      left: 13px;
+      display: grid;
+      place-items: center;
+      width: 33px;
+      height: 33px;
+      border: 1px solid rgba(255,255,255,.5);
+      border-radius: 8px;
+      color: white;
+      background: rgba(9,28,46,.5);
+      font-size: 10px;
+      font-weight: 850;
+      backdrop-filter: blur(6px);
+    }
+
+    .product-info {
+      padding: 18px 17px 15px;
+    }
+
+    .product-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .product-title-row h3 {
+      margin: 0;
+      color: #17364b;
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .product-arrow {
+      display: grid;
+      place-items: center;
+      width: 29px;
+      height: 29px;
+      flex: 0 0 auto;
+      border-radius: 8px;
+      color: #087d79;
+      background: #eaf7f5;
+      transition: transform .2s ease;
+    }
+
+    .product-card:hover .product-arrow {
+      transform: translate(-3px, -3px);
+    }
+
+    .product-info > p {
+      min-height: 45px;
+      margin: 10px 0 15px;
+      color: #73818d;
+      font-size: 11px;
+      line-height: 2;
+    }
+
+    .product-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding-top: 12px;
+      border-top: 1px solid #edf1f4;
+      color: #087d79;
+      font-size: 11px;
+      font-weight: 850;
+    }
+
+    .product-bottom-note {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      margin-top: 24px;
+      padding: 18px 20px;
+      border: 1px solid #d8e9e7;
+      border-radius: 12px;
+      background: #fafffe;
+    }
+
+    .note-question {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      flex: 0 0 auto;
+      border-radius: 10px;
+      color: white;
+      background: #138b86;
+      font-size: 20px;
+      font-weight: 900;
+    }
+
+    .product-bottom-note p {
+      flex: 1;
+      margin: 0;
+      color: #637783;
+      font-size: 12px;
+      line-height: 2;
+    }
+
+    .product-bottom-note p strong {
+      color: #1b4656;
+    }
+
+    .product-bottom-note > a {
+      display: inline-flex;
+      flex: 0 0 auto;
+      align-items: center;
+      gap: 8px;
+      color: #087d79;
+      font-size: 11px;
+      font-weight: 850;
+    }
+
+    /* Approach */
+
+    .approach-section {
+      background: white;
+    }
+
+    .approach-heading {
+      margin-bottom: 38px;
+    }
+
+    .approach-layout {
+      display: grid;
+      grid-template-columns: .95fr 1.05fr;
+      gap: 55px;
+      align-items: center;
+    }
+
+    .approach-image {
+      position: relative;
+      min-height: 445px;
+      overflow: hidden;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #35566d, #102a43);
+    }
+
+    .approach-image-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(0deg, rgba(6,20,32,.85), transparent 65%);
+    }
+
+    .approach-image-caption {
+      position: absolute;
+      right: 23px;
+      bottom: 25px;
+      left: 23px;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      color: white;
+    }
+
+    .approach-image-caption span {
+      color: var(--teal-light);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    .approach-image-caption strong {
+      font-size: 20px;
+      line-height: 1.8;
+    }
+
+    .steps-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 48px minmax(0, 1fr);
+      gap: 16px;
+      padding-block: 23px;
+      border-bottom: 1px solid #e7edf1;
+    }
+
+    .step:first-child {
+      padding-top: 0;
+    }
+
+    .step-index {
+      display: grid;
+      place-items: center;
+      width: 43px;
+      height: 43px;
+      border: 1px solid #d4e9e6;
+      border-radius: 12px;
+      color: #087d79;
+      background: #effaf8;
+      font-size: 17px;
+      font-weight: 900;
+      transition: transform .25s ease, background .25s ease;
+    }
+
+    .step:hover .step-index {
+      transform: scale(1.07) rotate(-4deg);
+      color: white;
+      background: #138b86;
+    }
+
+    .step h3 {
+      margin: 0 0 7px;
+      color: #17364b;
+      font-size: 15px;
+      font-weight: 900;
+      line-height: 1.9;
+    }
+
+    .step p {
+      margin: 0;
+      color: #6a7a87;
+      font-size: 12px;
+      line-height: 2.2;
+    }
+
+    .steps-button {
+      align-self: flex-start;
+      margin-top: 23px;
+    }
+
+    /* Values */
+
+    .values-section {
+      background: #f2f6f9;
+      border-top: 1px solid #e5ecf1;
+    }
+
+    .values-heading {
+      max-width: 720px;
+      margin: 0 auto 40px;
+      text-align: center;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .value-card {
+      position: relative;
+      min-width: 0;
+      min-height: 275px;
+      padding: 26px 23px;
+      overflow: hidden;
+      border: 1px solid #e0e7ed;
+      border-radius: 14px;
+      background: white;
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+
+    .value-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 17px 35px rgba(16,42,67,.08);
+    }
+
+    .value-number {
+      position: absolute;
+      top: 18px;
+      left: 20px;
+      color: #c2d0d9;
+      font-size: 25px;
+      font-weight: 900;
+    }
+
+    .value-icon {
+      display: grid;
+      place-items: center;
+      width: 54px;
+      height: 54px;
+      margin-bottom: 22px;
+      border-radius: 13px;
+      color: #087d79;
+      background: #e9f8f5;
+    }
+
+    .value-icon svg {
+      width: 31px;
+      height: 31px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .value-card h3 {
+      margin: 0 0 10px;
+      color: #18364a;
+      font-size: 16px;
+      font-weight: 900;
+      line-height: 1.9;
+    }
+
+    .value-card p {
+      margin: 0;
+      color: #6c7d89;
+      font-size: 12px;
+      line-height: 2.2;
+    }
+
+    .value-card-dark {
+      border-color: #173e55;
+      background: linear-gradient(145deg, #102a43, #183e55);
+    }
+
+    .value-card-dark .value-number {
+      color: rgba(255,255,255,.25);
+    }
+
+    .value-card-dark .value-icon {
+      color: var(--teal-light);
+      background: rgba(117,226,212,.12);
+    }
+
+    .value-card-dark h3 {
+      color: white;
+    }
+
+    .value-card-dark p {
+      color: #c8d7e1;
+    }
+
+    /* CTA */
+
+    .contact-cta {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      color: white;
+      background: linear-gradient(115deg, #091c2e, #143a53);
+    }
+
+    .cta-glow {
+      position: absolute;
+      z-index: -1;
+      top: -170px;
+      left: 10%;
+      width: 350px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: #19aaa2;
+      filter: blur(120px);
+      opacity: .18;
+      animation: orbMove 8s ease-in-out infinite alternate;
+    }
+
+    .cta-layout {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 35px;
+      padding-block: 67px;
+    }
+
+    .cta-copy {
+      max-width: 680px;
+    }
+
+    .cta-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #d1e5eb;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .cta-label .live-dot {
+      width: 7px;
+      height: 7px;
+    }
+
+    .cta-copy h2 {
+      margin: 15px 0 10px;
+      color: white;
+      font-size: clamp(25px, 3vw, 37px);
+      font-weight: 900;
+      line-height: 1.9;
+    }
+
+    .cta-copy h2 span {
+      display: block;
+      color: var(--teal-light);
+    }
+
+    .cta-copy p {
+      max-width: 570px;
+      margin: 0;
+      color: #cbdbe4;
+      font-size: 12px;
+      line-height: 2.25;
+    }
+
+    .cta-actions {
+      display: flex;
+      flex: 0 0 auto;
+      flex-direction: column;
+      gap: 11px;
+      min-width: 190px;
+    }
+
+    .btn-cta-outline {
+      color: white;
+      border-color: rgba(255,255,255,.3);
+      background: rgba(255,255,255,.025);
+    }
+
+    .cta-brand {
+      position: absolute;
+      left: 15px;
+      bottom: -55px;
+      color: rgba(255,255,255,.035);
+      font-size: 190px;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -15px;
+      pointer-events: none;
+    }
+
+    .cta-brand span {
+      color: rgba(117,226,212,.14);
+    }
+
+    /* Animations */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(23px);
+      transition:
+        opacity .75s ease,
+        transform .75s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-late {
+      transition-delay: .14s;
+    }
+
+    .reveal-late-more {
+      transition-delay: .25s;
+    }
+
+    @keyframes orbMove {
+      from { transform: translate3d(0,0,0) scale(1); }
+      to { transform: translate3d(35px,-25px,0) scale(1.14); }
+    }
+
+    @keyframes noteFloat {
+      0%, 100% { translate: 0 0; }
+      50% { translate: 0 -8px; }
+    }
+
+    @keyframes lineTravel {
+      from { transform: translateX(0); }
+      to { transform: translateX(-115%); }
+    }
+
+    @keyframes crosshairPulse {
+      0%, 100% { opacity: .35; }
+      50% { opacity: .9; }
+    }
+
+    /* Tablet */
+
+    @media (max-width: 1000px) {
+      .hero-layout {
+        gap: 30px;
+      }
+
+      .hero h1 {
+        font-size: clamp(30px, 4.2vw, 43px);
+      }
+
+      .hero-photo {
+        height: 385px;
+      }
+
+      .story-layout {
+        gap: 45px;
+      }
+
+      .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .approach-layout {
+        gap: 32px;
+      }
+
+      .approach-image {
+        min-height: 420px;
+      }
+
+      .cta-layout {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .cta-actions {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+    }
+
+    /* Mobile */
+
+    @media (max-width: 700px) {
+      .about-page .container {
+        width: calc(100% - 32px);
+      }
+
+      .section-padding {
+        padding-block: 62px;
+      }
+
+      .hero-layout {
+        grid-template-columns: 1fr;
+        gap: 35px;
+        padding-block: 49px 45px;
+      }
+
+      .hero h1 {
+        font-size: clamp(30px, 8vw, 41px);
+        line-height: 1.75;
+      }
+
+      .hero-text {
+        font-size: 13px;
+        line-height: 2.25;
+      }
+
+      .hero-buttons {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-top: 23px;
+      }
+
+      .hero-buttons .btn {
+        width: 100%;
+      }
+
+      .hero-photo-wrap {
+        width: min(100%, 460px);
+        margin-inline: auto;
+        padding: 8px;
+      }
+
+      .hero-photo {
+        height: 340px;
+      }
+
+      .floating-note-top {
+        top: 62px;
+        right: -1px;
+      }
+
+      .floating-note-bottom {
+        bottom: 60px;
+        left: -1px;
+      }
+
+      .floating-note {
+        min-width: 160px;
+      }
+
+      .hero-counter {
+        left: 9px;
+        top: 22px;
+      }
+
+      .hero-bottom-inner {
+        gap: 10px;
+        padding-block: 15px;
+        font-size: 9px;
+      }
+
+      .story-layout {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+
+      .story-side h2 {
+        font-size: 28px;
+      }
+
+      .story-content {
+        padding-top: 0;
+      }
+
+      .story-content .story-lead {
+        font-size: 15px;
+      }
+
+      .story-content p {
+        font-size: 12px;
+      }
+
+      .wide-photo-section {
+        padding-inline: 10px;
+      }
+
+      .wide-photo {
+        min-height: 420px;
+        border-radius: 13px;
+      }
+
+      .wide-photo-content {
+        width: calc(100% - 36px);
+        padding-block: 60px;
+      }
+
+      .wide-photo h2 {
+        font-size: 32px;
+      }
+
+      .wide-photo-content p {
+        font-size: 12px;
+      }
+
+      .wide-vertical-label {
+        left: 12px;
+        bottom: 15px;
+      }
+
+      .section-heading {
+        align-items: flex-start;
+        margin-bottom: 25px;
+      }
+
+      .section-heading h2,
+      .approach-heading h2,
+      .values-heading h2 {
+        font-size: 25px;
+      }
+
+      .section-heading p,
+      .approach-heading > p,
+      .values-heading > p {
+        font-size: 12px;
+      }
+
+      .all-products-link {
+        display: none;
+      }
+
+      .product-grid {
+        gap: 11px;
+      }
+
+      .product-image {
+        height: 145px;
+      }
+
+      .product-info {
+        padding: 14px 12px 12px;
+      }
+
+      .product-title-row h3 {
+        font-size: 14px;
+      }
+
+      .product-info > p {
+        min-height: 44px;
+        font-size: 10px;
+      }
+
+      .product-bottom-note {
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 15px;
+      }
+
+      .product-bottom-note p {
+        flex-basis: calc(100% - 55px);
+      }
+
+      .product-bottom-note > a {
+        margin-right: 48px;
+      }
+
+      .approach-heading {
+        margin-bottom: 25px;
+      }
+
+      .approach-layout {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .approach-image {
+        min-height: 300px;
+      }
+
+      .step {
+        grid-template-columns: 43px minmax(0, 1fr);
+        gap: 12px;
+        padding-block: 19px;
+      }
+
+      .step-index {
+        width: 39px;
+        height: 39px;
+      }
+
+      .step h3 {
+        font-size: 14px;
+      }
+
+      .step p {
+        font-size: 11px;
+      }
+
+      .steps-button {
+        align-self: stretch;
+        margin-top: 20px;
+      }
+
+      .values-heading {
+        margin-bottom: 28px;
+        text-align: right;
+      }
+
+      .values-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .value-card {
+        min-height: 0;
+        padding: 23px 19px;
+      }
+
+      .value-card h3 {
+        font-size: 15px;
+      }
+
+      .value-card p {
+        font-size: 11px;
+      }
+
+      .cta-layout {
+        gap: 25px;
+        padding-block: 48px;
+      }
+
+      .cta-copy h2 {
+        font-size: 26px;
+      }
+
+      .cta-copy p {
+        font-size: 12px;
+      }
+
+      .cta-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+        width: 100%;
+      }
+
+      .cta-actions .btn {
+        width: 100%;
+      }
+
+      .cta-brand {
+        left: 0;
+        bottom: -25px;
+        font-size: 120px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .about-page .container {
+        width: calc(100% - 24px);
+      }
+
+      .hero h1 {
+        font-size: 29px;
+      }
+
+      .hero-photo {
+        height: 305px;
+      }
+
+      .floating-note {
+        min-width: 148px;
+        padding: 9px;
+      }
+
+      .floating-note strong {
+        font-size: 11px;
+      }
+
+      .product-grid {
+        gap: 8px;
+      }
+
+      .product-image {
+        height: 125px;
+      }
+
+      .product-info {
+        padding-inline: 10px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .about-page *,
+      .about-page *::before,
+      .about-page *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+      }
+
+      .about-page .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+
+  <script>
+    const setupAboutPage = () => {
+      const elements = document.querySelectorAll('.about-page .reveal');
+
+      if (!('IntersectionObserver' in window)) {
+        elements.forEach((element) => {
+          element.classList.add('is-visible');
+        });
+        return;
+      }
+
+      const observer = new IntersectionObserver(
+        (entries, currentObserver) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              currentObserver.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.12,
+          rootMargin: '0px 0px -25px 0px',
+        }
+      );
+
+      elements.forEach((element) => observer.observe(element));
+    };
+
+    setupAboutPage();
+  </script>
+</BaseLayout>
