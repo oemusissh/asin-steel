@@ -33,3 +33,5 @@ pnpm-debug.log*
 *.md
 !README.md
 !LICENSE.md
+
+.seo-backup-*
