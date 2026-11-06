@@ -3,9 +3,14 @@
 ---
 
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getActiveProducts } from "../data/products";
 
 
 const base = import.meta.env.BASE_URL;
+
+// کارت‌های اولیه هنگام build در HTML نوشته می‌شوند تا گوگل فهرست محصولات را ببیند؛
+// بعد از بارگذاری، اسکریپت پایین فهرست را با داده‌ی Supabase جایگزین می‌کند.
+const ssrProducts = getActiveProducts();
 
 const categories = [
   { id: "rebar", name: "میلگرد" },
@@ -21,7 +26,7 @@ const categories = [
 ---
 
 
-<BaseLayout title="خرید آهن‌آلات و ورق فولادیL" description="فهرست ورق، میلگرد، تیرآهن، نبشی، ناودانی و پروفیل با مشخصات فنی و امکان استعلام و ثبت سفارش از آسین استیل.">
+<BaseLayout title="خرید آهن‌آلات و ورق فولادی" description="فهرست ورق، میلگرد، تیرآهن، نبشی، ناودانی و پروفیل با مشخصات فنی و امکان استعلام و ثبت سفارش از آسین استیل.">
   <main dir="rtl" class="min-h-screen bg-gray-50 py-8 text-gray-900 dark:bg-dark-900 dark:text-white sm:py-12">
     <div class="container mx-auto px-4">
 
@@ -123,7 +128,7 @@ const categories = [
 
         <div class="flex items-center gap-2 text-sm">
           <span class="text-gray-500 dark:text-gray-400">تعداد نتایج:</span>
-          <strong id="product-count" class="text-cyan-600 dark:text-cyan-400">0</strong>
+          <strong id="product-count" class="text-cyan-600 dark:text-cyan-400">{ssrProducts.length}</strong>
         </div>
       </div>
 
@@ -133,6 +138,27 @@ const categories = [
         id="products-grid"
         class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
       >
+        {ssrProducts.map((p) => (
+          <article
+            data-product-card
+            data-name={p.name}
+            data-category={p.category}
+            data-factory={p.factory || ""}
+            class="group overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm dark:border-dark-700 dark:bg-dark-800"
+          >
+            <div class="p-5">
+              <p class="mb-2 text-xs text-gray-500 dark:text-gray-400">{p.factory || "برای اطلاع تماس بگیرید"}</p>
+              <h3 class="text-lg font-extrabold leading-8">
+                <a href={`${base}products/${p.slug}/`}>{p.name}</a>
+              </h3>
+              <p class="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300">{p.description}</p>
+              <div class="mt-4 flex items-center justify-between gap-3 border-t border-gray-100 pt-4 dark:border-dark-700">
+                <span class="text-sm font-extrabold text-cyan-700 dark:text-cyan-400">استعلام قیمت</span>
+                <a href={`${base}products/${p.slug}/`} class="inline-flex items-center rounded-xl bg-slate-900 px-4 py-3 text-sm font-bold text-white">جزئیات محصول</a>
+              </div>
+            </div>
+          </article>
+        ))}
 
       </div>
 
@@ -399,13 +425,7 @@ const priceHtml = priceOnRequest
   emptyResetButton?.addEventListener("click", resetFilters);
 
   async function loadProducts() {
-    if (productGrid) {
-      productGrid.innerHTML = `
-        <div class="col-span-full py-12 text-center text-sm text-gray-500">
-          در حال دریافت محصولات...
-        </div>
-      `;
-    }
+    // تا رسیدن داده‌ی Supabase، کارت‌های ساخته‌شده هنگام build نمایش داده می‌شوند.
 
     const { data, error } = await supabase
       .from("products")
@@ -415,15 +435,7 @@ const priceHtml = priceOnRequest
 
     if (error) {
       console.error("خطا در دریافت محصولات:", error);
-      if (productGrid) {
-        productGrid.innerHTML = `
-          <div class="col-span-full rounded-2xl border border-red-200 bg-red-50 p-6 text-center text-sm leading-7 text-red-700">
-            دریافت محصولات با خطا مواجه شد. لطفاً کمی بعد دوباره تلاش کنید.
-          </div>
-        `;
-      }
-      if (productCount) productCount.textContent = "0";
-      emptyState?.classList.add("hidden");
+      // در صورت خطا، کارت‌های اولیه سر جای خود می‌مانند.
       return;
     }
 

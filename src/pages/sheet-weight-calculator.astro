@@ -1,0 +1,99 @@
+---
+import SheetLayout from '../layouts/SheetLayout.astro';
+import { DENSITY } from '../data/sheets';
+const thicknesses = [1, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10, 12, 15, 20, 25, 30, 40, 50];
+const sizes: { label: string; w: number; l: number }[] = [
+  { label: '۱ × ۲ متر', w: 1, l: 2 },
+  { label: '۱٫۲۵ × ۲٫۵ متر', w: 1.25, l: 2.5 },
+  { label: '۱٫۲۵ × ۶ متر', w: 1.25, l: 6 },
+  { label: '۱٫۵ × ۶ متر', w: 1.5, l: 6 },
+  { label: '۲ × ۶ متر', w: 2, l: 6 },
+];
+const fa = (n: number) => n.toLocaleString('fa-IR', { maximumFractionDigits: 1 });
+const csvRows = [
+  ['thickness_mm', ...sizes.map((s) => `${s.w}x${s.l}m_kg`)],
+  ...thicknesses.map((t) => [String(t), ...sizes.map((s) => (t * s.w * s.l * DENSITY).toFixed(1))]),
+];
+const csvHref = 'data:text/csv;charset=utf-8,' + encodeURIComponent('\uFEFF' + csvRows.map((r) => r.join(',')).join('\n'));
+const faq = [
+  { q: 'فرمول وزن ورق چیست؟', a: 'وزن (کیلوگرم) = ضخامت (میلی‌متر) × عرض (متر) × طول (متر) × ۷٫۸۵.' },
+  { q: 'چگالی فولاد را چند بگیریم؟', a: 'در این صفحه ۷٫۸۵ گرم بر سانتی‌متر مکعب استفاده شده. در منابع مختلف ۷٫۸۵ تا ۷٫۸۶ هم دیده می‌شود و اختلاف آن در عمل ناچیز است.' },
+  { q: 'چرا وزن واقعی با محاسبه فرق دارد؟', a: 'تلرانس ضخامت، پوشش سطح و تفاوت کارخانه‌ها باعث می‌شود وزن واقعی کمی با وزن تئوری فرق کند. وزن دقیق را از فروشنده بپرسید.' },
+];
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+};
+---
+<SheetLayout
+  title="ماشین‌حساب وزن ورق فولادی؛ محاسبه‌ی وزن بر اساس ضخامت و ابعاد"
+  description="وزن ورق فولادی را با ضخامت، عرض و طول محاسبه کنید و جدول وزن ورق در ابعاد رایج را ببینید. ابزار رایگان آسین استیل."
+  crumbs={[{ name: 'انواع ورق', href: '/sheets/' }, { name: 'ماشین‌حساب وزن ورق' }]}
+>
+  <h1>ماشین‌حساب وزن ورق</h1>
+  <p class="sheet-answer">
+    وزن تقریبی ورق فولادی برابر است با ضخامت (میلی‌متر) × عرض (متر) × طول (متر) × {DENSITY.toLocaleString('fa-IR', { minimumFractionDigits: 2 })}.
+    اعداد را وارد کنید تا وزن هر ورق و وزن کل به کیلوگرم و تن نمایش داده شود.
+  </p>
+
+  <div class="sheet-form">
+    <label>ضخامت (میلی‌متر)<input id="t" type="number" min="0" step="0.1" value="10" inputmode="decimal" /></label>
+    <label>عرض (متر)<input id="w" type="number" min="0" step="0.01" value="1.5" inputmode="decimal" /></label>
+    <label>طول (متر)<input id="l" type="number" min="0" step="0.01" value="6" inputmode="decimal" /></label>
+    <label>تعداد ورق<input id="q" type="number" min="1" step="1" value="1" inputmode="numeric" /></label>
+  </div>
+  <p class="sheet-result" id="result" aria-live="polite"></p>
+  <p class="sheet-note">محاسبه‌ی تقریبی برای فولاد معمولی است. وزن واقعی بسته به تلرانس و پوشش ممکن است کمی متفاوت باشد.</p>
+
+  <h2>جدول وزن ورق در ابعاد رایج (کیلوگرم، هر ورق)</h2>
+  <div class="sheet-table-wrap">
+    <table class="sheet-table">
+      <thead>
+        <tr><th>ضخامت (میلی‌متر)</th>{sizes.map((s) => <th>{s.label}</th>)}</tr>
+      </thead>
+      <tbody>
+        {thicknesses.map((t) => (
+          <tr>
+            <th scope="row">{fa(t)}</th>
+            {sizes.map((s) => <td>{fa(t * s.w * s.l * DENSITY)}</td>)}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <p>
+    <a class="sheet-cta" href={csvHref} download="steel-sheet-weight-table.csv">دانلود جدول وزن (CSV برای اکسل)</a>
+  </p>
+  <p class="sheet-note">ابعاد جدول نمونه‌ی رایج است و به معنای موجودی کارخانه یا انبار نیست. برای ابعاد و موجودی دقیق استعلام بگیرید.</p>
+
+  <h2>سؤالات متداول</h2>
+  <div class="sheet-faq">
+    {faq.map((f) => (<details><summary>{f.q}</summary><p>{f.a}</p></details>))}
+  </div>
+
+  <p>
+    <a class="sheet-cta" href="/sheets/black/">ورق سیاه</a>
+    <a class="sheet-cta" href="/sheets/galvanized/">ورق گالوانیزه</a>
+    <a class="sheet-cta" href="/contact/">استعلام قیمت</a>
+  </p>
+
+  <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />
+  <script is:inline define:vars={{ density: DENSITY }}>
+    (function () {
+      var ids = ['t', 'w', 'l', 'q'];
+      var out = document.getElementById('result');
+      var f = new Intl.NumberFormat('fa-IR', { maximumFractionDigits: 2 });
+      function calc() {
+        var v = ids.map(function (id) { return parseFloat(document.getElementById(id).value); });
+        if (v.some(function (x) { return !isFinite(x) || x <= 0; })) { out.textContent = 'مقادیر را کامل وارد کنید.'; return; }
+        var one = v[0] * v[1] * v[2] * density;
+        var total = one * v[3];
+        out.textContent = 'وزن هر ورق: ' + f.format(one) + ' کیلوگرم | وزن کل: ' + f.format(total) + ' کیلوگرم (' + f.format(total / 1000) + ' تن)';
+      }
+      ids.forEach(function (id) { document.getElementById(id).addEventListener('input', calc); });
+      calc();
+    })();
+  </script>
+</SheetLayout>

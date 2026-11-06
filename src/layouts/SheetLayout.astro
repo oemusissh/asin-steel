@@ -1,0 +1,59 @@
+---
+import BaseLayout from './BaseLayout.astro';
+interface Crumb { name: string; href?: string }
+interface Props { title: string; description: string; crumbs?: Crumb[] }
+const { title, description, crumbs = [] } = Astro.props;
+const site = (Astro.site ? Astro.site.href : Astro.url.origin + '/').replace(/\/$/, '');
+const all: Crumb[] = [{ name: 'خانه', href: '/' }, ...crumbs];
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: all.map((c, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: c.name,
+    ...(c.href ? { item: site + c.href } : {}),
+  })),
+};
+---
+<BaseLayout title={title} description={description}>
+  <div class="sheet-page">
+    <nav class="sheet-crumbs" aria-label="مسیر صفحه">
+      {all.map((c, i) => (
+        <>
+          {c.href ? <a href={c.href}>{c.name}</a> : <span>{c.name}</span>}
+          {i < all.length - 1 && <span aria-hidden="true"> / </span>}
+        </>
+      ))}
+    </nav>
+    <slot />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />
+  </div>
+</BaseLayout>
+
+<style is:global>
+  .sheet-page { max-width: 62rem; margin: 0 auto; padding: 1.5rem 1rem 4rem; line-height: 1.9; }
+  .sheet-page h1 { font-size: 1.9rem; line-height: 1.5; margin: 0.5rem 0 1rem; }
+  .sheet-page h2 { font-size: 1.35rem; margin: 2.2rem 0 0.8rem; }
+  .sheet-page ul { padding-inline-start: 1.4rem; }
+  .sheet-crumbs { font-size: 0.9rem; opacity: 0.8; margin-bottom: 0.5rem; }
+  .sheet-crumbs a { text-decoration: underline; }
+  .sheet-page a:not(.sheet-card):not(.sheet-cta) { color: #3b82f6; }
+  .sheet-answer { padding: 1rem 1.2rem; border-inline-start: 4px solid currentColor; background: rgba(128,128,128,0.1); border-radius: 0.5rem; }
+  .sheet-table-wrap { overflow-x: auto; }
+  .sheet-table { width: 100%; border-collapse: collapse; margin: 0.5rem 0 1rem; }
+  .sheet-table th, .sheet-table td { border: 1px solid rgba(128,128,128,0.4); padding: 0.55rem 0.8rem; text-align: start; vertical-align: top; }
+  .sheet-table th { background: rgba(128,128,128,0.12); }
+  .sheet-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); margin: 1rem 0; }
+  .sheet-card { display: block; border: 1px solid rgba(128,128,128,0.4); border-radius: 0.75rem; padding: 1rem 1.1rem; text-decoration: none; color: inherit; }
+  .sheet-card:hover { border-color: currentColor; }
+  .sheet-card strong { display: block; font-size: 1.1rem; margin-bottom: 0.3rem; }
+  .sheet-cta { display: inline-block; margin: 0.4rem 0 0.4rem 0.6rem; padding: 0.65rem 1.2rem; border-radius: 0.5rem; border: 1px solid currentColor; text-decoration: none; font-weight: 600; color: inherit; }
+  .sheet-note { font-size: 0.9rem; opacity: 0.8; }
+  .sheet-form { display: grid; gap: 0.8rem; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); margin: 1rem 0; }
+  .sheet-form label { display: grid; gap: 0.3rem; font-size: 0.95rem; }
+  .sheet-form input { padding: 0.55rem 0.7rem; border-radius: 0.4rem; border: 1px solid rgba(128,128,128,0.5); background: transparent; color: inherit; font: inherit; }
+  .sheet-result { font-size: 1.15rem; font-weight: 700; margin: 0.5rem 0 1rem; }
+  .sheet-faq details { border-bottom: 1px solid rgba(128,128,128,0.3); padding: 0.6rem 0; }
+  .sheet-faq summary { cursor: pointer; font-weight: 600; }
+</style>

@@ -1,0 +1,83 @@
+---
+import SheetLayout from '../../layouts/SheetLayout.astro';
+import { sheetTypes, getSheet } from '../../data/sheets';
+
+export function getStaticPaths() {
+  return sheetTypes.map((s) => ({ params: { slug: s.slug } }));
+}
+const { slug } = Astro.params;
+const sheet = getSheet(slug as string)!;
+const related = sheet.related.map((r) => getSheet(r)).filter(Boolean);
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: sheet.faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+<SheetLayout
+  title={sheet.title}
+  description={sheet.description}
+  crumbs={[{ name: 'انواع ورق', href: '/sheets/' }, { name: sheet.name }]}
+>
+  <h1>{sheet.h1}</h1>
+  <p class="sheet-answer">{sheet.answer}</p>
+
+  <h2>مشخصات {sheet.name}</h2>
+  <div class="sheet-table-wrap">
+    <table class="sheet-table">
+      <tbody>
+        {sheet.specs.map(([k, v]) => (<tr><th scope="row">{k}</th><td>{v}</td></tr>))}
+      </tbody>
+    </table>
+  </div>
+  <p class="sheet-note">مقادیر کلی هستند و بسته به کارخانه و استاندارد تغییر می‌کنند؛ مشخصات دقیق را از گواهی کارخانه بگیرید.</p>
+
+  <h2>کاربرد {sheet.name}</h2>
+  <ul>{sheet.uses.map((u) => <li>{u}</li>)}</ul>
+
+  <h2>نکات خرید {sheet.name}</h2>
+  <ul>{sheet.buyingTips.map((t) => <li>{t}</li>)}</ul>
+
+  {sheet.brands && sheet.brands.length > 0 && (
+    <>
+      <h2>برندهای موجود</h2>
+      <ul>{sheet.brands.map((b) => <li>{b}</li>)}</ul>
+    </>
+  )}
+
+  <h2>قیمت و استعلام</h2>
+  <p>
+    قیمت {sheet.name} به گرید، ضخامت، ابعاد، کارخانه و نرخ روز بستگی دارد. برای قیمت دقیق، مشخصات سفارش را اعلام کنید.
+  </p>
+  <p>
+    <a class="sheet-cta" href="/contact/">استعلام قیمت</a>
+    <a class="sheet-cta" href="/sheet-weight-calculator/">ماشین‌حساب وزن ورق</a>
+    <a class="sheet-cta" href="/products/">مشاهده محصولات</a>
+  </p>
+
+  <h2>سؤالات متداول</h2>
+  <div class="sheet-faq">
+    {sheet.faq.map((f) => (
+      <details>
+        <summary>{f.q}</summary>
+        <p>{f.a}</p>
+      </details>
+    ))}
+  </div>
+
+  {related.length > 0 && (
+    <>
+      <h2>مطالب مرتبط</h2>
+      <ul>
+        {related.map((r) => <li><a href={`/sheets/${r!.slug}/`}>{r!.name}</a></li>)}
+        <li><a href="/sheets/st37-vs-st52/">تفاوت ورق ST37 و ST52</a></li>
+      </ul>
+    </>
+  )}
+
+  <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />
+</SheetLayout>

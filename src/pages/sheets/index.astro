@@ -1,0 +1,40 @@
+---
+import SheetLayout from '../../layouts/SheetLayout.astro';
+import { sheetTypes } from '../../data/sheets';
+---
+<SheetLayout
+  title="انواع ورق فولادی؛ ورق سیاه، گالوانیزه، روغنی، آجدار و A516"
+  description="راهنمای انواع ورق فولادی: ورق سیاه، گالوانیزه، روغنی، آجدار و A516. مشخصات، کاربرد، تفاوت گریدها و استعلام قیمت روز از آسین استیل."
+  crumbs={[{ name: 'انواع ورق' }]}
+>
+  <h1>انواع ورق فولادی</h1>
+  <p class="sheet-answer">
+    ورق‌های فولادی بر اساس روش تولید (نورد گرم یا سرد)، پوشش سطح و استاندارد به چند دسته‌ی اصلی تقسیم می‌شوند:
+    ورق سیاه، گالوانیزه، روغنی، آجدار و ورق‌های مخزنی مثل A516. اینجا تفاوت هر کدام و نحوه‌ی انتخاب را می‌بینید.
+  </p>
+
+  <div class="sheet-grid">
+    {sheetTypes.map((s) => (
+      <a class="sheet-card" href={`/sheets/${s.slug}/`}>
+        <strong>{s.name}</strong>
+        <span>{s.answer.split('.')[0]}.</span>
+      </a>
+    ))}
+  </div>
+
+  <h2>کدام ورق را انتخاب کنم؟</h2>
+  <ul>
+    <li>برای سازه و اسکلت و قطعات ضخیم: ورق سیاه (ST37 یا ST52).</li>
+    <li>برای جایی که در برابر زنگ‌زدگی مقاومت لازم است: ورق گالوانیزه.</li>
+    <li>برای بدنه‌ی دقیق و سطح صاف: ورق روغنی.</li>
+    <li>برای کف ضدلغزش: ورق آجدار.</li>
+    <li>برای مخازن و دیگ بخار: ورق A516.</li>
+  </ul>
+
+  <h2>ابزارها و مقایسه‌ها</h2>
+  <p>
+    <a class="sheet-cta" href="/sheet-weight-calculator/">ماشین‌حساب وزن ورق</a>
+    <a class="sheet-cta" href="/sheets/st37-vs-st52/">تفاوت ورق ST37 و ST52</a>
+    <a class="sheet-cta" href="/contact/">استعلام قیمت</a>
+  </p>
+</SheetLayout>

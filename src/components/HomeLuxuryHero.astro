@@ -1,5 +1,6 @@
 
 ---
+
 import { getActiveProducts } from "../data/products";
 
 const base = import.meta.env.BASE_URL;
@@ -39,17 +40,17 @@ const mapRouteUrl = `https://www.google.com/maps/dir/?api=1&destination=${mapQue
 
 const heroSlides = [
   {
-    src: "/images/hero-steel.webp",
+    src: "/images/hero-steel.png",
     alt: "مقاطع فولادی در فضای صنعتی",
     label: "STEEL INDUSTRY",
   },
   {
-    src: "/images/hero-steel-2.webp",
+    src: "/images/hero-steel-2.jpg",
     alt: "ورق‌ها و کلاف‌های فولادی",
     label: "STEEL SHEETS",
   },
   {
-    src: "/images/hero-steel-3.webp",
+    src: "/images/hero-steel-3.jpg",
     alt: "تیرآهن و مقاطع فولادی در انبار",
     label: "STEEL PROFILES",
   },
@@ -57,30 +58,50 @@ const heroSlides = [
 
 ;
 
+// ============================================================
+// فیلم پس‌زمینهٔ هیرو
+// فایل فیلم: public/hero-film/hero.mp4
+// برای عوض‌کردن فیلم، فقط همین فایل را با فیلم جدید (با همین اسم) جایگزین کنید.
+// ============================================================
+const filmSrc = `${base}hero-film/hero.mp4`;
+
+// true  = اسلایدر عکس‌ها (کارت کوچک گوشهٔ هیرو) نمایش داده شود
+// false = اسلایدر مخفی شود و فیلم کامل دیده شود
+const showSlider = true;
+
 ---
 
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
 <link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css"
-  media="print"
-  onload="this.media='all'"
 />
-<noscript>
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css"
-  />
-</noscript>
 
 <main class="as" dir="rtl">
+
+  <!-- بخش اصلی هیرو: فیلم پس‌زمینه + لوگو + معرفی -->
+  <div class="as-stage">
+
+  <!-- فیلم پس‌زمینه (تزئینی و بدون صدا) -->
+  <div class="as-film" aria-hidden="true" data-hero-film>
+    <video
+      class="as-film-video"
+      src={filmSrc}
+      muted
+      autoplay
+      playsinline
+      preload="auto"
+      disablepictureinpicture
+      tabindex="-1"
+      data-film-video
+    ></video>
+    <div class="as-film-scrim"></div>
+  </div>
 
   <!-- لوگو -->
   <div class="as-logo">
     <img
       src={brand.logo}
-      width="44"
-      height="44"
+
       alt={brand.nameFa}
       onerror="this.style.display='none'"
     />
@@ -182,8 +203,7 @@ const heroSlides = [
   <div class="as-address-card">
     <div class="as-address-map-preview">
       <iframe
-        data-src={mapEmbedUrl}
-        data-map-iframe
+        src={mapEmbedUrl}
         title="موقعیت آسین استیل روی نقشه گوگل"
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
@@ -249,6 +269,7 @@ const heroSlides = [
       data-hero-slider
       aria-label="تصاویر مقاطع فولادی"
       tabindex="0"
+      hidden={!showSlider}
     >
       <div class="as-slides">
         {heroSlides.map((slide, index) => (
@@ -257,8 +278,7 @@ const heroSlides = [
             alt={slide.alt}
             class:list={["as-hero-slide", index === 0 && "is-active"]}
             data-slide-index={index}
-            width="1600"
-            height="900"
+            
             loading={index === 0 ? "eager" : "lazy"}
             fetchpriority={index === 0 ? "high" : "auto"}
             decoding="async"
@@ -326,6 +346,9 @@ const heroSlides = [
     </div>
 
   </section>
+
+  </div>
+  <!-- پایان بخش اصلی هیرو -->
 
   <!-- ریل محصولات -->
   <section class="as-rail-section">
@@ -762,33 +785,23 @@ const heroSlides = [
   .as-slider-dots {
     display: flex;
     align-items: center;
-    gap: 0;
+    gap: 6px;
   }
 
   .as-slider-dot {
-    position: relative;
-    width: 24px;
-    height: 24px;
-    padding: 0;
-    border: 0;
-    background: transparent;
-    cursor: pointer;
-  }
-
-  .as-slider-dot::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
     width: 7px;
     height: 7px;
+    padding: 0;
+    border: 0;
     border-radius: 99px;
     background: rgba(255, 255, 255, 0.62);
-    transform: translate(-50%, -50%);
-    transition: width 0.3s ease, background 0.3s ease;
+    cursor: pointer;
+    transition:
+      width 0.3s ease,
+      background 0.3s ease;
   }
 
-  .as-slider-dot.is-active::before {
+  .as-slider-dot.is-active {
     width: 22px;
     background: #fff;
   }
@@ -1623,27 +1636,200 @@ const heroSlides = [
   }
 }
 
+/* ================================================================
+   فیلم پس‌زمینهٔ هیرو
+   (اگر فیلم را عوض کردید و برش‌خوردنش دلخواه نبود، فقط --film-pos را تغییر دهید)
+   ================================================================ */
+.as-stage {
+  /* کدام بخش از فیلم هنگام برش‌خوردن دیده شود: افقی  عمودی */
+  --film-pos: 50% 62%;
+  position: relative;
+  isolation: isolate;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: clamp(16px, 2.2vw, 30px);
+  border-radius: 28px;
+  overflow: hidden;
+  background: #060b14;
+  color: #fff;
+  box-shadow: 0 28px 60px -30px rgba(6, 11, 20, 0.6);
+}
+
+.as-film {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  background: #060b14;
+  pointer-events: none;
+}
+
+.as-film-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--film-pos);
+  display: block;
+  animation: as-film-in 1.2s ease both;
+}
+
+@keyframes as-film-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* لایهٔ تیره روی فیلم تا متن‌ها همیشه خوانا باشند (سمت راست = جای متن) */
+.as-film-scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      270deg,
+      rgba(5, 10, 18, 0.9) 0%,
+      rgba(5, 10, 18, 0.76) 36%,
+      rgba(5, 10, 18, 0.22) 66%,
+      rgba(5, 10, 18, 0) 100%
+    ),
+    linear-gradient(0deg, rgba(5, 10, 18, 0.55) 0%, rgba(5, 10, 18, 0) 38%),
+    linear-gradient(180deg, rgba(5, 10, 18, 0.72) 0%, rgba(5, 10, 18, 0.3) 22%, rgba(5, 10, 18, 0) 36%);
+}
+
+/* رنگ‌های روشن برای متن‌هایی که مستقیم روی فیلم هستند */
+.as-stage .as-logo strong {
+  color: #fff;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.8);
+}
+
+.as-stage .as-logo span {
+  color: rgba(255, 255, 255, 0.8);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.8);
+}
+
+.as-stage .as-logo img {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+.as-stage .as-tag {
+  background: rgba(255, 255, 255, 0.1);
+  color: #d5e2ff;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.as-stage .as-intro-text h1 {
+  color: #fff;
+  text-shadow: 0 2px 26px rgba(0, 0, 0, 0.5);
+}
+
+.as-stage .as-intro-text h1 em {
+  color: #8fb4ff;
+}
+
+.as-stage .as-intro-text h1 em::after {
+  background: rgba(80, 130, 255, 0.34);
+}
+
+.as-stage .as-intro-text p {
+  color: rgba(255, 255, 255, 0.88);
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.55);
+}
+
+.as-stage .as-btn-primary {
+  background: linear-gradient(135deg, #3366f0 0%, #1e3a8a 100%);
+  box-shadow: 0 12px 28px -12px rgba(51, 102, 240, 0.8);
+}
+
+.as-stage .as-btn-primary:hover {
+  background: linear-gradient(135deg, #4577ff 0%, #2d4dab 100%);
+}
+
+.as-stage .as-btn-ghost {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.34);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.as-stage .as-btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: #fff;
+  color: #fff;
+}
+
+/* کارت‌های سفید (تماس، شبکه‌ها، آدرس) روی فیلم کمی سایهٔ بیشتر می‌گیرند */
+.as-stage .as-contact-phone,
+.as-stage .as-social-link,
+.as-stage .as-address-card {
+  box-shadow: 0 16px 36px -16px rgba(0, 0, 0, 0.6);
+}
+
+/* اسلایدر عکس‌ها (با showSlider=false مخفی می‌شود) */
+.as-intro-photo[hidden] {
+  display: none !important;
+}
+
+/* دسکتاپ: اسلایدر به کارت کوچک گوشهٔ هیرو تبدیل می‌شود تا فیلم دیده شود */
+@media (min-width: 901px) {
+  .as-stage .as-intro-photo {
+    align-self: end;
+    justify-self: end;
+    width: min(100%, 340px);
+    height: 230px;
+    min-height: 0;
+    max-height: none;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 24px 50px -16px rgba(0, 0, 0, 0.7);
+  }
+}
+
+/* تبلت و موبایل: فیلم بالای هیرو دیده می‌شود و پایینش آرام در رنگ زمینه محو می‌شود */
+@media (max-width: 900px) {
+  .as-film {
+    bottom: auto;
+    height: clamp(250px, 64vw, 520px);
+    -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
+    mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
+  }
+
+  .as-film-scrim {
+    background: linear-gradient(
+      180deg,
+      rgba(5, 10, 18, 0.8) 0%,
+      rgba(5, 10, 18, 0.66) 50%,
+      rgba(5, 10, 18, 0.3) 100%
+    );
+  }
+}
+
+@media (max-width: 620px) {
+  .as-stage {
+    padding: 14px;
+    border-radius: 22px;
+  }
+}
+
+/* کاهش حرکت: بدون محو‌شدن اولیه */
+@media (prefers-reduced-motion: reduce) {
+  .as-film-video {
+    animation: none;
+  }
+}
 
 </style>
 
 <script>
-
-  (() => {
-    const frame = document.querySelector("iframe[data-map-iframe]");
-    if (!frame) return;
-    let done = false;
-    const load = () => {
-      if (done) return;
-      done = true;
-      const src = frame.getAttribute("data-src");
-      if (src) frame.setAttribute("src", src);
-    };
-    ["pointerdown", "keydown", "touchstart", "scroll"].forEach((ev) =>
-      window.addEventListener(ev, load, { once: true, passive: true })
-    );
-    window.addEventListener("load", () => setTimeout(load, 6000), { once: true });
-  })();
-
   const slider = document.querySelector("[data-hero-slider]");
 
   if (slider && !slider.hasAttribute("data-slider-ready")) {
@@ -1818,4 +2004,74 @@ const heroSlides = [
     showSlide(0);
     startAutoPlay();
   }
+</script>
+
+<script>
+  // فیلم پس‌زمینهٔ هیرو: یک‌بار پخش می‌شود و روی آخرین قاب می‌ماند
+  (function () {
+    var film = document.querySelector("[data-hero-film]");
+    var video = film ? film.querySelector("[data-film-video]") : null;
+    if (!video) return;
+
+    var reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    var connection = navigator["connection"] || {};
+
+    // حالت «صرفه‌جویی در اینترنت»: فیلم اصلاً بارگیری نمی‌شود (پس‌زمینهٔ تیره می‌ماند)
+    if (connection.saveData === true) {
+      video.pause();
+      video.removeAttribute("src");
+      video.load();
+      video.style.display = "none";
+      return;
+    }
+
+    // به‌جای پخش، آخرین قاب فیلم (چیدمان نهایی) نشان داده می‌شود
+    function showLastFrame() {
+      video.pause();
+
+      var seek = function () {
+        try {
+          video.currentTime = Math.max(0, (video.duration || 1) - 0.05);
+        } catch (error) {}
+      };
+
+      if (video.readyState >= 1) {
+        seek();
+      } else {
+        video.addEventListener("loadedmetadata", seek, { once: true });
+      }
+    }
+
+    // کاربرانی که «کاهش حرکت» را روشن کرده‌اند، فیلم را پخش‌شده نمی‌بینند
+    if (reduceMotion) {
+      video.removeAttribute("autoplay");
+      showLastFrame();
+      return;
+    }
+
+    video.muted = true;
+
+    var started = false;
+
+    video.addEventListener(
+      "playing",
+      function () {
+        started = true;
+      },
+      { once: true }
+    );
+
+    var attempt = video.play();
+
+    if (attempt && attempt.catch) {
+      attempt.catch(showLastFrame);
+    }
+
+    // اگر مرورگر پخش خودکار را اجازه نداد (مثلاً حالت کم‌مصرف گوشی)
+    window.setTimeout(function () {
+      if (!started) showLastFrame();
+    }, 3500);
+  })();
 </script>

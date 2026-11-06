@@ -4,6 +4,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { categories } from "../../lib/categories";
 import { build3d } from "../../lib/steel3d";
+import { getActiveProducts } from "../../data/products";
 
 export function getStaticPaths() {
   return categories.map((cat) => ({ params: { slug: cat.slug }, props: { cat } }));
@@ -13,9 +14,10 @@ const { cat } = Astro.props;
 const rawBase = import.meta.env.BASE_URL;
 const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
 const model = build3d(cat.shape);
+const staticProducts = getActiveProducts().filter((p) => cat.db.includes(p.category));
 ---
 
-<BaseLayout title={`${cat.name} | ASIN STILL`}>
+<BaseLayout title={`${cat.name} | آسین استیل`} description={cat.desc}>
   <main
     id="cp"
     dir="rtl"
@@ -37,6 +39,7 @@ const model = build3d(cat.shape);
             <span class="cp-en">{cat.en}</span>
             <h1>{cat.name}</h1>
             <p>{cat.desc}</p>
+            {cat.slug === 'plate' && (<p><a href={`${base}sheets/`} style="text-decoration:underline">راهنمای انواع ورق: سیاه، گالوانیزه، روغنی، آجدار و A516</a></p>)}
 
             <dl class="cp-facts">
               {cat.facts.map((x) => (
@@ -105,6 +108,16 @@ const model = build3d(cat.shape);
         </div>
       </div>
     </section>
+    {staticProducts.length > 0 && (
+      <section class="cp-wrap" style="padding:2rem 1rem 3rem">
+        <h2>محصولات {cat.name} در کاتالوگ آسین استیل</h2>
+        <ul style="line-height:2.2">
+          {staticProducts.map((p) => (
+            <li><a href={`${base}products/${p.slug}/`} style="text-decoration:underline">{p.name}</a></li>
+          ))}
+        </ul>
+      </section>
+    )}
   </main>
 </BaseLayout>
 

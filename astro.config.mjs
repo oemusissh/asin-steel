@@ -13,7 +13,7 @@ export default defineConfig({
     tailwind(),
     sitemap({
       filter: (page) =>
-      !/\/(account|admin|cart|checkout|wishlist|login|register)(\/|$)/.test(page),
+      !/\/(account|admin|cart|checkout|wishlist|login|register|track-order)(\/|$)|\/products\/detail\/?$|\/news\/?$|\/news\/industry\/([0-9a-f]{12}|page\/)/.test(page),
     }),
   ],
 
